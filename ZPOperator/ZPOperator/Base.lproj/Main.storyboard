@@ -51,16 +51,16 @@
                     <navigationItem key="navigationItem" title="首页" id="UpU-Xf-CV9">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="uo8-Us-3W8">
                             <connections>
-                                <segue destination="lUe-jD-PMh" kind="push" id="1im-qd-eag"/>
+                                <segue destination="lUe-jD-PMh" kind="show" id="1im-qd-eag"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="375" height="603"/>
                     <connections>
-                        <segue destination="6Wu-kM-tDe" kind="push" identifier="deliverManagement" id="v4V-ye-0Ti"/>
-                        <segue destination="T6x-vR-zIh" kind="push" identifier="tagManagement" id="fuD-8c-W9w"/>
-                        <segue destination="rAv-QY-3UH" kind="push" identifier="TraceSourceDetail" id="OVy-Gz-WMh"/>
-                        <segue destination="t7l-Te-Xc5" kind="push" identifier="TraceSources" id="Z3e-HW-GMX"/>
+                        <segue destination="6Wu-kM-tDe" kind="show" identifier="deliverManagement" id="v4V-ye-0Ti"/>
+                        <segue destination="T6x-vR-zIh" kind="show" identifier="tagManagement" id="fuD-8c-W9w"/>
+                        <segue destination="rAv-QY-3UH" kind="show" identifier="TraceSourceDetail" id="OVy-Gz-WMh"/>
+                        <segue destination="t7l-Te-Xc5" kind="show" identifier="TraceSources" id="Z3e-HW-GMX"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xLa-zL-rOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -133,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbc-pb-AHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="1500"/>
+            <point key="canvasLocation" x="929" y="1402"/>
         </scene>
         <!--设置-->
         <scene sceneID="fxa-gz-k94">
@@ -368,12 +368,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="设置" id="rhF-pI-Ic8"/>
                     <connections>
-                        <segue destination="IRy-Ed-3jd" kind="push" id="gRa-BB-tAl"/>
+                        <segue destination="IRy-Ed-3jd" kind="show" identifier="modifyPassword" id="gRa-BB-tAl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ELE-i8-1Ul" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="2185"/>
+            <point key="canvasLocation" x="929" y="2697"/>
         </scene>
         <!--修改密码-->
         <scene sceneID="ORI-1G-lm5">
@@ -491,7 +491,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ko0-PT-5eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1710" y="2185"/>
+            <point key="canvasLocation" x="1591" y="2697"/>
         </scene>
         <!--全部溯源批次-->
         <scene sceneID="ec5-Q9-w9i">
@@ -535,17 +535,17 @@
                     <navigationItem key="navigationItem" title="全部溯源批次" id="9sk-oy-P6u">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hxh-dx-IIo">
                             <connections>
-                                <segue destination="bD2-Vv-D4I" kind="push" id="CaD-D1-475"/>
+                                <segue destination="bD2-Vv-D4I" kind="show" id="CaD-D1-475"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="rAv-QY-3UH" kind="push" identifier="TraceSourceDetail" id="aWr-Co-5de"/>
+                        <segue destination="rAv-QY-3UH" kind="show" identifier="TraceSourceDetail" id="aWr-Co-5de"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEu-7z-zuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="911" y="753"/>
+            <point key="canvasLocation" x="929" y="541"/>
         </scene>
         <!--添加溯源批次-->
         <scene sceneID="G36-ej-EHe">
@@ -648,7 +648,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g52-H3-Kh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1669.5999999999999" y="751.57421289355329"/>
+            <point key="canvasLocation" x="1591" y="782"/>
         </scene>
         <!--溯源批次详情-->
         <scene sceneID="a2c-du-K9q">
@@ -677,7 +677,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnW-C7-iri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="-56"/>
+            <point key="canvasLocation" x="1591" y="-88"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mQ1-Ii-Q92">
@@ -712,12 +712,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="发货管理" id="ggY-m9-IZG"/>
                     <connections>
-                        <segue destination="vwk-KY-Bsa" kind="push" identifier="deliverManagement" id="72r-h3-eQ6"/>
+                        <segue destination="vwk-KY-Bsa" kind="show" identifier="deliverManagement" id="72r-h3-eQ6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HW0-Yi-RQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="-860"/>
+            <point key="canvasLocation" x="929" y="-1031"/>
         </scene>
         <!--未发货管理-->
         <scene sceneID="SES-o4-geh">
@@ -776,10 +776,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppr-au-8xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2456.8000000000002" y="-1215.7421289355323"/>
+            <point key="canvasLocation" x="1591" y="-1031"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aWr-Co-5de"/>
+        <segue reference="OVy-Gz-WMh"/>
     </inferredMetricsTieBreakers>
 </document>
