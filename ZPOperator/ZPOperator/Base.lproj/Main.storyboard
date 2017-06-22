@@ -13,7 +13,7 @@
         <!--首页-->
         <scene sceneID="ts9-yi-zFn">
             <objects>
-                <collectionViewController id="hPL-aV-wOM" customClass="MainViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController restorationIdentifier="MainViewController" id="hPL-aV-wOM" customClass="MainViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Cell" dataMode="prototypes" id="Hnr-M4-Urx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="375" height="603"/>
                     <connections>
                         <segue destination="6Wu-kM-tDe" kind="show" identifier="deliverManagement" id="v4V-ye-0Ti"/>
                         <segue destination="T6x-vR-zIh" kind="show" identifier="tagManagement" id="fuD-8c-W9w"/>
@@ -346,7 +345,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退出" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpk-Yc-WoH">
-                                                    <rect key="frame" x="170.5" y="11.5" width="35" height="20.5"/>
+                                                    <rect key="frame" x="170" y="11.5" width="35" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -502,17 +501,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99443504339184763" green="1" blue="0.91159658379630037" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="15" id="DIk-he-ybL">
-                            <size key="itemSize" width="80" height="80"/>
+                            <size key="itemSize" width="157" height="155"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Ikd-6W-nSx">
-                                <rect key="frame" x="10" y="10" width="80" height="80"/>
+                                <rect key="frame" x="10" y="10" width="157" height="155"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="157" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-ph-DTy">
@@ -545,7 +544,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEu-7z-zuk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="541"/>
+            <point key="canvasLocation" x="928.79999999999995" y="540.17991004497753"/>
         </scene>
         <!--添加溯源批次-->
         <scene sceneID="G36-ej-EHe">
@@ -571,7 +570,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vm2-ys-PX7">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vm2-ys-PX7">
                                         <rect key="frame" x="80" y="0.0" width="285" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -602,7 +601,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请选择" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jZb-ig-lYX">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jZb-ig-lYX">
                                         <rect key="frame" x="80" y="0.0" width="285" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -631,7 +630,7 @@
                                 <state key="normal" title="提交"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="eql-8I-qUf" secondAttribute="trailing" constant="15" id="5qc-Rg-wl7"/>
                             <constraint firstItem="eql-8I-qUf" firstAttribute="leading" secondItem="rrg-YT-BrW" secondAttribute="leadingMargin" constant="15" id="7Pk-Ad-VIf"/>
@@ -648,12 +647,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g52-H3-Kh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="782"/>
+            <point key="canvasLocation" x="1697" y="777"/>
         </scene>
         <!--溯源批次详情-->
         <scene sceneID="a2c-du-K9q">
             <objects>
-                <tableViewController id="rAv-QY-3UH" sceneMemberID="viewController">
+                <tableViewController id="rAv-QY-3UH" customClass="TraceDetailController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="XuQ-H4-B90">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -677,7 +676,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LnW-C7-iri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="-88"/>
+            <point key="canvasLocation" x="1697" y="-87"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mQ1-Ii-Q92">
@@ -700,7 +699,7 @@
         <!--发货管理-->
         <scene sceneID="uFw-kJ-IJR">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Wu-kM-tDe" customClass="ViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Wu-kM-tDe" customClass="DeliverManageController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R4A-dR-VNy"/>
                         <viewControllerLayoutGuide type="bottom" id="7h4-d8-Kum"/>
@@ -717,12 +716,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HW0-Yi-RQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="929" y="-1031"/>
+            <point key="canvasLocation" x="928.79999999999995" y="-1031.3343328335832"/>
         </scene>
         <!--未发货管理-->
         <scene sceneID="SES-o4-geh">
             <objects>
-                <tableViewController id="vwk-KY-Bsa" sceneMemberID="viewController">
+                <tableViewController id="vwk-KY-Bsa" customClass="DeliveringViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="peD-VR-KpA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -776,10 +775,10 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppr-au-8xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1591" y="-1031"/>
+            <point key="canvasLocation" x="1697" y="-1031"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OVy-Gz-WMh"/>
+        <segue reference="aWr-Co-5de"/>
     </inferredMetricsTieBreakers>
 </document>

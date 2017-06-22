@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */; };
 		354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F21EFA1A5300D9EDA7 /* MainCell.swift */; };
 		354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354502F31EFA1A5300D9EDA7 /* MainCell.xib */; };
 		354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */; };
@@ -15,6 +16,27 @@
 		354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F81EFA1A5300D9EDA7 /* TagViewController.swift */; };
 		354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F91EFA1A5300D9EDA7 /* TraceSourcesController.swift */; };
 		354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502FA1EFA1A5300D9EDA7 /* ViewController.swift */; };
+		354503051EFA439C00D9EDA7 /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503041EFA439C00D9EDA7 /* MainVM.swift */; };
+		354503071EFA50FA00D9EDA7 /* DeliverManageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */; };
+		3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503091EFA529E00D9EDA7 /* JXHorizontalView.swift */; };
+		3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */; };
+		3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */; };
+		354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */; };
+		3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */; };
+		3545031B1EFBBFDB00D9EDA7 /* TraceSourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */; };
+		3545031D1EFBCB8600D9EDA7 /* TraceDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */; };
+		354503201EFBD29300D9EDA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */; };
+		354503211EFBD29300D9EDA7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3545031F1EFBD29300D9EDA7 /* LoginViewController.xib */; };
+		354503351EFBDF8800D9EDA7 /* JXDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503261EFBDF8800D9EDA7 /* JXDefaultView.swift */; };
+		354503361EFBDF8800D9EDA7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503281EFBDF8800D9EDA7 /* BaseViewController.swift */; };
+		354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503291EFBDF8800D9EDA7 /* JXTableViewController.swift */; };
+		354503381EFBDF8800D9EDA7 /* ApiEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545032C1EFBDF8800D9EDA7 /* ApiEnum.swift */; };
+		354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545032E1EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift */; };
+		3545033A1EFBDF8800D9EDA7 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545032F1EFBDF8800D9EDA7 /* UIColor+Extension.swift */; };
+		3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503301EFBDF8800D9EDA7 /* UIView+Extension.swift */; };
+		3545033C1EFBDF8800D9EDA7 /* JXBaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503321EFBDF8800D9EDA7 /* JXBaseRequest.swift */; };
+		3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503331EFBDF8800D9EDA7 /* JXNetworkManager.swift */; };
+		3545033E1EFBDF8800D9EDA7 /* JXRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503341EFBDF8800D9EDA7 /* JXRequest.swift */; };
 		359750801EF8BE9100419474 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597507F1EF8BE9100419474 /* AppDelegate.swift */; };
 		359750851EF8BE9100419474 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359750831EF8BE9100419474 /* Main.storyboard */; };
 		359750871EF8BE9100419474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 359750861EF8BE9100419474 /* Assets.xcassets */; };
@@ -30,12 +52,36 @@
 		354502F81EFA1A5300D9EDA7 /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		354502F91EFA1A5300D9EDA7 /* TraceSourcesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourcesController.swift; sourceTree = "<group>"; };
 		354502FA1EFA1A5300D9EDA7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		354503041EFA439C00D9EDA7 /* MainVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
+		354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverManageController.swift; sourceTree = "<group>"; };
+		354503091EFA529E00D9EDA7 /* JXHorizontalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXHorizontalView.swift; sourceTree = "<group>"; };
+		3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringViewController.swift; sourceTree = "<group>"; };
+		3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredViewController.swift; sourceTree = "<group>"; };
+		354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTopBarView.swift; sourceTree = "<group>"; };
+		354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceCell.swift; sourceTree = "<group>"; };
+		354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TraceSourceCell.xib; sourceTree = "<group>"; };
+		3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDetailController.swift; sourceTree = "<group>"; };
+		3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3545031F1EFBD29300D9EDA7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		354503261EFBDF8800D9EDA7 /* JXDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXDefaultView.swift; sourceTree = "<group>"; };
+		354503281EFBDF8800D9EDA7 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		354503291EFBDF8800D9EDA7 /* JXTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTableViewController.swift; sourceTree = "<group>"; };
+		3545032C1EFBDF8800D9EDA7 /* ApiEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEnum.swift; sourceTree = "<group>"; };
+		3545032E1EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
+		3545032F1EFBDF8800D9EDA7 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		354503301EFBDF8800D9EDA7 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		354503321EFBDF8800D9EDA7 /* JXBaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXBaseRequest.swift; sourceTree = "<group>"; };
+		354503331EFBDF8800D9EDA7 /* JXNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNetworkManager.swift; sourceTree = "<group>"; };
+		354503341EFBDF8800D9EDA7 /* JXRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXRequest.swift; sourceTree = "<group>"; };
 		3597507C1EF8BE9100419474 /* ZPOperator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZPOperator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3597507F1EF8BE9100419474 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359750841EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		359750861EF8BE9100419474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		359750891EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3597508B1EF8BE9100419474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.release.xcconfig"; sourceTree = "<group>"; };
+		9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZPOperator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,10 +106,13 @@
 		354502F11EFA1A5300D9EDA7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				354503081EFA514200D9EDA7 /* JXView */,
 				354502F21EFA1A5300D9EDA7 /* MainCell.swift */,
 				354502F31EFA1A5300D9EDA7 /* MainCell.xib */,
 				354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */,
 				354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */,
+				354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */,
+				354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -71,9 +121,15 @@
 			isa = PBXGroup;
 			children = (
 				354502F71EFA1A5300D9EDA7 /* MainViewController.swift */,
+				354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */,
+				3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */,
+				3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */,
 				354502F81EFA1A5300D9EDA7 /* TagViewController.swift */,
 				354502F91EFA1A5300D9EDA7 /* TraceSourcesController.swift */,
+				3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */,
 				354502FA1EFA1A5300D9EDA7 /* ViewController.swift */,
+				3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */,
+				3545031F1EFBD29300D9EDA7 /* LoginViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -81,16 +137,108 @@
 		354502FB1EFA1A5300D9EDA7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				354503041EFA439C00D9EDA7 /* MainVM.swift */,
 			);
 			name = ViewModel;
 			path = ZPOperator/ViewModel;
 			sourceTree = SOURCE_ROOT;
+		};
+		354503081EFA514200D9EDA7 /* JXView */ = {
+			isa = PBXGroup;
+			children = (
+				354503091EFA529E00D9EDA7 /* JXHorizontalView.swift */,
+				354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */,
+			);
+			path = JXView;
+			sourceTree = "<group>";
+		};
+		354503221EFBDE2100D9EDA7 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ThirdPart;
+			path = Model/ThirdPart;
+			sourceTree = "<group>";
+		};
+		354503231EFBDF8800D9EDA7 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				354503241EFBDF8800D9EDA7 /* Model */,
+				354503251EFBDF8800D9EDA7 /* View */,
+				354503271EFBDF8800D9EDA7 /* ViewController */,
+			);
+			path = Basic;
+			sourceTree = "<group>";
+		};
+		354503241EFBDF8800D9EDA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		354503251EFBDF8800D9EDA7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				354503261EFBDF8800D9EDA7 /* JXDefaultView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		354503271EFBDF8800D9EDA7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				354503281EFBDF8800D9EDA7 /* BaseViewController.swift */,
+				354503291EFBDF8800D9EDA7 /* JXTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3545032A1EFBDF8800D9EDA7 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				3545032B1EFBDF8800D9EDA7 /* Additions */,
+				3545032C1EFBDF8800D9EDA7 /* ApiEnum.swift */,
+				3545032D1EFBDF8800D9EDA7 /* Extension */,
+				354503311EFBDF8800D9EDA7 /* JXNetwork */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		3545032B1EFBDF8800D9EDA7 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		3545032D1EFBDF8800D9EDA7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3545032E1EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift */,
+				3545032F1EFBDF8800D9EDA7 /* UIColor+Extension.swift */,
+				354503301EFBDF8800D9EDA7 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		354503311EFBDF8800D9EDA7 /* JXNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				354503321EFBDF8800D9EDA7 /* JXBaseRequest.swift */,
+				354503331EFBDF8800D9EDA7 /* JXNetworkManager.swift */,
+				354503341EFBDF8800D9EDA7 /* JXRequest.swift */,
+			);
+			path = JXNetwork;
+			sourceTree = "<group>";
 		};
 		359750731EF8BE9100419474 = {
 			isa = PBXGroup;
 			children = (
 				3597507E1EF8BE9100419474 /* ZPOperator */,
 				3597507D1EF8BE9100419474 /* Products */,
+				B0E880C7AD9AFE51063DCCBE /* Pods */,
+				A04C4B58B9DA5E7B51DD5C97 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +253,9 @@
 		3597507E1EF8BE9100419474 /* ZPOperator */ = {
 			isa = PBXGroup;
 			children = (
+				354503231EFBDF8800D9EDA7 /* Basic */,
+				3545032A1EFBDF8800D9EDA7 /* Tool */,
+				354503221EFBDE2100D9EDA7 /* ThirdPart */,
 				354502F61EFA1A5300D9EDA7 /* ViewController */,
 				354502F11EFA1A5300D9EDA7 /* View */,
 				354502FB1EFA1A5300D9EDA7 /* ViewModel */,
@@ -118,6 +269,23 @@
 			path = ZPOperator;
 			sourceTree = "<group>";
 		};
+		A04C4B58B9DA5E7B51DD5C97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0E880C7AD9AFE51063DCCBE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */,
+				855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,9 +293,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3597508E1EF8BE9100419474 /* Build configuration list for PBXNativeTarget "ZPOperator" */;
 			buildPhases = (
+				32575E0D2A4F0770D792B8B6 /* [CP] Check Pods Manifest.lock */,
 				359750781EF8BE9100419474 /* Sources */,
 				359750791EF8BE9100419474 /* Frameworks */,
 				3597507A1EF8BE9100419474 /* Resources */,
+				5A38F3CDECC8B7BCDC8D1342 /* [CP] Embed Pods Frameworks */,
+				3B698CAE00484B18AC06F7A1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,15 +349,65 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3545031B1EFBBFDB00D9EDA7 /* TraceSourceCell.xib in Resources */,
 				3597508A1EF8BE9100419474 /* LaunchScreen.storyboard in Resources */,
 				359750871EF8BE9100419474 /* Assets.xcassets in Resources */,
 				354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */,
 				359750851EF8BE9100419474 /* Main.storyboard in Resources */,
+				354503211EFBD29300D9EDA7 /* LoginViewController.xib in Resources */,
 				354502FF1EFA1A5300D9EDA7 /* MainReusableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32575E0D2A4F0770D792B8B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3B698CAE00484B18AC06F7A1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A38F3CDECC8B7BCDC8D1342 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		359750781EF8BE9100419474 /* Sources */ = {
@@ -195,11 +416,30 @@
 			files = (
 				354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */,
 				354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */,
+				354503351EFBDF8800D9EDA7 /* JXDefaultView.swift in Sources */,
+				3545033E1EFBDF8800D9EDA7 /* JXRequest.swift in Sources */,
+				3545033A1EFBDF8800D9EDA7 /* UIColor+Extension.swift in Sources */,
+				3545033C1EFBDF8800D9EDA7 /* JXBaseRequest.swift in Sources */,
+				3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */,
+				354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */,
+				354503361EFBDF8800D9EDA7 /* BaseViewController.swift in Sources */,
+				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,
 				354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */,
+				3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */,
+				3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */,
 				354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */,
+				3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */,
+				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
 				354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */,
+				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
+				3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */,
+				3545031D1EFBCB8600D9EDA7 /* TraceDetailController.swift in Sources */,
+				354503381EFBDF8800D9EDA7 /* ApiEnum.swift in Sources */,
+				354503201EFBD29300D9EDA7 /* LoginViewController.swift in Sources */,
 				354503001EFA1A5300D9EDA7 /* MainViewController.swift in Sources */,
+				354503071EFA50FA00D9EDA7 /* DeliverManageController.swift in Sources */,
+				354503051EFA439C00D9EDA7 /* MainVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +560,7 @@
 		};
 		3597508F1EF8BE9100419474 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JD78BK6EHC;
@@ -333,6 +574,7 @@
 		};
 		359750901EF8BE9100419474 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = JD78BK6EHC;

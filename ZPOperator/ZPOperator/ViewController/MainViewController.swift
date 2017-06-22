@@ -14,7 +14,9 @@ private let reuseIndentifierFooter = "reuseIndentifierFooter"
 
 class MainViewController: UICollectionViewController {
     
-    
+    lazy var mainVM = MainVM()
+    //log state
+    var isLogin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,41 @@ class MainViewController: UICollectionViewController {
         //self.collectionView?.frame = CGRect.init(x: 0, y: 64, width: self.view.bounds.width, height: self.view.bounds.height - 64)
 
         // Do any additional setup after loading the view.
+        
+        
+        self.mainVM.dataArray = self.mainVM.loadMainData(append:true)
+        
+        print(self.mainVM.dataArray)
+        self.collectionView?.reloadData()
+        
+//        DispatchQueue.global().async { 
+//            self.mainVM.dataArray = self.mainVM.loadMainData()
+//            
+//            DispatchQueue.main.async {
+//                self.collectionView?.reloadData()
+//            }
+//            
+//        }
+        
+        if !isLogin {
+//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//            self.navigationController?.pushViewController(vc, animated: true)
+            
+            let login = LoginViewController()
+            
+            //self.addChildViewController(login)
+            self.navigationController?.present(login, animated: false, completion: nil)
+        }
+        
+        
+        
+        
+        
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! UINavigationController
+//        UIApplication.shared.keyWindow?.rootViewController = viewController
+//        
+//        print(UIApplication.shared.keyWindow)
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +96,7 @@ class MainViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return self.mainVM.dataArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +104,10 @@ class MainViewController: UICollectionViewController {
     
         // Configure the cell
         cell.backgroundColor = UIColor.red
-        cell.MainContentLabel.text = "大连暖棚樱桃苹果201703"
+        
+        let dict = self.mainVM.dataArray[indexPath.item]
+        
+        cell.MainContentLabel.text = dict["title"] as? String
     
         return cell
     }
@@ -117,7 +157,11 @@ class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "TraceSources", sender: nil)
+        if indexPath.item == (self.mainVM.dataArray.count - 1){
+            performSegue(withIdentifier: "TraceSources", sender: nil)
+        }else{
+            performSegue(withIdentifier: "TraceSourceDetail", sender: nil)
+        }
     }
 
     /*

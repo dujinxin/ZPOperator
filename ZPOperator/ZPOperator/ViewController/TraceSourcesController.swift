@@ -12,54 +12,87 @@ private let reuseIdentifier = "Cell"
 
 class TraceSourcesController: UICollectionViewController {
 
+    lazy var mainVM = MainVM()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        self.clearsSelectionOnViewWillAppear = false
+        
+        //self.automaticallyAdjustsScrollViewInsets = false
+        
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        
+        
         // Do any additional setup after loading the view.
+        
+        
+        self.mainVM.dataArray = self.mainVM.loadMainData()
+        
+        print(self.mainVM.dataArray)
+        self.collectionView?.reloadData()
+        
+        //        DispatchQueue.global().async {
+        //            self.mainVM.dataArray = self.mainVM.loadMainData()
+        //
+        //            DispatchQueue.main.async {
+        //                self.collectionView?.reloadData()
+        //            }
+        //
+        //        }
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using [segue destinationViewController].
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return self.mainVM.dataArray.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MainCell
+        
         // Configure the cell
-    
+        cell.backgroundColor = UIColor.red
+        
+        let dict = self.mainVM.dataArray[indexPath.item]
+        
+        cell.MainContentLabel.text = dict["title"] as? String
+        
         return cell
     }
-
+    
+    
+    // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "TraceSourceDetail", sender: nil)
+    }
     // MARK: UICollectionViewDelegate
 
     /*

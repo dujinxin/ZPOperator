@@ -1,0 +1,6 @@
+framework module Pods_ZPOperator {
+  umbrella header "Pods-ZPOperator-umbrella.h"
+
+  export *
+  module * { export * }
+}
