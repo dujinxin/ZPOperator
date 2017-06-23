@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class TraceSourcesController: UICollectionViewController {
 
-    lazy var mainVM = MainVM()
+    lazy var vm = TraceSourceVM()
     
     
     override func viewDidLoad() {
@@ -26,24 +26,17 @@ class TraceSourcesController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
+        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize.init(width: 100, height: 100)
+        self.collectionView?.collectionViewLayout = layout
         
-        // Do any additional setup after loading the view.
-        
-        
-        self.mainVM.dataArray = self.mainVM.loadMainData()
-        
-        print(self.mainVM.dataArray)
-        self.collectionView?.reloadData()
-        
-        //        DispatchQueue.global().async {
-        //            self.mainVM.dataArray = self.mainVM.loadMainData()
-        //
-        //            DispatchQueue.main.async {
-        //                self.collectionView?.reloadData()
-        //            }
-        //
-        //        }
-        
+        self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+            if isSuccess {
+                self.collectionView?.reloadData()
+            }else{
+                print("message = \(msg)")
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,15 +44,35 @@ class TraceSourcesController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
+
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
+     
+        if let identifier = segue.identifier{
+            switch identifier {
+            case "traceSourceAdd":
+                let dvc = segue.destination as! TraceSAddViewController
+                //let block = sender as! (()->())
+                
+                dvc.block = {()->()in
+                    print("回调")
+                    self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+                        if isSuccess {
+                            self.collectionView?.reloadData()
+                        }else{
+                            print("message = \(msg)")
+                        }
+                    })
+                }
+            default:
+                break
+            }
+        }
+
      }
-     */
+
     
     // MARK: UICollectionViewDataSource
     
@@ -71,7 +84,7 @@ class TraceSourcesController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.mainVM.dataArray.count
+        return self.vm.dataArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -80,9 +93,9 @@ class TraceSourcesController: UICollectionViewController {
         // Configure the cell
         cell.backgroundColor = UIColor.red
         
-        let dict = self.mainVM.dataArray[indexPath.item]
+        let model = self.vm.dataArray[indexPath.item]
         
-        cell.MainContentLabel.text = dict["title"] as? String
+        cell.MainContentLabel.text = model.name
         
         return cell
     }

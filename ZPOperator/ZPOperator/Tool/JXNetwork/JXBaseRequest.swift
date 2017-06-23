@@ -22,7 +22,7 @@ class JXBaseRequest: NSObject {
     ///请求URL
     var requestUrl : String?
     ///请求参数
-    var param : [String:String]?
+    var param : Dictionary<String, Any>?
     ///请求方式
     var method : JXRequestMethod = .post
     
@@ -40,9 +40,9 @@ class JXBaseRequest: NSObject {
         JXNetworkManager.manager.cancelRequest(request: self)
     }
     
-    typealias successCompletion = ((_ data:Any?, _ message:String?,_ alertType:String) -> ())
+    typealias successCompletion = ((_ data:Any?, _ message:String?) -> ())
     
-    typealias failureCompletion = ((_ task:URLSessionDataTask, _ error:Error?) -> ())
+    typealias failureCompletion = ((_ message:String?,_ code:JXNetworkError?) -> ())
     
     var success : successCompletion?
     
@@ -60,7 +60,7 @@ class JXBaseRequest: NSObject {
 //    }
     
     ///
-    class func request(with method:JXRequestMethod = .post, url:String, param:[String:String],success:@escaping successCompletion,failure:@escaping failureCompletion) {
+    class func request(with method:JXRequestMethod = .post, url:String, param:Dictionary<String, Any>,success:@escaping successCompletion,failure:@escaping failureCompletion) {
         
         
         
@@ -102,17 +102,161 @@ class JXBaseRequest: NSObject {
 //    }
     
     func requestSuccess(responseData: Any) {
-        print(responseData)
-        guard let success = self.success else {
-            return
+        //print("请求成功")
+        
+        let isJson = JSONSerialization.isValidJSONObject(responseData)
+        print(isJson)
+        guard let data = responseData as? Data,
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+//            ,
+//              let jsonDict = jsonData as? Dictionary<String, Any>
+            else{
+                handleResponseResult(result: nil, message: "数据解析失败", code: JXNetworkError.kResponseUnknow, isSuccess: false)
+                return
         }
-        success(responseData,"123","34")
+        
+        handleResponseResult(result: jsonData)
+        
+        
+//        guard let code = jsonDict["code"] as? NSNumber,
+//              let result = jsonDict["result"]
+//        else {
+//            return
+//        }
+//        
+//        if result is Dictionary<String, Any> {
+//            print("Dictionary")
+//        }else if result is Array<Any>{
+//            print("Array")
+//        }else if result is String{
+//            print("String")
+//        }else{
+//            print("未知")
+//        }
+//        
+//        let message = jsonDict["message"] as? String
+//        if (code == 200){
+//            print("请求成功")
+//            handleResponseResult(result: result, message: message ?? "请求成功", code: 200, isSuccess: true)
+//            
+//        }else{
+//            print("请求失败")
+//            handleResponseResult(result: nil, message: message ?? "请求失败", code: 202, isSuccess: false)
+//        }
+        
         
     }
-    func requestFailure(responseData: Any) {
-        print(responseData)
+    func requestFailure(error: Error) {
+        print("请求失败:\(error)")
+        handleResponseResult(result: error)
+        //handleResponseResult(result: error, message: "失败message", code: JXNetworkError.kResponseUnknow, isSuccess: false)
+        
     }
-    
+    func handleResponseResult(result:Any?) {
+        var msg = ""
+        //var code : JXNetworkError
+        
+        print("requestUrl = \(String(describing: requestUrl))")
+        
+        
+        if result is Dictionary<String, Any> {
+            print("Dictionary")
+            let jsonDict = result as! Dictionary<String, Any>
+            print("responseData = \(jsonDict)")
+            
+            guard let codeNum = jsonDict["code"] as? NSNumber,
+                  let code = JXNetworkError(rawValue: codeNum.intValue)
+                else {
+                handleResponseResult(result: nil, message: "状态码未知", code: .kResponseUnknow, isSuccess: false)
+                return
+            }
+            
+            let message = jsonDict["message"] as? String
+            let data = jsonDict["result"]
+            
+            if (code == .kResponseSuccess){
+                print("请求成功")
+                handleResponseResult(result: data, message: message ?? "请求成功", code: .kResponseSuccess, isSuccess: true)
+                
+            }else if code == .kResponseFailed{
+                print("请求失败")
+                handleResponseResult(result: nil, message: message ?? "请求失败", code: .kResponseFailed, isSuccess: false)
+            }else{
+                print("请求失败")
+                handleResponseResult(result: nil, message: message ?? "请求失败", code: .kResponseUnknow, isSuccess: false)
+            }
+            
+        }else if result is Array<Any>{
+            print("Array")
+        }else if result is String{
+            print("String")
+        }else if result is Error{
+            print("Error")
+            guard let error = result as? NSError,
+                  let code = JXNetworkError(rawValue: error.code)
+                else {
+                    handleResponseResult(result: nil, message: "Error", code: .kResponseUnknow, isSuccess: false)
+                    return
+            }
+            
+            
+            switch code {
+            case .kRequestErrorCannotConnectToHost,
+                 .kRequestErrorCannotFindHost,
+                 .kRequestErrorNotConnectedToInternet,
+                 .kRequestErrorNetworkConnectionLost,
+                 .kRequestErrorUnknown:
+                msg = kRequestNotConnectedDomain;
+                break;
+            case .kRequestErrorTimedOut:
+                msg = kRequestTimeOutDomain;
+                break;
+            case .kRequestErrorResourceUnavailable:
+                msg = kRequestResourceUnavailableDomain;
+                break;
+            case .kResponseDataError:
+                msg = kRequestResourceDataErrorDomain;
+                break;
+            default:
+                msg = error.localizedDescription;
+                break;
+            }
+            handleResponseResult(result: nil, message: msg, code: code, isSuccess: false)
+            
+        }else{
+            print("未知数据类型")
+        }
+    }
+    func handleResponseResult(result:Any?,message:String,code:JXNetworkError,isSuccess:Bool) {
+        
+        
+        if result is Dictionary<String, Any> {
+            print("Dictionary")
+            
+        }else if result is Array<Any>{
+            print("Array")
+        }else if result is String{
+            print("String")
+        }else{
+            print("未知数据类型")
+        }
+        
+        
+        
+        
+        
+        guard let success = self.success,
+              let failure = self.failure
+            else {
+                return
+        }
+        
+        if isSuccess {
+            success(result,message)
+        }else{
+            failure(message,code)
+        }
+    }
 }
 
 extension JXBaseRequest {

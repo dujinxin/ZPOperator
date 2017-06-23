@@ -16,7 +16,7 @@ class MainViewController: UICollectionViewController {
     
     lazy var mainVM = MainVM()
     //log state
-    var isLogin = false
+    var isLogin = JXNetworkManager.manager.isLogin
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +30,7 @@ class MainViewController: UICollectionViewController {
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIndentifierHeader)
         self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: reuseIndentifierFooter)
-        
-        //self.collectionView?.frame = CGRect.init(x: 0, y: 64, width: self.view.bounds.width, height: self.view.bounds.height - 64)
-
-        // Do any additional setup after loading the view.
-        
-        
-        self.mainVM.dataArray = self.mainVM.loadMainData(append:true)
-        
-        print(self.mainVM.dataArray)
-        self.collectionView?.reloadData()
-        
-//        DispatchQueue.global().async { 
-//            self.mainVM.dataArray = self.mainVM.loadMainData()
-//            
-//            DispatchQueue.main.async {
-//                self.collectionView?.reloadData()
-//            }
-//            
-//        }
+    
         
         if !isLogin {
 //            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
@@ -58,19 +40,24 @@ class MainViewController: UICollectionViewController {
             
             //self.addChildViewController(login)
             self.navigationController?.present(login, animated: false, completion: nil)
+        }else{
+            self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+                if isSuccess {
+                    self.collectionView?.reloadData()
+                }else{
+                    print("message = \(msg)")
+                }
+            })
         }
         
-        
-        
-        
-        
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! UINavigationController
-//        UIApplication.shared.keyWindow?.rootViewController = viewController
-//        
-//        print(UIApplication.shared.keyWindow)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+//            print(data)
+//        })
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -96,7 +83,7 @@ class MainViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.mainVM.dataArray.count
+        return self.mainVM.dataArray.count + 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,9 +92,14 @@ class MainViewController: UICollectionViewController {
         // Configure the cell
         cell.backgroundColor = UIColor.red
         
-        let dict = self.mainVM.dataArray[indexPath.item]
+        if indexPath.item < self.mainVM.dataArray.count {
+            let model = self.mainVM.dataArray[indexPath.item]
+            cell.MainContentLabel.text = model.name
+        }else{
+            cell.MainContentLabel.text = "更多溯源批次"
+        }
         
-        cell.MainContentLabel.text = dict["title"] as? String
+        
     
         return cell
     }
@@ -157,7 +149,7 @@ class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == (self.mainVM.dataArray.count - 1){
+        if indexPath.item == (self.mainVM.dataArray.count){
             performSegue(withIdentifier: "TraceSources", sender: nil)
         }else{
             performSegue(withIdentifier: "TraceSourceDetail", sender: nil)

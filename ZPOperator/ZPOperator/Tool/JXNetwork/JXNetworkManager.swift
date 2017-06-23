@@ -18,6 +18,16 @@ class JXNetworkManager: NSObject {
     
     var networkStatus : AFNetworkReachabilityStatus = .reachableViaWiFi
     
+    lazy var userAccound = UserModel()
+    
+    var isLogin : Bool {
+        return userAccound.sid != nil
+    }
+    
+    var sid : String? {
+        return ""
+    }
+    
     
     static let manager = JXNetworkManager()
     
@@ -25,10 +35,12 @@ class JXNetworkManager: NSObject {
         super.init()
         
         afmanager.responseSerializer = AFHTTPResponseSerializer.init()
-        afmanager.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html") as? Set<String>
+        afmanager.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html","application/json") as? Set<String>
         
         afmanager.operationQueue.maxConcurrentOperationCount = 5
         afmanager.requestSerializer.timeoutInterval = 10
+        
+        
         //afmanager.requestSerializer.setValue("", forHTTPHeaderField: "")
         
         afmanager.reachabilityManager = AFNetworkReachabilityManager.shared()
@@ -49,6 +61,11 @@ class JXNetworkManager: NSObject {
         
         ///获取URL
         let url = buildUrl(url: request.requestUrl)
+        
+        if isLogin == true,
+           let sid = userAccound.sid {
+            afmanager.requestSerializer.setValue("sid=\(sid)", forHTTPHeaderField: "Cookie")
+        }
         
         
         switch request.method {
@@ -160,7 +177,7 @@ extension JXNetworkManager {
             return url!
         }
        
-        let ssss = "http://operator.izheng.com\(url!)"
+        let ssss = "http://192.168.10.12:8086\(url!)"
         let sssss = ssss.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         return sssss!
@@ -182,7 +199,7 @@ extension JXNetworkManager {
         if succeed && error == nil{
             request.requestSuccess(responseData: data!)
         } else {
-            request.requestFailure(responseData: error!)
+            request.requestFailure(error: error!)
         }
         
         

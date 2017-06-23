@@ -501,27 +501,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99443504339184763" green="1" blue="0.91159658379630037" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="15" id="DIk-he-ybL">
-                            <size key="itemSize" width="157" height="155"/>
+                            <size key="itemSize" width="80" height="80"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Ikd-6W-nSx">
-                                <rect key="frame" x="10" y="10" width="157" height="155"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Ikd-6W-nSx" customClass="MainCell" customModule="ZPOperator" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="157" height="155"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-ph-DTy">
-                                            <rect key="frame" x="57" y="67" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.50051068385659825" blue="0.25902144420275464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </collectionViewCell>
@@ -534,7 +525,7 @@
                     <navigationItem key="navigationItem" title="全部溯源批次" id="9sk-oy-P6u">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="hxh-dx-IIo">
                             <connections>
-                                <segue destination="bD2-Vv-D4I" kind="show" id="CaD-D1-475"/>
+                                <segue destination="bD2-Vv-D4I" kind="show" identifier="traceSourceAdd" id="CaD-D1-475"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -549,7 +540,7 @@
         <!--添加溯源批次-->
         <scene sceneID="G36-ej-EHe">
             <objects>
-                <viewController id="bD2-Vv-D4I" sceneMemberID="viewController">
+                <viewController id="bD2-Vv-D4I" customClass="TraceSAddViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fVU-ED-VkJ"/>
                         <viewControllerLayoutGuide type="bottom" id="BHz-CH-3kC"/>
@@ -570,23 +561,23 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vm2-ys-PX7">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMi-Jv-ODu">
                                         <rect key="frame" x="80" y="0.0" width="285" height="44"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <connections>
+                                            <action selector="addressButton:" destination="bD2-Vv-D4I" eventType="touchUpInside" id="6eM-Q0-P2O"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="vm2-ys-PX7" secondAttribute="trailing" constant="10" id="0vd-04-Woo"/>
                                     <constraint firstItem="XXx-Xb-7Vq" firstAttribute="top" secondItem="1D8-0L-e5p" secondAttribute="top" id="8dw-We-bXy"/>
-                                    <constraint firstAttribute="bottom" secondItem="vm2-ys-PX7" secondAttribute="bottom" id="E9J-DC-lcg"/>
                                     <constraint firstAttribute="bottom" secondItem="XXx-Xb-7Vq" secondAttribute="bottom" id="IJf-8D-dTg"/>
                                     <constraint firstAttribute="height" constant="44" id="LQi-1g-0y8"/>
-                                    <constraint firstItem="vm2-ys-PX7" firstAttribute="leading" secondItem="XXx-Xb-7Vq" secondAttribute="trailing" constant="10" id="PBC-Pq-Js4"/>
-                                    <constraint firstItem="vm2-ys-PX7" firstAttribute="top" secondItem="1D8-0L-e5p" secondAttribute="top" id="ZO8-qv-v9i"/>
+                                    <constraint firstAttribute="bottom" secondItem="NMi-Jv-ODu" secondAttribute="bottom" id="WTz-iY-ynT"/>
+                                    <constraint firstItem="NMi-Jv-ODu" firstAttribute="top" secondItem="1D8-0L-e5p" secondAttribute="top" id="Ztq-Ir-RRo"/>
+                                    <constraint firstAttribute="trailing" secondItem="NMi-Jv-ODu" secondAttribute="trailing" constant="10" id="hug-RK-GXj"/>
                                     <constraint firstItem="XXx-Xb-7Vq" firstAttribute="leading" secondItem="1D8-0L-e5p" secondAttribute="leading" constant="10" id="jgl-rh-TaM"/>
+                                    <constraint firstItem="NMi-Jv-ODu" firstAttribute="leading" secondItem="XXx-Xb-7Vq" secondAttribute="trailing" constant="10" id="yiM-Ht-d8T"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B62-zG-CRI">
@@ -601,22 +592,25 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jZb-ig-lYX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfD-ai-OSM">
                                         <rect key="frame" x="80" y="0.0" width="285" height="44"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <state key="normal" title="请选择">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="productAction:" destination="bD2-Vv-D4I" eventType="touchUpInside" id="ZWl-L6-NBA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="jZb-ig-lYX" firstAttribute="top" secondItem="B62-zG-CRI" secondAttribute="top" id="8b1-lF-ZDk"/>
+                                    <constraint firstAttribute="bottom" secondItem="dfD-ai-OSM" secondAttribute="bottom" id="5VX-LG-DDo"/>
+                                    <constraint firstAttribute="trailing" secondItem="dfD-ai-OSM" secondAttribute="trailing" constant="10" id="AqG-bU-yb9"/>
                                     <constraint firstAttribute="height" constant="44" id="BcV-wU-Bus"/>
-                                    <constraint firstAttribute="trailing" secondItem="jZb-ig-lYX" secondAttribute="trailing" constant="10" id="MO0-Mh-cbf"/>
+                                    <constraint firstItem="dfD-ai-OSM" firstAttribute="leading" secondItem="GyG-Ul-xah" secondAttribute="trailing" constant="10" id="Dxk-Sp-4wf"/>
                                     <constraint firstItem="GyG-Ul-xah" firstAttribute="leading" secondItem="B62-zG-CRI" secondAttribute="leading" constant="10" id="TaO-hq-WjR"/>
-                                    <constraint firstAttribute="bottom" secondItem="jZb-ig-lYX" secondAttribute="bottom" id="g6v-Ax-5MV"/>
+                                    <constraint firstItem="dfD-ai-OSM" firstAttribute="top" secondItem="B62-zG-CRI" secondAttribute="top" id="jLd-EQ-lhi"/>
                                     <constraint firstItem="GyG-Ul-xah" firstAttribute="top" secondItem="B62-zG-CRI" secondAttribute="top" id="loO-MY-BZa"/>
-                                    <constraint firstItem="jZb-ig-lYX" firstAttribute="leading" secondItem="GyG-Ul-xah" secondAttribute="trailing" constant="10" id="lwC-hJ-gSw"/>
                                     <constraint firstAttribute="bottom" secondItem="GyG-Ul-xah" secondAttribute="bottom" id="pYg-5l-tYA"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="y72-xY-0bK"/>
                                 </constraints>
@@ -628,6 +622,9 @@
                                     <constraint firstAttribute="height" constant="44" id="8aj-7p-OG1"/>
                                 </constraints>
                                 <state key="normal" title="提交"/>
+                                <connections>
+                                    <action selector="submit:" destination="bD2-Vv-D4I" eventType="touchUpInside" id="cIJ-Oi-NzJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -644,6 +641,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="添加溯源批次" id="Tau-fP-nbK"/>
+                    <connections>
+                        <outlet property="addressButton" destination="NMi-Jv-ODu" id="yci-kJ-kfw"/>
+                        <outlet property="productButton" destination="dfD-ai-OSM" id="IUZ-hm-0Vf"/>
+                        <outlet property="submitButton" destination="eql-8I-qUf" id="eQs-w8-ntv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g52-H3-Kh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

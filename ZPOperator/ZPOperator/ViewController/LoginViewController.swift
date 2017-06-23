@@ -14,6 +14,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    lazy var vm = LoginVM()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,28 +31,32 @@ class LoginViewController: UIViewController {
 
     @IBAction func logAction(_ sender: Any) {
         
-        userTextField.text = "13121213434"
-        passwordTextField.text = "123456"
+        userTextField.text = "13477831123"
+        passwordTextField.text = "abc123"
         
-        JXBaseRequest.request(url: ApiString.userLogin.rawValue, param: ["ua":userTextField.text!,"Up":passwordTextField.text!], success: { (data, message, type) in
-            //
-            let isJson = JSONSerialization.isValidJSONObject(data)
-            print(isJson)
-            //let jsons = JSONSerialization.jsonObject(with: <#T##InputStream#>, options: <#T##JSONSerialization.ReadingOptions#>)
-            
-            guard let data = data as? Data,
-                let jsonData = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
-                
-                else{
-                    return
+        vm.login(userName: userTextField.text!, password: passwordTextField.text!) { (data, msg, isSuccess) in
+            if isSuccess {
+                self.dismiss(animated: true, completion: nil)
+            }else{
+                print(msg)
             }
-            
-            print("jsonData = \(jsonData) \n message = \(message) \n alertType = \(type)")
-        }) { (task, error) in
-            print(error)
         }
         
-        self.dismiss(animated: true, completion: nil)
+//        JXNetworkManager.manager.login(userName: userTextField.text!, password: passwordTextField.text!) { (data,msg, isSuccess) in
+//            if isSuccess {
+//                self.dismiss(animated: true, completion: nil)
+//            }else{
+//                print(msg)
+//            }
+//        }
+        
+//        JXNetworkManager.manager.login(userName: userTextField.text!, password: passwordTextField.text!) { (msg, isSuccess) in
+//            if isSuccess {
+//                self.dismiss(animated: true, completion: nil)
+//            }else{
+//                print(msg)
+//            }
+//        }
     }
     
 

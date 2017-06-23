@@ -10,6 +10,22 @@
 import Foundation
 
 enum ApiString : String {
-    case getTokenByKey = "/UserLogin/GetTokenByKey"
+
     case userLogin     = "/login"
+    case logout        = "/logout"
+    case modifiyPwd    = "/user/updatePassword"
+    case setting       = "/user/setting"
+    case home          = "/index"
+    case traceSources  = "/traceBatch/list"
+    case addTS         = "/traceBatch/addTraceBatch"
+    case saveTS        = "/traceBatch/saveTraceBatch"
+    case traceSDetail  = "/traceBatch/viewTraceBatchInfo"
+    case addTSRecord   = "/traceBatch/addTraceProcessRecord"
+    case saveTSRecord  = "/traceBatch/saveTraceProcessRecord"
+    case modifyTSRecord = "/traceBatch/editTraceProcessRecord"
+    case deleteTSRecord = "/traceBatch/deleteTraceProcessRecord"
+    case deliverList   = "/batch/list"
+    case deliver       = "/batch/deliver"
+    case codeSearch    = "/code/search"
+ 
 }
