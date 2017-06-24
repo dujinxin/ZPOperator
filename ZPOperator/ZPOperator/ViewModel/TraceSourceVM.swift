@@ -12,7 +12,7 @@ class TraceSourceVM {
 
     var dataArray = [MainSubModel]()
     
-    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String?,_ isSuccess:Bool)->())) -> Void{
+    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.traceSources.rawValue, param: ["pageNo":1,"pageSize":20], success: { (data, message) in

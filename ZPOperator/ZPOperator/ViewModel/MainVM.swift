@@ -14,7 +14,7 @@ class MainVM{
 
     var dataArray = [MainSubModel]()
     
-    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String?,_ isSuccess:Bool)->())) -> Void{
+    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.home.rawValue, param: Dictionary(), success: { (data, message) in

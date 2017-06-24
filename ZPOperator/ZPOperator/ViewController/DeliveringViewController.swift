@@ -23,7 +23,7 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
         self.tableView.frame = view.bounds
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier1")
         self.tableView.tableFooterView = UIView()
         view.addSubview(self.tableView)
     }
@@ -48,9 +48,10 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        //1.才用这种方式，cell不需要提前注册，拿不到的话会走if;如果注册，且可以正确获取，那么不走if
+        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
+        //2.才用这种，cell必须提前注册，不注册会crash,而且注册后获取不到cell也会crash，不走if(总之不能自定义UITableViewCellStyle)
+        //var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         if cell == nil {
             

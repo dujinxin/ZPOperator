@@ -14,7 +14,7 @@ class TraceSAddVM {
     
     var dataArray = [MainSubModel]()
     
-    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String?,_ isSuccess:Bool)->())) -> Void{
+    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.addTS.rawValue, param: Dictionary(), success: { (data, message) in
@@ -40,7 +40,7 @@ class TraceSAddVM {
             completion(nil, message, false)
         }
     }
-    func submitTS(goodId:String,completion:@escaping ((_ data:Any?, _ msg:String?,_ isSuccess:Bool)->())) -> Void{
+    func submitTS(goodId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.saveTS.rawValue, param: ["goods.id":goodId], success: { (data, message) in

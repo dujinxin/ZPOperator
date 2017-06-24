@@ -16,24 +16,20 @@ class LoginVM {
     
     
     
-    func login(userName:String, password:String, completion:@escaping ((_ data:Any?, _ msg:String?,_ isSuccess:Bool)->())){
+    func login(userName:String, password:String, completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())){
         
-        JXNetworkManager.manager.login(url: ApiString.userLogin.rawValue, param: ["phone":userName,"pwd":password]) { (data, msg, isSuccess) in
-            
-            completion(data,msg,isSuccess)
-            //dataArray = data
-            
-        }
-        
-//        JXRequest.request(url: ApiString.userLogin.rawValue, param: ["phone":userName,"pwd":password], success: { (data, message) in
-//            //
+//        JXNetworkManager.manager.login(url: ApiString.userLogin.rawValue, param: ["phone":userName,"pwd":password]) { (data, msg, isSuccess) in
 //            
-//            //self.isLogin = true
+//            completion(data,msg!,isSuccess)
+//            //dataArray = data
 //            
-//        }) { (message, code) in
-//            //
-//            //self.isLogin = false
 //        }
+        
+        JXRequest.request(url: ApiString.userLogin.rawValue, param: ["phone":userName,"pwd":password], success: { (data, message) in
+            completion(data,message,true)
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
     }
 //    JXNetworkManager.manager.dataRequest(url: ApiString.userLogin.rawValue, param: ["phone":userTextField.text!,"pwd":passwordTextField.text!]) { (data, msg, isSuccess) in
 //    //

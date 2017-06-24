@@ -17,7 +17,7 @@ class DeliveredViewController: UITableViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.tableFooterView = UIView()
         
     }
@@ -42,7 +42,7 @@ class DeliveredViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) 
+        var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
     
         if cell == nil {
             
