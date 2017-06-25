@@ -17,9 +17,12 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
     @IBOutlet weak var logoutButton: UIButton!
 
     var select : JXSelectView?
+    var alert : JXAlertView?
     
     
     @IBAction func lougouAction(_ sender: UIButton) {
+        
+        //alert?.show()
         
         select?.show()
         //select?.show(inView: nil, animate: true)
@@ -62,9 +65,16 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
         select = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: 300), customView: view1)
         select?.isUseTopBar = true
         select?.dataSource = self
- 
         //select?.customView = view1
         
+        
+        alert = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style: .list)
+        alert?.actions = ["1","2","3","4","5"]
+        alert?.topBarView = view1
+        alert?.isUseTopBar = true
+        alert?.topBarHeight = 50
+        alert?.isSetCancelView = true
+        alert?.position = .bottom
     }
 
     override func didReceiveMemoryWarning() {

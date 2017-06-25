@@ -21,23 +21,29 @@ enum JXSelectViewShowPosition {
 
 private let reuseIdentifier = "reuseIdentifier"
 private let topBarHeight : CGFloat = 40
+private let pickViewCellHeight : CGFloat = 44
+private let tableViewCellHeight : CGFloat = 44
+private let selectViewWidth : CGFloat = UIScreen.main.bounds.width
+private let pickViewHeight : CGFloat = 216
 private let animateDuration : TimeInterval = 0.3
 
 class JXSelectView: UIView {
     
-    var rect = CGRect.init()
+    //var rect = CGRect.init()
+    var selectViewHeight : CGFloat = pickViewHeight
     var selectViewTop : CGFloat = 0
     var selectRow : Int = -1
     
     var style : JXSelectViewStyle = .list
     let position : JXSelectViewShowPosition = .bottom
-    var customView : UIView?
+    private var contentView : UIView?
     var isUseTopBar : Bool = false {
         didSet{
             selectViewTop = topBarHeight
             self.addSubview(self.topBarView)
             self.topBarView.addSubview(self.cancelButton)
             self.topBarView.addSubview(self.confirmButton)
+            self.resetFrame()
             self.layoutSubviews()
         }
     }
@@ -104,44 +110,57 @@ class JXSelectView: UIView {
     
     init(frame: CGRect, style:JXSelectViewStyle) {
         super.init(frame: frame)
-        self.rect = frame
-        self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
+        //self.rect = frame
         self.backgroundColor = UIColor.white
         self.style = style
-        
+        self.resetFrame()
         if style == .list {
             self.addSubview(self.tableView)
         }else{
             self.addSubview(self.pickView)
         }
+        
     }
     init(frame:CGRect, customView:UIView) {
         super.init(frame: frame)
-        self.rect = frame
-        self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
+        //self.rect = frame
         self.backgroundColor = UIColor.white
         self.style = .custom
-        self.customView = customView
+        self.contentView = customView
+        selectViewHeight = customView.bounds.height
+        self.resetFrame()
     }
-    
+    func resetFrame() {
+        var height : CGFloat
+        
+        if style == .list{
+            let num = self.dataSource?.jxSelectView(self, numberOfRowsInSection: 0) ?? 0
+            height = CGFloat(num > 5 ? 5 : num) * tableViewCellHeight
+        } else if style == .pick{
+            height = pickViewHeight
+        } else {
+            height = selectViewHeight
+        }
+        
+        if isUseTopBar {
+            height += topBarHeight
+        }
+        self.frame = CGRect.init(x: 0, y: 0, width: selectViewWidth, height:height)
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if isUseTopBar {
-            topBarView.frame = CGRect.init(x: 0, y: 0, width: rect.width, height: topBarHeight)
+            topBarView.frame = CGRect.init(x: 0, y: 0, width: selectViewWidth, height: topBarHeight)
             cancelButton.frame = CGRect.init(x: 0, y: 0, width: 60, height: topBarHeight)
-            confirmButton.frame = CGRect.init(x: rect.width - 60, y: 0, width: 60, height: topBarHeight)
+            confirmButton.frame = CGRect.init(x: selectViewWidth - 60, y: 0, width: 60, height: topBarHeight)
         }
         
         
-        if style == .list {
-            tableView.frame = CGRect.init(x: 0, y: selectViewTop, width: rect.width, height: rect.height)
-        } else if style == .pick {
-            pickView.frame = CGRect.init(x: 0, y: selectViewTop, width: rect.width, height: 216)
+        if style == .pick {
+            self.contentView?.frame = CGRect.init(x: 0, y: selectViewTop, width: selectViewWidth, height: pickViewHeight)
         } else {
-            if customView != nil {
-                customView?.frame = CGRect.init(x: 0, y: selectViewTop, width: rect.width, height: rect.height)
-            }
+            self.contentView?.frame = CGRect.init(x: 0, y: selectViewTop, width: selectViewWidth, height: selectViewHeight)
         }
     }
     
@@ -155,35 +174,37 @@ class JXSelectView: UIView {
     
     func show(inView view:UIView? ,animate:Bool = true) {
         
-        if customView != nil && style == .custom {
-            self.addSubview(customView!)
+        if style == .custom {
+            self.addSubview(contentView!)
         }
+        self.resetFrame()
         
-        let contentView : UIView
+        
+        let superView : UIView
         
         if let v = view {
-            contentView = v
+            superView = v
         }else{
-            contentView = self.bgWindow
+            superView = self.bgWindow
         }
         //let center = CGPoint.init(x: contentView.center.x, y: contentView.center.y - 64 / 2)
-        let center = contentView.center
+        let center = superView.center
         
         if position == .top {
             var frame = self.frame
             frame.origin.y = 0.0 - self.frame.height
-            self.frame = rect
+            self.frame = frame
         }else if position == .bottom {
             var frame = self.frame
-            frame.origin.y = contentView.frame.height
+            frame.origin.y = superView.frame.height
             self.frame = frame
         }else{
             self.center = center
         }
         
-        contentView.addSubview(self.bgView)
-        contentView.addSubview(self)
-        contentView.isHidden = false
+        superView.addSubview(self.bgView)
+        superView.addSubview(self)
+        superView.isHidden = false
         
         if animate {
             UIView.animate(withDuration: animateDuration, delay: 0.0, options: .curveEaseIn, animations: {
@@ -194,7 +215,7 @@ class JXSelectView: UIView {
                     self.frame = frame
                 }else if self.position == .bottom {
                     var frame = self.frame
-                    frame.origin.y = contentView.frame.height - self.frame.height
+                    frame.origin.y = superView.frame.height - self.frame.height
                     self.frame = frame
                 }else{
                     self.center = center
@@ -235,15 +256,15 @@ class JXSelectView: UIView {
         }
     }
     
-    func clearInfo() {
+    fileprivate func clearInfo() {
         bgView.removeFromSuperview()
         self.removeFromSuperview()
         bgWindow.isHidden = true
     }
-    func tapClick() {
+    @objc private func tapClick() {
         self.dismiss()
     }
-    func viewDisAppear(row:Int) {
+    fileprivate func viewDisAppear(row:Int) {
         if self.delegate != nil && selectRow >= 0{
             self.delegate?.jxSelectView(self, didSelectRowAt: row)
         }
@@ -265,9 +286,9 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if dataSource != nil {
-            return dataSource?.jxSelectView(self, heightForRowAt: indexPath.row) ?? 44
+            return dataSource?.jxSelectView(self, heightForRowAt: indexPath.row) ?? tableViewCellHeight
         }
-        return 44
+        return tableViewCellHeight
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
@@ -307,10 +328,10 @@ extension JXSelectView : UIPickerViewDelegate, UIPickerViewDataSource{
         return nil
     }
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return self.rect.width
+        return selectViewWidth
     }
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 40
+        return pickViewCellHeight
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
