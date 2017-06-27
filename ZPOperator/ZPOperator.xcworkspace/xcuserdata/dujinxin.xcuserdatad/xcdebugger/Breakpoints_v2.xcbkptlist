@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/Model/UserModel.swift"
-            timestampString = "519888147.836526"
+            timestampString = "520221682.987926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "init()"
             landmarkType = "7">
             <Locations>
@@ -26,12 +26,12 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Model/UserModel.swift"
-                  timestampString = "520067207.217468"
+                  timestampString = "520223041.953506"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "67">
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "70">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,75 +41,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Model/UserModel.swift"
-                  timestampString = "520067207.218997"
+                  timestampString = "520223041.954861"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.MainVM.loadMainData (append : Swift.Bool, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/MainVM.swift"
-                  timestampString = "520067207.225345"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "38">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.MainVM.(loadMainData (append : Swift.Bool, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()).(default argument 0)"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/MainVM.swift"
-                  timestampString = "520067207.226638"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
                   offsetFromSymbolStart = "4">
                </Location>
             </Locations>
@@ -169,198 +105,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900575.616651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.MainVM.loadMainData (append : Swift.Bool, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/MainVM.swift"
-                  timestampString = "520067207.246181"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "38">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.MainVM.(loadMainData (append : Swift.Bool, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/MainVM.swift"
-                  timestampString = "520067207.247453"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "22"
-                  endingLineNumber = "22"
-                  offsetFromSymbolStart = "47">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-            timestampString = "519971753.495415"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "handleResponseResult(result:message:code:isSuccess:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.JXBaseRequest.handleResponseResult (result : Swift.Optional&lt;Any&gt;, message : Swift.String, code : ZPOperator.JXNetworkError, isSuccess : Swift.Bool) -&gt; ()"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520067207.250907"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "2743">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.JXBaseRequest.handleResponseResult (result : Swift.Optional&lt;Any&gt;, message : Swift.String, code : ZPOperator.JXNetworkError, isSuccess : Swift.Bool) -&gt; ()"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520067207.252337"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "216"
-                  endingLineNumber = "216"
-                  offsetFromSymbolStart = "2815">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewController/MainViewController.swift"
-            timestampString = "519972606.953566"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewController/MainViewController.swift"
-            timestampString = "519972606.953566"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/MainVM.swift"
-            timestampString = "519900703.754584"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "loadMainData(append:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSourcesController.swift"
             timestampString = "519913261.714526"
             startingColumnNumber = "9223372036854775807"
@@ -378,7 +122,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceSourcesController.swift"
-                  timestampString = "520067207.263599"
+                  timestampString = "520223041.966815"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -393,7 +137,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceSourcesController.swift"
-                  timestampString = "520067207.264906"
+                  timestampString = "520223041.968123"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "60"
@@ -410,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-            timestampString = "519971559.094098"
+            timestampString = "520177598.365774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "handleResponseResult(result:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-            timestampString = "519971559.094098"
+            timestampString = "520177598.365774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "handleResponseResult(result:)"
             landmarkType = "7">
             <Locations>
@@ -442,12 +186,12 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520067207.270472"
+                  timestampString = "520223041.974623"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
-                  offsetFromSymbolStart = "7255">
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "7679">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -457,12 +201,12 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520067207.27184"
+                  timestampString = "520223041.975958"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
-                  offsetFromSymbolStart = "7604">
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "8028">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -474,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-            timestampString = "520000688.574477"
+            timestampString = "520087837.462982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "loadMainData(traceBatchId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,13 +234,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-            timestampString = "520000982.00528"
+            timestampString = "520177598.365774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "loadMainData(traceBatchId:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ZPOperator.TraceSourceDetailVM.(loadMainData (traceBatchId : __ObjC.NSNumber, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ZPOperator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceSourceDetailVM.swift"
+                  timestampString = "520223041.987842"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "58">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ZPOperator.TraceSourceDetailVM.(loadMainData (traceBatchId : __ObjC.NSNumber, completion : (Swift.Optional&lt;Any&gt;, Swift.String, Swift.Bool) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "ZPOperator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceSourceDetailVM.swift"
+                  timestampString = "520223041.990009"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "455">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,27 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-            timestampString = "520001381.036397"
+            timestampString = "520177598.365774"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "loadMainData(traceBatchId:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-            timestampString = "520001746.281106"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "loadMainData(traceBatchId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,27 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/View/JXView/JXSelectView.swift"
-            timestampString = "520071645.590316"
+            timestampString = "520154776.495061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "dismiss(animate:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZPOperator/View/JXView/JXSelectView.swift"
-            timestampString = "520071645.590316"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "dismiss(animate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -577,38 +321,6 @@
             endingLineNumber = "180"
             landmarkName = "show(inView:animate:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.JXAlertView.(show (inView : Swift.Optional&lt;__ObjC.UIView&gt;, animate : Swift.Bool) -&gt; ()).(default argument 1)"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/View/JXView/JXAlertView.swift"
-                  timestampString = "520067207.297463"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "158"
-                  endingLineNumber = "158"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ZPOperator.JXAlertView.show (inView : Swift.Optional&lt;__ObjC.UIView&gt;, animate : Swift.Bool) -&gt; ()"
-                  moduleName = "ZPOperator"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/View/JXView/JXAlertView.swift"
-                  timestampString = "520067207.298866"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -641,6 +353,150 @@
             endingLineNumber = "74"
             landmarkName = "isSetCancelView"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/TraceSAddViewController.swift"
+            timestampString = "520139332.05745"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/MainViewController.swift"
+            timestampString = "520177262.731284"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ZPOperator.MainViewController.prepare (for : __ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "ZPOperator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/MainViewController.swift"
+                  timestampString = "520223042.069402"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
+                  offsetFromSymbolStart = "609">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ZPOperator.MainViewController.prepare (for : __ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "ZPOperator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/MainViewController.swift"
+                  timestampString = "520223042.070868"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "161"
+                  endingLineNumber = "161"
+                  offsetFromSymbolStart = "994">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/MainViewController.swift"
+            timestampString = "520176526.232029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/TraceDetailController.swift"
+            timestampString = "520176530.464824"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewModel/LoginVM.swift"
+            timestampString = "520223415.525106"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "login(userName:password:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/TagViewController.swift"
+            timestampString = "520223008.336928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "search(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewModel/TraceSourceTagVM.swift"
+            timestampString = "520222945.932164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "loadMainData(code:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

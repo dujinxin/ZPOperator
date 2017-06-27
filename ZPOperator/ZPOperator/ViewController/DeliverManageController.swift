@@ -27,6 +27,11 @@ class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizont
         
         let deliveringVC = DeliveringViewController()
         let deliveredVC = DeliveredViewController()
+        
+        deliveringVC.block = {(deliveringModel)->() in
+            print("fahuo ")
+            self.performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
+        }
 
         horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: 64 + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - 64 - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
         view.addSubview(horizontalView!)
@@ -35,6 +40,20 @@ class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizont
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let identifier = segue.identifier{
+            switch identifier {
+            case "deliveringManager":
+                let dvc = segue.destination as! DeliveringManagerController
+                dvc.deliverModel = sender as? TraceDeliverModel
+            default:
+                break
+            }
+        }
+        
     }
 
 }

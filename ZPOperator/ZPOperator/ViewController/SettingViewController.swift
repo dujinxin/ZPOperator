@@ -62,7 +62,8 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
         let view1 = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
         view1.backgroundColor = UIColor.orange
         
-        select = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: 300), customView: view1)
+        select = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: //300), customView: view1)
+            300), style:.list)
         select?.isUseTopBar = true
         select?.dataSource = self
         //select?.customView = view1

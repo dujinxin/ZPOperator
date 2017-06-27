@@ -43,27 +43,6 @@ class MainVM{
             //self.isLogin = false
             completion(nil, message, false)
         }
-        
-        
-        
-//        JXNetworkManager.manager.dataRequest(url: ApiString.home.rawValue, param: Dictionary()) { (data, msg, isSuccess) in
-//            
-//            completion(data,msg,isSuccess)
-//            //dataArray = data
-//            
-//        }
-        
-        
-        
-//        for i in 1..<9 {
-//            var dict = Dictionary<String, AnyObject>()
-//            dict["title"] = "大连暖棚樱桃苹果20170\(i)" as AnyObject
-//            dataArray.append(dict)
-//        }
-//        if append {
-//            dataArray.append(["title":"更多溯源批次" as AnyObject])
-//        }
-//        return dataArray
     }
 
 }

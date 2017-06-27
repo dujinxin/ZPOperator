@@ -30,8 +30,8 @@ private let animateDuration : TimeInterval = 0.3
 class JXSelectView: UIView {
     
     //var rect = CGRect.init()
-    var selectViewHeight : CGFloat = pickViewHeight
-    var selectViewTop : CGFloat = 0
+    private var selectViewHeight : CGFloat = pickViewHeight
+    private var selectViewTop : CGFloat = 0
     var selectRow : Int = -1
     
     var style : JXSelectViewStyle = .list
@@ -44,7 +44,6 @@ class JXSelectView: UIView {
             self.topBarView.addSubview(self.cancelButton)
             self.topBarView.addSubview(self.confirmButton)
             self.resetFrame()
-            self.layoutSubviews()
         }
     }
     
@@ -113,12 +112,14 @@ class JXSelectView: UIView {
         //self.rect = frame
         self.backgroundColor = UIColor.white
         self.style = style
-        self.resetFrame()
+        
         if style == .list {
-            self.addSubview(self.tableView)
+            self.contentView = self.tableView
         }else{
-            self.addSubview(self.pickView)
+            self.contentView = self.pickView
         }
+        selectViewHeight = frame.height
+        self.resetFrame()
         
     }
     init(frame:CGRect, customView:UIView) {
@@ -130,22 +131,26 @@ class JXSelectView: UIView {
         selectViewHeight = customView.bounds.height
         self.resetFrame()
     }
-    func resetFrame() {
-        var height : CGFloat
-        
-        if style == .list{
-            let num = self.dataSource?.jxSelectView(self, numberOfRowsInSection: 0) ?? 0
-            height = CGFloat(num > 5 ? 5 : num) * tableViewCellHeight
-        } else if style == .pick{
-            height = pickViewHeight
-        } else {
-            height = selectViewHeight
+    func resetFrame(height:CGFloat = 0.0) {
+        var h : CGFloat
+        if height > 0 {
+            h = height
+            selectViewHeight = height
+        }else{
+            if style == .list{
+                let num = self.dataSource?.jxSelectView(self, numberOfRowsInSection: 0) ?? 0
+                h = CGFloat(num > 5 ? 5 : num) * tableViewCellHeight
+            } else if style == .pick{
+                h = pickViewHeight
+            } else {
+                h = selectViewHeight
+            }
         }
-        
         if isUseTopBar {
-            height += topBarHeight
+            h += topBarHeight
         }
-        self.frame = CGRect.init(x: 0, y: 0, width: selectViewWidth, height:height)
+        self.frame = CGRect.init(x: 0, y: 0, width: selectViewWidth, height:h)
+        self.layoutSubviews()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -174,10 +179,8 @@ class JXSelectView: UIView {
     
     func show(inView view:UIView? ,animate:Bool = true) {
         
-        if style == .custom {
-            self.addSubview(contentView!)
-        }
-        self.resetFrame()
+        self.addSubview(self.contentView!)
+        self.resetFrame(height: selectViewHeight)
         
         
         let superView : UIView
@@ -293,10 +296,18 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
-        cell.textLabel?.text = "\(indexPath.row)"
         if dataSource != nil {
+            if let view = dataSource?.jxSelectView!(self, viewForRow: indexPath.row) {
+                view.tag = 666
+                cell.contentView.addSubview(view)
+            }
+        }
+        if let view = cell.contentView.viewWithTag(666){
+            view.isHidden = false
+        }else{
             cell.textLabel?.text = dataSource?.jxSelectView(self, contentForRow: indexPath.row, InSection: indexPath.section)
         }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -344,14 +355,22 @@ extension JXSelectView : UIPickerViewDelegate, UIPickerViewDataSource{
     
     
 }
-protocol JXSelectViewDataSource {
+@objc protocol JXSelectViewDataSource {
     
     func jxSelectView(_ :JXSelectView, numberOfRowsInSection section:Int) -> Int
-    
-    func jxSelectView(_ :JXSelectView, contentForRow row:Int, InSection section:Int) -> String
     func jxSelectView(_ :JXSelectView, heightForRowAt row:Int) -> CGFloat
+    func jxSelectView(_ :JXSelectView, contentForRow row:Int, InSection section:Int) -> String
+    
+    @objc optional func jxSelectView(_ :JXSelectView, viewForRow row:Int) -> UIView?
+    
 }
 protocol JXSelectViewDelegate {
     
     func jxSelectView(_ :JXSelectView, didSelectRowAt row:Int)
 }
+
+//extension JXSelectViewDataSource {
+//    func jxSelectView(_ :JXSelectView, viewForRow row:Int) -> UIView{
+//        return UIView()
+//    }
+//}

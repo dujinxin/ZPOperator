@@ -76,6 +76,22 @@ class JXNetworkManager: NSObject {
                 self.handleTask(task: task!, data: nil, error: error)
             })
         case .post:
+//            if request. {
+//                <#code#>
+//            }
+//            afmanager.post(url, parameters: request.param, constructingBodyWith: { (formdata) in
+//                //
+//                
+//                let str = NSHomeDirectory() + "/Documents/userImage.jpg"
+//                let url = URL.init(fileURLWithPath: str)
+//                let data = try? Data.init(contentsOf: url)
+//                formdata.appendPart(withFileData: data!, name: "image", fileName: "userImage.jpg", mimeType: "image/jpeg")
+//                
+//            }, progress: nil, success: { (task, res) in
+//                //
+//            }, failure: { (task, error) in
+//                //
+//            })
             request.sessionTask = afmanager.post(url, parameters: request.param, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
                 self.handleTask(task: task, data: responseData)
             }, failure: { (task:URLSessionDataTask?, error:Error) in

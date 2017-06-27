@@ -17,6 +17,8 @@ class TraceDetailController: UIViewController,UITableViewDelegate,UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
+    var traceBatchId : NSNumber?
+    
     lazy var vm = TraceSourceDetailVM()
 
     override func viewDidLoad() {
@@ -27,7 +29,7 @@ class TraceDetailController: UIViewController,UITableViewDelegate,UITableViewDat
         self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         
-        self.vm.loadMainData(traceBatchId: "") { (data, msg, isSuccess) in
+        self.vm.loadMainData(traceBatchId: traceBatchId!) { (data, msg, isSuccess) in
             if isSuccess {
                 self.tableView.reloadData()
             }else{

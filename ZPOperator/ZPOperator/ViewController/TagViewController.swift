@@ -10,10 +10,17 @@ import UIKit
 
 class TagViewController: UIViewController {
 
+    var vm = TraceSourceTagVM()
+    
+    
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        searchTextField.text = "210000100101"
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +28,15 @@ class TagViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func search(_ sender: UIButton) {
+        self.vm.loadMainData(code: searchTextField.text!) { (data, msg, isSuccess) in
+            if isSuccess{
+                self.performSegue(withIdentifier: "210000100101", sender: self.vm.traceSourceTag)
+            }else{
+                print(msg)
+            }
+        }
     }
-    */
+    
 
 }

@@ -13,7 +13,14 @@ private let userPath = NSHomeDirectory() + "/Documents/userAccound.json"
 
 class UserModel: NSObject {
     
+    //登录接口获取
     var sid : String?
+    
+    //设置接口获取
+    var mobile : String?
+    var stationName : String?
+    var userName : String?
+    
     
     override init() {
         super.init()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 enum JXRequestMethod : NSInteger{
     case get
@@ -27,7 +28,15 @@ class JXBaseRequest: NSObject {
     var method : JXRequestMethod = .post
     
     var sessionTask : URLSessionTask?
+    //func constructingBlock< T : AFMultipartFormData >(formData : [T]) -> T
     
+    typealias constructingBlock = ((_ formData : AFMultipartFormData) -> Void)?
+    typealias successCompletion = ((_ data:Any?, _ message:String) -> ())
+    typealias failureCompletion = ((_ message:String,_ code:JXNetworkError) -> ())
+    
+    var construct : (()->(constructingBlock))?
+    var success : successCompletion?
+    var failure : failureCompletion?
     
     ///开始请求
     func startRequest() {
@@ -39,15 +48,6 @@ class JXBaseRequest: NSObject {
         //
         JXNetworkManager.manager.cancelRequest(request: self)
     }
-    
-    typealias successCompletion = ((_ data:Any?, _ message:String) -> ())
-    
-    typealias failureCompletion = ((_ message:String,_ code:JXNetworkError) -> ())
-    
-    var success : successCompletion?
-    
-    var failure : failureCompletion?
-    
     
     
 //    ///
@@ -124,8 +124,9 @@ class JXBaseRequest: NSObject {
         var msg = "请求失败"
         var netCode : JXNetworkError = .kResponseUnknow
         var data : Any? = nil
-        var isSuccess : Bool = true
+        var isSuccess : Bool = false
         
+        print("requestParam \(String(describing: param))")
         print("requestUrl = \(String(describing: requestUrl))")
         
         

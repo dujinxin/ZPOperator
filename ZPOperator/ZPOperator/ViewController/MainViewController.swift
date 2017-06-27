@@ -144,11 +144,25 @@ class MainViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if indexPath.item == (self.mainVM.dataArray.count){
-//            performSegue(withIdentifier: "TraceSources", sender: nil)
-//        }else{
-            performSegue(withIdentifier: "TraceSourceDetail", sender: nil)
-//        }
+        
+        if indexPath.item == (self.mainVM.dataArray.count){
+            
+            performSegue(withIdentifier: "TraceSources", sender: nil)
+        }else{
+            let model = self.mainVM.dataArray[indexPath.item]
+            performSegue(withIdentifier: "TraceSourceDetail", sender: model.id)
+        }
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier{
+            switch identifier {
+            case "TraceSourceDetail":
+                let dvc = segue.destination as! TraceDetailController
+                dvc.traceBatchId = sender as? NSNumber
+                
+            default:
+                break
+            }
+        }
+    }
 }

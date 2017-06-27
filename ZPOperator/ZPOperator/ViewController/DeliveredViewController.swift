@@ -10,6 +10,8 @@ import UIKit
 
 class DeliveredViewController: UITableViewController {
 
+    var vm = TraceDeliverVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,6 +21,14 @@ class DeliveredViewController: UITableViewController {
         
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.tableFooterView = UIView()
+        
+        self.vm.loadMainData(batchStatus: 1) { (data, msg, isSuccess) in
+            if isSuccess{
+                self.tableView.reloadData()
+            }else{
+                print(msg)
+            }
+        }
         
     }
 
@@ -37,7 +47,7 @@ class DeliveredViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return self.vm.dataArray.count
     }
     
     
@@ -45,14 +55,15 @@ class DeliveredViewController: UITableViewController {
         var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
     
         if cell == nil {
-            
             cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
+            cell?.accessoryType = .disclosureIndicator
         }
         
         // Configure the cell...
-        cell?.accessoryType = .disclosureIndicator
-        cell?.textLabel?.text = "产品名称"
-        cell!.detailTextLabel?.text = "备注说明"
+        let model = self.vm.dataArray[indexPath.row]
+        
+        cell?.textLabel?.text = model.goodsName
+        cell?.detailTextLabel?.text = model.remarks
         
         return cell!
     }
