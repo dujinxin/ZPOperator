@@ -61,6 +61,7 @@
 		35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */; };
 		35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */; };
 		35E7DD751F01FE5900E1F7E9 /* TraceSRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */; };
+		35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +120,7 @@
 		35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTag.swift; sourceTree = "<group>"; };
 		35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTagVM.swift; sourceTree = "<group>"; };
 		35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordController.swift; sourceTree = "<group>"; };
+		35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordVM.swift; sourceTree = "<group>"; };
 		855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.release.xcconfig"; sourceTree = "<group>"; };
 		9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZPOperator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				35AE7FF71EFD17F600528D6A /* TraceSourceVM.swift */,
 				35AE7FFB1EFD1D2100528D6A /* TraceSAddVM.swift */,
 				35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */,
+				35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */,
 				35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */,
 				35E7DD6E1F01329100E1F7E9 /* DeliveringManagerVM.swift */,
 				35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */,
@@ -489,6 +492,7 @@
 				3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */,
 				35AE7FF61EFCEE0A00528D6A /* MainModel.swift in Sources */,
 				354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */,
+				35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */,
 				354503361EFBDF8800D9EDA7 /* BaseViewController.swift in Sources */,
 				35AE7FFC1EFD1D2100528D6A /* TraceSAddVM.swift in Sources */,
 				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,

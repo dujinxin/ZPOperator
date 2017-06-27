@@ -12,7 +12,14 @@ class TraceSourceModel: NSObject {
     var traceBatch : TraceSource?
     var traceProcessRecords : Array<TraceSourceRecord>?
 }
-
+//
+class TraceSource: NSObject {
+    
+    var goodsId : NSNumber?
+    var traceBatchId : NSNumber?
+    var traceBatchName : String?
+    var traceBatchCreateBy : String?
+}
 //溯源记录
 class TraceSourceRecord: NSObject {
     
@@ -26,11 +33,8 @@ class TraceSourceRecord: NSObject {
     var images : Array<Any>?
     
 }
-//
-class TraceSource: NSObject {
-    
-    var goodsId : NSNumber?
-    var traceBatchId : NSNumber?
-    var traceBatchName : String?
-    var traceBatchCreateBy : String?
+//获取溯源过程
+class TraceSourceProgress: NSObject {
+    var stationLocation :String?
+    var traceProcesses = Array<MainSubModel>()
 }

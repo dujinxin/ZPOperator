@@ -46,6 +46,19 @@ class TraceDetailController: UIViewController,UITableViewDelegate,UITableViewDat
         performSegue(withIdentifier: "addTraceSourceRecord", sender: nil)
         
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier,
+           let vc = segue.destination as? TraceSRecordController{
+            
+            switch identifier {
+            case "addTraceSourceRecord":
+                vc.traceSource = self.vm.traceSource
+            default:
+                break
+            }
+        }
+        
+    }
 
     // MARK: - Table view data source
 

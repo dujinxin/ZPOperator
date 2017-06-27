@@ -30,7 +30,7 @@ class TraceSourceTagVM {
             self.traceSourceTag.traceRecords.removeAll()
             
             for d in traceRecords{
-                let model = TraceSourceTagRecord()
+                let model = TraceSourceRecord()
                 model.setValuesForKeys(d)
                 model.setValue(d["Operator"], forKey: "Operator")
                 self.traceSourceTag.traceRecords.append(model)

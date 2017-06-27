@@ -30,7 +30,7 @@ class JXAlertView: UIView {
 
     var title : String?
     var message : String?
-    var actions : Array<String>?
+    lazy var actions = Array<String>()
     
     var delegate : JXAlertViewDelegate?
     var style : JXAlertViewStyle = .plain
@@ -269,8 +269,8 @@ extension JXAlertView : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (actions?.isEmpty == false) {
-            return actions?.count ?? 0
+        if (actions.isEmpty == false) {
+            return actions.count
         }
         return 0
     }
@@ -281,8 +281,8 @@ extension JXAlertView : UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
         cell.textLabel?.text = "\(indexPath.row)"
-        if actions?.isEmpty == false {
-            cell.textLabel?.text = actions?[indexPath.row]
+        if actions.isEmpty == false {
+            cell.textLabel?.text = actions[indexPath.row]
         }
         return cell
     }
@@ -299,8 +299,10 @@ extension JXAlertView : UITableViewDelegate,UITableViewDataSource{
 
 
 protocol JXAlertViewDelegate {
+    
     func jxAlertView(_ :JXAlertView, clickButtonAtIndex index:Int)
     func jxAlertViewCancel(_ :JXAlertView)
     func willPresentJXAlertView(_ :JXAlertView)
     func didPresentJXAlertView(_ :JXAlertView)
+    
 }
