@@ -61,4 +61,15 @@ class LoginVM {
         }
         
     }
+    
+    func modifyPassword(old:String,new:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
+        JXRequest.request(url: ApiString.modifiyPwd.rawValue, param: ["oldPassword":old,"newPassword":new], success: { (data, message) in
+            
+            completion(data,message,true)
+            
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
+        
+    }
 }

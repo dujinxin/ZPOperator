@@ -66,13 +66,16 @@ class TraceSourcesController: UICollectionViewController {
                         }
                     })
                 }
+                
+            case "TraceSourceDetail":
+                let dvc = segue.destination as! TraceDetailController
+                dvc.traceBatchId = sender as? NSNumber
             default:
                 break
             }
         }
 
      }
-
     
     // MARK: UICollectionViewDataSource
     
@@ -100,11 +103,11 @@ class TraceSourcesController: UICollectionViewController {
         return cell
     }
     
-    
     // MARK: UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "TraceSourceDetail", sender: nil)
+        let model = self.vm.dataArray[indexPath.item]
+        performSegue(withIdentifier: "TraceSourceDetail", sender: model.id)
     }
     // MARK: UICollectionViewDelegate
 

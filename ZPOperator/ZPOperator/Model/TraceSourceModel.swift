@@ -36,5 +36,7 @@ class TraceSourceRecord: NSObject {
 //获取溯源过程
 class TraceSourceProgress: NSObject {
     var stationLocation :String?
+    var traceBatchId : NSNumber?
+    
     var traceProcesses = Array<MainSubModel>()
 }

@@ -19,61 +19,72 @@ enum JXAlertViewShowPosition {
 }
 
 private let reuseIdentifier = "reuseIdentifier"
-//private let topBarHeight : CGFloat = 40
 
-private let alertViewWidth : CGFloat = UIScreen.main.bounds.width - 40
+private let topBarHeight : CGFloat = 40
+private let alertViewWidth : CGFloat = UIScreen.main.bounds.width
 private let listHeight : CGFloat = 40
 private let cancelViewHeight : CGFloat = 40
 private let animateDuration : TimeInterval = 0.3
 
 class JXAlertView: UIView {
 
+    private var alertViewHeight : CGFloat = 0
+    private var alertViewTopHeight : CGFloat = 0
+    
     var title : String?
     var message : String?
-    lazy var actions = Array<String>()
+    var actions : Array<String> = [String](){
+        didSet{
+            self.resetFrame(height: CGFloat(actions.count) * listHeight)
+        }
+    }
     
     var delegate : JXAlertViewDelegate?
     var style : JXAlertViewStyle = .plain
     var position : JXAlertViewShowPosition = .middle {
         didSet{
             self.resetFrame()
-            self.layoutSubviews()
         }
     }
     
-    var rect : CGRect = CGRect.init()
+    //var rect : CGRect = CGRect.init()
     
     var selectRow : Int = -1
     
     private var contentView : UIView?
-    
-    var selectViewTop : CGFloat = 0
-    var topBarHeight : CGFloat = 40 {
-        didSet{
-            if (self.topBarView.superview == nil){
-                self.addSubview(self.topBarView)
-            }
-            selectViewTop = topBarHeight
-            self.resetFrame()
-            self.layoutSubviews()
-        }
-    }
+
+//    var alertViewTopHeight : CGFloat = 40 {
+//        didSet{
+//            if (self.topBarView.superview == nil){
+//                self.addSubview(self.topBarView)
+//            }
+//            selectViewTop = topBarHeight
+//            self.resetFrame()
+//            self.layoutSubviews()
+//        }
+//    }
     var isUseTopBar : Bool = false {
         didSet{
-            selectViewTop = topBarHeight
-            if (self.topBarView.superview == nil){
-                self.addSubview(self.topBarView)
+            if isUseTopBar {
+                alertViewTopHeight = topBarHeight
+                if (self.topBarView.superview == nil){
+                    self.addSubview(self.topBarView)
+                }
+            }else{
+                alertViewTopHeight = 0
+                if (self.topBarView.superview != nil){
+                    self.topBarView.removeFromSuperview()
+                }
             }
             self.resetFrame()
-            self.layoutSubviews()
         }
     }
     var isSetCancelView : Bool = false {
         didSet{
             if isSetCancelView {
-                self.resetFrame()
+                
                 self.addSubview(self.cancelButton)
-                self.layoutSubviews()
+                self.resetFrame()
             }
         }
     }
@@ -87,14 +98,18 @@ class JXAlertView: UIView {
         let table = UITableView.init(frame: CGRect.init(), style: .plain)
         table.delegate = self
         table.dataSource = self
-        table.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        table.isScrollEnabled = false
+        table.bounces = false
+        table.showsVerticalScrollIndicator = false
+        table.showsHorizontalScrollIndicator = false
+        table.register(listViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         return table
     }()
     lazy var cancelButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor.white
         btn.setTitle("取消", for: UIControlState.normal)
-        btn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+        btn.setTitleColor(UIColor.black, for: UIControlState.normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(tapClick), for: UIControlEvents.touchUpInside)
         return btn
@@ -122,8 +137,8 @@ class JXAlertView: UIView {
     
     init(frame: CGRect, style:JXAlertViewStyle) {
         super.init(frame: frame)
-        self.rect = frame
-        self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
+        //self.rect = frame
+        //self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
         self.backgroundColor = UIColor.clear
         self.style = style
         
@@ -134,41 +149,62 @@ class JXAlertView: UIView {
         }else{
             
         }
-        self.addSubview(self.contentView!)
-        self.layoutSubviews()
+        alertViewHeight = frame.height
+        self.resetFrame()
     }
   
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func resetFrame() {
-        var height = rect.height
-        
-        if isUseTopBar {
-            height += topBarHeight
-        }
-        if isSetCancelView {
-            height += cancelViewHeight
-            
-            if position == .bottom {
-                height += 10
+//    func resetFrame() {
+//        var height = rect.height
+//        
+//        if isUseTopBar {
+//            height += topBarHeight
+//        }
+//        if isSetCancelView {
+//            height += cancelViewHeight
+//            
+//            if position == .bottom {
+//                height += 10
+//            }
+//        }
+//        
+//        self.frame = CGRect.init(x: (UIScreen.main.bounds.width - alertViewWidth)/2, y: 0, width: alertViewWidth, height:height)
+//    }
+    func resetFrame(height:CGFloat = 0.0) {
+        var h : CGFloat = 0
+        if height > 0 {
+            h = height
+            alertViewHeight = height
+        }else{
+            if style == .list{
+                let num = self.actions.count
+                h = CGFloat(num > 5 ? 5 : num) * listHeight
+                alertViewHeight = h
             }
         }
+        if isUseTopBar {
+            h += topBarHeight
+        }
+        if isSetCancelView {
+            h += cancelViewHeight + 10
+        }
+        self.frame = CGRect.init(x: (UIScreen.main.bounds.width - alertViewWidth)/2, y: 0, width: alertViewWidth, height:h)
         
-        self.frame = CGRect.init(x: 20, y: 0, width: alertViewWidth, height:height)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if isUseTopBar {
-            topBarView.frame = CGRect.init(x: 0, y: 0, width: alertViewWidth, height: topBarHeight)
+            topBarView.frame = CGRect.init(x: 0, y: 0, width: alertViewWidth, height: alertViewTopHeight)
             
             //confirmButton.frame = CGRect.init(x: rect.width - 60, y: 0, width: 60, height: topBarHeight)
         }
         
-        self.contentView?.frame = CGRect.init(x: 0, y: selectViewTop, width: alertViewWidth, height: rect.height)
+        self.contentView?.frame = CGRect.init(x: 0, y: alertViewTopHeight, width: alertViewWidth, height: alertViewHeight)
         if isSetCancelView {
-            cancelButton.frame = CGRect.init(x: 0, y: topBarHeight + rect.height + 10, width: alertViewWidth, height: cancelViewHeight)
+            cancelButton.frame = CGRect.init(x: 0, y: alertViewTopHeight + alertViewHeight + 10, width: alertViewWidth, height: cancelViewHeight)
         } 
     }
     
@@ -178,9 +214,8 @@ class JXAlertView: UIView {
     
     func show(inView view:UIView? ,animate:Bool = true) {
         
-        if style == .custom {
-            self.addSubview(contentView!)
-        }
+        self.addSubview(self.contentView!)
+        self.resetFrame(height: alertViewHeight)
         
         let superView : UIView
         
@@ -278,11 +313,10 @@ extension JXAlertView : UITableViewDelegate,UITableViewDataSource{
         return listHeight
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! listViewCell
         
-        cell.textLabel?.text = "\(indexPath.row)"
         if actions.isEmpty == false {
-            cell.textLabel?.text = actions[indexPath.row]
+            cell.titleLabel.text = actions[indexPath.row]
         }
         return cell
     }
@@ -293,16 +327,54 @@ extension JXAlertView : UITableViewDelegate,UITableViewDataSource{
 //        }else{
 //            self.viewDisAppear(row: indexPath.row)
 //        }
-        self.dismiss(animate: true)
+        
+        
+        //self.delegate?.willPresentJXAlertView!(self)
+        self.delegate?.jxAlertView(self, clickButtonAtIndex: indexPath.row)
+        self.dismiss()
+        //self.delegate?.didPresentJXAlertView!(self)
+       
     }
 }
 
-
-protocol JXAlertViewDelegate {
+class listViewCell: UITableViewCell {
     
-    func jxAlertView(_ :JXAlertView, clickButtonAtIndex index:Int)
-    func jxAlertViewCancel(_ :JXAlertView)
-    func willPresentJXAlertView(_ :JXAlertView)
-    func didPresentJXAlertView(_ :JXAlertView)
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.darkText
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14)
+        
+        return label
+    }()
+    lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.groupTableViewBackground
+        return view
+    }()
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.addSubview(self.titleLabel)
+        self.contentView.addSubview(self.separatorView)
+        self.layoutSubviews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.titleLabel.frame = CGRect.init(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+        self.separatorView.frame = CGRect.init(x: 0, y: self.bounds.height - 0.5, width: self.bounds.width, height: 0.5)
+    }
+}
+
+@objc protocol JXAlertViewDelegate {
+    
+    func jxAlertView(_ alertView :JXAlertView, clickButtonAtIndex index:Int)
+    @objc optional func jxAlertViewCancel(_ :JXAlertView)
+    @objc optional func willPresentJXAlertView(_ :JXAlertView)
+    @objc optional func didPresentJXAlertView(_ :JXAlertView)
     
 }

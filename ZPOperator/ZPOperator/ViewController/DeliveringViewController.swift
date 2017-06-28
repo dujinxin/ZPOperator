@@ -20,6 +20,8 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     var remarkHeight : CGFloat = 44.0
     var selectViewHeight : CGFloat = 44.0 * 6.0 + 29.0
     
+    var addressStr : String = ""
+    
     var block : ((_ deliveringModel:TraceDeliverModel)->())?
     
 
@@ -48,6 +50,12 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
         selectView?.isUseTopBar = true
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+        
+        //开启定位
+        JXLocationManager.manager.startUpdateLocation()
         
     }
 
@@ -108,7 +116,7 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     
     func calculateHeight(model:TraceDeliverModel) -> CGFloat {
         
-        address1Height = 30.0 + 14 + calculateHeight(string: model.stationName)
+        address1Height = 30.0 + 14 + calculateHeight(string: self.addressStr)
         if let province = deliveringModel?.province,
             let city = deliveringModel?.city,
             let county = deliveringModel?.county,
@@ -116,9 +124,8 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
             
             let detailAddress = province + city + county + address
             address2Height = 30 + calculateHeight(string: detailAddress)
-
         }
-        
+
         if let remark = deliveringModel?.remarks {
             remarkHeight = 30 + calculateHeight(string: remark)
         }
@@ -212,7 +219,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 14)
             addressLabel.numberOfLines = 0
-            addressLabel.text = deliveringModel?.stationName
+            addressLabel.text = self.addressStr
             view?.addSubview(addressLabel)
         }
         
@@ -230,6 +237,8 @@ extension DeliveringViewController: JXSelectViewDataSource{
                 
                 addressLabel.text = province + city + county + address
             }
+
+            
             view?.addSubview(addressLabel)
         }
         
@@ -264,5 +273,22 @@ extension DeliveringViewController: JXSelectViewDataSource{
         //dmVC.performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
         
         ///performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
+    }
+}
+extension DeliveringViewController {
+    func locationStatus(notify:Notification) {
+        print(notify)
+        
+        guard let isSuccess = notify.object as? Bool else {
+            return
+        }
+        if isSuccess {
+            self.addressStr = JXLocationManager.manager.address
+        }else{
+            if let stationName = deliveringModel?.stationName{
+                self.addressStr = stationName
+            }
+        }
+        
     }
 }

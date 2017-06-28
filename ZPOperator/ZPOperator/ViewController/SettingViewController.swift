@@ -58,6 +58,11 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.nameLabel.text = LoginVM.loginVMManager.userModel.userName
+        self.phoneLabel.text = LoginVM.loginVMManager.userModel.mobile
+        self.addressLabel.text = LoginVM.loginVMManager.userModel.stationName
+        self.versionLabel.text = "v1.0.0"
 
         let view1 = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
         view1.backgroundColor = UIColor.orange
@@ -73,7 +78,7 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
         alert?.actions = ["1","2","3","4","5"]
         alert?.topBarView = view1
         alert?.isUseTopBar = true
-        alert?.topBarHeight = 50
+        //alert?.topBarHeight = 50
         alert?.isSetCancelView = true
         alert?.position = .bottom
     }
@@ -81,5 +86,48 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 10
+        }else if section == 1 {
+            return 10
+        }else{
+            return 64
+        }
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
+    
+    //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        if indexPath.section == 1 && indexPath.row == 2 {
+    //            return 180
+    //        }else{
+    //            return 44
+    //        }
+    //    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            tableView.deselectRow(at: indexPath, animated: true)
+            if indexPath.row == 0 {
+                
+            }else if indexPath.row == 1{
+                
+            }else{
+                performSegue(withIdentifier: "modifyPassword", sender: nil)
+            }
+        }
     }
 }

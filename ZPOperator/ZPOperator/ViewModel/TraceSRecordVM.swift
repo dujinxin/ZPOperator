@@ -13,9 +13,9 @@ class TraceSRecordVM {
     var traceSourceProgress = TraceSourceProgress()
     
     
-    func loadProgress(goodsId:NSNumber ,completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
+    func loadProgress(goodsId:NSNumber,traceBatchId:NSNumber, completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
         
-        JXRequest.request(url: ApiString.addTSRecord.rawValue, param: ["goodsId":goodsId], success: { (data, msg) in
+        JXRequest.request(url: ApiString.addTSRecord.rawValue, param: ["goodsId":goodsId,"traceBatchId":traceBatchId], success: { (data, msg) in
             //
             guard let dict = data as? Dictionary<String,Any> else{
                 completion(nil,msg,false)

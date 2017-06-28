@@ -62,6 +62,10 @@
 		35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */; };
 		35E7DD751F01FE5900E1F7E9 /* TraceSRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */; };
 		35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */; };
+		35E7DD791F022AD600E1F7E9 /* QiNiuUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD781F022AD600E1F7E9 /* QiNiuUploadManager.swift */; };
+		35E7DD7B1F02575C00E1F7E9 /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD7A1F02575C00E1F7E9 /* ModifyPasswordViewController.swift */; };
+		35E7DD7D1F027A2700E1F7E9 /* JXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD7C1F027A2700E1F7E9 /* JXLocationManager.swift */; };
+		35E7DD7F1F02815A00E1F7E9 /* NotificationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +125,10 @@
 		35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTagVM.swift; sourceTree = "<group>"; };
 		35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordController.swift; sourceTree = "<group>"; };
 		35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordVM.swift; sourceTree = "<group>"; };
+		35E7DD781F022AD600E1F7E9 /* QiNiuUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiNiuUploadManager.swift; sourceTree = "<group>"; };
+		35E7DD7A1F02575C00E1F7E9 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		35E7DD7C1F027A2700E1F7E9 /* JXLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXLocationManager.swift; sourceTree = "<group>"; };
+		35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationEnum.swift; sourceTree = "<group>"; };
 		855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.release.xcconfig"; sourceTree = "<group>"; };
 		9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZPOperator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,6 +189,7 @@
 				3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */,
 				3545031F1EFBD29300D9EDA7 /* LoginViewController.xib */,
 				35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */,
+				35E7DD7A1F02575C00E1F7E9 /* ModifyPasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -216,6 +225,8 @@
 		354503221EFBDE2100D9EDA7 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				35E7DD781F022AD600E1F7E9 /* QiNiuUploadManager.swift */,
+				35E7DD7C1F027A2700E1F7E9 /* JXLocationManager.swift */,
 			);
 			name = ThirdPart;
 			path = Model/ThirdPart;
@@ -260,6 +271,7 @@
 			children = (
 				3545032B1EFBDF8800D9EDA7 /* Additions */,
 				3545032C1EFBDF8800D9EDA7 /* ApiEnum.swift */,
+				35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */,
 				3545032D1EFBDF8800D9EDA7 /* Extension */,
 				354503311EFBDF8800D9EDA7 /* JXNetwork */,
 			);
@@ -289,8 +301,8 @@
 				354503321EFBDF8800D9EDA7 /* JXBaseRequest.swift */,
 				354503331EFBDF8800D9EDA7 /* JXNetworkManager.swift */,
 				354503341EFBDF8800D9EDA7 /* JXRequest.swift */,
-				354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */,
 				35AE7FFD1EFD429800528D6A /* JXNetworkError.swift */,
+				354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */,
 			);
 			path = JXNetwork;
 			sourceTree = "<group>";
@@ -490,6 +502,7 @@
 				35E7DD6B1F00B5CB00E1F7E9 /* TraceDeliverModel.swift in Sources */,
 				35E7DD6F1F01329100E1F7E9 /* DeliveringManagerVM.swift in Sources */,
 				3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */,
+				35E7DD7B1F02575C00E1F7E9 /* ModifyPasswordViewController.swift in Sources */,
 				35AE7FF61EFCEE0A00528D6A /* MainModel.swift in Sources */,
 				354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */,
 				35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */,
@@ -497,6 +510,7 @@
 				35AE7FFC1EFD1D2100528D6A /* TraceSAddVM.swift in Sources */,
 				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,
 				35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */,
+				35E7DD7F1F02815A00E1F7E9 /* NotificationEnum.swift in Sources */,
 				35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */,
 				35E7DD6D1F0122DA00E1F7E9 /* DeliveringManagerController.swift in Sources */,
 				354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */,
@@ -504,6 +518,7 @@
 				35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */,
 				3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */,
 				35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */,
+				35E7DD7D1F027A2700E1F7E9 /* JXLocationManager.swift in Sources */,
 				354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */,
 				3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */,
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
@@ -514,6 +529,7 @@
 				35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */,
 				3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */,
 				3545031D1EFBCB8600D9EDA7 /* TraceDetailController.swift in Sources */,
+				35E7DD791F022AD600E1F7E9 /* QiNiuUploadManager.swift in Sources */,
 				354503381EFBDF8800D9EDA7 /* ApiEnum.swift in Sources */,
 				354503201EFBD29300D9EDA7 /* LoginViewController.swift in Sources */,
 				354503401EFCB21D00D9EDA7 /* LoginVM.swift in Sources */,

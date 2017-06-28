@@ -38,13 +38,17 @@ class DeliveringManagerController: UITableViewController {
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
         selectView?.isUseTopBar = true
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+    }
     
 
     @IBAction func deleveringManagerSelect(_ sender: UIButton) {

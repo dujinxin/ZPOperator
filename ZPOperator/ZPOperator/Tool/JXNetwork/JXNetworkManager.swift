@@ -190,6 +190,7 @@ extension JXNetworkManager {
         }
         
         if url?.hasPrefix("http") == true{
+            afmanager.requestSerializer.setValue("AppStore", forHTTPHeaderField: "ua")
             return url!
         }
        

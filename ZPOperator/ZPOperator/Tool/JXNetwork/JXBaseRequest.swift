@@ -100,14 +100,21 @@ class JXBaseRequest: NSObject {
 //    func requestFailure(responseData:Any) {
 //        
 //    }
-    
+
     func requestSuccess(responseData: Any) {
         //print("请求成功")
         
         let isJson = JSONSerialization.isValidJSONObject(responseData)
         print(isJson)
+        if responseData is Dictionary<String,Any> {
+            print("responseData is Dictionary")
+        }else if responseData is Data{
+            print("responseData is Data")
+        }else if responseData is String{
+            print("responseData is String")
+        }
         guard let data = responseData as? Data,
-              let jsonData = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: [])
             else{
                 handleResponseResult(result: nil, message: "数据解析失败", code: JXNetworkError.kResponseUnknow, isSuccess: false)
                 return

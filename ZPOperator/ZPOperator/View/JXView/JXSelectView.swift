@@ -76,6 +76,10 @@ class JXSelectView: UIView {
         let table = UITableView.init(frame: CGRect.init(), style: .plain)
         table.delegate = self
         table.dataSource = self
+        table.isScrollEnabled = false
+        table.bounces = false
+        table.showsVerticalScrollIndicator = false
+        table.showsHorizontalScrollIndicator = false
         table.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         return table
     }()
@@ -140,6 +144,15 @@ class JXSelectView: UIView {
             if style == .list{
                 let num = self.dataSource?.jxSelectView(self, numberOfRowsInSection: 0) ?? 0
                 h = CGFloat(num > 5 ? 5 : num) * tableViewCellHeight
+                if num > 5 {
+                    tableView.isScrollEnabled = true
+                    tableView.bounces = true
+                    tableView.showsVerticalScrollIndicator = true
+                }else{
+                    tableView.isScrollEnabled = false
+                    tableView.bounces = false
+                    tableView.showsVerticalScrollIndicator = false
+                }
             } else if style == .pick{
                 h = pickViewHeight
             } else {
