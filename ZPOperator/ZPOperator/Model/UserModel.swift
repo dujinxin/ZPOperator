@@ -11,7 +11,7 @@ import UIKit
 private let userPath = NSHomeDirectory() + "/Documents/userAccound.json"
 
 
-class UserModel: NSObject {
+class UserModel: BaseModel {
     
     //登录接口获取
     var sid : String?
@@ -47,5 +47,9 @@ class UserModel: NSObject {
         print("保存地址：\(userPath)")
  
         return true
+    }
+    func removeAccound() {
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(atPath: userPath)
     }
 }

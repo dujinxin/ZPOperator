@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class ViewManager {
+    
+    class func showNotice(notice:String) {
+        let noticeView = JXNoticeView.init(text: notice)
+        noticeView.show()
+    }
+}

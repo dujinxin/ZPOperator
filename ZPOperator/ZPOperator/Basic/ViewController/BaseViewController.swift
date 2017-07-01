@@ -50,16 +50,28 @@ class BaseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        automaticallyAdjustsScrollViewInsets = false
-        view.backgroundColor = UIColor.white
-        view.backgroundColor = UIColor.rgbColor(rgbValue: 0xf1f1f1)
-        view.backgroundColor = UIColor.rgbColor(from: 200, 200, 200)
-        view.backgroundColor = UIColor.randomColor()
+        let image = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorImage = image
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image?.withRenderingMode(.alwaysOriginal)
+        self.navigationItem.leftItemsSupplementBackButton = false;
+        let backBarButtonItem = UIBarButtonItem.init(title:"", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
+        self.navigationController?.navigationBar.tintColor = UIColor.white //item图片文字颜色
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]//标题设置
+        
+//        automaticallyAdjustsScrollViewInsets = false
+//        
+//        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor.rgbColor(rgbValue: 0xf1f1f1)
+//        view.backgroundColor = UIColor.rgbColor(from: 200, 200, 200)
+//        view.backgroundColor = UIColor.randomColor()
         
         
-        isLogin ? setUpMainView() : setUpDefaultView()
+        //isLogin ? setUpMainView() : setUpDefaultView()
         
-        setCustomNavigationBar()
+        //setCustomNavigationBar()
         
     }
 

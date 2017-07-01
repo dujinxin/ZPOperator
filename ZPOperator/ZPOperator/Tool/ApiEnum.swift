@@ -19,12 +19,20 @@ enum ApiString : String {
     case traceSources  = "/traceBatch/list"
     case addTS         = "/traceBatch/addTraceBatch"
     case saveTS        = "/traceBatch/saveTraceBatch"
+    
     case traceSDetail  = "/traceBatch/viewTraceBatchInfo"
     case addTSRecord   = "/traceBatch/addTraceProcessRecord"
     case saveTSRecord  = "/traceBatch/saveTraceProcessRecord"
     case modifyTSRecord = "/traceBatch/editTraceProcessRecord"
     case deleteTSRecord = "/traceBatch/deleteTraceProcessRecord"
+    
     case deliverList   = "/batch/list"
+    
+    case deliveredWholeTrace = "/batch/allTrace"
+    case deliveredWholeFetchRecord = "/batch/traceProcess"
+    case deliveredWholeUpdateRecord = "/batch/saveTrace"
+    
+    case deliveringBatch = "/batch/traceList" //发货产品相关联的 批次列表
     case deliver       = "/batch/deliver"
     case codeSearch    = "/code/search"
     

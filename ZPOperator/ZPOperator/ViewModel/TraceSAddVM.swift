@@ -40,10 +40,10 @@ class TraceSAddVM {
             completion(nil, message, false)
         }
     }
-    func submitTS(goodId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func submitTS(goodId:NSNumber?,goodName:String?,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
-        JXRequest.request(url: ApiString.saveTS.rawValue, param: ["goods.id":goodId], success: { (data, message) in
+        JXRequest.request(url: ApiString.saveTS.rawValue, param: ["goods.id":goodId,"good.name":goodName], success: { (data, message) in
             
             completion(data, message, true)
             

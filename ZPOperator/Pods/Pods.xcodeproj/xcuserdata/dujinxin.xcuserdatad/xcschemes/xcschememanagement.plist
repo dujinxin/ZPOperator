@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,20 +39,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>08224A741CBF21BCDBFAD57C319DBAFC</key>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C88F861BE470560D8B4FB2278B08BA0</key>
+		<key>4C0B414A7D30B04E4B3CCB4327413060</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E202E000278D3A8BC883F166FCEA7B7</key>
+		<key>908B2B039C21ED4242CA8C58E77C4242</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BDA980B2A1DEF5C809361AB4B2CCDE9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -63,6 +78,11 @@
 			<true/>
 		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB6AD47BB353C8059BE8E4F113867A68</key>
 		<dict>
 			<key>primary</key>
 			<true/>

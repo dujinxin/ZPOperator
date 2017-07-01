@@ -66,38 +66,46 @@ extension JXLocationManager: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("JXLocationManager didUpdateLocations = \(locations)")
         
-        
         if let location = locations.last {
             geoCoder.reverseGeocodeLocation(location) { (CLPlacemarks, error) in
                 //
-                if let clplacemark = CLPlacemarks?.last ,
-                    let addressDict = clplacemark.addressDictionary{
-                    
-                    let formattedAddressLines = addressDict["FormattedAddressLines"] as? NSArray
-                    
-                    
-                    if let city = addressDict["City"],
-                        let subLocality = addressDict["SubLocality"]{
-                        self.address = "\(city)\(subLocality)"
-                        if let name = addressDict["Name"]{
-                            self.address += "\(name)"
-                        }else if let street = addressDict["Street"]{
-                            self.address += "\(street)"
-                        }
-                    }else{
-                        self.address = formattedAddressLines?.lastObject as! String
-                    }
-                    print("clplacemark.addressDictionary = %@", addressDict)
-                    print("address = \(self.address)")
-                    
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: true)
-                    
+                if let error = error {
+                    print("JXLocationManager reverseGeocodeLocation error = \(String(describing: error.localizedDescription))")
+                }
+                guard let clplacemarks = CLPlacemarks,
+                      let clplacemark = clplacemarks.last ,
+                      let addressDict = clplacemark.addressDictionary else{
+                        
                     self.stopUpdateLocation()
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: false)
+                        
+                    return
                 }
                 
+                let formattedAddressLines = addressDict["FormattedAddressLines"] as? NSArray
+           
+                if  let city = addressDict["City"],
+                    let subLocality = addressDict["SubLocality"]{
+                    
+                    self.address = "\(city)\(subLocality)"
+                    if let name = addressDict["Name"]{
+                        self.address += "\(name)"
+                    }else if let street = addressDict["Street"]{
+                        self.address += "\(street)"
+                    }
+                }else{
+                    self.address = formattedAddressLines?.lastObject as! String
+                }
+                print("clplacemark.addressDictionary = %@", addressDict)
+                print("address = \(self.address)")
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: true)
+                
+                self.stopUpdateLocation()
             }
         }else{
             //只要开启定位一般不会走到这里
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: false)
         }
         
     }

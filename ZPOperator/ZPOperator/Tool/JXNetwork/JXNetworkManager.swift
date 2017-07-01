@@ -18,10 +18,13 @@ class JXNetworkManager: NSObject {
     
     var networkStatus : AFNetworkReachabilityStatus = .reachableViaWiFi
     
-    lazy var userAccound = UserModel()
+    var userAccound : UserModel?
     
     var isLogin : Bool {
-        return userAccound.sid != nil
+        if userAccound == nil {
+            userAccound = UserModel()
+        }
+        return userAccound!.sid != nil
     }
     
     var sid : String? {
@@ -33,11 +36,13 @@ class JXNetworkManager: NSObject {
     
     override init() {
         super.init()
-        
+        //返回数据格式AFHTTPResponseSerializer(http) AFJSONResponseSerializer(json) AFXMLDocumentResponseSerializer ...
         afmanager.responseSerializer = AFHTTPResponseSerializer.init()
         afmanager.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html","application/json") as? Set<String>
         
         afmanager.operationQueue.maxConcurrentOperationCount = 5
+        //请求参数格式AFHTTPRequestSerializer（http） AFJSONRequestSerializer(json) AFPropertyListRequestSerializer (plist)
+        afmanager.requestSerializer = AFHTTPRequestSerializer.init()
         afmanager.requestSerializer.timeoutInterval = 10
         
         
@@ -63,7 +68,7 @@ class JXNetworkManager: NSObject {
         let url = buildUrl(url: request.requestUrl)
         
         if isLogin == true,
-           let sid = userAccound.sid {
+           let sid = userAccound?.sid {
             afmanager.requestSerializer.setValue("sid=\(sid)", forHTTPHeaderField: "Cookie")
         }
         
@@ -190,8 +195,14 @@ extension JXNetworkManager {
         }
         
         if url?.hasPrefix("http") == true{
-            afmanager.requestSerializer.setValue("AppStore", forHTTPHeaderField: "ua")
+            afmanager.requestSerializer = AFJSONRequestSerializer.init()
+            afmanager.requestSerializer.timeoutInterval = 10
+            afmanager.requestSerializer.setValue("ceccm", forHTTPHeaderField: "source")
+            print("afmanager.requestSerializer = \(afmanager.requestSerializer)")
             return url!
+        }else{
+            afmanager.requestSerializer = AFHTTPRequestSerializer.init()
+            afmanager.requestSerializer.timeoutInterval = 10
         }
        
         let ssss = "http://192.168.10.12:8086\(url!)"

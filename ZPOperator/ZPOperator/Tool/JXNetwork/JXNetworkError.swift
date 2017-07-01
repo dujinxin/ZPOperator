@@ -10,9 +10,14 @@ import Foundation
 
 enum JXNetworkError : Int {
     
+    
+    case kResponseSuccessForUploadToken     = 0
+    case kResponseFailureForUploadToken     = -2
+    
     case kResponseSuccess     = 200
-    case kResponseFailed      = 201
-    case kResponseUnknow      = 202
+    case kResponseTokenDisabled      = 201  //token过期
+    case kResponseFailed      = 202
+    case kResponseUnknow      = 203
     
     
     case kResponseDataError = 3840    /*数据有误*/

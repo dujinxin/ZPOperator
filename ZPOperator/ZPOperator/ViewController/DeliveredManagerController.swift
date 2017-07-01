@@ -8,16 +8,95 @@
 
 import UIKit
 
-class DeliveredManagerController: UITableViewController {
+class DeliveredManagerController: ZPTableViewController {
+    
+    var deliveredBatchId : Int = 0
+    var traceDeliverSubModel : TraceDeliverSubModel?
+    var traceDeliverOperatorModel : TraceDeliverOperatorModel?
+    
+    
+    
+    
+    @IBOutlet weak var deliverBatchIdLabel: UILabel!
+    @IBOutlet weak var deliverProduct: UILabel!
+    @IBOutlet weak var deliverProductWeightLabel: UILabel!
+    @IBOutlet weak var deliverAddressLabel: UILabel!
+    
+    @IBOutlet weak var receiveAddressLabel: UILabel!
+    @IBOutlet weak var receivePerson: UILabel!
+    
+    @IBOutlet weak var remarkLabel: UILabel!
+    @IBOutlet weak var traceBatchLabel: UILabel!
+    @IBOutlet weak var startNumLabel: UILabel!
+    @IBOutlet weak var endNumLabel: UILabel!
+    @IBOutlet weak var tagNumLabel: UILabel!
+    @IBOutlet weak var operatorAddressLabel: UILabel!
+    @IBOutlet weak var operatorPersonLabel: UILabel!
+    @IBOutlet weak var operatorTimeLabel: UILabel!
+    
+    @IBOutlet weak var traceDetailButton: UIButton!
+    @IBAction func traceDetail(_ sender: Any) {
+        performSegue(withIdentifier: "TraceSourceWhole", sender: deliveredBatchId)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier,
+            identifier == "TraceSourceWhole"{
+            
+            let vc = segue.destination as! DeliveredWholeController
+            vc.batchId = sender as! NSNumber
+        
+        }
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
+        
+        self.tableView.reloadData()
+        
+        
+        self.deliveredBatchId = (self.traceDeliverSubModel?.id?.intValue)!
+        
+        self.traceDetailButton.backgroundColor = UIColor.originColor
+        self.traceDetailButton.layer.cornerRadius = 5
+        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.deliverBatchIdLabel.text = self.traceDeliverSubModel?.batchCode
+        self.deliverProduct.text = self.traceDeliverSubModel?.goodsName
+        self.deliverProductWeightLabel.text = self.traceDeliverSubModel?.counts
+        self.deliverAddressLabel.text = self.traceDeliverSubModel?.stationName
+        
+        if let province = self.traceDeliverSubModel?.province,
+            let city = self.traceDeliverSubModel?.city,
+            let country = self.traceDeliverSubModel?.county,
+            let address = self.traceDeliverSubModel?.address{
+            
+            self.receiveAddressLabel.text = province + city + country + address
+        }
+        if let contact = self.traceDeliverSubModel?.contact,
+            let mobile = self.traceDeliverSubModel?.mobile{
+            
+            self.receivePerson.text = contact + "" + mobile
+        }
+        
+        
+        self.remarkLabel.text = self.traceDeliverSubModel?.remarks
+        self.traceBatchLabel.text = "溯源批次"
+        self.startNumLabel.text = self.traceDeliverSubModel?.startCode
+        self.endNumLabel.text = self.traceDeliverSubModel?.endCode
+        if let totalCount = self.traceDeliverSubModel?.totalCount {
+            self.tagNumLabel.text = String.init(format: "%@",totalCount)
+        }
+        
+        
+        self.operatorAddressLabel.text = self.traceDeliverOperatorModel?.station
+        self.operatorPersonLabel.text = self.traceDeliverOperatorModel?.name
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,70 +105,49 @@ class DeliveredManagerController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }else{
+            return 34
+        }
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 1 {
+            return 60
+        }else if indexPath.row == 2{
+            return 88
+        }else if indexPath.row == 3{
+            return calculateHeight(string: self.traceDeliverSubModel?.remarks)
+        }else{
+            return 44
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    func calculateHeight(string:String?,width:CGFloat = UIScreen.main.bounds.width - 120,fontSize:CGFloat = 14) -> CGFloat {
+        guard let contentStr = string as? NSString else{
+            return 44
+        }
+        
+        let paragraphStyle = NSMutableParagraphStyle.init()
+        paragraphStyle.lineSpacing = 5
+        
+        let rect = contentStr.boundingRect(with: CGSize.init(width: width, height: 200), options: [], attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize)], context: nil)
+        
+        if rect.height < 20{
+            return 44
+        }else{
+            
+            return rect.height + 10
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

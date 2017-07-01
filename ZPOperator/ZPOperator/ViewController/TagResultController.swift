@@ -7,89 +7,190 @@
 //
 
 import UIKit
+import MJRefresh
 
-class TagResultController: UITableViewController {
+private let reuseIdentifier = "reuseIdentifier"
+private let reuseIdentifierNib = "reuseIdentifierNib"
 
+class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addButton: UIButton!
+    
+    var tagCode : String? //查询编号 ,标签查询结果用
+    
+    lazy var detailVM = TraceSourceDetailVM()
+    
+    
+    var currentPage = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.currentPage = 1
+            self.loadData(page: 1)
+        })
+        self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingBlock: {
+            self.currentPage += 1
+            self.loadData(page: self.currentPage)
+        })
+        
+        self.tableView.reloadData()
+        //self.tableView.mj_header.beginRefreshing()
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+
+        return detailVM.dataArray.count + 2
     }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        if indexPath.row == 0 {
+            
+            var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier1")
+            if cell == nil {
+                cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: "reuseIdentifier1")
+                
+                cell?.contentView.backgroundColor = UIColor.groupTableViewBackground
+                cell?.selectionStyle = .none
+                
+                let lab = UILabel()
+                lab.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 44)
+                lab.backgroundColor = UIColor.white
+                lab.textAlignment = .left
+                lab.font = UIFont.systemFont(ofSize: 13)
+                lab.tag = 10
+                
+                cell?.contentView.addSubview(lab)
+            }
+            let lab = cell?.contentView.viewWithTag(10) as? UILabel
+            
+            
+            // Configure the cell...
+            lab?.text = "   标签码："
+            if let code = detailVM.traceSourceTag.code {
+                lab?.text = String.init(format: "   标签码：%@", code)
+            }
+            
+            return cell!
+        }else if indexPath.row == 1{
+            var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier2")
+            if cell == nil {
+                cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier2")
+                
+                cell?.contentView.backgroundColor = UIColor.groupTableViewBackground
+                cell?.selectionStyle = .none
+                
+                let lab1 = UILabel()
+                lab1.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 30)
+                lab1.backgroundColor = UIColor.white
+                lab1.textAlignment = .left
+                lab1.font = UIFont.systemFont(ofSize: 13)
+                lab1.tag = 10
+                
+                cell?.contentView.addSubview(lab1)
+                
+                
+                let lab2 = UILabel()
+                lab2.frame = CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 30)
+                lab2.backgroundColor = UIColor.white
+                lab2.textAlignment = .left
+                lab2.font = UIFont.systemFont(ofSize: 12)
+                lab2.tag = 11
+                
+                cell?.contentView.addSubview(lab2)
+            }
+            let lab1 = cell?.contentView.viewWithTag(10) as? UILabel
+            let lab2 = cell?.contentView.viewWithTag(11) as? UILabel
+            // Configure the cell...
+            //lab1?.text = vm.traceSourceTag?.goodsName
+            if let goodsName = detailVM.traceSourceTag.goodsName {
+                lab1?.text = String.init(format: "   %@", goodsName)
+            }
+            lab2?.text = "   发货批次号："
+            if let code = detailVM.traceSourceTag.batchCode {
+                lab2?.text = String.init(format: "   发货批次号：%@", code)
+            }
+            
+            return cell!
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib, for: indexPath) as! TraceSourceCell
+            // Configure the cell...
+            cell.selectionStyle = .none
+            
+            let model = self.detailVM.dataArray[indexPath.row - 2]
+            cell.model = model
+            
+            return cell
+        }
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
     }
-    */
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+        if indexPath.row == 0 {
+            return 44 + 10
+        }else if indexPath.row == 1 {
+            return 60 + 10
+        }else{
+            return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 1].images)
+        }
+
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func calculateCellHeight(array:Array<String>?) -> CGFloat {
+        let height : CGFloat = (44 * 3 + 92)//44 * 3 + 72 + 10 + 5 + 5
+        if let array = array{
+            if !array.isEmpty {
+                let imageheight = (UIScreen.main.bounds.width - (10 * 2 + 20 * 2 + 60 + 10)) / 3
+                return height + imageheight
+            }
+        }
+        return height
     }
-    */
+    
+    
+    func loadData(page:Int) {
 
+        self.detailVM.traceSourceTag(code: tagCode!, completion: { (data, msg, isSuccess) in
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            if isSuccess {
+                self.tableView.reloadData()
+            }else{
+                ViewManager.showNotice(notice: msg)
+            }
+        })
+        
+    }
 }

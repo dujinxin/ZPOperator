@@ -40,7 +40,7 @@ class LoginVM {
                 for (key,value) in dict {
                     mDict[key] = value
                 }
-                
+                JXNetworkManager.manager.userAccound = UserModel()
                 print("保存（登录-设置）信息成功：\(self.userModel.saveAccound(dict: mDict))")
                 completion(data,message,true)
             })
@@ -71,5 +71,15 @@ class LoginVM {
             completion(nil,message,false)
         }
         
+    }
+    func logout(completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
+        JXRequest.request(url: ApiString.logout.rawValue, param: Dictionary(), success: { (data, message) in
+            
+            completion(data,message,true)
+            
+            
+        }) { (message, code) in
+            completion(nil,message,false)
+        }
     }
 }

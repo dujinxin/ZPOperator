@@ -8,7 +8,23 @@
 
 import UIKit
 
-class TraceDeliverModel: NSObject {
+
+class TraceDeliverModel: BaseModel {
+    var Operator = TraceDeliverOperatorModel()
+    
+    var count : Int = 0
+    
+    var batches = Array<TraceDeliverSubModel>()
+}
+
+class TraceDeliverOperatorModel: BaseModel {
+    var name : String?
+    var station : String?
+    
+    var stationLocation : String? //全程溯源中独有
+}
+
+class TraceDeliverSubModel: BaseModel {
 
     var id : NSNumber?
     var Batch : String?
@@ -16,6 +32,7 @@ class TraceDeliverModel: NSObject {
     var goodsName : String?
     var counts : String?
     var stationName : String?
+    var batchCode:String?
     //联系人信息
     var province : String?
     var city : String?

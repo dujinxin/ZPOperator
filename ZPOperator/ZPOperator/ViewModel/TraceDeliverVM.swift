@@ -10,7 +10,7 @@ import Foundation
 
 class TraceDeliverVM {
     
-    var dataArray = Array<TraceDeliverModel>()
+    var traceDeliverModel = TraceDeliverModel()
     
     
     /// 发货列表
@@ -23,14 +23,19 @@ class TraceDeliverVM {
         
         JXRequest.request(url: ApiString.deliverList.rawValue, param: ["batchStatus":batchStatus], success: { (data, message) in
             
-            guard let array = data as? Array<Dictionary<String,Any>>
+            guard let dict = data as? Dictionary<String,Any>,
+                  let Operator = dict["operator"] as? Dictionary<String,Any>,
+                  let array = dict["batches"] as? Array<Dictionary<String,Any>>
                 else{
                     return
             }
-            for dict in array{
-                let model = TraceDeliverModel()
-                model.setValuesForKeys(dict)
-                self.dataArray.append(model)
+            self.traceDeliverModel.Operator.setValuesForKeys(Operator)
+            self.traceDeliverModel.count = dict["count"] as! Int
+            self.traceDeliverModel.batches.removeAll()
+            for d in array{
+                let model = TraceDeliverSubModel()
+                model.setValuesForKeys(d)
+                self.traceDeliverModel.batches.append(model)
             }
             
             completion(data, message, true)
@@ -40,4 +45,5 @@ class TraceDeliverVM {
             completion(nil, message, false)
         }
     }
+    
 }

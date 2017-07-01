@@ -12,7 +12,7 @@ private let reuseIdentifier = "Cell"
 private let reuseIndentifierHeader = "reuseIndentifierHeader"
 private let reuseIndentifierFooter = "reuseIndentifierFooter"
 
-class MainViewController: UICollectionViewController {
+class MainViewController: ZPCollectionViewController {
     
     lazy var mainVM = MainVM()
     //log state
@@ -25,13 +25,27 @@ class MainViewController: UICollectionViewController {
         self.clearsSelectionOnViewWillAppear = false
         
         //self.automaticallyAdjustsScrollViewInsets = false
+        
+        
+        let width = (UIScreen.main.bounds.width - 20 * 2 - 10 * 2) / 3
+        
+        
+        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize.init(width: width, height: width)
+        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 10
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: width)
+        layout.footerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: width)
+        
+        self.collectionView?.collectionViewLayout = layout
 
         // Register cell classes
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIndentifierHeader)
         self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: reuseIndentifierFooter)
     
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
         if !isLogin {
             let login = LoginViewController()
             self.navigationController?.present(login, animated: false, completion: nil)
@@ -57,7 +71,9 @@ class MainViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+    }
     /*
     // MARK: - Navigation
 
@@ -85,13 +101,18 @@ class MainViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MainCell
     
         // Configure the cell
-        cell.backgroundColor = UIColor.red
+        //cell.backgroundColor = UIColor.red
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.layer.borderColor = UIColor.rgbColor(from: 35, 68, 120).cgColor
+        cell.contentView.layer.borderWidth = 1
         
         if indexPath.item < self.mainVM.dataArray.count {
             let model = self.mainVM.dataArray[indexPath.item]
             cell.MainContentLabel.text = model.name
+            cell.MainContentLabel.textColor = UIColor.rgbColor(rgbValue: 0x0469c8)
         }else{
             cell.MainContentLabel.text = "更多溯源批次"
+            cell.MainContentLabel.textColor = UIColor.rgbColor(rgbValue: 0x4b81b4)
         }
         
         
@@ -105,15 +126,22 @@ class MainViewController: UICollectionViewController {
         let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseStr, for: indexPath) as! MainReusableView
        
         if kind == UICollectionElementKindSectionHeader {
-            reusableView.mainActionButton.setTitle("发货管理", for: UIControlState.normal)
+            reusableView.mainActionButton.setImage(UIImage.init(named: "deliver")?.withRenderingMode(.alwaysOriginal), for: UIControlState.normal)
+            if self.mainVM.orderCount != 0 {
+                reusableView.mainActionButton.setTitle("发货管理(\(self.mainVM.orderCount))", for: UIControlState.normal)
+            }else{
+                reusableView.mainActionButton.setTitle("发货管理", for: UIControlState.normal)
+            }
+            
             reusableView.mainActionButton.addTarget(self, action: #selector(deliverManagement), for: UIControlEvents.touchUpInside)
+            reusableView.mainActionButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20)
         }else{
+            reusableView.mainActionButton.setImage(UIImage.init(named: "tag")?.withRenderingMode(.automatic), for: UIControlState.normal)
             reusableView.mainActionButton.setTitle("标签管理", for: UIControlState.normal)
             reusableView.mainActionButton.addTarget(self, action: #selector(tagManagement), for: UIControlEvents.touchUpInside)
+            reusableView.mainActionButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20)
         }
-        reusableView.mainActionButton.backgroundColor = UIColor.yellow
-    
-        
+
         return reusableView
     }
     
@@ -163,6 +191,23 @@ class MainViewController: UICollectionViewController {
             default:
                 break
             }
+        }
+    }
+    func loginStatus(notify:Notification) {
+        print(notify)
+        
+        if let isSuccess = notify.object as? Bool,
+            isSuccess == true{
+            self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+                if isSuccess {
+                    self.collectionView?.reloadData()
+                }else{
+                    print("message = \(msg)")
+                }
+            })
+        }else{
+            let login = LoginViewController()
+            self.navigationController?.present(login, animated: false, completion: nil)
         }
     }
 }

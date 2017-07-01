@@ -9,6 +9,8 @@ target 'ZPOperator' do
   pod 'SDWebImage'
   
   pod 'Qiniu'
+  pod 'TZImagePickerController'
+  pod 'MBProgressHUD'
 
   # Pods for ZPOperator
 

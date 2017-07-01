@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizontalViewDelegate{
+class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizontalViewDelegate{
     
     var topBar : JXTopBarView?
     
@@ -28,11 +28,13 @@ class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizont
         let deliveringVC = DeliveringViewController()
         let deliveredVC = DeliveredViewController()
         
-        deliveringVC.block = {(deliveringModel)->() in
-            print("fahuo ")
-            self.performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
+        deliveringVC.deliveringBlock = {(deliveringModel,deliveringOperatorModel)->() in
+            self.performSegue(withIdentifier: "deliveringManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
         }
 
+        deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
+            self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
+        }
         horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: 64 + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - 64 - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
         view.addSubview(horizontalView!)
     }
@@ -48,7 +50,33 @@ class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizont
             switch identifier {
             case "deliveringManager":
                 let dvc = segue.destination as! DeliveringManagerController
-                dvc.deliverModel = sender as? TraceDeliverModel
+                if let dict = sender as? Dictionary<String,Any>,
+                   let deliveringModel = dict["deliveringModel"] as? TraceDeliverSubModel,
+                   let deliveringOperatorModel = dict["deliveringOperatorModel"] as? TraceDeliverOperatorModel{
+                    dvc.deliverModel = deliveringModel
+                    dvc.deliverOperatorModel = deliveringOperatorModel
+                    
+                    dvc.deliveringManageBlock = { (isSuccess)->() in
+                        
+                        let indexPath = IndexPath.init(item: 1, section: 0)
+                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+                    }
+                }
+            case "deliveredManager":
+                let dvc = segue.destination as! DeliveredManagerController
+                if let dict = sender as? Dictionary<String,Any>,
+                    let deliveringModel = dict["deliveringModel"] as? TraceDeliverSubModel,
+                    let deliveringOperatorModel = dict["deliveringOperatorModel"] as? TraceDeliverOperatorModel{
+                    dvc.traceDeliverSubModel = deliveringModel
+                    dvc.traceDeliverOperatorModel = deliveringOperatorModel
+                    
+//                    dvc.deliveringManageBlock = { (isSuccess)->() in
+//                        
+//                        let indexPath = IndexPath.init(item: 1, section: 0)
+//                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+//                    }
+                }
+                    
             default:
                 break
             }
@@ -61,7 +89,7 @@ class DeliverManageController: UIViewController ,JXTopBarViewDelegate,JXHorizont
 extension DeliverManageController {
     func jxTopBarView(topBarView: JXTopBarView, didSelectTabAt index: Int) {
         let indexPath = IndexPath.init(item: index, section: 0)
-        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+        self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
     }
     
     func horizontalView(_: JXHorizontalView, to indexPath: IndexPath) {

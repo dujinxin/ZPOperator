@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class DeliveringManagerController: UITableViewController {
+class DeliveringManagerController: ZPTableViewController {
 
-    var deliverModel : TraceDeliverModel?
+    var deliverModel : TraceDeliverSubModel?
+    var deliverOperatorModel : TraceDeliverOperatorModel?
+    
     var vm = DeliveringManagerVM()
     
     var selectView : JXSelectView?
+    var jxAlertView : JXAlertView?
     var addressHeight : CGFloat = 44.0
     var selectViewHeight : CGFloat = 44.0 * 6.0 + 88
     
@@ -23,10 +27,15 @@ class DeliveringManagerController: UITableViewController {
     @IBOutlet weak var endTextField: UITextField!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    
-    
     @IBOutlet weak var submitButton: UIButton!
-
+    
+    var batchId : Int = 0
+    var batchArray = Array<String>()
+    var confirmArray = Array<String>()
+    var tagNum : Int = 0
+    
+    var deliveringManageBlock : ((_ isSuccess:Bool)->())?
+    
     
     
     
@@ -35,13 +44,34 @@ class DeliveringManagerController: UITableViewController {
         
         self.operatorLabel.text = LoginVM.loginVMManager.userModel.userName
         
+        submitButton.layer.cornerRadius = 5
+        submitButton.backgroundColor = UIColor.gray
+        submitButton.isEnabled = false
+        
+        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        
+        self.jxAlertView?.position = .bottom
+        self.jxAlertView?.isSetCancelView = true
+        self.jxAlertView?.delegate = self
+        
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
-        selectView?.isUseTopBar = true
+        selectView?.isUseTopBar = false
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+        
+        self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess) in
+            if isSuccess {
+                for modal in self.vm.deliveringBatches {
+                    self.batchArray.append(modal.name!)
+                }
+                self.batchArray.append("暂无溯源批次")
+            }
+        }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,15 +80,42 @@ class DeliveringManagerController: UITableViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier
+        if identifier ==  "traceSourceAdd" {
+            let vc = segue.destination as! TraceSAddViewController
+            vc.traceSAddBlock = {()->() in
+                self.vm.loadDeliveringBatch(batchId: self.deliverModel?.id as! Int) { (data, msg, isSuccess) in
+                    if isSuccess {
+                        self.batchArray.removeAll()
+                        for modal in self.vm.deliveringBatches {
+                            self.batchArray.append(modal.name!)
+                        }
+                        self.batchArray.append("暂无溯源批次")
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
 
     @IBAction func deleveringManagerSelect(_ sender: UIButton) {
+        self.jxAlertView?.actions = batchArray
+        self.jxAlertView?.show()
     }
     @IBAction func submit(_ sender: UIButton) {
         
-        //self.selectView?.resetFrame(height: calculateHeight(model: model))
-        self.selectView?.resetFrame(height: selectViewHeight)
+        self.confirmArray.append(String.init(format: "溯源批次：%@", (self.deliverModel?.batchCode)!))
+        self.confirmArray.append(String.init(format: "开始编码：%@", self.startTextField.text!))
+        self.confirmArray.append(String.init(format: "结束编码：%@", self.endTextField.text!))
+        self.confirmArray.append(String.init(format: "标签数量：%d", self.tagNum))
+        self.confirmArray.append(String.init(format: "操作网点：%@", (self.deliverOperatorModel?.station)!))
+        self.confirmArray.append(String.init(format: "操作人：%@", (self.deliverOperatorModel?.name)!))
+        
+        self.selectView?.resetFrame(height: 44 * 6 + 88)
         self.selectView?.show()
-
     }
 
     // MARK: - Table view data source
@@ -102,51 +159,152 @@ class DeliveringManagerController: UITableViewController {
     }
 }
 
+extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
+    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+        if index < self.vm.deliveringBatches.count {
+            let model = self.vm.deliveringBatches[index]
+            self.traceSourceButton.setTitle(model.name, for: .normal)
+            batchId = model.id as! Int
+        }else{
+            let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+            alert.show()
+            
+        }
+        
+    }
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        if buttonIndex == 0 {
+            //
+            print("添加溯源")
+            
+            self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
+        }else{
+            print("发货")
+        }
+    }
+    func confirmDeliver() {
+     
+        self.selectView?.dismiss()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: tagNum) { (data, msg, isSuccess) in
+            
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            if isSuccess{
+                if let block = self.deliveringManageBlock {
+                    block(true)
+                }
+                ViewManager.showNotice(notice: "发货成功")
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                ViewManager.showNotice(notice: msg)
+            }
+        }
+    }
+}
+
+extension DeliveringManagerController: UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let s = textField.text! as NSString
+        
+        if range.location > 11 {
+            
+            let str = s.substring(to: 11)
+            textField.text = str
+            ViewManager.showNotice(notice: "字符个数不能大于12")
+            
+//            if let string = textField.text?.replacingCharacters(in: range, with: string) {
+//                textField.text = string.substring(to: string.index(string.startIndex, offsetBy: 20))
+//                
+//                ViewManager.showNotice(notice: "字符个数不能大于20")
+//            }
+        }
+        return true
+    }
+    
+    func textChange(notify:NSNotification) {
+        
+        if notify.object is UITextField {
+            if startTextField.text?.characters.count == 12 && endTextField.text?.characters.count != 0{
+                if let startNum = Int(startTextField.text!),
+                    let endNum = Int(endTextField.text!){
+                    if endNum > startNum {
+                        numberLabel.text = String(endNum - startNum)
+                        numberLabel.textColor = UIColor.black
+                        submitButton.backgroundColor = UIColor.originColor
+                        submitButton.isEnabled = true
+                        tagNum = endNum - startNum
+                    }else{
+                        numberLabel.text = String(endNum - startNum)
+                        numberLabel.textColor = UIColor.red
+                        submitButton.backgroundColor = UIColor.gray
+                        submitButton.isEnabled = false
+                    }
+                }else{
+                    submitButton.backgroundColor = UIColor.gray
+                    submitButton.isEnabled = false
+                }
+                
+                
+            }else{
+                submitButton.backgroundColor = UIColor.gray
+                submitButton.isEnabled = false
+            }
+        }
+    }
+}
 extension DeliveringManagerController: JXSelectViewDataSource{
     func jxSelectView(_: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }
     func jxSelectView(_: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
-        return "测试\(row)"
+        if row < 6 {
+            return confirmArray[row]
+        }else {
+            return ""
+        }
     }
     func jxSelectView(_: JXSelectView, heightForRowAt row: Int) -> CGFloat {
         
-        if row == 4{
-            return addressHeight
-        }else if row == 6{
-            return 88
-        }else{
+        if row < 6{
             return 44
+        }
+//        else if row == 1{
+//            return address1Height
+//        }else if row == 2{
+//            return address2Height
+//        }else if row == 3 {
+//            return remarkHeight
+//        }
+        else{
+            return 88
         }
     }
     func jxSelectView(_: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
-        let titleArray = ["溯源批次","开始编码","结尾编码","标签数量","操作网点","操作人"]
-        let detailArray = ["溯源批次","开始编码","结尾编码","标签数量","操作网点","操作人"]
-        
-        if row != 6{
-            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: addressHeight))
-            
-            let leftLabel = UILabel.init(frame: CGRect.init(x: 10, y: 0, width: 60, height: 44))
-            leftLabel.textColor = UIColor.black
-            leftLabel.textAlignment = .center
-            leftLabel.font = UIFont.systemFont(ofSize: 14)
-            leftLabel.text = titleArray[row]
-            view?.addSubview(leftLabel)
-            
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: UIScreen.main.bounds.width - 90, height: addressHeight))
-            addressLabel.textColor = UIColor.black
-            addressLabel.textAlignment = .left
-            addressLabel.font = UIFont.systemFont(ofSize: 14)
-            addressLabel.numberOfLines = 0
-            addressLabel.text = detailArray[row]
-            view?.addSubview(addressLabel)
-            
-        }else {
+//        let titleArray = ["发货","收货","备注"]
+//        
+//        if row == 1 || row == 2 || row == 3{
+//            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+//            
+//            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
+//            leftLabel.textColor = UIColor.black
+//            leftLabel.textAlignment = .left
+//            leftLabel.font = UIFont.systemFont(ofSize: 14)
+//            leftLabel.text = titleArray[row - 1]
+//            view?.addSubview(leftLabel)
+//            
+//        }else
+            if row == 6{
             
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: UIScreen.main.bounds.width - 80, height: 44)
-            button.setTitle("确认发货编码", for: UIControlState.normal)
+            button.setTitle("确认发货批次", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = UIColor.orange
             button.layer.cornerRadius = 5
@@ -154,17 +312,74 @@ extension DeliveringManagerController: JXSelectViewDataSource{
             return button
             
         }
-
+//            else{
+//            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 44))
+//            leftLabel.textColor = UIColor.black
+//            leftLabel.textAlignment = .left
+//            leftLabel.font = UIFont.systemFont(ofSize: 14)
+//            leftLabel.text = "发货批次号："
+//            if let batchCode = deliveringModel?.batchCode{
+//                leftLabel.text = "发货批次号：" + batchCode
+//            }
+//            return leftLabel
+//            
+//        }
+//        
+//        if row == 1 {
+//            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: address1Height)
+//            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: UIScreen.main.bounds.width - 90, height: 14))
+//            rightLabel.textColor = UIColor.black
+//            rightLabel.textAlignment = .left
+//            rightLabel.font = UIFont.systemFont(ofSize: 14)
+//            if let goodsName = deliveringModel?.goodsName,
+//                let counts = deliveringModel?.counts{
+//                rightLabel.text = goodsName + "      " + counts
+//            }
+//            view?.addSubview(rightLabel)
+//            
+//            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: UIScreen.main.bounds.width - 90, height: address1Height - 30))
+//            addressLabel.textColor = UIColor.black
+//            addressLabel.textAlignment = .left
+//            addressLabel.font = UIFont.systemFont(ofSize: 14)
+//            addressLabel.numberOfLines = 0
+//            addressLabel.text = self.addressStr
+//            view?.addSubview(addressLabel)
+//        }
+//        
+//        if row == 2 {
+//            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: address2Height)
+//            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: UIScreen.main.bounds.width - 90, height: address2Height))
+//            addressLabel.textColor = UIColor.black
+//            addressLabel.textAlignment = .left
+//            addressLabel.font = UIFont.systemFont(ofSize: 14)
+//            addressLabel.numberOfLines = 0
+//            if let province = deliveringModel?.province,
+//                let city = deliveringModel?.city,
+//                let county = deliveringModel?.county,
+//                let address = deliveringModel?.address{
+//                
+//                addressLabel.text = province + city + county + address
+//            }
+//            
+//            
+//            view?.addSubview(addressLabel)
+//        }
+//        
+//        if row == 3 {
+//            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: remarkHeight)
+//            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: UIScreen.main.bounds.width - 90, height: remarkHeight))
+//            addressLabel.textColor = UIColor.black
+//            addressLabel.textAlignment = .left
+//            addressLabel.font = UIFont.systemFont(ofSize: 14)
+//            addressLabel.numberOfLines = 0
+//            if let remarks = deliveringModel?.remarks {
+//                addressLabel.text = remarks
+//            }else{
+//                addressLabel.text = "暂无"
+//            }
+//            
+//            view?.addSubview(addressLabel)
+//        }
         return view
     }
-    
-    func confirmDeliver() {
-//        self.selectView?.dismiss()
-//        if let block = block {
-//            block(deliveringModel!)
-//        }
-        
-//        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: <#T##Int#>, startCode: <#T##String#>, endCode: <#T##String#>, counts: <#T##Int#>, completion: <#T##((Any?, String, Bool) -> ())##((Any?, String, Bool) -> ())##(Any?, String, Bool) -> ()#>)
-    }
 }
-

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainModel: NSObject {
+class MainModel: BaseModel {
     
     var orderCount : String?
     
@@ -17,7 +17,7 @@ class MainModel: NSObject {
 
 }
 
-class MainSubModel: NSObject {
+class MainSubModel: BaseModel {
     var name : String?
     var id : NSNumber?
 }
