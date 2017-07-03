@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -21,6 +22,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        loginButton.layer.cornerRadius = 22
+        
+        
+        //userTextField.text = "13477831123"
+        //passwordTextField.text = "12345678a"
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,32 +38,31 @@ class LoginViewController: UIViewController {
 
     @IBAction func logAction(_ sender: Any) {
         
-        userTextField.text = "13477831123"
-        passwordTextField.text = "abc123"
+        
+        
+        
+        
+//        guard let phone = userTextField.text ,
+//              let password = passwordTextField.text else {
+//            
+//            return
+//        }
+//        
+//        if !String.validateTelephone(tel: phone) {
+//            
+//        }
+        
+        MBProgressHUD.showAdded(to: view, animated: true)
         
         vm.login(userName: userTextField.text!, password: passwordTextField.text!) { (data, msg, isSuccess) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if isSuccess {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
                 self.dismiss(animated: true, completion: nil)
             }else{
-                print(msg)
+                ViewManager.showNotice(notice: msg)
             }
         }
-        
-//        JXNetworkManager.manager.login(userName: userTextField.text!, password: passwordTextField.text!) { (data,msg, isSuccess) in
-//            if isSuccess {
-//                self.dismiss(animated: true, completion: nil)
-//            }else{
-//                print(msg)
-//            }
-//        }
-        
-//        JXNetworkManager.manager.login(userName: userTextField.text!, password: passwordTextField.text!) { (msg, isSuccess) in
-//            if isSuccess {
-//                self.dismiss(animated: true, completion: nil)
-//            }else{
-//                print(msg)
-//            }
-//        }
     }
     
 

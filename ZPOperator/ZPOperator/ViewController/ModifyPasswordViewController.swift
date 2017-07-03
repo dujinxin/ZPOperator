@@ -8,22 +8,58 @@
 
 import UIKit
 
-class ModifyPasswordViewController: UITableViewController {
+class ModifyPasswordViewController: ZPTableViewController {
 
     @IBOutlet weak var oldTextField: UITextField!
     @IBOutlet weak var newTextField: UITextField!
     @IBOutlet weak var againTextField: UITextField!
-    @IBOutlet weak var confirmLabel: UILabel!
+
+    @IBOutlet weak var confirmButton: UIButton!
     
     var vm = LoginVM()
     
+    @IBAction func confirm(_ sender: Any) {
+        
+        guard let oldPassword = oldTextField.text,
+              let newPassword = newTextField.text,
+              let againPassword = againTextField.text else {
+                
+                ViewManager.showNotice(notice: "密码不能为空")
+            return
+        }
+        if !String.validatePassword(passWord: newPassword) {
+            ViewManager.showNotice(notice: "密码格式错误")
+            return
+        }
+        if newPassword != againPassword {
+            ViewManager.showNotice(notice: "两次密码输入不一致")
+            return
+        }
+        
+        
+        self.vm.modifyPassword(old: oldPassword, new: newPassword) { (data, msg, isSuccess) in
+            if isSuccess {
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                ViewManager.showNotice(notice: msg)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+        
+        confirmButton.layer.cornerRadius = 5
+        confirmButton.backgroundColor = UIColor.gray
+        confirmButton.isEnabled = false
+        
+        //originColor
     }
-
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidChange, object: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,14 +86,36 @@ class ModifyPasswordViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            self.vm.modifyPassword(old: oldTextField.text!, new: newTextField.text!) { (data, msg, isSuccess) in
-                if isSuccess {
-                    self.navigationController?.popViewController(animated: true)
-                }else{
-                    
-                }
+
+    }
+}
+
+extension ModifyPasswordViewController : UITextFieldDelegate{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == oldTextField {
+            newTextField.becomeFirstResponder()
+        }else if textField == newTextField {
+            againTextField.becomeFirstResponder()
+        }else{
+            againTextField.resignFirstResponder()
+        }
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
+    func textChange(notify:NSNotification) {
+        
+        if notify.object is UITextField {
+            if oldTextField.text?.characters.count != 0 && newTextField.text?.characters.count != 0 && againTextField.text?.characters.count != 0 {
+                confirmButton.backgroundColor = UIColor.originColor
+                confirmButton.isEnabled = true
+            }else{
+                confirmButton.backgroundColor = UIColor.gray
+                confirmButton.isEnabled = false
             }
         }
     }
+    
 }

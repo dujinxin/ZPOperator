@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class TraceSourcesController: UICollectionViewController {
+class TraceSourcesController: ZPCollectionViewController {
 
     lazy var vm = TraceSourceVM()
     
@@ -26,11 +26,17 @@ class TraceSourcesController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
+        let width = (kScreenWidth - 20 * 2 - 10 * 2) / 3
+        
+        
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize.init(width: 100, height: 100)
+        layout.itemSize = CGSize.init(width: width, height: width)
+        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 10
         self.collectionView?.collectionViewLayout = layout
         
-        self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+        self.vm.loadMainData(append: false, completion: { (data, msg, isSuccess) in
             if isSuccess {
                 self.collectionView?.reloadData()
             }else{
@@ -56,7 +62,7 @@ class TraceSourcesController: UICollectionViewController {
                 let dvc = segue.destination as! TraceSAddViewController
                 //let block = sender as! (()->())
                 
-                dvc.block = {()->()in
+                dvc.traceSAddBlock = {()->()in
                     print("回调")
                     self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
                         if isSuccess {
@@ -94,7 +100,10 @@ class TraceSourcesController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MainCell
         
         // Configure the cell
-        cell.backgroundColor = UIColor.red
+        
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.layer.borderColor = UIColor.rgbColor(from: 35, 68, 120).cgColor
+        cell.contentView.layer.borderWidth = 1
         
         let model = self.vm.dataArray[indexPath.item]
         

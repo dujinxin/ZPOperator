@@ -49,6 +49,20 @@
 		35AE7FFA1EFD1BFF00528D6A /* TraceSAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */; };
 		35AE7FFC1EFD1D2100528D6A /* TraceSAddVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FFB1EFD1D2100528D6A /* TraceSAddVM.swift */; };
 		35AE7FFE1EFD429800528D6A /* JXNetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FFD1EFD429800528D6A /* JXNetworkError.swift */; };
+		35E0207B1F04C76B00852BBD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0207A1F04C76B00852BBD /* String+Extension.swift */; };
+		35E0207D1F04D3DD00852BBD /* JXNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0207C1F04D3DD00852BBD /* JXNoticeView.swift */; };
+		35E0207F1F04DDAA00852BBD /* ViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0207E1F04DDAA00852BBD /* ViewManager.swift */; };
+		35E020811F050D9A00852BBD /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020801F050D9A00852BBD /* BaseModel.swift */; };
+		35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020821F0630F900852BBD /* DeliveredManagerController.swift */; };
+		35E020851F0640E500852BBD /* DeliveredManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020841F0640E500852BBD /* DeliveredManagerVM.swift */; };
+		35E020871F0671D600852BBD /* DeliveredWholeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020861F0671D600852BBD /* DeliveredWholeController.swift */; };
+		35E020891F06746400852BBD /* DeliveredWholeRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020881F06746400852BBD /* DeliveredWholeRecordController.swift */; };
+		35E0208B1F06807E00852BBD /* TagResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0208A1F06807E00852BBD /* TagResultController.swift */; };
+		35E0208D1F07638600852BBD /* ZPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0208C1F07638600852BBD /* ZPTableViewController.swift */; };
+		35E0208F1F07639700852BBD /* ZPCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0208E1F07639700852BBD /* ZPCollectionViewController.swift */; };
+		35E020911F07A67A00852BBD /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020901F07A67A00852BBD /* UIImage+Extension.swift */; };
+		35E020931F09F66600852BBD /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020921F09F66600852BBD /* UIScreen+Extension.swift */; };
+		35E020951F09F7EF00852BBD /* ConstantHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020941F09F7EF00852BBD /* ConstantHeader.swift */; };
 		35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */; };
 		35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */; };
 		35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */; };
@@ -112,6 +126,20 @@
 		35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSAddViewController.swift; sourceTree = "<group>"; };
 		35AE7FFB1EFD1D2100528D6A /* TraceSAddVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSAddVM.swift; sourceTree = "<group>"; };
 		35AE7FFD1EFD429800528D6A /* JXNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNetworkError.swift; sourceTree = "<group>"; };
+		35E0207A1F04C76B00852BBD /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		35E0207C1F04D3DD00852BBD /* JXNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNoticeView.swift; sourceTree = "<group>"; };
+		35E0207E1F04DDAA00852BBD /* ViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewManager.swift; sourceTree = "<group>"; };
+		35E020801F050D9A00852BBD /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		35E020821F0630F900852BBD /* DeliveredManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredManagerController.swift; sourceTree = "<group>"; };
+		35E020841F0640E500852BBD /* DeliveredManagerVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredManagerVM.swift; sourceTree = "<group>"; };
+		35E020861F0671D600852BBD /* DeliveredWholeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredWholeController.swift; sourceTree = "<group>"; };
+		35E020881F06746400852BBD /* DeliveredWholeRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredWholeRecordController.swift; sourceTree = "<group>"; };
+		35E0208A1F06807E00852BBD /* TagResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResultController.swift; sourceTree = "<group>"; };
+		35E0208C1F07638600852BBD /* ZPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPTableViewController.swift; sourceTree = "<group>"; };
+		35E0208E1F07639700852BBD /* ZPCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPCollectionViewController.swift; sourceTree = "<group>"; };
+		35E020901F07A67A00852BBD /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		35E020921F09F66600852BBD /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		35E020941F09F7EF00852BBD /* ConstantHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantHeader.swift; sourceTree = "<group>"; };
 		35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceModel.swift; sourceTree = "<group>"; };
 		35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceDetailVM.swift; sourceTree = "<group>"; };
 		35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +208,11 @@
 				3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */,
 				3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */,
 				35E7DD6C1F0122DA00E1F7E9 /* DeliveringManagerController.swift */,
+				35E020821F0630F900852BBD /* DeliveredManagerController.swift */,
+				35E020861F0671D600852BBD /* DeliveredWholeController.swift */,
+				35E020881F06746400852BBD /* DeliveredWholeRecordController.swift */,
 				354502F81EFA1A5300D9EDA7 /* TagViewController.swift */,
+				35E0208A1F06807E00852BBD /* TagResultController.swift */,
 				354502F91EFA1A5300D9EDA7 /* TraceSourcesController.swift */,
 				3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */,
 				35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */,
@@ -205,6 +237,7 @@
 				35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */,
 				35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */,
 				35E7DD6E1F01329100E1F7E9 /* DeliveringManagerVM.swift */,
+				35E020841F0640E500852BBD /* DeliveredManagerVM.swift */,
 				35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */,
 			);
 			name = ViewModel;
@@ -218,6 +251,7 @@
 				354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */,
 				35E7DD641EFEBA1D00E1F7E9 /* JXSelectView.swift */,
 				35E7DD661EFF7EF800E1F7E9 /* JXAlertView.swift */,
+				35E0207C1F04D3DD00852BBD /* JXNoticeView.swift */,
 			);
 			path = JXView;
 			sourceTree = "<group>";
@@ -245,6 +279,7 @@
 		354503241EFBDF8800D9EDA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35E020801F050D9A00852BBD /* BaseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,6 +297,8 @@
 			children = (
 				354503281EFBDF8800D9EDA7 /* BaseViewController.swift */,
 				354503291EFBDF8800D9EDA7 /* JXTableViewController.swift */,
+				35E0208C1F07638600852BBD /* ZPTableViewController.swift */,
+				35E0208E1F07639700852BBD /* ZPCollectionViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -272,6 +309,8 @@
 				3545032B1EFBDF8800D9EDA7 /* Additions */,
 				3545032C1EFBDF8800D9EDA7 /* ApiEnum.swift */,
 				35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */,
+				35E0207E1F04DDAA00852BBD /* ViewManager.swift */,
+				35E020941F09F7EF00852BBD /* ConstantHeader.swift */,
 				3545032D1EFBDF8800D9EDA7 /* Extension */,
 				354503311EFBDF8800D9EDA7 /* JXNetwork */,
 			);
@@ -291,6 +330,9 @@
 				3545032E1EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift */,
 				3545032F1EFBDF8800D9EDA7 /* UIColor+Extension.swift */,
 				354503301EFBDF8800D9EDA7 /* UIView+Extension.swift */,
+				35E0207A1F04C76B00852BBD /* String+Extension.swift */,
+				35E020901F07A67A00852BBD /* UIImage+Extension.swift */,
+				35E020921F09F66600852BBD /* UIScreen+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -396,7 +438,7 @@
 				TargetAttributes = {
 					3597507B1EF8BE9100419474 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = JD78BK6EHC;
+						DevelopmentTeam = PZN2XEQRUA;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -496,9 +538,12 @@
 				35E7DD691F00B4DD00E1F7E9 /* TraceDeliverVM.swift in Sources */,
 				354503441EFCBDAF00D9EDA7 /* UserModel.swift in Sources */,
 				3545033E1EFBDF8800D9EDA7 /* JXRequest.swift in Sources */,
+				35E0207F1F04DDAA00852BBD /* ViewManager.swift in Sources */,
+				35E0208D1F07638600852BBD /* ZPTableViewController.swift in Sources */,
 				3545033A1EFBDF8800D9EDA7 /* UIColor+Extension.swift in Sources */,
 				3545033C1EFBDF8800D9EDA7 /* JXBaseRequest.swift in Sources */,
 				35E7DD651EFEBA1D00E1F7E9 /* JXSelectView.swift in Sources */,
+				35E0208B1F06807E00852BBD /* TagResultController.swift in Sources */,
 				35E7DD6B1F00B5CB00E1F7E9 /* TraceDeliverModel.swift in Sources */,
 				35E7DD6F1F01329100E1F7E9 /* DeliveringManagerVM.swift in Sources */,
 				3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */,
@@ -511,22 +556,28 @@
 				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,
 				35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */,
 				35E7DD7F1F02815A00E1F7E9 /* NotificationEnum.swift in Sources */,
+				35E020931F09F66600852BBD /* UIScreen+Extension.swift in Sources */,
+				35E0207B1F04C76B00852BBD /* String+Extension.swift in Sources */,
+				35E020811F050D9A00852BBD /* BaseModel.swift in Sources */,
 				35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */,
 				35E7DD6D1F0122DA00E1F7E9 /* DeliveringManagerController.swift in Sources */,
 				354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */,
 				3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */,
 				35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */,
 				3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */,
+				35E020951F09F7EF00852BBD /* ConstantHeader.swift in Sources */,
 				35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */,
 				35E7DD7D1F027A2700E1F7E9 /* JXLocationManager.swift in Sources */,
 				354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */,
 				3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */,
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
+				35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */,
 				354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */,
 				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
 				354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */,
 				35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */,
+				35E020891F06746400852BBD /* DeliveredWholeRecordController.swift in Sources */,
 				3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */,
 				3545031D1EFBCB8600D9EDA7 /* TraceDetailController.swift in Sources */,
 				35E7DD791F022AD600E1F7E9 /* QiNiuUploadManager.swift in Sources */,
@@ -534,11 +585,16 @@
 				354503201EFBD29300D9EDA7 /* LoginViewController.swift in Sources */,
 				354503401EFCB21D00D9EDA7 /* LoginVM.swift in Sources */,
 				35E7DD671EFF7EF800E1F7E9 /* JXAlertView.swift in Sources */,
+				35E020851F0640E500852BBD /* DeliveredManagerVM.swift in Sources */,
 				35E7DD751F01FE5900E1F7E9 /* TraceSRecordController.swift in Sources */,
 				35AE7FFE1EFD429800528D6A /* JXNetworkError.swift in Sources */,
 				354503001EFA1A5300D9EDA7 /* MainViewController.swift in Sources */,
 				354503071EFA50FA00D9EDA7 /* DeliverManageController.swift in Sources */,
+				35E020911F07A67A00852BBD /* UIImage+Extension.swift in Sources */,
+				35E020871F0671D600852BBD /* DeliveredWholeController.swift in Sources */,
+				35E0208F1F07639700852BBD /* ZPCollectionViewController.swift in Sources */,
 				35AE7FF81EFD17F600528D6A /* TraceSourceVM.swift in Sources */,
+				35E0207D1F04D3DD00852BBD /* JXNoticeView.swift in Sources */,
 				354503051EFA439C00D9EDA7 /* MainVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,12 +719,14 @@
 			baseConfigurationReference = E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JD78BK6EHC;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PZN2XEQRUA;
 				INFOPLIST_FILE = ZPOperator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = zpsy.ZPOperator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.zpsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -678,12 +736,14 @@
 			baseConfigurationReference = 855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JD78BK6EHC;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PZN2XEQRUA;
 				INFOPLIST_FILE = ZPOperator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = zpsy.ZPOperator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.zpsy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

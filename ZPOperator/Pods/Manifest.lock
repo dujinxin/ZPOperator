@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - HappyDNS (0.3.10)
+  - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.12)
   - Qiniu (7.1.5):
     - AFNetworking (~> 3)
@@ -22,20 +23,25 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - TZImagePickerController (1.7.9)
 
 DEPENDENCIES:
   - AFNetworking
+  - MBProgressHUD
   - MJRefresh
   - Qiniu
   - SDWebImage
+  - TZImagePickerController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Qiniu: 77a3dba411556a383d72d17e842345a9d4c83252
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  TZImagePickerController: 0a8ff228d287ebdd7d485e8c42a2a932894f1fba
 
-PODFILE CHECKSUM: 53dda6d101ce7152e974bdbeb5345827923395b0
+PODFILE CHECKSUM: a19246a5788c4d7f3906822d9856e28b45b238dd
 
 COCOAPODS: 1.2.1

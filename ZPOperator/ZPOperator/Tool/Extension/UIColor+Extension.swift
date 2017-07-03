@@ -73,6 +73,10 @@ extension UIColor{
         return UIColor.rgbColor(rgbValue: 0xf1f1f1)
     }
     
+    class var originColor: UIColor {
+        return UIColor.rgbColor(from: 219, 80, 8)
+    }
+    
     
 }
 

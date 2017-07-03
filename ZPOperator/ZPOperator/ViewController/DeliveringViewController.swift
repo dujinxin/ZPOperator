@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MJRefresh
 
-class DeliveringViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
     var tableView = UITableView.init(frame: CGRect.zero, style: .plain)
     var vm = TraceDeliverVM()
     var selectView : JXSelectView?
-    var deliveringModel : TraceDeliverModel?
+    var deliveringModel : TraceDeliverSubModel?
     
     var address1Height : CGFloat = 44.0
     var address2Height : CGFloat = 44.0
@@ -22,16 +23,16 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     
     var addressStr : String = ""
     
-    var block : ((_ deliveringModel:TraceDeliverModel)->())?
+    var deliveringBlock : ((_ deliveringModel:TraceDeliverSubModel,_ deliverOperatorModel:TraceDeliverOperatorModel)->())?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.groupTableViewBackground
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.frame = view.bounds
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -39,17 +40,22 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
         self.tableView.tableFooterView = UIView()
         view.addSubview(self.tableView)
         
-        vm.loadMainData(batchStatus: 0) { (data, msg, isSuccess) in
-            if isSuccess{
-                self.tableView.reloadData()
-            }else{
-                print(msg)
+        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            
+            self.vm.loadMainData(batchStatus: 0) { (data, msg, isSuccess) in
+                self.tableView.mj_header.endRefreshing()
+                if isSuccess{
+                    self.tableView.reloadData()
+                }else{
+                    print(msg)
+                }
             }
-        }
+        })
+        self.tableView.mj_header.beginRefreshing()
         
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
-        selectView?.isUseTopBar = true
+        selectView?.isUseTopBar = false
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
@@ -57,6 +63,9 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
         //开启定位
         JXLocationManager.manager.startUpdateLocation()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,7 +83,7 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return vm.dataArray.count
+        return vm.traceDeliverModel.batches.count
     }
     
     
@@ -88,7 +97,7 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
             
             cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
         }
-        let model = self.vm.dataArray[indexPath.row]
+        let model = self.vm.traceDeliverModel.batches[indexPath.row]
         // Configure the cell...
         cell?.accessoryType = .disclosureIndicator
         cell?.textLabel?.text = model.goodsName
@@ -107,14 +116,14 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = self.vm.dataArray[indexPath.row]
+        let model = self.vm.traceDeliverModel.batches[indexPath.row]
         deliveringModel = model
         self.selectView?.resetFrame(height: calculateHeight(model: model))
         
         selectView?.show()
     }
     
-    func calculateHeight(model:TraceDeliverModel) -> CGFloat {
+    func calculateHeight(model:TraceDeliverSubModel) -> CGFloat {
         
         address1Height = 30.0 + 14 + calculateHeight(string: self.addressStr)
         if let province = deliveringModel?.province,
@@ -133,17 +142,16 @@ class DeliveringViewController: UIViewController,UITableViewDelegate,UITableView
         selectViewHeight = 44.0  + address1Height + address2Height + remarkHeight + 88.0
         return selectViewHeight
     }
-    func calculateHeight(string:String?,width:CGFloat = UIScreen.main.bounds.width - 90,fontSize:CGFloat = 14) -> CGFloat {
+    func calculateHeight(string:String?,width:CGFloat = kScreenWidth - 90,fontSize:CGFloat = 14) -> CGFloat {
         guard let contentStr = string  else{
-            return 44
+            return 14
         }
-
-        let paragraphStyle = NSMutableParagraphStyle.init()
-        paragraphStyle.lineSpacing = 5
-        
-        let rect = contentStr.boundingRect(with: CGSize.init(width: width, height: CGFloat.greatestFiniteMagnitude), options: [], attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize)], context: nil)
-        
-        return rect.height;
+        let height = contentStr.calculate(width: width, fontSize: fontSize, lineSpace: 5).height
+        if height < CGFloat(20) {
+            return 14
+        }else{
+            return height
+        }
     }
 }
 
@@ -178,11 +186,11 @@ extension DeliveringViewController: JXSelectViewDataSource{
         let titleArray = ["发货","收货","备注"]
         
         if row == 1 || row == 2 || row == 3{
-            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
-            let leftLabel = UILabel.init(frame: CGRect.init(x: 10, y: 0, width: 60, height: 44))
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
             leftLabel.textColor = UIColor.black
-            leftLabel.textAlignment = .center
+            leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
             leftLabel.text = titleArray[row - 1]
             view?.addSubview(leftLabel)
@@ -190,7 +198,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         }else if row == 4{
             
             let button = UIButton()
-            button.frame = CGRect.init(x: 40, y: 22, width: UIScreen.main.bounds.width - 80, height: 44)
+            button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
             button.setTitle("确认发货批次", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = UIColor.orange
@@ -199,12 +207,21 @@ extension DeliveringViewController: JXSelectViewDataSource{
             return button
             
         }else{
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: kScreenWidth - 40, height: 44))
+            leftLabel.textColor = UIColor.black
+            leftLabel.textAlignment = .left
+            leftLabel.font = UIFont.systemFont(ofSize: 14)
+            leftLabel.text = "发货批次号："
+            if let batchCode = deliveringModel?.batchCode{
+                leftLabel.text = "发货批次号：" + batchCode
+            }
+            return leftLabel
             
         }
         
         if row == 1 {
-            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: address1Height)
-            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: UIScreen.main.bounds.width - 90, height: 14))
+            view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address1Height)
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: kScreenWidth - 90, height: 14))
             rightLabel.textColor = UIColor.black
             rightLabel.textAlignment = .left
             rightLabel.font = UIFont.systemFont(ofSize: 14)
@@ -214,7 +231,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             }
             view?.addSubview(rightLabel)
             
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: UIScreen.main.bounds.width - 90, height: address1Height - 30))
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: kScreenWidth - 90, height: address1Height - 30))
             addressLabel.textColor = UIColor.black
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 14)
@@ -224,8 +241,8 @@ extension DeliveringViewController: JXSelectViewDataSource{
         }
         
         if row == 2 {
-            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: address2Height)
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: UIScreen.main.bounds.width - 90, height: address2Height))
+            view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address2Height)
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: address2Height))
             addressLabel.textColor = UIColor.black
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 14)
@@ -243,8 +260,8 @@ extension DeliveringViewController: JXSelectViewDataSource{
         }
         
         if row == 3 {
-            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: remarkHeight)
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: UIScreen.main.bounds.width - 90, height: remarkHeight))
+            view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: remarkHeight)
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: remarkHeight))
             addressLabel.textColor = UIColor.black
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 14)
@@ -262,8 +279,8 @@ extension DeliveringViewController: JXSelectViewDataSource{
     
     func confirmDeliver() {
         self.selectView?.dismiss()
-        if let block = block {
-            block(deliveringModel!)
+        if let block = deliveringBlock {
+            block(deliveringModel!,self.vm.traceDeliverModel.Operator)
         }
         
 //        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)

@@ -27,7 +27,16 @@ class MainVM{
             }
             self.orderCount = Int(count)
             
-            for i in 0..<array.count{
+            let endIndex : Int
+            
+            if append == true {
+                endIndex = 5
+            }else{
+                endIndex = array.count
+            }
+            
+            
+            for i in 0..<endIndex{
                 let model = MainSubModel()
                 model.setValuesForKeys(array[i] as! [String : Any])
                 self.dataArray.append(model)

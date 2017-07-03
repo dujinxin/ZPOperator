@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingViewController: UITableViewController ,JXSelectViewDataSource {
+class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
@@ -19,32 +19,20 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
     var select : JXSelectView?
     var alert : JXAlertView?
     
+    var vm = LoginVM()
+    
     
     @IBAction func lougouAction(_ sender: UIButton) {
         
-        //alert?.show()
-        
-        select?.show()
-        //select?.show(inView: nil, animate: true)
-        
-//        let alert = UIAlertController(title: "正品溯源", message: "message", preferredStyle: .actionSheet)
-//        for i in 0..<5 {
-//            let action = UIAlertAction(title: "\(i)", style: .destructive, handler: { (action) in
-//                //
-//            })
-//            alert.addAction(action)
-//            
-//        }
-//        //alert.addTextField { (textField) in}//.alert
-//        alert.addAction(UIAlertAction.init(title: "取消", style: .cancel, handler: { (action) in
-//            //
-//            alert.dismiss(animated: true, completion: nil)
-//        }))
-//        self.present(alert, animated: true) { 
-//            //
-//        }
-        
-        
+        self.vm.logout { (data, msg, isSuccess) in
+            if isSuccess {
+                JXNetworkManager.manager.userAccound?.removeAccound()
+                JXNetworkManager.manager.userAccound = nil
+                //JXNetworkManager.manager.userAccound.sid = nil
+                let login = LoginViewController()
+                self.navigationController?.present(login, animated: false, completion: nil)
+            }
+        }
     }
     func jxSelectView(_: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -63,6 +51,9 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
         self.phoneLabel.text = LoginVM.loginVMManager.userModel.mobile
         self.addressLabel.text = LoginVM.loginVMManager.userModel.stationName
         self.versionLabel.text = "v1.0.0"
+        
+        logoutButton.layer.cornerRadius = 5
+        logoutButton.backgroundColor = UIColor.originColor
 
         let view1 = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
         view1.backgroundColor = UIColor.orange
@@ -124,7 +115,11 @@ class SettingViewController: UITableViewController ,JXSelectViewDataSource {
             if indexPath.row == 0 {
                 
             }else if indexPath.row == 1{
-                
+                var uploadManager = QiNiuUploadManager()
+                //TZImagePickerController
+//                uploadManager.qiniuUpload(key: "", data: "", options: nil, completion: {()->() in
+//                    //
+//                })
             }else{
                 performSegue(withIdentifier: "modifyPassword", sender: nil)
             }

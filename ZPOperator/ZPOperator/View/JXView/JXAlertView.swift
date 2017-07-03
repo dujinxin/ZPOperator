@@ -35,7 +35,17 @@ class JXAlertView: UIView {
     var message : String?
     var actions : Array<String> = [String](){
         didSet{
-            self.resetFrame(height: CGFloat(actions.count) * listHeight)
+            if actions.count > 5 {
+                self.tableView.isScrollEnabled = true
+                self.tableView.bounces = true
+                self.tableView.showsVerticalScrollIndicator = true
+            }else{
+                self.tableView.isScrollEnabled = false
+                self.tableView.bounces = false
+                self.tableView.showsVerticalScrollIndicator = false
+            }
+            //self.resetFrame(height: CGFloat(actions.count) * listHeight)
+            self.resetFrame()
         }
     }
     
@@ -63,6 +73,20 @@ class JXAlertView: UIView {
 //            self.layoutSubviews()
 //        }
 //    }
+    var isScrollEnabled : Bool = false {
+        didSet{
+            if isScrollEnabled == true {
+                self.tableView.isScrollEnabled = true
+                self.tableView.bounces = true
+                self.tableView.showsVerticalScrollIndicator = true
+            }else{
+                self.tableView.isScrollEnabled = false
+                self.tableView.bounces = false
+                self.tableView.showsVerticalScrollIndicator = false
+            }
+        }
+    }
+    
     var isUseTopBar : Bool = false {
         didSet{
             if isUseTopBar {
@@ -179,8 +203,8 @@ class JXAlertView: UIView {
             alertViewHeight = height
         }else{
             if style == .list{
-                let num = self.actions.count
-                h = CGFloat(num > 5 ? 5 : num) * listHeight
+                let num : CGFloat = CGFloat(self.actions.count)
+                h = (num > 5 ? 5.5 : num) * listHeight
                 alertViewHeight = h
             }
         }

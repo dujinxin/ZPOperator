@@ -39,10 +39,12 @@ class JXSelectView: UIView {
     private var contentView : UIView?
     var isUseTopBar : Bool = false {
         didSet{
-            selectViewTop = topBarHeight
-            self.addSubview(self.topBarView)
-            self.topBarView.addSubview(self.cancelButton)
-            self.topBarView.addSubview(self.confirmButton)
+            if isUseTopBar == true {
+                selectViewTop = topBarHeight
+                self.addSubview(self.topBarView)
+                self.topBarView.addSubview(self.cancelButton)
+                self.topBarView.addSubview(self.confirmButton)
+            }
             self.resetFrame()
         }
     }
@@ -80,7 +82,7 @@ class JXSelectView: UIView {
         table.bounces = false
         table.showsVerticalScrollIndicator = false
         table.showsHorizontalScrollIndicator = false
-        table.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        //table.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         return table
     }()
     lazy var pickView: UIPickerView = {
@@ -307,21 +309,26 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
         return tableViewCellHeight
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        
-        if dataSource != nil {
-            if let view = dataSource?.jxSelectView!(self, viewForRow: indexPath.row) {
-                view.tag = 666
-                cell.contentView.addSubview(view)
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        if cell == nil {
+            cell = UITableViewCell.init(style: .default, reuseIdentifier: reuseIdentifier)
+            cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+            if dataSource != nil {
+                if let view = dataSource?.jxSelectView!(self, viewForRow: indexPath.row) {
+                    view.tag = 666
+                    cell?.contentView.addSubview(view)
+                }
             }
         }
-        if let view = cell.contentView.viewWithTag(666){
+
+        if let view = cell?.contentView.viewWithTag(666){
             view.isHidden = false
         }else{
-            cell.textLabel?.text = dataSource?.jxSelectView(self, contentForRow: indexPath.row, InSection: indexPath.section)
+            cell?.textLabel?.text = dataSource?.jxSelectView(self, contentForRow: indexPath.row, InSection: indexPath.section)
         }
         
-        return cell
+        return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -15,7 +15,6 @@ private let reuseIndentifierFooter = "reuseIndentifierFooter"
 class JXHorizontalView: UIView {
 
     let parentViewController : UIViewController
-    //let containerView = UICollectionView()
     let rect : CGRect
     var containers = Array<UIViewController>()
     
@@ -74,9 +73,6 @@ class JXHorizontalView: UIView {
   
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        print("item size \(flowlayout.itemSize) " )
-        print("collection size \(collectionView.frame) " )
-        //print("collection size \(collectionView.) " )
         return collectionView
     }()
 }
