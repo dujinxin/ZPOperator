@@ -134,7 +134,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     cell?.selectionStyle = .none
                     
                     let lab = UILabel()
-                    lab.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 44)
+                    lab.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 44)
                     lab.backgroundColor = UIColor.white
                     lab.textAlignment = .left
                     lab.font = UIFont.systemFont(ofSize: 13)
@@ -161,7 +161,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     cell?.selectionStyle = .none
                     
                     let lab1 = UILabel()
-                    lab1.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 30)
+                    lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                     lab1.backgroundColor = UIColor.white
                     lab1.textAlignment = .left
                     lab1.font = UIFont.systemFont(ofSize: 13)
@@ -171,7 +171,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     
                     
                     let lab2 = UILabel()
-                    lab2.frame = CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 30)
+                    lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                     lab2.backgroundColor = UIColor.white
                     lab2.textAlignment = .left
                     lab2.font = UIFont.systemFont(ofSize: 12)
@@ -213,7 +213,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     cell?.selectionStyle = .none
                     
                     let lab1 = UILabel()
-                    lab1.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: 30)
+                    lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                     lab1.backgroundColor = UIColor.white
                     lab1.textAlignment = .left
                     lab1.font = UIFont.systemFont(ofSize: 13)
@@ -223,7 +223,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     
                     
                     let lab2 = UILabel()
-                    lab2.frame = CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 30)
+                    lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                     lab2.backgroundColor = UIColor.white
                     lab2.textAlignment = .left
                     lab2.font = UIFont.systemFont(ofSize: 12)
@@ -307,7 +307,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
         let height : CGFloat = (44 * 3 + 92)//44 * 3 + 72 + 10 + 5 + 5
         if let array = array{
             if !array.isEmpty {
-                let imageheight = (UIScreen.main.bounds.width - (10 * 2 + 20 * 2 + 60 + 10)) / 3
+                let imageheight = (kScreenWidth - (10 * 2 + 20 * 2 + 60 + 10)) / 3
                 return height + imageheight
             }
         }
@@ -378,12 +378,10 @@ extension TraceDetailController : JXAlertViewDelegate,UIAlertViewDelegate{
             
             
             self.recordVM.deleteTraceSourceRecord(id: currentRecord!.id!, completion: { (data, msg, isSuccess) in
+                ViewManager.showNotice(notice: msg)
                 if isSuccess {
-                    ViewManager.showNotice(notice: "删除成功")
                     self.detailVM.dataArray.remove(at: alertView.tag)
                     self.tableView.reloadData()
-                }else {
-                    ViewManager.showNotice(notice: msg)
                 }
             })
             

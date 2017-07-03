@@ -219,26 +219,22 @@ class TraceSRecordController: ZPTableViewController {
             }
         }else {
             let id : NSNumber?
-            let successStr : String
             
             if isAdd == false {
                 id = self.traceRecordId
-                successStr = "修改成功"
             }else{
                 id = nil
-                successStr = "添加成功"
             }
             
             self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
+                
                 MBProgressHUD.hide(for: self.view, animated: true)
+                ViewManager.showNotice(notice: msg)
                 if isSuccess{
-                    ViewManager.showNotice(notice: successStr)
                     if let myblock = self.block {
                         myblock()
                     }
                     self.navigationController?.popViewController(animated: true)
-                }else{
-                    ViewManager.showNotice(notice: msg)
                 }
             }
         }
@@ -574,7 +570,7 @@ extension TraceSRecordController : UIImagePickerControllerDelegate , UINavigatio
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        let newImage = UIImage.image(originalImage: image, to: UIScreen.main.bounds.width)
+        let newImage = UIImage.image(originalImage: image, to: kScreenWidth)
         
         if let im = newImage {
             self.imageArray.append(im)

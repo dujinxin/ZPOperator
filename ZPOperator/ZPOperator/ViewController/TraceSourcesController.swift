@@ -26,7 +26,7 @@ class TraceSourcesController: ZPCollectionViewController {
         // Register cell classes
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         
-        let width = (UIScreen.main.bounds.width - 20 * 2 - 10 * 2) / 3
+        let width = (kScreenWidth - 20 * 2 - 10 * 2) / 3
         
         
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout

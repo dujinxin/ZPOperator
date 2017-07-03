@@ -11,6 +11,12 @@ import UIKit
 
 extension UIImage {
     
+    /// 依据宽度等比例对图片重新绘制
+    ///
+    /// - Parameters:
+    ///   - originalImage: 原图
+    ///   - scaledWidth: 将要缩放或拉伸的宽度
+    /// - Returns: 新的图片
     class func image(originalImage:UIImage? ,to scaledWidth:CGFloat) -> UIImage? {
         guard let image = originalImage else {
             return UIImage.init()

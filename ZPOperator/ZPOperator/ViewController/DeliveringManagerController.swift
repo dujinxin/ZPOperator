@@ -189,15 +189,12 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
         self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: tagNum) { (data, msg, isSuccess) in
             
             MBProgressHUD.hide(for: self.view, animated: true)
-            
+            ViewManager.showNotice(notice: msg)
             if isSuccess{
                 if let block = self.deliveringManageBlock {
                     block(true)
                 }
-                ViewManager.showNotice(notice: "发货成功")
                 self.navigationController?.popViewController(animated: true)
-            }else{
-                ViewManager.showNotice(notice: msg)
             }
         }
     }
@@ -290,7 +287,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
 //        let titleArray = ["发货","收货","备注"]
 //        
 //        if row == 1 || row == 2 || row == 3{
-//            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+//            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
 //            
 //            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
 //            leftLabel.textColor = UIColor.black
@@ -303,7 +300,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
             if row == 6{
             
             let button = UIButton()
-            button.frame = CGRect.init(x: 40, y: 22, width: UIScreen.main.bounds.width - 80, height: 44)
+            button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
             button.setTitle("确认发货批次", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = UIColor.orange
@@ -313,7 +310,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
             
         }
 //            else{
-//            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: UIScreen.main.bounds.width - 40, height: 44))
+//            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: kScreenWidth - 40, height: 44))
 //            leftLabel.textColor = UIColor.black
 //            leftLabel.textAlignment = .left
 //            leftLabel.font = UIFont.systemFont(ofSize: 14)
@@ -326,7 +323,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
 //        }
 //        
 //        if row == 1 {
-//            view?.frame =  CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: address1Height)
+//            view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address1Height)
 //            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: UIScreen.main.bounds.width - 90, height: 14))
 //            rightLabel.textColor = UIColor.black
 //            rightLabel.textAlignment = .left

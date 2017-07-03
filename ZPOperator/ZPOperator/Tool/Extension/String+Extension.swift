@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     
@@ -38,5 +39,37 @@ extension String {
         let passWordRegex = "^[0-9]{6}+$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
         return predicate.evaluate(with: code)
+    }
+}
+
+extension String {
+    
+    func calculate(width: CGFloat,fontSize:CGFloat,lineSpace:CGFloat = -1) -> CGSize {
+        
+        if self.isEmpty {
+            return CGSize()
+        }
+        
+        let ocText = self as NSString
+        var attributes : Dictionary<String, Any>
+        let paragraph = NSMutableParagraphStyle.init()
+        paragraph.lineSpacing = lineSpace
+        
+        if lineSpace < 0 {
+            attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize)]
+        }else{
+            attributes = [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize),NSParagraphStyleAttributeName:paragraph]
+        }
+        
+        let rect = ocText.boundingRect(with: CGSize.init(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin,.usesFontLeading,.usesDeviceMetrics], attributes: attributes, context: nil)
+        
+        let height : CGFloat
+        if rect.origin.x < 0 {
+            height = abs(rect.origin.x) + rect.height
+        }else{
+            height = rect.height
+        }
+        
+        return CGSize(width: width, height: height)
     }
 }

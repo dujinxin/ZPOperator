@@ -27,7 +27,7 @@ class MainViewController: ZPCollectionViewController {
         //self.automaticallyAdjustsScrollViewInsets = false
         
         
-        let width = (UIScreen.main.bounds.width - 20 * 2 - 10 * 2) / 3
+        let width = (kScreenWidth - 20 * 2 - 10 * 2) / 3
         
         
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
@@ -35,8 +35,8 @@ class MainViewController: ZPCollectionViewController {
         layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
-        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: width)
-        layout.footerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: width)
+        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: width)
+        layout.footerReferenceSize = CGSize(width: kScreenWidth, height: width)
         
         self.collectionView?.collectionViewLayout = layout
 

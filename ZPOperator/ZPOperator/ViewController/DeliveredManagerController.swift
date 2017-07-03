@@ -35,9 +35,11 @@ class DeliveredManagerController: ZPTableViewController {
     @IBOutlet weak var operatorTimeLabel: UILabel!
     
     @IBOutlet weak var traceDetailButton: UIButton!
+    
     @IBAction func traceDetail(_ sender: Any) {
         performSegue(withIdentifier: "TraceSourceWhole", sender: deliveredBatchId)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier,
             identifier == "TraceSourceWhole"{
@@ -126,27 +128,15 @@ class DeliveredManagerController: ZPTableViewController {
         }else if indexPath.row == 2{
             return 88
         }else if indexPath.row == 3{
-            return calculateHeight(string: self.traceDeliverSubModel?.remarks)
+            let size = self.traceDeliverSubModel?.remarks?.calculate(width: kScreenWidth - 120, fontSize: 14)
+            if (size?.height)! < CGFloat(20) {
+                return 44
+            }else{
+                return (size?.height)! + CGFloat(10)
+            }
+
         }else{
             return 44
-        }
-    }
-    
-    func calculateHeight(string:String?,width:CGFloat = UIScreen.main.bounds.width - 120,fontSize:CGFloat = 14) -> CGFloat {
-        guard let contentStr = string as? NSString else{
-            return 44
-        }
-        
-        let paragraphStyle = NSMutableParagraphStyle.init()
-        paragraphStyle.lineSpacing = 5
-        
-        let rect = contentStr.boundingRect(with: CGSize.init(width: width, height: 200), options: [], attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize)], context: nil)
-        
-        if rect.height < 20{
-            return 44
-        }else{
-            
-            return rect.height + 10
         }
     }
 
