@@ -177,7 +177,7 @@ class TraceSRecordController: ZPTableViewController {
         
         if self.imageDataArray.count != 0 {
             self.uploadManager.qiniuUpload(datas: self.imageDataArray) { (array) in
-                print("imageArrayUrl = \(array)")
+                print("imageArrayUrl = \(String(describing: array))")
                 
                 if let arr = array,
                     arr.count != 0 {
@@ -308,7 +308,7 @@ class TraceSRecordController: ZPTableViewController {
 extension TraceSRecordController : JXAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
         if isProcessAlert == 0{
-            if let batchId = batchId {
+            if let _ = batchId {
                 self.processLabel.text = self.vm.traceSourceWholeModify.traceProcesses[index].name
                 self.processId = self.vm.traceSourceWholeModify.traceProcesses[index].id
             }else{
@@ -329,8 +329,8 @@ extension TraceSRecordController : JXAlertViewDelegate{
                 
                 imagePickerVC?.didFinishPickingPhotosHandle = { (images, assets, isSelectOriginalPhoto) -> () in
                     
-                    print("images = \(images)")
-                    print("assets = \(assets)")
+                    print("images = \(String(describing: images))")
+                    print("assets = \(String(describing: assets))")
                     if let images = images {
                         self.imageArray += images
                         self.setImages(images: self.imageArray)
@@ -344,10 +344,10 @@ extension TraceSRecordController : JXAlertViewDelegate{
                         //PHImageManager.default().requestImageData(for: <#T##PHAsset#>, options: <#T##PHImageRequestOptions?#>, resultHandler: <#T##(Data?, String?, UIImageOrientation, [AnyHashable : Any]?) -> Void#>)
                         PHImageManager.default().requestImageData(for: asset as! PHAsset, options: nil, resultHandler: { (data, uti, orientation, dict) in
                             //
-                            print(data)
-                            print(uti)
-                            print(orientation)
-                            print(dict)
+                            //print(data)
+                            //print(uti)
+                            //print(orientation)
+                            //print(dict)
                             guard let data = data else{
                                 //获取到data
                                 return
@@ -391,7 +391,13 @@ extension TraceSRecordController : JXAlertViewDelegate{
 extension TraceSRecordController {
     func locationStatus(notify:Notification) {
         print(notify)
-        
+        if let isSuccess = notify.object as? Bool {
+            if isSuccess {
+                self.addressLabel.text = JXLocationManager.manager.address
+            }else{
+                
+            }
+        }
 //        if let isSuccess = notify.object as? Bool,
 //            isSuccess == true{
 //            self.addressArray.append(JXLocationManager.manager.address)
@@ -517,22 +523,24 @@ extension TraceSRecordController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.placeHolderLabel.isHidden = true
     }
-    
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+    func textViewDidChange(_ textView: UITextView) {
         if textView.text.characters.count > 0 {
             placeHolderLabel.isHidden = true
+        }else{
+            placeHolderLabel.isEnabled = false
+        }
+        if processLabel.text?.isEmpty != true && addressLabel.text?.isEmpty != true{
             submitButton.backgroundColor = UIColor.originColor
             submitButton.isEnabled = true
         }else{
-            placeHolderLabel.isEnabled = false
-            
             submitButton.backgroundColor = UIColor.gray
             submitButton.isEnabled = false
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
-        
+
         if textView.text.characters.count > 100 {
             if let string = textView.text {
                 textView.text = string.substring(to: string.index(string.startIndex, offsetBy: 100))

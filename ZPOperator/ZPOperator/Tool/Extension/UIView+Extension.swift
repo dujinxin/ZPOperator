@@ -15,7 +15,7 @@ extension UIView {
      *
      * Sets frame.origin.x = left
      */
-    var jxLeft : CGFloat? {
+    var jxLeft : CGFloat {
         get{
             return frame.origin.x
         }
@@ -26,7 +26,7 @@ extension UIView {
      *
      * Sets frame.origin.y = top
      */
-    var jxTop : CGFloat? {
+    var jxTop : CGFloat {
         get{
             return frame.origin.y
         }
@@ -37,7 +37,7 @@ extension UIView {
      *
      * Sets frame.origin.x = right - frame.size.width
      */
-    var jxRight : CGFloat? {
+    var jxRight : CGFloat {
         get{
             return frame.origin.x + frame.size.width
         }
@@ -48,7 +48,7 @@ extension UIView {
      *
      * Sets frame.origin.y = bottom - frame.size.height
      */
-    var jxBottom : CGFloat? {
+    var jxBottom : CGFloat {
         get{
             return frame.origin.y + frame.size.height
         }
@@ -59,7 +59,7 @@ extension UIView {
      *
      * Sets frame.size.width = width
      */
-    var jxWidth : CGFloat? {
+    var jxWidth : CGFloat {
         get{
             return frame.size.width
         }
@@ -70,7 +70,7 @@ extension UIView {
      *
      * Sets frame.size.height = height
      */
-    var jxHeight : CGFloat? {
+    var jxHeight : CGFloat {
         get{
             return frame.size.height
         }
@@ -81,7 +81,17 @@ extension UIView {
      *
      * Sets center.x = centerX
      */
-    var centerX : CGFloat? {
+    var JXcenter : CGPoint {
+        get{
+            return center
+        }
+    }
+    /**
+     * Shortcut for center.x
+     *
+     * Sets center.x = centerX
+     */
+    var jxCenterX : CGFloat {
         get{
             return center.x
         }
@@ -92,7 +102,7 @@ extension UIView {
      *
      * Sets center.y = centerY
      */
-    var jxCenterY : CGFloat? {
+    var jxCenterY : CGFloat {
         get{
             return center.y
         }
@@ -100,7 +110,7 @@ extension UIView {
     /**
      * Shortcut for frame.origin
      */
-    var jxOrigin : CGPoint? {
+    var jxOrigin : CGPoint {
         get{
             return frame.origin
         }
@@ -109,7 +119,7 @@ extension UIView {
     /**
      * Shortcut for frame.size
      */
-    var jxSize : CGSize? {
+    var jxSize : CGSize {
         get{
             return frame.size
         }
@@ -121,7 +131,7 @@ extension UIView {
     func removeAllSubView() {
         
         for view in subviews {
-            var v = view
+            let v = view
             
             if v is UIImageView {
                 let v = view as! UIImageView

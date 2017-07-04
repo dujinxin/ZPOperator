@@ -64,7 +64,7 @@ extension JXLocationManager: CLLocationManagerDelegate{
         }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("JXLocationManager didUpdateLocations = \(locations)")
+        //print("JXLocationManager didUpdateLocations = \(locations)")
         
         if let location = locations.last {
             geoCoder.reverseGeocodeLocation(location) { (CLPlacemarks, error) in
@@ -96,8 +96,8 @@ extension JXLocationManager: CLLocationManagerDelegate{
                 }else{
                     self.address = formattedAddressLines?.lastObject as! String
                 }
-                print("clplacemark.addressDictionary = %@", addressDict)
-                print("address = \(self.address)")
+                //print("clplacemark.addressDictionary = %@", addressDict)
+                //print("address = \(self.address)")
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: true)
                 

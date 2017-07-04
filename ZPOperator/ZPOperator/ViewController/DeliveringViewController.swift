@@ -46,6 +46,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
                 self.tableView.mj_header.endRefreshing()
                 if isSuccess{
                     self.tableView.reloadData()
+                    NotificationCenter.default.post(name:NSNotification.Name(rawValue: NotificationMainDeliveringNumber) , object: self.vm.traceDeliverModel.batches.count)
                 }else{
                     print(msg)
                 }
@@ -55,8 +56,38 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
-        selectView?.isUseTopBar = false
         
+        selectView?.topBarView = {
+            let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
+            view.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 60)
+            //label.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            //label.center = view.center
+            label.text = "确认发货批次"
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 18)
+            label.textColor = UIColor.white
+            view.addSubview(label)
+            //label.sizeToFit()
+            
+            let button = UIButton()
+            button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
+            //button.center = CGPoint(x: 30, y: view.jxCenterY)
+            button.setTitle("×", for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.contentVerticalAlignment = .center
+            button.contentHorizontalAlignment = .center
+            button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
+            view.addSubview(button)
+            
+            return view
+        }()
+        selectView?.isUseTopBar = true
+        selectView?.isEnabled = false
+        selectView?.isScrollEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
         
@@ -276,7 +307,9 @@ extension DeliveringViewController: JXSelectViewDataSource{
         }
         return view
     }
-    
+    func dismissSelectView() {
+        self.selectView?.dismiss()
+    }
     func confirmDeliver() {
         self.selectView?.dismiss()
         if let block = deliveringBlock {

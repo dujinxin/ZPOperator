@@ -270,19 +270,22 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentRecord = self.detailVM.dataArray[indexPath.row - 1]
-        
-        if currentRecord?.isMine == false {
-            return
+        if indexPath.row > 0 {
+            currentRecord = self.detailVM.dataArray[indexPath.row - 1]
+            
+            if currentRecord?.isMine == false {
+                return
+            }
+            let jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+            
+            jxAlertView.position = .bottom
+            jxAlertView.isSetCancelView = true
+            jxAlertView.delegate = self
+            jxAlertView.actions = ["修改","删除"]
+            jxAlertView.tag = indexPath.row - 1
+            jxAlertView.show()
         }
-        let jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
         
-        jxAlertView.position = .bottom
-        jxAlertView.isSetCancelView = true
-        jxAlertView.delegate = self
-        jxAlertView.actions = ["修改","删除"]
-        jxAlertView.tag = indexPath.row - 1
-        jxAlertView.show()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -352,8 +355,6 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     print(msg)
                 }
             })
-        default:
-            break
         }
 
     }

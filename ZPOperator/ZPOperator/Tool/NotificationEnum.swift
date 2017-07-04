@@ -13,4 +13,5 @@ let NotificationLocatedStatus = "NotificationLocatedStatus"
 
 let NotificationLoginStatus = "NotificationLoginStatus"
 
+let NotificationMainDeliveringNumber = "NotificationMainDeliveringNumber"
 

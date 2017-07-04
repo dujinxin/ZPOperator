@@ -55,8 +55,29 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         logoutButton.layer.cornerRadius = 5
         logoutButton.backgroundColor = UIColor.originColor
 
-        let view1 = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
-        view1.backgroundColor = UIColor.orange
+        let cancelView : UIView = {
+            let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
+            view.backgroundColor = UIColor.originColor
+            
+            
+            let button = UIButton()
+            button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            button.center = CGPoint(x: 30, y: view.jxCenterY)
+            button.setImage(UIImage.init(named: ""), for: .normal)
+            view.addSubview(button)
+            
+            let label = UILabel()
+            label.center = view.center
+            label.sizeToFit()
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 16)
+            label.textColor = UIColor.white
+            view.addSubview(label)
+            
+            return view
+        }()
+        
+        
         
         select = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: //300), customView: view1)
             300), style:.list)
@@ -67,7 +88,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         
         alert = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style: .list)
         alert?.actions = ["1","2","3","4","5"]
-        alert?.topBarView = view1
+        alert?.topBarView = cancelView
         alert?.isUseTopBar = true
         //alert?.topBarHeight = 50
         alert?.isSetCancelView = true
@@ -115,11 +136,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
             if indexPath.row == 0 {
                 
             }else if indexPath.row == 1{
-                var uploadManager = QiNiuUploadManager()
-                //TZImagePickerController
-//                uploadManager.qiniuUpload(key: "", data: "", options: nil, completion: {()->() in
-//                    //
-//                })
+
             }else{
                 performSegue(withIdentifier: "modifyPassword", sender: nil)
             }

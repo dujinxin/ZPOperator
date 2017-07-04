@@ -59,6 +59,7 @@ class MainViewController: ZPCollectionViewController {
             })
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +74,7 @@ class MainViewController: ZPCollectionViewController {
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
     }
     /*
     // MARK: - Navigation
@@ -208,6 +210,12 @@ class MainViewController: ZPCollectionViewController {
         }else{
             let login = LoginViewController()
             self.navigationController?.present(login, animated: false, completion: nil)
+        }
+    }
+    func deliveringNumberChange(notify:Notification) {
+        if let number = notify.object as? Int {
+            self.mainVM.orderCount = number
+            self.collectionView?.reloadData()
         }
     }
 }

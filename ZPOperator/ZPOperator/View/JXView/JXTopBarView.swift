@@ -88,11 +88,6 @@ class JXTopBarView: UIView {
         button.isSelected = true
         
         self.subviews.forEach { (v : UIView) -> () in
-//            if let (v is UIButton.self),
-//               let btn = v as! UIButton,
-//                   btn.tag != button.tag{
-//                btn.isEnabled = false
-//            }
             
             if (v is UIButton){
                 if (v.tag != button.tag){

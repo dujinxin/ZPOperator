@@ -92,7 +92,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         
         let model = self.vm.dataArray[selectIndex]
         
-        self.vm.submitTS(goodId:model.id,goodName:model.name, completion: { (data, msg, isSuccess) in
+        self.vm.submitTS(goodId:model.id!,goodName:model.name!, completion: { (data, msg, isSuccess) in
             if isSuccess {
                 print("message = \(msg)")
                 if let myblock = self.traceSAddBlock {

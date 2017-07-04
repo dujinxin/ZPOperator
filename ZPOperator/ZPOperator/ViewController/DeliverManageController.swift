@@ -13,6 +13,15 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
     var topBar : JXTopBarView?
     
     var horizontalView : JXHorizontalView?
+    
+    let deliveringVC = DeliveringViewController()
+    let deliveredVC = DeliveredViewController()
+    
+    var deliverManagerBlock : (()->())?
+    var isBlockShouldRun : Bool = false
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +34,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         topBar?.delegate = self
         view.addSubview(topBar!)
         
-        let deliveringVC = DeliveringViewController()
-        let deliveredVC = DeliveredViewController()
+        
         
         deliveringVC.deliveringBlock = {(deliveringModel,deliveringOperatorModel)->() in
             self.performSegue(withIdentifier: "deliveringManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
@@ -58,8 +66,12 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
                     
                     dvc.deliveringManageBlock = { (isSuccess)->() in
                         
-                        let indexPath = IndexPath.init(item: 1, section: 0)
-                        self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+//                        let indexPath = IndexPath.init(item: 1, section: 0)
+//                        self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+//                        self.resetTopBarStatus(index: indexPath.item)
+                        
+                        self.deliveringVC.tableView.mj_header.beginRefreshing()
+                        
                     }
                 }
             case "deliveredManager":
@@ -97,7 +109,12 @@ extension DeliverManageController {
         if self.topBar?.selectedIndex == indexPath.item {
             return
         }
-        self.topBar?.selectedIndex = indexPath.item
+        resetTopBarStatus(index: indexPath.item)
+    }
+    
+    func resetTopBarStatus(index:Int) {
+        
+        self.topBar?.selectedIndex = index
         self.topBar?.subviews.forEach { (v : UIView) -> () in
             
             if (v is UIButton){

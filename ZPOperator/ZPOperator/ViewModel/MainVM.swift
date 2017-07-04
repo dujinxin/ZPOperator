@@ -29,7 +29,7 @@ class MainVM{
             
             let endIndex : Int
             
-            if append == true {
+            if append == true && array.count > 5{
                 endIndex = 5
             }else{
                 endIndex = array.count

@@ -40,7 +40,7 @@ class QiNiuUploadManager {
             let httpsZone = QNAutoZone.init(https: self.isHttps, dns: dns)
             
             builder?.setZone(httpsZone)
-            var error : Error?
+            //var error : Error?
             //builder?.recorder = QNFileRecorder.init(folder: <#T##String!#>)
         }
         
@@ -60,7 +60,7 @@ class QiNiuUploadManager {
         
         var urlArray = Array<String>()
         var index = 0
-        var process = 1 / datas.count
+        let process = 1 / datas.count
         var totalProcess = 0
         
         
@@ -114,9 +114,9 @@ class QiNiuUploadManager {
                 
                 self.qiniuManager?.put(data as! Data, key: fileName, token: token, complete: { (QNResponseInfo, str, dict) in
                     //
-                    print(QNResponseInfo)
-                    print(str)
-                    print(dict)
+                    //print(QNResponseInfo)
+                    //print(str)
+                    //print(dict)
                     guard let dict = dict ,
                         let info = QNResponseInfo,
                         info.statusCode == 200 else{
@@ -136,7 +136,7 @@ class QiNiuUploadManager {
     func qiniuGetToken(bucket:String = "zpsy",completion:@escaping (_ data:Any?,_ msg:String?,_ isSuccess:Bool)->()) {
         JXRequest.request(tag: 1, url: ApiString.getTestTokenUrl.rawValue, param: ["bucket":bucket], success: { (data, msg) in
             //
-            print(data)
+            //print(data)
             completion(data,msg,true)
         }) { (msg, error) in
             print(msg)
@@ -150,7 +150,7 @@ class QiNiuUploadManager {
         return dateStr
     }
     func randomStr(length:Int) -> String {
-        let defaultStr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        //let defaultStr = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         var randomStr = String.init()
 //        for i in 0..<length {
 //            //let c = defaultStr.characters

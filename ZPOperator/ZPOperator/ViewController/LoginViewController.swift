@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet weak var textFieldTopConstraint: NSLayoutConstraint!
     lazy var vm = LoginVM()
     
     
@@ -22,8 +23,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
         
         loginButton.layer.cornerRadius = 22
+        
+        
         
         
         //userTextField.text = "13477831123"
@@ -33,6 +37,10 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func awakeFromNib() {
+        //
     }
     
 
@@ -66,4 +74,11 @@ class LoginViewController: UIViewController {
     }
     
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

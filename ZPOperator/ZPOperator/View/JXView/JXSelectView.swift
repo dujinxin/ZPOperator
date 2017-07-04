@@ -20,7 +20,7 @@ enum JXSelectViewShowPosition {
 }
 
 private let reuseIdentifier = "reuseIdentifier"
-private let topBarHeight : CGFloat = 40
+private let topBarHeight : CGFloat = 60
 private let pickViewCellHeight : CGFloat = 44
 private let tableViewCellHeight : CGFloat = 44
 private let selectViewWidth : CGFloat = UIScreen.main.bounds.width
@@ -42,8 +42,8 @@ class JXSelectView: UIView {
             if isUseTopBar == true {
                 selectViewTop = topBarHeight
                 self.addSubview(self.topBarView)
-                self.topBarView.addSubview(self.cancelButton)
-                self.topBarView.addSubview(self.confirmButton)
+                //self.topBarView.addSubview(self.cancelButton)
+                //self.topBarView.addSubview(self.confirmButton)
             }
             self.resetFrame()
         }
@@ -53,8 +53,27 @@ class JXSelectView: UIView {
     var delegate : JXSelectViewDelegate?
     var dataSource : JXSelectViewDataSource?
     
+    var isScrollEnabled : Bool = false {
+        didSet{
+            if isScrollEnabled == true {
+                self.tableView.isScrollEnabled = true
+                self.tableView.bounces = true
+                self.tableView.showsVerticalScrollIndicator = true
+            }else{
+                self.tableView.isScrollEnabled = false
+                self.tableView.bounces = false
+                self.tableView.showsVerticalScrollIndicator = false
+            }
+        }
+    }
+    var isEnabled : Bool = true {
+        didSet{
+            
+        }
+    }
     
-    lazy var topBarView: UIView = {
+    
+    var topBarView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.groupTableViewBackground
         return view
@@ -314,6 +333,9 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: reuseIdentifier)
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+            if isEnabled == false{
+                cell?.selectionStyle = .none
+            }
             if dataSource != nil {
                 if let view = dataSource?.jxSelectView!(self, viewForRow: indexPath.row) {
                     view.tag = 666
@@ -331,13 +353,19 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if isUseTopBar {
-            selectRow = indexPath.row
+        
+        if isEnabled {
+            tableView.deselectRow(at: indexPath, animated: true)
+            if isUseTopBar {
+                selectRow = indexPath.row
+            }else{
+                self.viewDisAppear(row: indexPath.row)
+                self.dismiss(animate: true)
+            }
         }else{
-            self.viewDisAppear(row: indexPath.row)
+            
         }
-        self.dismiss(animate: true)
+        
     }
 }
 extension JXSelectView : UIPickerViewDelegate, UIPickerViewDataSource{
@@ -389,8 +417,3 @@ protocol JXSelectViewDelegate {
     func jxSelectView(_ :JXSelectView, didSelectRowAt row:Int)
 }
 
-//extension JXSelectViewDataSource {
-//    func jxSelectView(_ :JXSelectView, viewForRow row:Int) -> UIView{
-//        return UIView()
-//    }
-//}

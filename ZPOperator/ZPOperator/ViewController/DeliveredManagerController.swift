@@ -45,7 +45,7 @@ class DeliveredManagerController: ZPTableViewController {
             identifier == "TraceSourceWhole"{
             
             let vc = segue.destination as! DeliveredWholeController
-            vc.batchId = sender as! NSNumber
+            vc.batchId = sender as? NSNumber
         
         }
         

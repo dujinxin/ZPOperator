@@ -15,7 +15,7 @@ class TraceSRecordVM {
     lazy var traceSourceWholeModify = TraceSourceRecordWholeModify()//全程
     
     
-    func loadProgress(goodsId:NSNumber?,traceBatchId:NSNumber, completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
+    func loadProgress(goodsId:NSNumber,traceBatchId:NSNumber, completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
         
         JXRequest.request(url: ApiString.addTSRecord.rawValue, param: ["goodsId":goodsId,"traceBatchId":traceBatchId], success: { (data, msg) in
             //

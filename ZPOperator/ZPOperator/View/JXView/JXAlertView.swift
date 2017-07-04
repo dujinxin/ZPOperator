@@ -113,7 +113,7 @@ class JXAlertView: UIView {
         }
     }
     
-    lazy var topBarView: UIView = {
+    var topBarView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.groupTableViewBackground
         return view

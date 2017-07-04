@@ -157,7 +157,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         if self.imageDataArray.count != 0 {
             self.uploadManager.qiniuUpload(datas: self.imageDataArray) { (array) in
-                print("imageArrayUrl = \(array)")
+                print("imageArrayUrl = \(String(describing: array))")
                 
                 if let arr = array,
                     arr.count != 0 {
@@ -331,6 +331,13 @@ extension DeliveredWholeRecordController : JXAlertViewDelegate{
 extension DeliveredWholeRecordController {
     func locationStatus(notify:Notification) {
         //print(notify)
+        if let isSuccess = notify.object as? Bool {
+            if isSuccess {
+                self.addressLabel.text = JXLocationManager.manager.address
+            }else{
+                
+            }
+        }
     }
 }
 extension DeliveredWholeRecordController :TZImagePickerControllerDelegate{
@@ -415,7 +422,20 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
         placeHolderLabel.isHidden = true
     }
-    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.characters.count > 0 {
+            placeHolderLabel.isHidden = true
+        }else{
+            placeHolderLabel.isEnabled = false
+        }
+        if processLabel.text?.isEmpty != true && addressLabel.text?.isEmpty != true{
+            submitButton.backgroundColor = UIColor.originColor
+            submitButton.isEnabled = true
+        }else{
+            submitButton.backgroundColor = UIColor.gray
+            submitButton.isEnabled = false
+        }
+    }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if textView.text.characters.count > 0 {
