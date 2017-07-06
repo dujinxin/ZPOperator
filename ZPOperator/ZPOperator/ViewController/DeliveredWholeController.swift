@@ -43,7 +43,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             self.currentPage = 1
             self.loadData(page: 1)
         })
-        self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingBlock: {
+        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
             self.currentPage += 1
             self.loadData(page: self.currentPage)
         })
@@ -70,7 +70,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             case "addTraceSourceWholeRecord":
                 
                 vc.isAddTraceSource = sender as! Bool
-                
+                vc.traceBatch = self.detailVM.traceSourceWhole.batch.traceBatch
                 vc.batchId = self.detailVM.traceSourceWhole.batch.id
                 vc.block = {()->()in
                     print("回调")
@@ -117,7 +117,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
                 lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                 lab1.backgroundColor = UIColor.white
                 lab1.textAlignment = .left
-                lab1.font = UIFont.systemFont(ofSize: 13)
+                lab1.font = UIFont.systemFont(ofSize: 15)
                 lab1.tag = 10
                 
                 cell?.contentView.addSubview(lab1)
@@ -127,7 +127,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
                 lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                 lab2.backgroundColor = UIColor.white
                 lab2.textAlignment = .left
-                lab2.font = UIFont.systemFont(ofSize: 12)
+                lab2.font = UIFont.systemFont(ofSize: 13)
                 lab2.tag = 11
                 
                 cell?.contentView.addSubview(lab2)

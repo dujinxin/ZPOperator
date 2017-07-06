@@ -14,8 +14,14 @@ class DeliveringManagerVM {
     
     func deliveringManagerSubmit(id:Int,traceBatchId:Int,startCode:String,endCode:String,counts:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
+        let param : [String:Any]
+        if traceBatchId >= 0 {
+            param = ["id":id,"traceBatchId":traceBatchId,"startCode":startCode,"endCode":endCode,"counts":counts]
+        }else{
+            param = ["id":id,"startCode":startCode,"endCode":endCode,"counts":counts]
+        }
         
-        JXRequest.request(url: ApiString.deliver.rawValue, param: ["id":id,"traceBatchId":traceBatchId,"startCode":startCode,"endCode":endCode,"counts":counts], success: { (data, message) in
+        JXRequest.request(url: ApiString.deliver.rawValue, param: param, success: { (data, message) in
             
             completion(data, message, true)
             

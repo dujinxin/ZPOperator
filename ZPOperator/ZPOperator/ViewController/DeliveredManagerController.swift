@@ -87,7 +87,7 @@ class DeliveredManagerController: ZPTableViewController {
         
         
         self.remarkLabel.text = self.traceDeliverSubModel?.remarks
-        self.traceBatchLabel.text = "溯源批次"
+        self.traceBatchLabel.text = self.traceDeliverSubModel?.traceBatch
         self.startNumLabel.text = self.traceDeliverSubModel?.startCode
         self.endNumLabel.text = self.traceDeliverSubModel?.endCode
         if let totalCount = self.traceDeliverSubModel?.totalCount {
@@ -97,7 +97,7 @@ class DeliveredManagerController: ZPTableViewController {
         
         self.operatorAddressLabel.text = self.traceDeliverOperatorModel?.station
         self.operatorPersonLabel.text = self.traceDeliverOperatorModel?.name
-        
+        self.operatorTimeLabel.text = self.traceDeliverSubModel?.operateTime
         
     }
 
@@ -124,7 +124,7 @@ class DeliveredManagerController: ZPTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 1 {
-            return 60
+            return 74
         }else if indexPath.row == 2{
             return 88
         }else if indexPath.row == 3{

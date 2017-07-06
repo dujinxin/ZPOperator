@@ -37,7 +37,15 @@ class TagViewController: BaseViewController {
     }
     
     @IBAction func search(_ sender: UIButton) {
-        self.vm.traceSourceTag(code: searchTextField.text!) { (data, msg, isSuccess) in
+        guard let text = searchTextField.text else {
+            return
+        }
+        if text.characters.count != 12 {
+            ViewManager.showNotice(notice: "请输入正确的12位标签编码")
+            return
+        }
+        
+        self.vm.traceSourceTag(page:1,code: text) { (data, msg, isSuccess) in
             if isSuccess{
                 if let status = self.vm.traceSourceTag.status?.intValue{
                     switch  status{
@@ -62,6 +70,7 @@ class TagViewController: BaseViewController {
             let vc = segue.destination as! TagResultController
             if let str = searchTextField.text {
                 vc.detailVM.traceSourceTag = self.vm.traceSourceTag
+                vc.detailVM.dataArray = self.vm.dataArray
                 vc.tagCode = str
                 //vc.traceBatchId = self.vm.traceSourceTag.batchCode
             }

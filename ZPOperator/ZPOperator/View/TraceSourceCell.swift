@@ -38,9 +38,9 @@ class TraceSourceCell: UITableViewCell {
             
             self.timeLabel.text = model?.operationTime
             if let isMine = model?.isMine,isMine == true {
-                self.myLabel.isHidden = !isMine
+                self.labelDetail1.textColor = UIColor.rgbColor(rgbValue: 0x0469c8)
             }else{
-                self.myLabel.isHidden = true
+                self.labelDetail1.textColor = UIColor.rgbColor(rgbValue: 0x333333)
             }
             
             

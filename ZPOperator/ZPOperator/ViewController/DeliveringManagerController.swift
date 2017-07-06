@@ -29,7 +29,7 @@ class DeliveringManagerController: ZPTableViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     
-    var batchId : Int = 0
+    var batchId : Int = -1
     var batchArray = Array<String>()
     var confirmArray = Array<String>()
     var tagNum : Int = 0
@@ -58,16 +58,16 @@ class DeliveringManagerController: ZPTableViewController {
         selectView?.dataSource = self
         selectView?.topBarView = {
             let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
-            view.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            view.backgroundColor = JX999999Color
             
             let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 60)
-            //label.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
+            label.backgroundColor = UIColor.white
             //label.center = view.center
             label.text = "确认发货编号"
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
-            label.textColor = UIColor.white
+            label.textColor = JX333333Color
             view.addSubview(label)
             //label.sizeToFit()
             
@@ -76,7 +76,7 @@ class DeliveringManagerController: ZPTableViewController {
             //button.center = CGPoint(x: 30, y: view.jxCenterY)
             button.setTitle("×", for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-            button.setTitleColor(UIColor.white, for: .normal)
+            button.setTitleColor(JX333333Color, for: .normal)
             button.contentVerticalAlignment = .center
             button.contentHorizontalAlignment = .center
             button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
@@ -136,10 +136,14 @@ class DeliveringManagerController: ZPTableViewController {
     }
     @IBAction func submit(_ sender: UIButton) {
         
-        self.confirmArray.append(String.init(format: "溯源批次：%@", (self.deliverModel?.batchCode)!))
+        startTextField.resignFirstResponder()
+        endTextField.resignFirstResponder()
+        
+        self.confirmArray.removeAll()
+        self.confirmArray.append(String.init(format: "溯源批次：%@", (self.traceSourceButton.currentTitle)!))
         self.confirmArray.append(String.init(format: "开始编码：%@", self.startTextField.text!))
         self.confirmArray.append(String.init(format: "结束编码：%@", self.endTextField.text!))
-        self.confirmArray.append(String.init(format: "标签数量：%d", self.tagNum))
+        self.confirmArray.append(String.init(format: "标签数量：%ld", self.tagNum))
         self.confirmArray.append(String.init(format: "操作网点：%@", (self.deliverOperatorModel?.station)!))
         self.confirmArray.append(String.init(format: "操作人：%@", (self.deliverOperatorModel?.name)!))
         
@@ -208,6 +212,7 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
             
             self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
         }else{
+            batchId = -1
             self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
             print("发货")
         }
@@ -263,14 +268,14 @@ extension DeliveringManagerController: UITextFieldDelegate{
             if startTextField.text?.characters.count == 12 && endTextField.text?.characters.count != 0{
                 if let startNum = Int(startTextField.text!),
                     let endNum = Int(endTextField.text!){
-                    if endNum > startNum {
-                        numberLabel.text = String(endNum - startNum)
+                    if endNum >= startNum {
+                        numberLabel.text = String(endNum - startNum + 1)
                         numberLabel.textColor = UIColor.black
                         submitButton.backgroundColor = UIColor.originColor
                         submitButton.isEnabled = true
                         tagNum = endNum - startNum + 1
                     }else{
-                        numberLabel.text = String(endNum - startNum)
+                        numberLabel.text = String(endNum - startNum + 1)
                         numberLabel.textColor = UIColor.red
                         submitButton.backgroundColor = UIColor.gray
                         submitButton.isEnabled = false
@@ -316,7 +321,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
         }
     }
     func jxSelectView(_: JXSelectView, viewForRow row: Int) -> UIView? {
-        var view : UIView?
+//        var view : UIView?
 //        let titleArray = ["发货","收货","备注"]
 //        
 //        if row == 1 || row == 2 || row == 3{
@@ -410,6 +415,6 @@ extension DeliveringManagerController: JXSelectViewDataSource{
 //            
 //            view?.addSubview(addressLabel)
 //        }
-        return view
+        return nil
     }
 }

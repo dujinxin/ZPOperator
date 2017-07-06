@@ -14,8 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var lookButton: UIButton!
     
-    @IBOutlet weak var textFieldTopConstraint: NSLayoutConstraint!
     lazy var vm = LoginVM()
     
     
@@ -23,8 +23,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
+        //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
         
+        lookButton.setImage(UIImage(named:"look_normal"), for: .normal)
+        lookButton.setImage(UIImage(named:"look_highlight"), for: .highlighted)
+        lookButton.isSelected = false
         loginButton.layer.cornerRadius = 22
         
         
@@ -43,26 +46,35 @@ class LoginViewController: UIViewController {
         //
     }
     
+    @IBAction func changePasswordText(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            passwordTextField.isSecureTextEntry = false
+        }else{
+            passwordTextField.isSecureTextEntry = true
+        }
+        
+    }
 
     @IBAction func logAction(_ sender: Any) {
         
-        
-        
-        
-        
-//        guard let phone = userTextField.text ,
-//              let password = passwordTextField.text else {
-//            
-//            return
-//        }
-//        
-//        if !String.validateTelephone(tel: phone) {
-//            
-//        }
+        guard let phone = userTextField.text,
+            let password = passwordTextField.text else {
+                ViewManager.showNotice(notice: "用户名密码不能为空")
+                return
+        }
+        if !String.validateTelephone(tel: phone) {
+            ViewManager.showNotice(notice: "密码格式错误")
+            return
+        }
+        if password.isEmpty == true {
+            ViewManager.showNotice(notice: "密码不能为空")
+            return
+        }
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        vm.login(userName: userTextField.text!, password: passwordTextField.text!) { (data, msg, isSuccess) in
+        vm.login(userName: phone, password: password) { (data, msg, isSuccess) in
             MBProgressHUD.hide(for: self.view, animated: true)
             if isSuccess {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
@@ -81,4 +93,23 @@ extension LoginViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let s = textField.text! as NSString
+        
+        if textField == userTextField {
+            if range.location > 10 {
+                
+                let str = s.substring(to: 10)
+                textField.text = str
+                ViewManager.showNotice(notice: "字符个数为11位")
+            }
+        }
+        return true
+    }
+    
+    func textChange(notify:NSNotification) {
+        
+    }
+    
 }

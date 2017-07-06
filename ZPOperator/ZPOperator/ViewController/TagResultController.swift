@@ -20,7 +20,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
     
     var tagCode : String? //查询编号 ,标签查询结果用
     
-    lazy var detailVM = TraceSourceDetailVM()
+    var detailVM = TraceSourceDetailVM()
     
     
     var currentPage = 1
@@ -33,14 +33,14 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
         self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
 
         
-        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-            self.currentPage = 1
-            self.loadData(page: 1)
-        })
-        self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingBlock: {
-            self.currentPage += 1
-            self.loadData(page: self.currentPage)
-        })
+//        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+//            self.currentPage = 1
+//            self.loadData(page: 1)
+//        })
+//        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
+//            self.currentPage += 1
+//            self.loadData(page: self.currentPage)
+//        })
         
         self.tableView.reloadData()
         //self.tableView.mj_header.beginRefreshing()
@@ -85,7 +85,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
                 lab.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 44)
                 lab.backgroundColor = UIColor.white
                 lab.textAlignment = .left
-                lab.font = UIFont.systemFont(ofSize: 13)
+                lab.font = UIFont.systemFont(ofSize: 15)
                 lab.tag = 10
                 
                 cell?.contentView.addSubview(lab)
@@ -112,7 +112,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
                 lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                 lab1.backgroundColor = UIColor.white
                 lab1.textAlignment = .left
-                lab1.font = UIFont.systemFont(ofSize: 13)
+                lab1.font = UIFont.systemFont(ofSize: 15)
                 lab1.tag = 10
                 
                 cell?.contentView.addSubview(lab1)
@@ -122,7 +122,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
                 lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                 lab2.backgroundColor = UIColor.white
                 lab2.textAlignment = .left
-                lab2.font = UIFont.systemFont(ofSize: 12)
+                lab2.font = UIFont.systemFont(ofSize: 13)
                 lab2.tag = 11
                 
                 cell?.contentView.addSubview(lab2)
@@ -163,7 +163,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
         }else if indexPath.row == 1 {
             return 60 + 10
         }else{
-            return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 1].images)
+            return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 2].images)
         }
 
     }
@@ -182,7 +182,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
     
     func loadData(page:Int) {
 
-        self.detailVM.traceSourceTag(code: tagCode!, completion: { (data, msg, isSuccess) in
+        self.detailVM.traceSourceTag(page:page,code: tagCode!, completion: { (data, msg, isSuccess) in
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             if isSuccess {

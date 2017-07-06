@@ -33,6 +33,8 @@ class TraceDeliverSubModel: BaseModel {
     var counts : String?
     var stationName : String?
     var batchCode:String?
+    var traceBatch :String?
+    
     //联系人信息
     var province : String?
     var city : String?
@@ -46,7 +48,7 @@ class TraceDeliverSubModel: BaseModel {
     var endCode : String?
     var totalCount : NSNumber?
     var operatorName : String?
-    var operateTime : NSNumber?
+    var operateTime : String?
     
     
     

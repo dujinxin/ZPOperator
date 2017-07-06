@@ -36,6 +36,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         self.tableView.frame = view.bounds
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.rowHeight = 54
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier1")
         self.tableView.tableFooterView = UIView()
         view.addSubview(self.tableView)
@@ -59,16 +60,16 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         selectView?.topBarView = {
             let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
-            view.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            view.backgroundColor = JX999999Color
             
             let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 60)
-            //label.backgroundColor = UIColor.rgbColor(from: 219, 80, 6)
+            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
+            label.backgroundColor = UIColor.white
             //label.center = view.center
             label.text = "确认发货批次"
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
-            label.textColor = UIColor.white
+            label.textColor = JX333333Color
             view.addSubview(label)
             //label.sizeToFit()
             
@@ -77,22 +78,19 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             //button.center = CGPoint(x: 30, y: view.jxCenterY)
             button.setTitle("×", for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-            button.setTitleColor(UIColor.white, for: .normal)
+            button.setTitleColor(JX333333Color, for: .normal)
             button.contentVerticalAlignment = .center
             button.contentHorizontalAlignment = .center
             button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
             view.addSubview(button)
+            
+            
             
             return view
         }()
         selectView?.isUseTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
-        
-        //开启定位
-        JXLocationManager.manager.startUpdateLocation()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +130,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         // Configure the cell...
         cell?.accessoryType = .disclosureIndicator
         cell?.textLabel?.text = model.goodsName
-        cell?.textLabel?.textColor = UIColor.red
+        //cell?.textLabel?.textColor = UIColor.red
         cell?.detailTextLabel?.text = model.remarks
 
         return cell!
@@ -155,8 +153,10 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     }
     
     func calculateHeight(model:TraceDeliverSubModel) -> CGFloat {
+        if let sendAddress = deliveringModel?.stationName {
+            address1Height = 30.0 + 14 + calculateHeight(string: sendAddress)
+        }
         
-        address1Height = 30.0 + 14 + calculateHeight(string: self.addressStr)
         if let province = deliveringModel?.province,
             let city = deliveringModel?.city,
             let county = deliveringModel?.county,
@@ -256,18 +256,29 @@ extension DeliveringViewController: JXSelectViewDataSource{
             rightLabel.textColor = UIColor.black
             rightLabel.textAlignment = .left
             rightLabel.font = UIFont.systemFont(ofSize: 14)
+            rightLabel.lineBreakMode = .byTruncatingMiddle
             if let goodsName = deliveringModel?.goodsName,
                let counts = deliveringModel?.counts{
                 rightLabel.text = goodsName + "      " + counts
             }
             view?.addSubview(rightLabel)
+       
+//            let weightLabel = UILabel.init(frame: CGRect.init(x: kScreenWidth - 60 - 10, y: 15, width: 60, height: 14))
+//            weightLabel.textColor = UIColor.black
+//            weightLabel.textAlignment = .right
+//            weightLabel.font = UIFont.systemFont(ofSize: 14)
+//            if let goodsName = deliveringModel?.goodsName,
+//                let counts = deliveringModel?.counts{
+//                weightLabel.text = goodsName + "      " + counts
+//            }
+//            view?.addSubview(weightLabel)
             
             let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: kScreenWidth - 90, height: address1Height - 30))
             addressLabel.textColor = UIColor.black
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 14)
             addressLabel.numberOfLines = 0
-            addressLabel.text = self.addressStr
+            addressLabel.text = deliveringModel?.stationName
             view?.addSubview(addressLabel)
         }
         
@@ -325,20 +336,4 @@ extension DeliveringViewController: JXSelectViewDataSource{
         ///performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
     }
 }
-extension DeliveringViewController {
-    func locationStatus(notify:Notification) {
-        print(notify)
-        
-        guard let isSuccess = notify.object as? Bool else {
-            return
-        }
-        if isSuccess {
-            self.addressStr = JXLocationManager.manager.address
-        }else{
-            if let stationName = deliveringModel?.stationName{
-                self.addressStr = stationName
-            }
-        }
-        
-    }
-}
+

@@ -173,6 +173,16 @@ class TraceSRecordController: ZPTableViewController {
     }
   
     @IBAction func submit(_ sender: UIButton) {
+        
+        guard let _ = self.addressLabel.text else {
+            ViewManager.showNotice(notice: "请选择操作地点")
+            return
+        }
+        guard let _ = self.processId else {
+            ViewManager.showNotice(notice: "请选择操作过程")
+            return
+        }
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
         if self.imageDataArray.count != 0 {
@@ -529,7 +539,7 @@ extension TraceSRecordController: UITextViewDelegate{
         }else{
             placeHolderLabel.isEnabled = false
         }
-        if processLabel.text?.isEmpty != true && addressLabel.text?.isEmpty != true{
+        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
             submitButton.backgroundColor = UIColor.originColor
             submitButton.isEnabled = true
         }else{
@@ -539,7 +549,18 @@ extension TraceSRecordController: UITextViewDelegate{
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+        if textView.text.characters.count > 0 {
+            placeHolderLabel.isHidden = true
+        }else{
+            placeHolderLabel.isEnabled = false
+        }
+        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
+            submitButton.backgroundColor = UIColor.originColor
+            submitButton.isEnabled = true
+        }else{
+            submitButton.backgroundColor = UIColor.gray
+            submitButton.isEnabled = false
+        }
 
         if textView.text.characters.count > 100 {
             if let string = textView.text {
@@ -556,20 +577,6 @@ extension TraceSRecordController: UITextViewDelegate{
         
         return true
     }
-    
-//    
-//    func textChange(notify:NSNotification) {
-//        
-//        if notify.object is UITextField {
-//            if oldTextField.text?.characters.count != 0 && newTextField.text?.characters.count != 0 && againTextField.text?.characters.count != 0 {
-//                confirmButton.backgroundColor = UIColor.originColor
-//                confirmButton.isEnabled = true
-//            }else{
-//                confirmButton.backgroundColor = UIColor.gray
-//                confirmButton.isEnabled = false
-//            }
-//        }
-//    }
 }
 extension TraceSRecordController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     

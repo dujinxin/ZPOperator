@@ -47,6 +47,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
     var isAddTraceSource = true
     var traceRecordId : NSNumber?//修改时用
     
+    var traceBatch : String?//溯源批次名称
     var batchId : NSNumber? //全程溯源来源需要用
     
     var vm = TraceSRecordVM()
@@ -70,6 +71,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
         self.jxAlertView?.isSetCancelView = true
         self.jxAlertView?.delegate = self
         
+        productLabel.text = self.traceBatch
         operatorLabel.text = "操作人：" + LoginVM.loginVMManager.userModel.userName!
         
         submitButton.layer.cornerRadius = 5
@@ -105,7 +107,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
                         for model in self.vm.traceSourceWholeModify.traceProcesses{
                             self.processArray.append(model.name!)
                         }
-                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                        //self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
                         self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.station
                         self.operatorLabel.text = self.vm.traceSourceWholeModify.Operator.name
                     }
@@ -121,7 +123,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
                             self.processArray.append(model.name!)
                         }
                         self.placeHolderLabel.isHidden = false
-                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                        //self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
                     }
                 })
             }
@@ -154,6 +156,15 @@ class DeliveredWholeRecordController: ZPTableViewController {
     }
     
     @IBAction func submit(_ sender: UIButton) {
+        guard let _ = self.addressLabel.text else {
+            ViewManager.showNotice(notice: "请选择操作地点")
+            return
+        }
+        guard let _ = self.processId else {
+            ViewManager.showNotice(notice: "请选择操作过程")
+            return
+        }
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         if self.imageDataArray.count != 0 {
             self.uploadManager.qiniuUpload(datas: self.imageDataArray) { (array) in
@@ -428,7 +439,7 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
         }else{
             placeHolderLabel.isEnabled = false
         }
-        if processLabel.text?.isEmpty != true && addressLabel.text?.isEmpty != true{
+        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
             submitButton.backgroundColor = UIColor.originColor
             submitButton.isEnabled = true
         }else{
@@ -437,14 +448,15 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
         }
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
         if textView.text.characters.count > 0 {
             placeHolderLabel.isHidden = true
+        }else{
+            placeHolderLabel.isEnabled = false
+        }
+        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
             submitButton.backgroundColor = UIColor.originColor
             submitButton.isEnabled = true
         }else{
-            placeHolderLabel.isEnabled = false
-            
             submitButton.backgroundColor = UIColor.gray
             submitButton.isEnabled = false
         }

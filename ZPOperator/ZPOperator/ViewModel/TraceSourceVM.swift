@@ -12,17 +12,20 @@ class TraceSourceVM {
 
     var dataArray = [MainSubModel]()
     
-    func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func loadMainData(append:Bool = false,page:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
-        JXRequest.request(url: ApiString.traceSources.rawValue, param: ["pageNo":1,"pageSize":20], success: { (data, message) in
+        JXRequest.request(url: ApiString.traceSources.rawValue, param: ["pageNo":page,"pageSize":18], success: { (data, message) in
             
             guard let array = data as? Array<Dictionary<String, Any>>
                 else{
                     return
             }
         
-            self.dataArray.removeAll()
+            if page == 1 {
+                self.dataArray.removeAll()
+            }
+            
             
             for i in 0..<array.count{
                 let model = MainSubModel()

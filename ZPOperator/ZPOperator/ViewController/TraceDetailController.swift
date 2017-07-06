@@ -61,7 +61,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             self.currentPage = 1
             self.loadData(page: 1)
         })
-        self.tableView.mj_footer = MJRefreshAutoFooter.init(refreshingBlock: {
+        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
             self.currentPage += 1
             self.loadData(page: self.currentPage)
         })
@@ -137,7 +137,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 44)
                     lab.backgroundColor = UIColor.white
                     lab.textAlignment = .left
-                    lab.font = UIFont.systemFont(ofSize: 13)
+                    lab.font = UIFont.systemFont(ofSize: 15)
                     lab.tag = 10
                     
                     cell?.contentView.addSubview(lab)
@@ -164,7 +164,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                     lab1.backgroundColor = UIColor.white
                     lab1.textAlignment = .left
-                    lab1.font = UIFont.systemFont(ofSize: 13)
+                    lab1.font = UIFont.systemFont(ofSize: 15)
                     lab1.tag = 10
                     
                     cell?.contentView.addSubview(lab1)
@@ -174,7 +174,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                     lab2.backgroundColor = UIColor.white
                     lab2.textAlignment = .left
-                    lab2.font = UIFont.systemFont(ofSize: 12)
+                    lab2.font = UIFont.systemFont(ofSize: 13)
                     lab2.tag = 11
                     
                     cell?.contentView.addSubview(lab2)
@@ -216,7 +216,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                     lab1.backgroundColor = UIColor.white
                     lab1.textAlignment = .left
-                    lab1.font = UIFont.systemFont(ofSize: 13)
+                    lab1.font = UIFont.systemFont(ofSize: 15)
                     lab1.tag = 10
                     
                     cell?.contentView.addSubview(lab1)
@@ -226,7 +226,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                     lab2.backgroundColor = UIColor.white
                     lab2.textAlignment = .left
-                    lab2.font = UIFont.systemFont(ofSize: 12)
+                    lab2.font = UIFont.systemFont(ofSize: 13)
                     lab2.tag = 11
                     
                     cell?.contentView.addSubview(lab2)
@@ -334,7 +334,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                 }
             }
         case .tag:
-            self.detailVM.traceSourceTag(code: tagCode!, completion: { (data, msg, isSuccess) in
+            self.detailVM.traceSourceTag(page:page,code: tagCode!, completion: { (data, msg, isSuccess) in
                 self.tableView.mj_header.endRefreshing()
                 self.tableView.mj_footer.endRefreshing()
                 if isSuccess {

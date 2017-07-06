@@ -47,6 +47,7 @@ class TraceSourceWholeProduct: BaseModel {
     var id : NSNumber?
     var goodsName : String?
     var code : String?
+    var traceBatch:String?
 }
 
 //溯源记录

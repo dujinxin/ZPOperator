@@ -13,10 +13,30 @@ class ModifyPasswordViewController: ZPTableViewController {
     @IBOutlet weak var oldTextField: UITextField!
     @IBOutlet weak var newTextField: UITextField!
     @IBOutlet weak var againTextField: UITextField!
+    @IBOutlet weak var newLookButton: UIButton!
+    @IBOutlet weak var againLookButton: UIButton!
 
     @IBOutlet weak var confirmButton: UIButton!
     
     var vm = LoginVM()
+    
+    @IBAction func changeNewPasswordText(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            newTextField.isSecureTextEntry = false
+        }else{
+            newTextField.isSecureTextEntry = true
+        }
+    }
+    @IBAction func changeAgainPasswordText(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            againTextField.isSecureTextEntry = false
+        }else{
+            againTextField.isSecureTextEntry = true
+        }
+    }
+    
     
     @IBAction func confirm(_ sender: Any) {
         
@@ -54,6 +74,9 @@ class ModifyPasswordViewController: ZPTableViewController {
         confirmButton.layer.cornerRadius = 5
         confirmButton.backgroundColor = UIColor.gray
         confirmButton.isEnabled = false
+        
+        newLookButton.isSelected = false
+        againTextField.isSelected = false
         
         //originColor
     }

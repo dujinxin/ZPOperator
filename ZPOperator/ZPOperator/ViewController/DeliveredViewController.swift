@@ -26,7 +26,7 @@ class DeliveredViewController: ZPTableViewController {
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
-        
+        self.tableView.rowHeight = 54
         
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             

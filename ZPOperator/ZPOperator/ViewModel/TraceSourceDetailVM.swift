@@ -70,10 +70,10 @@ class TraceSourceDetailVM {
     /// - Parameters:
     ///   - code: 查询码
     ///   - completion: 结果闭包
-    func traceSourceTag(code:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func traceSourceTag(page:Int,code:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
-        
-        JXRequest.request(url: ApiString.codeSearch.rawValue, param: ["code":code,"pageNo":1,"pageSize":20], success: { (data, message) in
+        //["code":code,"pageNo":page,"pageSize":5]
+        JXRequest.request(url: ApiString.codeSearch.rawValue, param: ["code":code], success: { (data, message) in
             
             guard let dict = data as? Dictionary<String, Any>
                 else{
@@ -84,7 +84,10 @@ class TraceSourceDetailVM {
             //let traceBatch = dict["traceBatch"] as? Dictionary<String,Any>
             let traceRecords = dict["traceRecords"] as? Array<Dictionary<String,Any>> ?? []
             
-            self.dataArray.removeAll()
+            if page == 1{
+                self.dataArray.removeAll()
+            }
+            
             
             for d in traceRecords{
                 let model = TraceSourceRecord()

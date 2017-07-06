@@ -30,8 +30,9 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         self.automaticallyAdjustsScrollViewInsets = false
         
         
-        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货","已发货"])
+        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
         topBar?.delegate = self
+        topBar?.isBottomLineEnabled = true
         view.addSubview(topBar!)
         
         
@@ -45,6 +46,8 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         }
         horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
         view.addSubview(horizontalView!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +98,12 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         }
         
     }
+    func deliveringNumberChange(notify:Notification) {
+        if let number = notify.object as? Int {
+            let title = String.init(format: "未发货(%d)", number)
+            self.topBar?.titles = [title,"已发货"]
+        }
+    }
 
 }
 
@@ -103,7 +112,12 @@ extension DeliverManageController {
         let indexPath = IndexPath.init(item: index, section: 0)
         self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
     }
-    
+    func horizontalViewDidScroll(scrollView:UIScrollView) {
+        var frame = self.topBar?.bottomLineView.frame
+        let offset = scrollView.contentOffset.x
+        frame?.origin.x = (offset / kScreenWidth ) * (kScreenWidth / 2)
+        self.topBar?.bottomLineView.frame = frame!
+    }
     func horizontalView(_: JXHorizontalView, to indexPath: IndexPath) {
         //
         if self.topBar?.selectedIndex == indexPath.item {

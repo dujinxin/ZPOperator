@@ -26,11 +26,17 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         
         self.vm.logout { (data, msg, isSuccess) in
             if isSuccess {
+                
+                self.navigationController?.popToRootViewController(animated: false)
+                
                 JXNetworkManager.manager.userAccound?.removeAccound()
                 JXNetworkManager.manager.userAccound = nil
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
+                
                 //JXNetworkManager.manager.userAccound.sid = nil
-                let login = LoginViewController()
-                self.navigationController?.present(login, animated: false, completion: nil)
+                //let login = LoginViewController()
+                //self.navigationController?.present(login, animated: false, completion: nil)
             }
         }
     }
@@ -52,8 +58,8 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         self.addressLabel.text = LoginVM.loginVMManager.userModel.stationName
         self.versionLabel.text = "v1.0.0"
         
-        logoutButton.layer.cornerRadius = 5
-        logoutButton.backgroundColor = UIColor.originColor
+        //logoutButton.layer.cornerRadius = 5
+        //logoutButton.backgroundColor = UIColor.originColor
 
         let cancelView : UIView = {
             let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
@@ -93,6 +99,20 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         //alert?.topBarHeight = 50
         alert?.isSetCancelView = true
         alert?.position = .bottom
+        
+        
+        
+        
+//        let rootVc = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
+//        let storyboard  = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let vc = rootVc.topViewController
+//        if rootVc.viewControllers.count > 1 {
+//            vc?.navigationController?.popToRootViewController(animated: false)
+//        }
+//        print("rootVc = \(rootVc)")
+//        print("rootVc.viewControllers = \(rootVc.viewControllers)")
+//        print("vc = \(vc)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,7 +127,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         }else if section == 1 {
             return 10
         }else{
-            return 64
+            return 10
         }
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -136,7 +156,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
             if indexPath.row == 0 {
                 
             }else if indexPath.row == 1{
-
+                performSegue(withIdentifier: "AboutUs", sender: nil)
             }else{
                 performSegue(withIdentifier: "modifyPassword", sender: nil)
             }

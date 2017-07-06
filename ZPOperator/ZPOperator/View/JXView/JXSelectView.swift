@@ -333,6 +333,7 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: reuseIdentifier)
             cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+            cell?.textLabel?.numberOfLines = 1
             if isEnabled == false{
                 cell?.selectionStyle = .none
             }

@@ -13,6 +13,9 @@ class MainReusableView: UICollectionReusableView {
     
     @IBOutlet weak var mainActionButton: UIButton!
     
+    ///多个xib共用一个父类时，不是公共的view一定要设置成可选的
+    @IBOutlet weak var moreActionButton: UIButton?
+    
     @IBAction func mainAction(_ sender: UIButton) {
     }
     

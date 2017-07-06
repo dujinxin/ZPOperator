@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MJRefresh
 
 private let reuseIdentifier = "Cell"
 private let reuseIndentifierHeader = "reuseIndentifierHeader"
 private let reuseIndentifierFooter = "reuseIndentifierFooter"
 
-class MainViewController: ZPCollectionViewController {
+class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlowLayout {
     
     lazy var mainVM = MainVM()
     //log state
@@ -30,33 +31,37 @@ class MainViewController: ZPCollectionViewController {
         let width = (kScreenWidth - 20 * 2 - 10 * 2) / 3
         
         
-        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        let layout = self.collectionView?.collectionViewLayout as! MainCollectionViewFlowLayout
         layout.itemSize = CGSize.init(width: width, height: width)
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20)
+        layout.sectionInset = UIEdgeInsetsMake(0, 20, 20, 20)
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
-        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: width)
+        layout.headerReferenceSize = CGSize(width: kScreenWidth, height: width + width / 2 + 10)
         layout.footerReferenceSize = CGSize(width: kScreenWidth, height: width)
         
         self.collectionView?.collectionViewLayout = layout
 
         // Register cell classes
         self.collectionView!.register(UINib.init(nibName: "MainCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIndentifierHeader)
+        self.collectionView?.register(UINib.init(nibName: "MainReusableViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: reuseIndentifierHeader)
         self.collectionView?.register(UINib.init(nibName: "MainReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: reuseIndentifierFooter)
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
-        if !isLogin {
-            let login = LoginViewController()
-            self.navigationController?.present(login, animated: false, completion: nil)
-        }else{
+        self.collectionView?.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { 
             self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
+                self.collectionView?.mj_header.endRefreshing()
                 if isSuccess {
                     self.collectionView?.reloadData()
                 }else{
                     print("message = \(msg)")
                 }
             })
+        })
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
+        if !isLogin {
+            let login = LoginViewController()
+            self.navigationController?.present(login, animated: false, completion: nil)
+        }else{
+            self.collectionView?.mj_header.beginRefreshing()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
@@ -76,15 +81,10 @@ class MainViewController: ZPCollectionViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, backgroundColorForSectionAt section: Int) -> UIColor {
+        return UIColor.white
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -112,9 +112,11 @@ class MainViewController: ZPCollectionViewController {
             let model = self.mainVM.dataArray[indexPath.item]
             cell.MainContentLabel.text = model.name
             cell.MainContentLabel.textColor = UIColor.rgbColor(rgbValue: 0x0469c8)
+            cell.MainContentLabel.font = UIFont.systemFont(ofSize: 15)
         }else{
-            cell.MainContentLabel.text = "更多溯源批次"
-            cell.MainContentLabel.textColor = UIColor.rgbColor(rgbValue: 0x4b81b4)
+            cell.MainContentLabel.text = "+"
+            cell.MainContentLabel.textColor = UIColor.rgbColor(from: 200, 228, 255)
+            cell.MainContentLabel.font = UIFont.systemFont(ofSize: 40)
         }
         
         
@@ -129,17 +131,15 @@ class MainViewController: ZPCollectionViewController {
        
         if kind == UICollectionElementKindSectionHeader {
             reusableView.mainActionButton.setImage(UIImage.init(named: "deliver")?.withRenderingMode(.alwaysOriginal), for: UIControlState.normal)
-            if self.mainVM.orderCount != 0 {
-                reusableView.mainActionButton.setTitle("发货管理(\(self.mainVM.orderCount))", for: UIControlState.normal)
-            }else{
-                reusableView.mainActionButton.setTitle("发货管理", for: UIControlState.normal)
-            }
+            reusableView.mainActionButton.setTitle("发货管理(\(self.mainVM.orderCount))", for: UIControlState.normal)
             
             reusableView.mainActionButton.addTarget(self, action: #selector(deliverManagement), for: UIControlEvents.touchUpInside)
             reusableView.mainActionButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20)
+            
+            reusableView.moreActionButton?.addTarget(self, action: #selector(moreTraceSources), for: .touchUpInside)
         }else{
             reusableView.mainActionButton.setImage(UIImage.init(named: "tag")?.withRenderingMode(.automatic), for: UIControlState.normal)
-            reusableView.mainActionButton.setTitle("标签管理", for: UIControlState.normal)
+            reusableView.mainActionButton.setTitle("标签查询", for: UIControlState.normal)
             reusableView.mainActionButton.addTarget(self, action: #selector(tagManagement), for: UIControlEvents.touchUpInside)
             reusableView.mainActionButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, -20)
         }
@@ -164,9 +164,10 @@ class MainViewController: ZPCollectionViewController {
         
         
     }
+    func moreTraceSources() {
+        performSegue(withIdentifier: "TraceSources", sender: nil)
+    }
     func tagManagement() {
-        print("876543")
-        
         performSegue(withIdentifier: "tagManagement", sender: nil)
     }
 
@@ -177,7 +178,7 @@ class MainViewController: ZPCollectionViewController {
         
         if indexPath.item == (self.mainVM.dataArray.count){
             
-            performSegue(withIdentifier: "TraceSources", sender: nil)
+            performSegue(withIdentifier: "traceSourceAdd", sender: nil)
         }else{
             let model = self.mainVM.dataArray[indexPath.item]
             performSegue(withIdentifier: "TraceSourceDetail", sender: model.id)
@@ -200,13 +201,7 @@ class MainViewController: ZPCollectionViewController {
         
         if let isSuccess = notify.object as? Bool,
             isSuccess == true{
-            self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
-                if isSuccess {
-                    self.collectionView?.reloadData()
-                }else{
-                    print("message = \(msg)")
-                }
-            })
+            self.collectionView?.mj_header.beginRefreshing()
         }else{
             let login = LoginViewController()
             self.navigationController?.present(login, animated: false, completion: nil)

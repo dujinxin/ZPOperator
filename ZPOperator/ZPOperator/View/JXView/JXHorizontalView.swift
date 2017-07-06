@@ -80,6 +80,7 @@ class JXHorizontalView: UIView {
 protocol JXHorizontalViewDelegate {
     
     func horizontalView(_ :JXHorizontalView,to indexPath:IndexPath) -> Void
+    func horizontalViewDidScroll(scrollView:UIScrollView) -> Void
     
 }
 
@@ -105,7 +106,9 @@ extension JXHorizontalView:UICollectionViewDelegate,UICollectionViewDataSource{
 
 extension JXHorizontalView {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        if self.delegate != nil {
+            self.delegate?.horizontalViewDidScroll(scrollView: self.containerView)
+        }
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.x

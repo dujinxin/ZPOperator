@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import MJRefresh
 
 private let reuseIdentifier = "Cell"
 
 class TraceSourcesController: ZPCollectionViewController {
 
     lazy var vm = TraceSourceVM()
-    
+    var currentPage = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +36,16 @@ class TraceSourcesController: ZPCollectionViewController {
         layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
         self.collectionView?.collectionViewLayout = layout
-        
-        self.vm.loadMainData(append: false, completion: { (data, msg, isSuccess) in
-            if isSuccess {
-                self.collectionView?.reloadData()
-            }else{
-                print("message = \(msg)")
-            }
+        self.collectionView?.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { 
+            self.currentPage = 1
+            self.loadData(page: self.currentPage)
         })
+        self.collectionView?.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
+            self.currentPage += 1
+            self.loadData(page: self.currentPage)
+        })
+        self.collectionView?.mj_header.beginRefreshing()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,38 +53,42 @@ class TraceSourcesController: ZPCollectionViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func loadData(page:Int) {
+        self.vm.loadMainData(append: false, page:page, completion: { (data, msg, isSuccess) in
+            self.collectionView?.mj_header.endRefreshing()
+            self.collectionView?.mj_footer.endRefreshing()
+            if isSuccess {
+                self.collectionView?.reloadData()
+            }else{
+                print("message = \(msg)")
+            }
+        })
+    }
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     
-        if let identifier = segue.identifier{
-            switch identifier {
-            case "traceSourceAdd":
-                let dvc = segue.destination as! TraceSAddViewController
-                //let block = sender as! (()->())
-                
-                dvc.traceSAddBlock = {()->()in
-                    print("回调")
-                    self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
-                        if isSuccess {
-                            self.collectionView?.reloadData()
-                        }else{
-                            print("message = \(msg)")
-                        }
-                    })
-                }
-                
-            case "TraceSourceDetail":
-                let dvc = segue.destination as! TraceDetailController
-                dvc.traceBatchId = sender as? NSNumber
-            default:
-                break
-            }
-        }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-     }
+    if let identifier = segue.identifier{
+        switch identifier {
+        case "traceSourceAdd":
+            let dvc = segue.destination as! TraceSAddViewController
+            //let block = sender as! (()->())
+            
+            dvc.traceSAddBlock = {()->()in
+                print("回调")
+                self.collectionView?.mj_header.beginRefreshing()
+            }
+            
+        case "TraceSourceDetail":
+            let dvc = segue.destination as! TraceDetailController
+            dvc.traceBatchId = sender as? NSNumber
+        default:
+            break
+        }
+    }
+
+    }
     
     // MARK: UICollectionViewDataSource
     

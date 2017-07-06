@@ -63,6 +63,8 @@
 		35E020911F07A67A00852BBD /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020901F07A67A00852BBD /* UIImage+Extension.swift */; };
 		35E020931F09F66600852BBD /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020921F09F66600852BBD /* UIScreen+Extension.swift */; };
 		35E020951F09F7EF00852BBD /* ConstantHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020941F09F7EF00852BBD /* ConstantHeader.swift */; };
+		35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */; };
+		35E020991F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */; };
 		35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */; };
 		35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */; };
 		35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */; };
@@ -140,6 +142,8 @@
 		35E020901F07A67A00852BBD /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		35E020921F09F66600852BBD /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		35E020941F09F7EF00852BBD /* ConstantHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantHeader.swift; sourceTree = "<group>"; };
+		35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainReusableViewHeader.xib; sourceTree = "<group>"; };
+		35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceModel.swift; sourceTree = "<group>"; };
 		35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceDetailVM.swift; sourceTree = "<group>"; };
 		35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 				354502F31EFA1A5300D9EDA7 /* MainCell.xib */,
 				354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */,
 				354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */,
+				35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */,
+				35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */,
 				354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */,
 				354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */,
 			);
@@ -473,6 +479,7 @@
 				359750851EF8BE9100419474 /* Main.storyboard in Resources */,
 				354503211EFBD29300D9EDA7 /* LoginViewController.xib in Resources */,
 				354502FF1EFA1A5300D9EDA7 /* MainReusableView.xib in Resources */,
+				35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +577,7 @@
 				35E7DD7D1F027A2700E1F7E9 /* JXLocationManager.swift in Sources */,
 				354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */,
 				3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */,
+				35E020991F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift in Sources */,
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
 				35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */,
 				354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */,

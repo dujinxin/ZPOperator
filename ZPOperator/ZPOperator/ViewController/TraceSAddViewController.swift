@@ -52,12 +52,12 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         
         //NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
         //开启定位
-        JXLocationManager.manager.startUpdateLocation()
+        //JXLocationManager.manager.startUpdateLocation()
         
         self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
             if isSuccess{
                 //格式化数组
-                //self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
+                self.addressButton.setTitle(self.vm.station, for: .normal)
                 for model in self.vm.dataArray{
                     self.productArray.append(model.name!)
                 }
@@ -67,17 +67,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
     }
     
     @IBAction func addressButton(_ sender: UIButton) {
-        
-        self.addressArray.removeAll()
-        if JXLocationManager.manager.address.isEmpty == false {
-            addressArray.append(JXLocationManager.manager.address)
-        }
-        if let station = self.vm.station {
-            addressArray.append(station)
-        }
-        isAddressAlert = true
-        self.jxAlertView?.actions = addressArray
-        self.jxAlertView?.show()
+
     }
 
     @IBAction func productAction(_ sender: UIButton) {
@@ -93,14 +83,13 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         let model = self.vm.dataArray[selectIndex]
         
         self.vm.submitTS(goodId:model.id!,goodName:model.name!, completion: { (data, msg, isSuccess) in
+            ViewManager.showNotice(notice: msg)
             if isSuccess {
                 print("message = \(msg)")
                 if let myblock = self.traceSAddBlock {
                     myblock()
                 }
                 self.navigationController?.popViewController(animated: true)
-            }else{
-                ViewManager.showNotice(notice: msg)
             }
         })
     }
@@ -108,11 +97,9 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
 }
 extension TraceSAddViewController : JXAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
-        if isAddressAlert {
-            self.addressButton.setTitle(self.addressArray[index], for: .normal)
-        }else{
-            self.productButton.setTitle(self.productArray[index], for: .normal)
-        }
+
+        self.productButton.setTitle(self.productArray[index], for: .normal)
+
         if let _ = addressButton.currentTitle,
             let _ = productButton.currentTitle{
             

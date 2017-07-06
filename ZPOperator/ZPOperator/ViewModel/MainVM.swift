@@ -35,7 +35,7 @@ class MainVM{
                 endIndex = array.count
             }
             
-            
+            self.dataArray.removeAll()
             for i in 0..<endIndex{
                 let model = MainSubModel()
                 model.setValuesForKeys(array[i] as! [String : Any])
