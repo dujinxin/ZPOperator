@@ -92,12 +92,33 @@ class QiNiuUploadManager {
         }
         self.qiniuUpload(data: datas[0], completion1: self.successBlock!)
         
-//        self.qiniuUpload(data: datas[0]) { (urlStr) in
-//            //
-//        }
-        
 
-        
+//        let group = DispatchGroup()
+//        let queue = DispatchQueue(label: "label")
+//        
+//        for data in datas {
+//            DispatchQueue.global().async(group: group, qos: .default, flags: .detached) {
+//                print("download1 \(Thread.current)")
+//                self.qiniuUpload(data: data, completion1: { (url,isSuc) in
+//                    if url != nil {
+//                        urlArray.append(url!)
+//                    }
+//                })
+//            }
+//        }
+//        
+////        //DispatchQueue.global().async(group: <#T##DispatchGroup#>, execute: <#T##DispatchWorkItem#>)
+////        DispatchQueue.global().async(group: group, qos: .default, flags: .detached) {
+////            print("download1 \(Thread.current)")
+////        }
+////        DispatchQueue.global().async(group: group, qos: .default, flags: .detached) {
+////            Thread.sleep(forTimeInterval: 1)
+////            print("download2 \(Thread.current)")
+////        }
+//        group.notify(queue: queue) {
+//            print("done \(Thread.current)")
+//            completion(urlArray)
+//        }
         
         
     }
@@ -134,7 +155,7 @@ class QiNiuUploadManager {
     }
 
     func qiniuGetToken(bucket:String = "zpsy",completion:@escaping (_ data:Any?,_ msg:String?,_ isSuccess:Bool)->()) {
-        JXRequest.request(tag: 1, url: ApiString.getTestTokenUrl.rawValue, param: ["bucket":bucket], success: { (data, msg) in
+        JXRequest.request(tag: 1, url: getTokenUrl, param: ["bucket":bucket], success: { (data, msg) in
             //
             //print(data)
             completion(data,msg,true)

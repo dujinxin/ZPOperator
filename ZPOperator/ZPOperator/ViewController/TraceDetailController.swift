@@ -199,6 +199,10 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                 
                 let model = self.detailVM.dataArray[indexPath.row - 2]
                 cell.model = model
+//                cell.imageViewBlock = {index in
+//                    let i = index
+//                    
+//                }
                 
                 return cell
             }

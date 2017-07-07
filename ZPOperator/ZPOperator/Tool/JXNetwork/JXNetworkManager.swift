@@ -110,7 +110,7 @@ class JXNetworkManager: NSObject {
     }
     
 }
-
+//MARK: request add remove resume cancel
 extension JXNetworkManager {
     
     /// 缓存request
@@ -190,28 +190,28 @@ extension JXNetworkManager {
     
     func buildUrl(url:String?) -> String {
         
-        guard url != nil else {
+        guard let url = url else {
             return ""
         }
         
-        if url?.hasPrefix("http") == true{
+        if url.hasPrefix("http") == true{
             afmanager.requestSerializer = AFJSONRequestSerializer.init()
             afmanager.requestSerializer.timeoutInterval = 10
             afmanager.requestSerializer.setValue("ceccm", forHTTPHeaderField: "source")
             print("afmanager.requestSerializer = \(afmanager.requestSerializer)")
-            return url!
+            return url
         }else{
             afmanager.requestSerializer = AFHTTPRequestSerializer.init()
             afmanager.requestSerializer.timeoutInterval = 10
         }
        
-        let ssss = "http://192.168.10.12:8086\(url!)"
+        let ssss = kBaseUrl + url //"http://192.168.10.12:8086\(url)"
         let sssss = ssss.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         return sssss!
     }
 }
-//MARK: 结果处理
+//MARK: 结果处理 response handle
 extension JXNetworkManager {
     
     func handleTask(task:URLSessionDataTask, data:Any? = nil, error:Error? = nil) {

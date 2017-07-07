@@ -21,7 +21,8 @@ enum JXAlertViewShowPosition {
 private let reuseIdentifier = "reuseIdentifier"
 
 private let topBarHeight : CGFloat = 40
-private let alertViewWidth : CGFloat = UIScreen.main.bounds.width
+private let alertViewMargin : CGFloat = 0
+private let alertViewWidth : CGFloat = UIScreen.main.bounds.width - 2 * alertViewMargin
 private let listHeight : CGFloat = 40
 private let cancelViewHeight : CGFloat = 40
 private let animateDuration : TimeInterval = 0.3
@@ -34,6 +35,17 @@ class JXAlertView: UIView {
     var title : String?
     var message : String?
     var actions : Array<String> = [String](){
+//        willSet{//默认newValue，可以自己指定：（myValue）
+//            if newValue.count > 5 {
+//                self.tableView.isScrollEnabled = true
+//                self.tableView.bounces = true
+//                self.tableView.showsVerticalScrollIndicator = true
+//            }else{
+//                self.tableView.isScrollEnabled = false
+//                self.tableView.bounces = false
+//                self.tableView.showsVerticalScrollIndicator = false
+//            }
+//        }
         didSet{
             if actions.count > 5 {
                 self.tableView.isScrollEnabled = true
@@ -56,8 +68,29 @@ class JXAlertView: UIView {
             self.resetFrame()
         }
     }
-    
-    //var rect : CGRect = CGRect.init()
+
+    var contentHeight : CGFloat {
+        set{//可以自己指定值带来替默认值eg: （myValue）
+            var h : CGFloat = 0
+            if newValue > 0 {
+                h = newValue
+                alertViewHeight = newValue
+            }else{
+                if style == .list{
+                    let num : CGFloat = CGFloat(self.actions.count)
+                    h = (num > 5 ? 5.5 : num) * listHeight
+                    alertViewHeight = h
+                }
+            }
+            if isUseTopBar {
+                h += topBarHeight
+            }
+            self.frame = CGRect(x: alertViewMargin, y: 0, width: alertViewWidth, height: alertViewHeight + topBarHeight + cancelViewHeight + 10)
+        }
+        get{
+            return self.frame.height
+        }
+    }
     
     var selectRow : Int = -1
     

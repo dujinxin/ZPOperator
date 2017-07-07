@@ -37,6 +37,15 @@ class DeliveringManagerController: ZPTableViewController {
     var deliveringManageBlock : ((_ isSuccess:Bool)->())?
     
     
+    lazy var doneButton : UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: kScreenHeight, width: kScreenWidth / 3, height: 53)
+        button.setTitle("完成", for: .normal)
+        button.setTitleColor(JX333333Color, for: .normal)
+        button.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
+        
+        return button
+    }()
     
     
     override func viewDidLoad() {
@@ -89,6 +98,9 @@ class DeliveringManagerController: ZPTableViewController {
         selectView?.isScrollEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+      
         
         self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess) in
             if isSuccess {
@@ -100,13 +112,20 @@ class DeliveringManagerController: ZPTableViewController {
         }
         
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //self.doneButton.removeFromSuperview()
+        self.hideKeyboard()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -131,6 +150,7 @@ class DeliveringManagerController: ZPTableViewController {
     
 
     @IBAction func deleveringManagerSelect(_ sender: UIButton) {
+        self.view.endEditing(true)
         self.jxAlertView?.actions = batchArray
         self.jxAlertView?.show()
     }
@@ -190,6 +210,12 @@ class DeliveringManagerController: ZPTableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
 
 extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
@@ -239,6 +265,17 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
 }
 
 extension DeliveringManagerController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        //获得键盘所在的window视图
+//        let array = UIApplication.shared.windows
+//        for w in array {
+//            
+//            let str =  NSStringFromClass(type(of: w))    //NSStringFromClass(w.self)
+//            if str == "UIRemoteKeyboardWindow" && self.doneButton.superview == nil{
+//                w.addSubview(self.doneButton)
+//            }
+//        }
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -291,6 +328,56 @@ extension DeliveringManagerController: UITextFieldDelegate{
                 submitButton.isEnabled = false
             }
         }
+    }
+    // 键盘出现处理事件
+    func keyboardWillShow(notify:Notification) {
+        //获得键盘所在的window视图
+        if self.doneButton.superview == nil {
+            let array = UIApplication.shared.windows
+            for w in array {
+                
+                let str =  NSStringFromClass(type(of: w))    //NSStringFromClass(w.self)
+                if str == "UIRemoteKeyboardWindow"{
+                    self.doneButton.alpha = 0
+                    w.addSubview(self.doneButton)
+                }
+            }
+        }
+
+        if
+            let userInfo = notify.userInfo,
+            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval
+            //,let animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UIViewAnimationCurve
+            {
+        
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationDuration(duration)
+            //UIView.setAnimationCurve(animationCurve)
+        
+            self.doneButton.alpha = 1
+            //self.doneButton.transform = CGAffineTransform(translationX: 0, y: -53)
+            self.doneButton.frame = CGRect(x: 0, y: kScreenHeight - 53, width: kScreenWidth / 3, height: 53)
+            UIView.commitAnimations()
+        }
+    }
+    func keyboardWillHide(notify:Notification) {
+        if
+            let userInfo = notify.userInfo,
+            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval
+            //,let animationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UIViewAnimationCurve
+        {
+            if (self.doneButton.superview != nil) {
+                UIView.animate(withDuration: duration, animations: {
+                    //self.doneButton.transform = CGAffineTransform(translationX: 0, y: 53)
+                    self.doneButton.frame = CGRect(x: 0, y: kScreenHeight, width: kScreenWidth / 3, height: 53)
+                }, completion: { (finished) in
+                    self.doneButton.removeFromSuperview()
+                })
+            }
+        }
+    }
+    func hideKeyboard() {
+        UIApplication.shared.keyWindow?.endEditing(true)
     }
 }
 extension DeliveringManagerController: JXSelectViewDataSource{

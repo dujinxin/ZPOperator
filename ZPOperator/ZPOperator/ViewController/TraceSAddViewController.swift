@@ -98,6 +98,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
 extension TraceSAddViewController : JXAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
 
+        selectIndex = index
         self.productButton.setTitle(self.productArray[index], for: .normal)
 
         if let _ = addressButton.currentTitle,

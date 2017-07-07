@@ -113,6 +113,26 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
 //        print("rootVc = \(rootVc)")
 //        print("rootVc.viewControllers = \(rootVc.viewControllers)")
 //        print("vc = \(vc)")
+        
+        
+        
+        
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "label")
+        
+        //DispatchQueue.global().async(group: <#T##DispatchGroup#>, execute: <#T##DispatchWorkItem#>)
+        DispatchQueue.global().async(group: group, qos: .default, flags: .detached) { 
+            print("download1 \(Thread.current)")
+        }
+        DispatchQueue.global().async(group: group, qos: .default, flags: .detached) {
+            Thread.sleep(forTimeInterval: 1)
+            print("download2 \(Thread.current)")
+        }
+        group.notify(queue: queue) { 
+            print("done \(Thread.current)")
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

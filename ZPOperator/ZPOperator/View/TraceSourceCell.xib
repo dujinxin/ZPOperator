@@ -105,13 +105,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRV-qG-laB">
+                            <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRV-qG-laB">
                                 <rect key="frame" x="85" y="205" width="96.5" height="96.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sRV-qG-laB" secondAttribute="height" id="aVs-5G-KTO"/>
                                 </constraints>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HfA-OQ-vbZ">
+                            <imageView hidden="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HfA-OQ-vbZ">
                                 <rect key="frame" x="201.5" y="205" width="96.5" height="96.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HfA-OQ-vbZ" secondAttribute="height" id="Yfl-hs-mWr"/>
@@ -141,7 +141,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3tv-xV-l1T">
+                            <imageView hidden="YES" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3tv-xV-l1T">
                                 <rect key="frame" x="318.5" y="205" width="96.5" height="96.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="3tv-xV-l1T" secondAttribute="height" id="MvD-fw-QCr"/>

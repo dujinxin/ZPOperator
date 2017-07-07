@@ -242,6 +242,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
     //    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.textView.resignFirstResponder()
         if indexPath.section == 1 {
             if indexPath.row == 0 {
                 isProcessAlert = 0
@@ -353,7 +354,7 @@ extension DeliveredWholeRecordController {
 }
 extension DeliveredWholeRecordController :TZImagePickerControllerDelegate{
     func photo11() {
-        
+        self.textView.resignFirstResponder()
         isProcessAlert = 2
         self.jxAlertView?.actions = ["从相册中选择（最多三张）","拍照"]
         self.jxAlertView?.show()
@@ -453,7 +454,7 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
         }else{
             placeHolderLabel.isEnabled = false
         }
-        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
+        if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false && textView.text.isEmpty == false{
             submitButton.backgroundColor = UIColor.originColor
             submitButton.isEnabled = true
         }else{

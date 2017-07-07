@@ -83,7 +83,7 @@
                                         <rect key="frame" x="110" y="0.0" width="250" height="44"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="T6x-vR-zIh" id="qcW-Yr-zl6"/>
                                         </connections>
@@ -1536,42 +1536,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Pe0-BA-06A">
-                                        <rect key="frame" x="0.0" y="426" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pe0-BA-06A" id="UMN-aR-Qdg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxd-PK-NaF">
-                                                    <rect key="frame" x="100" y="0.0" width="255" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作网点：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E83-Dn-nvQ">
-                                                    <rect key="frame" x="20" y="0.0" width="80" height="43.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="ujM-Kd-tc9"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="E83-Dn-nvQ" firstAttribute="leading" secondItem="UMN-aR-Qdg" secondAttribute="leading" constant="20" id="4p0-bB-Rmt"/>
-                                                <constraint firstAttribute="trailing" secondItem="Jxd-PK-NaF" secondAttribute="trailing" constant="20" id="Bur-DK-Ll6"/>
-                                                <constraint firstItem="Jxd-PK-NaF" firstAttribute="top" secondItem="UMN-aR-Qdg" secondAttribute="top" id="JP4-ED-rvt"/>
-                                                <constraint firstAttribute="bottom" secondItem="E83-Dn-nvQ" secondAttribute="bottom" id="g1O-YV-3xt"/>
-                                                <constraint firstItem="E83-Dn-nvQ" firstAttribute="top" secondItem="UMN-aR-Qdg" secondAttribute="top" id="hnY-Vr-xQb"/>
-                                                <constraint firstItem="Jxd-PK-NaF" firstAttribute="leading" secondItem="E83-Dn-nvQ" secondAttribute="trailing" id="tyV-6z-M30"/>
-                                                <constraint firstAttribute="bottom" secondItem="Jxd-PK-NaF" secondAttribute="bottom" id="vfB-Jt-TSA"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="zfv-09-NDX">
-                                        <rect key="frame" x="0.0" y="470" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="426" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zfv-09-NDX" id="3LC-z7-qHZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1621,7 +1587,7 @@
                             <tableViewSection id="WaZ-74-avP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="i2e-Af-1lb">
-                                        <rect key="frame" x="0.0" y="514" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="470" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i2e-Af-1lb" id="rXk-ZZ-CVn">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1662,7 +1628,6 @@
                         <outlet property="deliverProduct" destination="AOy-xo-QAK" id="Aao-NG-nea"/>
                         <outlet property="deliverProductWeightLabel" destination="T2c-68-eDC" id="tLF-SW-Srs"/>
                         <outlet property="endNumLabel" destination="fzc-BG-zd7" id="58G-g6-17y"/>
-                        <outlet property="operatorAddressLabel" destination="Jxd-PK-NaF" id="9KT-HD-xUL"/>
                         <outlet property="operatorPersonLabel" destination="Mj6-i2-WWe" id="ceL-wV-XjM"/>
                         <outlet property="operatorTimeLabel" destination="7Gd-Go-ZLU" id="kcL-Sf-q1w"/>
                         <outlet property="receiveAddressLabel" destination="YZP-2U-6P7" id="8oh-L9-FbN"/>
@@ -1752,7 +1717,7 @@
                                                     <rect key="frame" x="118" y="0.0" width="242" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vwk-KY-Bsa" id="eM5-ik-3FP"/>
                                                     </connections>
@@ -1789,7 +1754,7 @@
                                                     <rect key="frame" x="118" y="0.0" width="242" height="44"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="vwk-KY-Bsa" id="tNY-Dr-5l8"/>
                                                     </connections>
@@ -2380,6 +2345,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Fc2-Pk-Bhi"/>
-        <segue reference="CaD-D1-475"/>
+        <segue reference="Mxn-DK-VFw"/>
     </inferredMetricsTieBreakers>
 </document>

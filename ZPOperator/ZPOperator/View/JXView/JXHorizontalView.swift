@@ -16,7 +16,7 @@ class JXHorizontalView: UIView {
 
     let parentViewController : UIViewController
     let rect : CGRect
-    var containers = Array<UIViewController>()
+    var containers = Array<Any>()
     
     var delegate : JXHorizontalViewDelegate?
     
@@ -94,12 +94,21 @@ extension JXHorizontalView:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = containerView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         if containers.count > indexPath.item {
-            let vc = containers[indexPath.item]
-            vc.view.frame = CGRect.init(x: 0, y: 0, width: collectionView.frame.width, height: collectionView.frame.height)
-            cell.contentView.addSubview(vc.view)
-            vc.didMove(toParentViewController: parentViewController)
-            
+            let v = containers[indexPath.item]
+            if v is UIViewController {
+                let vc = v as! UIViewController
+                vc.view.frame = CGRect.init(x: 0, y: 0, width: collectionView.frame.width, height: collectionView.frame.height)
+                cell.contentView.addSubview(vc.view)
+                vc.didMove(toParentViewController: parentViewController)
+            }else if(v is UIView){
+                let iv = v as! UIView
+                iv.frame = cell.contentView.bounds
+                iv.tag = 1000
+                cell.contentView.addSubview(iv)
+            }
+
         }
+        
         return cell
     }
 }

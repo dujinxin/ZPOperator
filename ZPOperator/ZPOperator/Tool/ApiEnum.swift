@@ -36,8 +36,4 @@ enum ApiString : String {
     case deliver       = "/batch/deliver"
     case codeSearch    = "/code/search"
     
-    
-    case getTestTokenUrl     = "http://192.168.10.12:8082/genuine/user/getUploadToken"
-    case getProductTokenUrl  = "https://app.izheng.org/genuine/user/getUploadToken"
- 
 }

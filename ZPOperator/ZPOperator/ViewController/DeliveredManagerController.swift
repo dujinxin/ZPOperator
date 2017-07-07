@@ -30,7 +30,7 @@ class DeliveredManagerController: ZPTableViewController {
     @IBOutlet weak var startNumLabel: UILabel!
     @IBOutlet weak var endNumLabel: UILabel!
     @IBOutlet weak var tagNumLabel: UILabel!
-    @IBOutlet weak var operatorAddressLabel: UILabel!
+
     @IBOutlet weak var operatorPersonLabel: UILabel!
     @IBOutlet weak var operatorTimeLabel: UILabel!
     
@@ -94,8 +94,6 @@ class DeliveredManagerController: ZPTableViewController {
             self.tagNumLabel.text = String.init(format: "%@",totalCount)
         }
         
-        
-        self.operatorAddressLabel.text = self.traceDeliverOperatorModel?.station
         self.operatorPersonLabel.text = self.traceDeliverOperatorModel?.name
         self.operatorTimeLabel.text = self.traceDeliverSubModel?.operateTime
         

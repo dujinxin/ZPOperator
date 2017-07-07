@@ -26,7 +26,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Model/UserModel.swift"
-                  timestampString = "520943349.410196"
+                  timestampString = "521036315.625404"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -41,7 +41,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Model/UserModel.swift"
-                  timestampString = "520943349.411632"
+                  timestampString = "521036315.628579"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -122,7 +122,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520943349.423501"
+                  timestampString = "521036316.420304"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
@@ -137,7 +137,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520943349.42482"
+                  timestampString = "521036316.421671"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
@@ -186,7 +186,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-                  timestampString = "520943349.4308"
+                  timestampString = "521036316.427915"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -201,7 +201,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceSourceDetailVM.swift"
-                  timestampString = "520943349.432146"
+                  timestampString = "521036316.429407"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -266,7 +266,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/MainViewController.swift"
-                  timestampString = "520943349.440577"
+                  timestampString = "521036316.437941"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
@@ -281,7 +281,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/MainViewController.swift"
-                  timestampString = "520943349.441893"
+                  timestampString = "521036316.43924"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TagViewController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521037436.02933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "search(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
             landmarkName = "locationStatus(notify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -522,7 +522,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520943349.477672"
+                  timestampString = "521036316.476678"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "274"
@@ -537,7 +537,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/Tool/JXNetwork/JXBaseRequest.swift"
-                  timestampString = "520943349.479096"
+                  timestampString = "521036316.478083"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "274"
@@ -634,11 +634,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "jxAlertView(_:clickButtonAtIndex:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,7 +666,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceDetailController.swift"
-                  timestampString = "520943349.498317"
+                  timestampString = "521036316.499542"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "91"
@@ -681,7 +681,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceDetailController.swift"
-                  timestampString = "520943349.499631"
+                  timestampString = "521036316.500914"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "92"
@@ -714,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "textView(_:shouldChangeTextIn:replacementText:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "locationStatus(notify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -794,7 +794,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceDeliverVM.swift"
-                  timestampString = "520943349.516967"
+                  timestampString = "521036316.519838"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -809,7 +809,7 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewModel/TraceDeliverVM.swift"
-                  timestampString = "520943349.518266"
+                  timestampString = "521036316.521315"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -842,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "textChange(notify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -874,7 +874,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveredWholeRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021203.233378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "244"
@@ -954,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TagViewController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521037436.02933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -970,11 +970,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TagViewController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521037436.02933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "textFieldShouldReturn(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,11 +986,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TagViewController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521037436.02933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "textChange(notify:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1018,11 +1018,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceSRecordController.swift"
-                  timestampString = "520943349.555161"
+                  timestampString = "521036316.558716"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "229"
-                  endingLineNumber = "229"
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
                   offsetFromSymbolStart = "2293">
                </Location>
                <Location
@@ -1033,11 +1033,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceSRecordController.swift"
-                  timestampString = "520943349.556981"
+                  timestampString = "521036316.560121"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "229"
-                  endingLineNumber = "229"
+                  startingLineNumber = "239"
+                  endingLineNumber = "239"
                   offsetFromSymbolStart = "4466">
                </Location>
                <Location
@@ -1048,11 +1048,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TraceSRecordController.swift"
-                  timestampString = "520943349.558562"
+                  timestampString = "521036316.561485"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
+                  startingLineNumber = "241"
+                  endingLineNumber = "241"
                   offsetFromSymbolStart = "45">
                </Location>
             </Locations>
@@ -1065,11 +1065,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
             landmarkName = "jxSelectView(_:heightForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1097,11 +1097,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/DeliveringViewController.swift"
-                  timestampString = "520943349.565665"
+                  timestampString = "521036316.569009"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "177"
-                  endingLineNumber = "177"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
                   offsetFromSymbolStart = "4">
                </Location>
                <Location
@@ -1112,11 +1112,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/DeliveringViewController.swift"
-                  timestampString = "520943349.567369"
+                  timestampString = "521036316.57087"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "177"
-                  endingLineNumber = "177"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
                   offsetFromSymbolStart = "12">
                </Location>
                <Location
@@ -1127,11 +1127,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/DeliveringViewController.swift"
-                  timestampString = "520943349.569027"
+                  timestampString = "521036316.572416"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
+                  startingLineNumber = "177"
+                  endingLineNumber = "177"
                   offsetFromSymbolStart = "63">
                </Location>
             </Locations>
@@ -1176,11 +1176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520765498.2037"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1192,11 +1192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "alertView(_:clickedButtonAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1208,11 +1208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
             landmarkName = "imagePickerControllerDidCancel(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1224,11 +1224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TraceSRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021010.487018"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1240,11 +1240,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
             landmarkName = "confirmDeliver()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1272,11 +1272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "confirmDeliver()"
             landmarkType = "7">
             <Locations>
@@ -1288,11 +1288,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/DeliveringManagerController.swift"
-                  timestampString = "520943349.600525"
+                  timestampString = "521036316.609477"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "226"
-                  endingLineNumber = "226"
+                  startingLineNumber = "250"
+                  endingLineNumber = "250"
                   offsetFromSymbolStart = "449">
                </Location>
                <Location
@@ -1303,11 +1303,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/DeliveringManagerController.swift"
-                  timestampString = "520943349.602077"
+                  timestampString = "521036316.610798"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "228"
-                  endingLineNumber = "228"
+                  startingLineNumber = "252"
+                  endingLineNumber = "252"
                   offsetFromSymbolStart = "45">
                </Location>
             </Locations>
@@ -1320,11 +1320,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
-            timestampString = "520946140.185202"
+            timestampString = "521036831.407067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "confirmDeliver()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1336,11 +1336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/TagViewController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521037436.02933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "search(_:)"
             landmarkType = "7">
             <Locations>
@@ -1352,12 +1352,12 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TagViewController.swift"
-                  timestampString = "520943349.608202"
+                  timestampString = "521036316.61798"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "40"
-                  endingLineNumber = "40"
-                  offsetFromSymbolStart = "26">
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "724">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1367,11 +1367,11 @@
                   moduleName = "ZPOperator"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dujinxin/github/ZPOperator/ZPOperator/ZPOperator/ViewController/TagViewController.swift"
-                  timestampString = "520943349.609565"
+                  timestampString = "521036316.619362"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "41"
-                  endingLineNumber = "41"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
@@ -1464,11 +1464,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveredWholeRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021203.233378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
             landmarkName = "textViewDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1480,11 +1480,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/ViewController/DeliveredWholeRecordController.swift"
-            timestampString = "521007957.164709"
+            timestampString = "521021203.233378"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
             landmarkName = "textView(_:shouldChangeTextIn:replacementText:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1512,11 +1512,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/View/JXView/JXHorizontalView.swift"
-            timestampString = "520943042.977248"
+            timestampString = "521026941.603412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "scrollViewDidEndDecelerating(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1528,11 +1528,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZPOperator/View/JXView/JXHorizontalView.swift"
-            timestampString = "520943096.500743"
+            timestampString = "521026941.603412"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "scrollViewDidScroll(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1550,6 +1550,198 @@
             startingLineNumber = "121"
             endingLineNumber = "121"
             landmarkName = "horizontalView(_:to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveredWholeRecordController.swift"
+            timestampString = "521021401.798215"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/Model/ThirdPart/QiNiuUploadManager.swift"
+            timestampString = "521023446.236636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "qiniuUpload(datas:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/Model/ThirdPart/QiNiuUploadManager.swift"
+            timestampString = "521023448.176523"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "qiniuUpload(datas:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/Model/ThirdPart/QiNiuUploadManager.swift"
+            timestampString = "521023472.827468"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "qiniuUpload(datas:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/Model/ThirdPart/QiNiuUploadManager.swift"
+            timestampString = "521023481.692451"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "qiniuUpload(datas:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "touchesEnded(_:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "scrollViewDidScroll(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "textFieldDidBeginEditing(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "textFieldDidBeginEditing(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "keyboardWillShow(notify:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
+            landmarkName = "keyboardWillHide(notify:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZPOperator/ViewController/DeliveringManagerController.swift"
+            timestampString = "521036831.407067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
+            landmarkName = "keyboardWillShow(notify:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

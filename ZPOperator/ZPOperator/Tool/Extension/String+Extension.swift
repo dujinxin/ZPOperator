@@ -40,6 +40,12 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
         return predicate.evaluate(with: code)
     }
+    static func validateCode(code:String) -> Bool {
+        
+        let passWordRegex = "^[0-9]{12}+$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: code)
+    }
 }
 
 extension String {

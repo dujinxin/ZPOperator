@@ -29,6 +29,9 @@ class TraceSourceCell: UITableViewCell {
     @IBOutlet weak var imageView2: UIImageView!
     @IBOutlet weak var imageView3: UIImageView!
     
+    var imageViewBlock : ((_ index:Int)->())?
+    
+    
     var model : TraceSourceRecord? {
         didSet{
             self.labelDetail1.text = model?.createBy
@@ -93,8 +96,21 @@ class TraceSourceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.imageView1.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tap(tap:))))
+        self.imageView2.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tap(tap:))))
+        self.imageView3.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tap(tap:))))
+        
     }
 
+    func tap(tap:UITapGestureRecognizer) {
+        
+        if
+            let block = self.imageViewBlock,
+            let index = tap.view?.tag{
+            block(index)
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

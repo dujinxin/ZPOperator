@@ -65,6 +65,8 @@
 		35E020951F09F7EF00852BBD /* ConstantHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020941F09F7EF00852BBD /* ConstantHeader.swift */; };
 		35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */; };
 		35E020991F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */; };
+		35E0209B1F0E404E00852BBD /* PhotoBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0209A1F0E404D00852BBD /* PhotoBrowserView.swift */; };
+		35E0209D1F0F1B9800852BBD /* ProjectHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0209C1F0F1B9800852BBD /* ProjectHeader.swift */; };
 		35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */; };
 		35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */; };
 		35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */; };
@@ -144,6 +146,8 @@
 		35E020941F09F7EF00852BBD /* ConstantHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantHeader.swift; sourceTree = "<group>"; };
 		35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainReusableViewHeader.xib; sourceTree = "<group>"; };
 		35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		35E0209A1F0E404D00852BBD /* PhotoBrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserView.swift; sourceTree = "<group>"; };
+		35E0209C1F0F1B9800852BBD /* ProjectHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHeader.swift; sourceTree = "<group>"; };
 		35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceModel.swift; sourceTree = "<group>"; };
 		35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceDetailVM.swift; sourceTree = "<group>"; };
 		35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				354503091EFA529E00D9EDA7 /* JXHorizontalView.swift */,
+				35E0209A1F0E404D00852BBD /* PhotoBrowserView.swift */,
 				354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */,
 				35E7DD641EFEBA1D00E1F7E9 /* JXSelectView.swift */,
 				35E7DD661EFF7EF800E1F7E9 /* JXAlertView.swift */,
@@ -317,6 +322,7 @@
 				35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */,
 				35E0207E1F04DDAA00852BBD /* ViewManager.swift */,
 				35E020941F09F7EF00852BBD /* ConstantHeader.swift */,
+				35E0209C1F0F1B9800852BBD /* ProjectHeader.swift */,
 				3545032D1EFBDF8800D9EDA7 /* Extension */,
 				354503311EFBDF8800D9EDA7 /* JXNetwork */,
 			);
@@ -550,6 +556,7 @@
 				3545033A1EFBDF8800D9EDA7 /* UIColor+Extension.swift in Sources */,
 				3545033C1EFBDF8800D9EDA7 /* JXBaseRequest.swift in Sources */,
 				35E7DD651EFEBA1D00E1F7E9 /* JXSelectView.swift in Sources */,
+				35E0209B1F0E404E00852BBD /* PhotoBrowserView.swift in Sources */,
 				35E0208B1F06807E00852BBD /* TagResultController.swift in Sources */,
 				35E7DD6B1F00B5CB00E1F7E9 /* TraceDeliverModel.swift in Sources */,
 				35E7DD6F1F01329100E1F7E9 /* DeliveringManagerVM.swift in Sources */,
@@ -583,6 +590,7 @@
 				354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */,
 				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
+				35E0209D1F0F1B9800852BBD /* ProjectHeader.swift in Sources */,
 				354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */,
 				35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */,
 				35E020891F06746400852BBD /* DeliveredWholeRecordController.swift in Sources */,
