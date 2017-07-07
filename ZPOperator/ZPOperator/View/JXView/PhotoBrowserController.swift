@@ -1,5 +1,5 @@
 //
-//  PhotoBrowserView.swift
+//  PhotoBrowserController.swift
 //  ZPOperator
 //
 //  Created by 杜进新 on 2017/7/6.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotoBrowserView: UIView {
+class PhotoBrowserController: UIView {
 
 //    var <#variable name#>: <#type#> {
 //        get {
@@ -41,14 +41,12 @@ class PhotoBrowserView: UIView {
     }()
     
     
-    init(frame: CGRect,images:Array<Any>) {
-        self.collectionView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        addSubview(self.collectionView)
-        
-        
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
-extension PhotoBrowserView: UICollectionViewDelegate,UICollectionViewDataSource {
+extension PhotoBrowserController: UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }

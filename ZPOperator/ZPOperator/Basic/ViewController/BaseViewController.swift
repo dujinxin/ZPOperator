@@ -36,7 +36,7 @@ class BaseViewController: UIViewController {
     /// default view
     lazy var defaultView: JXDefaultView = {
         let v = JXDefaultView()
-        v.backgroundColor = UIColor.randomColor()
+        v.backgroundColor = UIColor.randomColor
         return v
     }()
     

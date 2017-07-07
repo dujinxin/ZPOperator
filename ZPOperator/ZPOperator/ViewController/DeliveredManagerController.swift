@@ -23,7 +23,6 @@ class DeliveredManagerController: ZPTableViewController {
     @IBOutlet weak var deliverAddressLabel: UILabel!
     
     @IBOutlet weak var receiveAddressLabel: UILabel!
-    @IBOutlet weak var receivePerson: UILabel!
     
     @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var traceBatchLabel: UILabel!
@@ -79,11 +78,6 @@ class DeliveredManagerController: ZPTableViewController {
             
             self.receiveAddressLabel.text = province + city + country + address
         }
-        if let contact = self.traceDeliverSubModel?.contact,
-            let mobile = self.traceDeliverSubModel?.mobile{
-            
-            self.receivePerson.text = contact + "" + mobile
-        }
         
         
         self.remarkLabel.text = self.traceDeliverSubModel?.remarks
@@ -124,7 +118,20 @@ class DeliveredManagerController: ZPTableViewController {
         if indexPath.row == 1 {
             return 74
         }else if indexPath.row == 2{
-            return 88
+//            if let province = self.traceDeliverSubModel?.province,
+//                let city = self.traceDeliverSubModel?.city,
+//                let country = self.traceDeliverSubModel?.county,
+//                let address = self.traceDeliverSubModel?.address{
+//                
+//                self.receiveAddressLabel.text = province + city + country + address
+//            }
+            let size = self.receiveAddressLabel.text?.calculate(width: kScreenWidth - 120, fontSize: 14)
+            if (size?.height)! < CGFloat(20) {
+                return 44
+            }else{
+                return (size?.height)! + CGFloat(10)
+            }
+
         }else if indexPath.row == 3{
             let size = self.traceDeliverSubModel?.remarks?.calculate(width: kScreenWidth - 120, fontSize: 14)
             if (size?.height)! < CGFloat(20) {
