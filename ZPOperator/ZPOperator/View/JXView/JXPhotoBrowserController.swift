@@ -1,5 +1,5 @@
 //
-//  ppCollectionViewController.swift
+//  JXPhotoBrowserController.swift
 //  ZPOperator
 //
 //  Created by 杜进新 on 2017/7/7.
@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class ppCollectionViewController: UICollectionViewController {
+class JXPhotoBrowserController: UICollectionViewController {
     
     var images = Array<String>()
     var currentPage = 1
@@ -34,7 +34,9 @@ class ppCollectionViewController: UICollectionViewController {
         images = [
             "http://img.izheng.org/d879ec5f-43dc-4860-ba35-ca63c974a83b",
             "http://img.izheng.org/e0cc9b48-aaad-47a4-bc0b-1133189b148d",
-            "http://img.izheng.org/be2c15bb-d877-4580-802e-57e2252c4600"
+            "http://img.izheng.org/be2c15bb-d877-4580-802e-57e2252c4600",
+            "http://img.izheng.org/2017-07-08_uwbkzimk.png",
+            "http://img.izheng.org/2017-07-08_uzhmpsrc.png"
         ]
         
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
@@ -84,25 +86,42 @@ class ppCollectionViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.images.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoImageView
     
         // Configure the cell
-        cell.imageView.backgroundColor = UIColor.randomColor
+        //cell.imageView.backgroundColor = UIColor.randomColor
         cell.imageView.setImageWith(URL.init(string: self.images[indexPath.item])!, placeholderImage: nil)
         cell.closeBlock = { _ in
             self.dismiss(animated: true, completion: nil)
+        }
+        cell.showAddtionBlock = {
+//            let action = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//            action.addAction(UIAlertAction(title: "保存图片", style: .destructive, handler: { (action) in
+//                print("save album")
+//                UIImage.save(image: cell.imageView.image!, completion: nil)
+//            }))
+//            action.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+//                
+//            }))
+//            self.present(action, animated: true, completion: nil)
         }
     
         return cell
     }
     // MARK: UICollectionViewDelegate
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if let cell = cell as? PhotoImageView {
+            cell.scrollView.zoomScale = 1.0
+        }
+    }
 
 }
-extension ppCollectionViewController {
+extension JXPhotoBrowserController {
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.x / view.bounds.width
@@ -124,21 +143,30 @@ class PhotoImageView: UICollectionViewCell,UIScrollViewDelegate {
     lazy var imageView: UIImageView = {
         let iv = UIImageView()
         iv.isUserInteractionEnabled = true
+        iv.contentMode = .scaleAspectFit
         
+        //单击事件：用于显示或隐藏导航栏，或者退出图片浏览
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(tapZoomScale(tap:)))
         doubleTap.numberOfTapsRequired = 2
         doubleTap.numberOfTouchesRequired = 1
         iv.addGestureRecognizer(doubleTap)
-        
+        //双击事件：用于图片放大显示
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(tapDismiss(tap:)))
         singleTap.numberOfTapsRequired = 1
         singleTap.numberOfTouchesRequired = 1
         singleTap.require(toFail: doubleTap)//单击事件需要双击事件失败才响应，不然优先响应双击
         iv.addGestureRecognizer(singleTap)
-        
+        //缩放：图片的放大或者缩小
+        let pan = UIPinchGestureRecognizer(target: self, action: #selector(pinchZoonScale(pinch:)))
+        iv.addGestureRecognizer(pan)
+        //长按事件：弹出视图。类似保存到相册，分享等
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(pressAction(press:)))
+        iv.addGestureRecognizer(longPress)
         return iv
     }()
     var closeBlock : (()->())?
+    var showAddtionBlock : (()->())?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -175,6 +203,35 @@ class PhotoImageView: UICollectionViewCell,UIScrollViewDelegate {
             }
         }) { (finished) in
             //
+        }
+    }
+    func pinchZoonScale(pinch:UIPinchGestureRecognizer) {
+        var size = pinch.view?.frame.size
+        size?.width *= pinch.scale
+        size?.height *= pinch.scale
+        self.scrollView.bounds.size = size!
+    }
+    func pressAction(press:UILongPressGestureRecognizer) {
+        //print("long press")
+        switch press.state {
+        case .began:
+            print("long press begin")
+        case .changed:
+            print("long press changed")
+        case .ended:
+            print("long press ended")
+            print("do something")
+            
+            if let block = showAddtionBlock {
+                block()
+            }
+   
+        case .cancelled:
+            print("long press cancelled")
+        case .failed:
+            print("long press failed")
+        case .possible:
+            print("long press possible")
         }
     }
     /// 获取要缩放的视图

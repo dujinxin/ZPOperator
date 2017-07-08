@@ -42,4 +42,31 @@ extension UIImage {
         
         return newImage
     }
+
+    
+}
+extension UIImage {
+    
+    class func screenshot(with view: UIView) -> UIImage {
+        let rect = view.bounds
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        
+        view.layer.render(in: context!)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    class func save(image:UIImage,completion:((_ isSuccess:Bool)->())?) {
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    func image(image:UIImage,didFinishSavingWithError error:Error?,contextInfo:AnyObject?) {
+        if error != nil {
+            //
+            print("保存成功")
+        }else{
+            print("保存失败")
+        }
+    }
 }

@@ -175,7 +175,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         if indexPath.section == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             if indexPath.row == 0 {
-                let vc = ppCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+                let vc = JXPhotoBrowserController(collectionViewLayout: UICollectionViewFlowLayout())
                 self.navigationController?.present(vc, animated: true, completion: nil)
             }else if indexPath.row == 1{
                 performSegue(withIdentifier: "AboutUs", sender: nil)
