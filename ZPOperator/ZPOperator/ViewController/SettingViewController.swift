@@ -132,7 +132,8 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
             print("done \(Thread.current)")
         }
         
-        
+        //1.正品溯源，单从名字上来看，有两点：一是我们对正追求，二是建立溯源过程。如果说追求是目标，是理想的话，那么建立溯源过程则是我们当前要做的事情。正品溯源的成立有其特殊背景和使命，我觉得与其他溯源性质的公司不同，我们更应该有一种使命感和责任感，那么我们所做的就是一个更有意义的事情。虽然过程会很艰难，未来也不明朗，但是我依然很乐观，我相信有梦想谁都了不起，谁都可以走向成功。
+        //2.周末听了胡总的分享，感触很多，很多问题：公司的、个人的，工作状态，工作方式等等，感觉每一个环节都在拖后腿。不同于成熟企业，每个企业在其发展过程中都有不同的问题，但是通过类似这种分享会，讲座，我们能更快的发现问题，正视问题，解决问题，并将实现弯道超车。还有我们的产品一定要早日走向市场，由市场来检验我们的成果，根据市场来调整和优化产品，这才是走向成功的捷径！
         
     }
 
@@ -175,8 +176,9 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         if indexPath.section == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
             if indexPath.row == 0 {
-                let vc = JXPhotoBrowserController(collectionViewLayout: UICollectionViewFlowLayout())
-                self.navigationController?.present(vc, animated: true, completion: nil)
+//                let vc = JXPhotoBrowserController(collectionViewLayout: UICollectionViewFlowLayout())
+//                vc.currentPage = 2
+//                self.navigationController?.present(vc, animated: true, completion: nil)
             }else if indexPath.row == 1{
                 performSegue(withIdentifier: "AboutUs", sender: nil)
             }else{

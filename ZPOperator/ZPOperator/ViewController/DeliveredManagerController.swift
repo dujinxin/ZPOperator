@@ -68,7 +68,7 @@ class DeliveredManagerController: ZPTableViewController {
 
         self.deliverBatchIdLabel.text = self.traceDeliverSubModel?.batchCode
         self.deliverProduct.text = self.traceDeliverSubModel?.goodsName
-        self.deliverProductWeightLabel.text = self.traceDeliverSubModel?.counts
+        self.deliverProductWeightLabel.text = String(format: "%@", self.traceDeliverSubModel?.counts ?? "0")
         self.deliverAddressLabel.text = self.traceDeliverSubModel?.stationName
         
         if let province = self.traceDeliverSubModel?.province,

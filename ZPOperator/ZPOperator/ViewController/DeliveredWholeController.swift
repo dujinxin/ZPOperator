@@ -152,7 +152,15 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             
             let model = self.detailVM.dataArray[indexPath.row - 1]
             cell.model = model
-            
+            cell.imageViewBlock = {index in
+                let vc = JXPhotoBrowserController(collectionViewLayout: UICollectionViewFlowLayout())
+                vc.currentPage = index
+                vc.images = model.images!
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            }
+            //PLBuildVersion is implemented in both 
+            ///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/PrivateFrameworks/AssetsLibraryServices.framework/AssetsLibraryServices (0x11e681cc0)
+            ///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/PhotoLibraryServices (0x11e4986f0).
             return cell
         }
         

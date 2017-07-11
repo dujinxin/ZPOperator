@@ -265,6 +265,12 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
 }
 
 extension DeliveringManagerController: UITextFieldDelegate{
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        if textField == self.startTextField {
+//            return false
+//        }
+        return true
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
 //        //获得键盘所在的window视图
 //        let array = UIApplication.shared.windows

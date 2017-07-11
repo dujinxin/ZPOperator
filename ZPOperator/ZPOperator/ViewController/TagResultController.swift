@@ -147,6 +147,12 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
             
             let model = self.detailVM.dataArray[indexPath.row - 2]
             cell.model = model
+            cell.imageViewBlock = {index in
+                let vc = JXPhotoBrowserController(collectionViewLayout: UICollectionViewFlowLayout())
+                vc.currentPage = index
+                vc.images = model.images!
+                self.navigationController?.present(vc, animated: true, completion: nil)
+            }
             
             return cell
         }

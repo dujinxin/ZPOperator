@@ -151,24 +151,28 @@ class TraceSourceDetailVM {
     }
     func submitTS2222(goodId:String,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
-        let request = JXRequest.init()
-        request.requestUrl = ApiString.saveTS.rawValue
-        request.param = ["goods.id":goodId]
-        request.success = { (data, message) in
-            completion(data, message, true)
-        }
-        request.failure = { (message, code) in
-            completion(nil, message, false)
-        }
-        request.construct = {
-            return { (formData) in
-                let str = NSHomeDirectory() + "/Documents/userImage.jpg"
-                let url = URL.init(fileURLWithPath: str)
-                let data = try? Data.init(contentsOf: url)
-                formData.appendPart(withFileData: data!, name: "image", fileName: "userImage.jpg", mimeType: "image/jpeg")
-            }
-        }
-        request.startRequest()
+//        let request = JXRequest.init(tag: 0, url: ApiString.saveTS.rawValue, param: ["goods.id":goodId], success: { (responseData, msg) in
+//            //
+//        }) { (msg, errorCode) in
+//            //
+//        }
+//        request.requestUrl = ApiString.saveTS.rawValue
+//        request.param = ["goods.id":goodId]
+//        request.success = { (data, message) in
+//            completion(data, message, true)
+//        }
+//        request.failure = { (message, code) in
+//            completion(nil, message, false)
+//        }
+//        request.construct = {
+//            return { (formData) in
+//                let str = NSHomeDirectory() + "/Documents/userImage.jpg"
+//                let url = URL.init(fileURLWithPath: str)
+//                let data = try? Data.init(contentsOf: url)
+//                formData.appendPart(withFileData: data!, name: "image", fileName: "userImage.jpg", mimeType: "image/jpeg")
+//            }
+//        }
+//        request.startRequest()
         
         
         JXRequest.request(url: ApiString.saveTS.rawValue, param: ["goods.id":goodId], success: { (data, message) in

@@ -8,12 +8,15 @@
 
 import UIKit
 
+
 private let reuseIdentifier = "Cell"
 
 class JXPhotoBrowserController: UICollectionViewController {
     
+    ///图片数组
     var images = Array<String>()
-    var currentPage = 1
+    ///当前页码
+    var currentPage = 0
     
     lazy var pageLabel: UILabel = {
         let lab = UILabel()
@@ -31,13 +34,13 @@ class JXPhotoBrowserController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        images = [
-            "http://img.izheng.org/d879ec5f-43dc-4860-ba35-ca63c974a83b",
-            "http://img.izheng.org/e0cc9b48-aaad-47a4-bc0b-1133189b148d",
-            "http://img.izheng.org/be2c15bb-d877-4580-802e-57e2252c4600",
-            "http://img.izheng.org/2017-07-08_uwbkzimk.png",
-            "http://img.izheng.org/2017-07-08_uzhmpsrc.png"
-        ]
+//        images = [
+//            "http://img.izheng.org/d879ec5f-43dc-4860-ba35-ca63c974a83b",
+//            "http://img.izheng.org/e0cc9b48-aaad-47a4-bc0b-1133189b148d",
+//            "http://img.izheng.org/be2c15bb-d877-4580-802e-57e2252c4600",
+//            "http://img.izheng.org/2017-07-08_uwbkzimk.png",
+//            "http://img.izheng.org/2017-07-08_uzhmpsrc.png"
+//        ]
         
         let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -57,9 +60,11 @@ class JXPhotoBrowserController: UICollectionViewController {
         view.addSubview(self.pageLabel)
         
         pageLabel.center = CGPoint(x: view.center.x, y: view.bounds.height - 80)
-        pageLabel.text = "\(self.currentPage)/\(self.images.count)"
+        pageLabel.text = "\(self.currentPage + 1)/\(self.images.count)"
         
 
+        //显示默认设置的页码
+        self.collectionView?.scrollToItem(at: IndexPath.init(item: currentPage, section: 0), at: .left, animated: false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -99,18 +104,31 @@ class JXPhotoBrowserController: UICollectionViewController {
             self.dismiss(animated: true, completion: nil)
         }
         cell.showAddtionBlock = {
-//            let action = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//            action.addAction(UIAlertAction(title: "保存图片", style: .destructive, handler: { (action) in
-//                print("save album")
-//                UIImage.save(image: cell.imageView.image!, completion: nil)
-//            }))
-//            action.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
-//                
-//            }))
-//            self.present(action, animated: true, completion: nil)
+            let actionVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            actionVC.addAction(UIAlertAction(title: "保存图片", style: .destructive, handler: { (action) in
+                //UIImage.save(image: cell.imageView.image!, completion: nil)
+                //UIImageWriteToSavedPhotosAlbum(cell.imageView.image!, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
+                
+                UIImage.saveImage(image: cell.imageView.image!, isAlbum: false, completion: { (isSuccess, msg) in
+                    print("msg:\(msg)")
+                })
+                
+            }))
+            actionVC.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { (action) in
+                
+            }))
+            self.present(actionVC, animated: true, completion: nil)
         }
     
         return cell
+    }
+    func image(image:UIImage,didFinishSavingWithError error:Error?,contextInfo:AnyObject?) {
+        if error == nil {
+            //
+            print("保存成功")
+        }else{
+            print("保存失败:\(String(describing: error?.localizedDescription))")
+        }
     }
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -131,6 +149,7 @@ extension JXPhotoBrowserController {
     
 }
 
+/// cell 图片视图，用于缩放和处理其他特殊事件
 class PhotoImageView: UICollectionViewCell,UIScrollViewDelegate {
 
     lazy var scrollView: UIScrollView = {
@@ -182,7 +201,7 @@ class PhotoImageView: UICollectionViewCell,UIScrollViewDelegate {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - imageView gesture method
     func tapDismiss(tap:UITapGestureRecognizer) {
         //收起
         print("收起")
@@ -216,24 +235,22 @@ class PhotoImageView: UICollectionViewCell,UIScrollViewDelegate {
         switch press.state {
         case .began:
             print("long press begin")
-        case .changed:
-            print("long press changed")
         case .ended:
             print("long press ended")
-            print("do something")
-            
             if let block = showAddtionBlock {
                 block()
             }
-   
         case .cancelled:
             print("long press cancelled")
         case .failed:
             print("long press failed")
         case .possible:
             print("long press possible")
+        default://.changed 会调用多次
+            break
         }
     }
+    //MARK:- iamgeView zooming Scale
     /// 获取要缩放的视图
     ///
     /// - Parameter scrollView: scrollview

@@ -72,39 +72,71 @@ class JXNetworkManager: NSObject {
             afmanager.requestSerializer.setValue("sid=\(sid)", forHTTPHeaderField: "Cookie")
         }
         
-        
-        switch request.method {
-        case .get:
-            request.sessionTask = afmanager.get(url, parameters: request.param, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
-                self.handleTask(task: task, data: responseData, error: nil)
-            }, failure: { (task:URLSessionDataTask?, error:Error) in
-                self.handleTask(task: task!, data: nil, error: error)
+        if let customUrlRequest = request.buildCustomUrlRequest() {
+            request.sessionTask = afmanager.dataTask(with: customUrlRequest, uploadProgress: nil, downloadProgress: nil, completionHandler: { (response, responseData, error) in
+                //
+                self.handleTask(task: nil, data: responseData, error: error)
             })
-        case .post:
-//            if request. {
-//                <#code#>
-//            }
-//            afmanager.post(url, parameters: request.param, constructingBodyWith: { (formdata) in
-//                //
-//                
-//                let str = NSHomeDirectory() + "/Documents/userImage.jpg"
-//                let url = URL.init(fileURLWithPath: str)
-//                let data = try? Data.init(contentsOf: url)
-//                formdata.appendPart(withFileData: data!, name: "image", fileName: "userImage.jpg", mimeType: "image/jpeg")
-//                
-//            }, progress: nil, success: { (task, res) in
-//                //
-//            }, failure: { (task, error) in
-//                //
-//            })
-            request.sessionTask = afmanager.post(url, parameters: request.param, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
-                self.handleTask(task: task, data: responseData)
-            }, failure: { (task:URLSessionDataTask?, error:Error) in
-                self.handleTask(task: task!, error: error)
-            })
-        default: break
-            //
+        }else{
+            switch request.method {
+            case .get:
+                request.sessionTask = afmanager.get(url, parameters: request.param, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
+                    self.handleTask(task: task, data: responseData, error: nil)
+                }, failure: { (task:URLSessionDataTask?, error:Error) in
+                    self.handleTask(task: task, data: nil, error: error)
+                })
+            case .post:
+                if let constructBlock = request.customConstruct(), constructBlock != nil{
+                    request.sessionTask = afmanager.post(url, parameters: request.param, constructingBodyWith: constructBlock, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
+                        self.handleTask(task: task, data: responseData, error: nil)
+                    }, failure: { (task:URLSessionDataTask?, error:Error) in
+                        self.handleTask(task: task, data: nil, error: error)
+                    })
+                }else{
+                    request.sessionTask = afmanager.post(url, parameters: request.param, progress: nil, success: { (task:URLSessionDataTask, responseData:Any?) in
+                        self.handleTask(task: task, data: responseData)
+                    }, failure: { (task:URLSessionDataTask?, error:Error) in
+                        self.handleTask(task: task, error: error)
+                    })
+                }
+                //            afmanager.post(url, parameters: request.param, constructingBodyWith: { (formdata) in
+                //                //
+                //
+                //                let str = NSHomeDirectory() + "/Documents/userImage.jpg"
+                //                let url = URL.init(fileURLWithPath: str)
+                //                let data = try? Data.init(contentsOf: url)
+                //                formdata.appendPart(withFileData: data!, name: "image", fileName: "userImage.jpg", mimeType: "image/jpeg")
+                //
+                //            }, progress: nil, success: { (task, res) in
+                //                //
+                //            }, failure: { (task, error) in
+                //                //
+                //            })
+            case .delete:
+                request.sessionTask = afmanager.delete(url, parameters: request.param, success: { (task:URLSessionDataTask, responseData:Any?) in
+                    self.handleTask(task: task, data: responseData)
+                }, failure: { (task:URLSessionDataTask?, error:Error) in
+                    self.handleTask(task: task, error: error)
+                })
+            case .put:
+                request.sessionTask = afmanager.put(url, parameters: request.param, success: { (task:URLSessionDataTask, responseData:Any?) in
+                    self.handleTask(task: task, data: responseData)
+                }, failure: { (task:URLSessionDataTask?, error:Error) in
+                    self.handleTask(task: task, error: error)
+                })
+            case .head:
+                request.sessionTask = afmanager.head(url, parameters: request.param, success: { (task:URLSessionDataTask) in
+                    self.handleTask(task: task, data: nil)
+                }, failure: { (task:URLSessionDataTask?, error:Error) in
+                    self.handleTask(task: task, error: error)
+                })
+            default:
+                assert(request.method == .unknow, "请求类型未知")
+                break
+            }
         }
+        
+        
         
         addRequest(request: request)
     }
@@ -214,11 +246,13 @@ extension JXNetworkManager {
 //MARK: 结果处理 response handle
 extension JXNetworkManager {
     
-    func handleTask(task:URLSessionDataTask, data:Any? = nil, error:Error? = nil) {
+    func handleTask(task:URLSessionDataTask?, data:Any? = nil, error:Error? = nil) {
+        ///
+        guard let task = task else {
+                return
+        }
         //
         let key = requestHashKey(task: task)
-        ///
-        
         guard let request = requestCache[key] else {
             return
         }
@@ -229,14 +263,7 @@ extension JXNetworkManager {
         } else {
             request.requestFailure(error: error!)
         }
-        
-        
-//        if error == nil {
-//            request.requestSuccess(responseData: data!)
-//        } else {
-//            request.requestFailure(responseData: error!)
-//        }
-        
+
         requestCache.removeValue(forKey: key)
     }
     
@@ -244,9 +271,7 @@ extension JXNetworkManager {
         let result = request.statusCodeValidate()
         return result
     }
-    
-    
-    
+   
 }
 
 extension JXNetworkManager {

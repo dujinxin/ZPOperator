@@ -36,6 +36,8 @@ enum JXNetworkError : Int {
     case kRequestErrorResourceUnavailable = -1008
     case kRequestErrorNotConnectedToInternet = -1009                  /*网络连接断开*/
     
+    case kRequestErrorBadServerResponse = 		-1011
+    
 }
 
 let kRequestTimeOutDomain = "网络请求超时"

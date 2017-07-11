@@ -30,7 +30,7 @@ class TraceDeliverSubModel: BaseModel {
     var Batch : String?
     var batchStatus : NSNumber?
     var goodsName : String?
-    var counts : String?
+    var counts : NSNumber?     //改为Int
     var stationName : String?
     var batchCode:String?
     var traceBatch :String?

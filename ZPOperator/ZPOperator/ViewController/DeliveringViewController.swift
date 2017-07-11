@@ -259,7 +259,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             rightLabel.lineBreakMode = .byTruncatingMiddle
             if let goodsName = deliveringModel?.goodsName,
                let counts = deliveringModel?.counts{
-                rightLabel.text = goodsName + "      " + counts
+                rightLabel.text = goodsName + "      " + String(format: "%@", counts)
             }
             view?.addSubview(rightLabel)
        
