@@ -11,6 +11,6 @@ import UIKit
 class BaseModel: NSObject {
 
     override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        print("undefinedKey:\(key) Value:\(String(describing: value))")
+        print("class:\(type(of: self)) undefinedKey:\(key) Value:\(String(describing: value))")
     }
 }

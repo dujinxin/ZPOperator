@@ -10,7 +10,7 @@ import Foundation
 
 class DeliveringManagerVM {
     
-    var deliveringBatches = Array<MainSubModel>()
+    var deliveringManagerModel = DeliveringManagerModel()
     
     func deliveringManagerSubmit(id:Int,traceBatchId:Int,startCode:String,endCode:String,counts:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
@@ -34,17 +34,21 @@ class DeliveringManagerVM {
     func loadDeliveringBatch(batchId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
-        JXRequest.request(url: ApiString.deliveringBatch.rawValue, param: ["batchId":batchId], success: { (data, message) in
+        JXRequest.request(url: ApiString.deliveringManager.rawValue, param: ["batchId":batchId], success: { (data, message) in
             
-            guard let array = data as? Array<Dictionary<String,Any>>
+            guard
+                let dict = data as? Dictionary<String,Any>,
+                let array = dict["traceBatches"] as? Array<Dictionary<String,Any>>
                 else{
+                    completion(data, message, false)
                     return
             }
-            self.deliveringBatches.removeAll()
+            self.deliveringManagerModel.setValuesForKeys(dict)
+            self.deliveringManagerModel.traceBatches.removeAll()
             for d in array{
                 let model = MainSubModel()
                 model.setValuesForKeys(d)
-                self.deliveringBatches.append(model)
+                self.deliveringManagerModel.traceBatches.append(model)
             }
             
             completion(data, message, true)

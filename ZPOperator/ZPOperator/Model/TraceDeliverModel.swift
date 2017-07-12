@@ -52,7 +52,14 @@ class TraceDeliverSubModel: BaseModel {
     
     
     
-    override func setValue(_ value: Any?, forUndefinedKey key: String) {
-        print("undefinedKey:\(key) Value:\(String(describing: value))")
-    }
+//    override func setValue(_ value: Any?, forUndefinedKey key: String) {
+//        print("undefinedKey:\(key) Value:\(String(describing: value))")
+//    }
+}
+
+class DeliveringManagerModel: BaseModel {
+    var startCode : String?
+    var endCode : String?
+    var counts : Int = 0
+    var traceBatches = Array<MainSubModel>()
 }

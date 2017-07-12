@@ -29,7 +29,7 @@ class DeliveringManagerController: ZPTableViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     
-    var batchId : Int = -1
+    var batchId : Int = -2 //不做选择为-2，选择暂无溯源批次为 -1，大于0的已选的批次
     var batchArray = Array<String>()
     var confirmArray = Array<String>()
     var tagNum : Int = 0
@@ -52,6 +52,8 @@ class DeliveringManagerController: ZPTableViewController {
         super.viewDidLoad()
         
         self.operatorLabel.text = LoginVM.loginVMManager.userModel.userName
+        
+        
         
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = UIColor.gray
@@ -104,10 +106,18 @@ class DeliveringManagerController: ZPTableViewController {
         
         self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess) in
             if isSuccess {
-                for modal in self.vm.deliveringBatches {
+                self.startTextField.text = self.vm.deliveringManagerModel.startCode
+                self.endTextField.text = self.vm.deliveringManagerModel.endCode
+                self.numberLabel.text = String(format: "%d", self.vm.deliveringManagerModel.counts)
+                
+                for modal in self.vm.deliveringManagerModel.traceBatches {
                     self.batchArray.append(modal.name!)
                 }
                 self.batchArray.append("暂无溯源批次")
+            }else{
+                self.traceSourceButton.isEnabled = false
+                self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
+                ViewManager.showNotice(notice: msg)
             }
         }
         
@@ -136,7 +146,7 @@ class DeliveringManagerController: ZPTableViewController {
                 self.vm.loadDeliveringBatch(batchId: self.deliverModel?.id as! Int) { (data, msg, isSuccess) in
                     if isSuccess {
                         self.batchArray.removeAll()
-                        for modal in self.vm.deliveringBatches {
+                        for modal in self.vm.deliveringManagerModel.traceBatches {
                             self.batchArray.append(modal.name!)
                         }
                         self.batchArray.append("暂无溯源批次")
@@ -159,16 +169,34 @@ class DeliveringManagerController: ZPTableViewController {
         startTextField.resignFirstResponder()
         endTextField.resignFirstResponder()
         
-        self.confirmArray.removeAll()
-        self.confirmArray.append(String.init(format: "溯源批次：%@", (self.traceSourceButton.currentTitle)!))
-        self.confirmArray.append(String.init(format: "开始编码：%@", self.startTextField.text!))
-        self.confirmArray.append(String.init(format: "结束编码：%@", self.endTextField.text!))
-        self.confirmArray.append(String.init(format: "标签数量：%ld", self.tagNum))
-        self.confirmArray.append(String.init(format: "操作网点：%@", (self.deliverOperatorModel?.station)!))
-        self.confirmArray.append(String.init(format: "操作人：%@", (self.deliverOperatorModel?.name)!))
         
-        self.selectView?.resetFrame(height: 44 * 6 + 88)
-        self.selectView?.show()
+        if
+            let startCode = self.startTextField.text,
+            let endCode = self.endTextField.text,
+            let station = self.deliverOperatorModel?.station,
+            let name = self.deliverOperatorModel?.name
+        {
+            if String.validateCode(code: endCode) == false {
+                ViewManager.showNotice(notice: "请输入12位纯数字编码")
+                return
+            }
+            if Int(endCode)! < Int(self.vm.deliveringManagerModel.endCode!)!{
+                ViewManager.showNotice(notice: "结束编码不能小于默认编码")
+                return
+            }
+            self.confirmArray.removeAll()
+            self.confirmArray.append(String.init(format: "溯源批次：%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
+            self.confirmArray.append(String.init(format: "开始编码：%@", startCode))
+            self.confirmArray.append(String.init(format: "结束编码：%@", endCode))
+            self.confirmArray.append(String.init(format: "标签数量：%d", self.vm.deliveringManagerModel.counts))
+            self.confirmArray.append(String.init(format: "操作网点：%@", station))
+            self.confirmArray.append(String.init(format: "操作人：%@", name))
+            
+            self.selectView?.resetFrame(height: 44 * 6 + 88)
+            self.selectView?.show()
+        }
+        
+        
     }
 
     // MARK: - Table view data source
@@ -220,15 +248,23 @@ class DeliveringManagerController: ZPTableViewController {
 
 extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
-        if index < self.vm.deliveringBatches.count {
-            let model = self.vm.deliveringBatches[index]
+        if index < self.vm.deliveringManagerModel.traceBatches.count {
+            let model = self.vm.deliveringManagerModel.traceBatches[index]
             self.traceSourceButton.setTitle(model.name, for: .normal)
             batchId = model.id as! Int
+            
+            if (endTextField.text?.characters.isEmpty)! {
+                submitButton.backgroundColor = UIColor.gray
+                submitButton.isEnabled = false
+            }else{
+                submitButton.backgroundColor = UIColor.originColor
+                submitButton.isEnabled = true
+            }
         }else{
             let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
             alert.show()
-            
         }
+        
         
     }
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
@@ -241,6 +277,14 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
             batchId = -1
             self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
             print("发货")
+            
+            if (endTextField.text?.characters.isEmpty)! {
+                submitButton.backgroundColor = UIColor.gray
+                submitButton.isEnabled = false
+            }else{
+                submitButton.backgroundColor = UIColor.originColor
+                submitButton.isEnabled = true
+            }
         }
     }
     func dismissSelectView() {
@@ -250,7 +294,7 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
      
         self.selectView?.dismiss()
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: tagNum) { (data, msg, isSuccess) in
+        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliveringManagerModel.counts) { (data, msg, isSuccess) in
             
             MBProgressHUD.hide(for: self.view, animated: true)
             ViewManager.showNotice(notice: msg)
@@ -266,9 +310,9 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
 
 extension DeliveringManagerController: UITextFieldDelegate{
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        if textField == self.startTextField {
-//            return false
-//        }
+        if textField == self.startTextField {
+            return false
+        }
         return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -307,32 +351,23 @@ extension DeliveringManagerController: UITextFieldDelegate{
     
     func textChange(notify:NSNotification) {
         
-        if notify.object is UITextField {
-            if startTextField.text?.characters.count == 12 && endTextField.text?.characters.count != 0{
-                if let startNum = Int(startTextField.text!),
-                    let endNum = Int(endTextField.text!){
-                    if endNum >= startNum {
-                        numberLabel.text = String(endNum - startNum + 1)
-                        numberLabel.textColor = UIColor.black
-                        submitButton.backgroundColor = UIColor.originColor
-                        submitButton.isEnabled = true
-                        tagNum = endNum - startNum + 1
-                    }else{
-                        numberLabel.text = String(endNum - startNum + 1)
-                        numberLabel.textColor = UIColor.red
-                        submitButton.backgroundColor = UIColor.gray
-                        submitButton.isEnabled = false
-                    }
-                }else{
-                    submitButton.backgroundColor = UIColor.gray
-                    submitButton.isEnabled = false
-                }
-                
-                
+        if  notify.object is UITextField,
+            let endStr = endTextField.text,
+            let endCode = self.vm.deliveringManagerModel.endCode,
+            let endNumber = Int(endCode),
+            let number = Int(endStr),
+            endStr.characters.count == 12
+        {
+            
+            if number >= endNumber {
+                submitButton.backgroundColor = UIColor.originColor
+                submitButton.isEnabled = true
             }else{
-                submitButton.backgroundColor = UIColor.gray
-                submitButton.isEnabled = false
+                ViewManager.showNotice(notice: "不能小于默认结束编码")
             }
+        }else{
+            submitButton.backgroundColor = UIColor.gray
+            submitButton.isEnabled = false
         }
     }
     // 键盘出现处理事件
