@@ -59,11 +59,11 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         self.versionLabel.text = "v1.0.0"
         
         //logoutButton.layer.cornerRadius = 5
-        //logoutButton.backgroundColor = UIColor.originColor
+        //logoutButton.backgroundColor = JXOrangeColor
 
         let cancelView : UIView = {
             let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
-            view.backgroundColor = UIColor.originColor
+            view.backgroundColor = JXOrangeColor
             
             
             let button = UIButton()

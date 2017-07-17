@@ -39,6 +39,9 @@ class UserModel: BaseModel {
     
 
     func saveAccound(dict:Dictionary<String, Any>) -> Bool {
+        
+        setValuesForKeys(dict)
+        
         guard let data = try? JSONSerialization.data(withJSONObject: dict, options: [])
          else {
             return false

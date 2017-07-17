@@ -96,7 +96,11 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return self.mainVM.dataArray.count + 1
+        if self.mainVM.dataArray.count == 0 {
+            return self.mainVM.dataArray.count + 1
+        }else{
+            return self.mainVM.dataArray.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,7 +109,8 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         // Configure the cell
         //cell.backgroundColor = UIColor.red
         cell.contentView.layer.cornerRadius = 5
-        cell.contentView.layer.borderColor = UIColor.rgbColor(from: 35, 68, 120).cgColor
+        //cell.contentView.layer.borderColor = UIColor.rgbColor(from: 35, 68, 120).cgColor
+        cell.contentView.layer.borderColor = UIColor.rgbColor(rgbValue: 0x0469c8).cgColor
         cell.contentView.layer.borderWidth = 1
         
         if indexPath.item < self.mainVM.dataArray.count {
@@ -190,7 +195,11 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
             case "TraceSourceDetail":
                 let dvc = segue.destination as! TraceDetailController
                 dvc.traceBatchId = sender as? NSNumber
-                
+            case "traceSourceAdd":
+                let dvc = segue.destination as! TraceSAddViewController
+                dvc.traceSAddBlock = {()->()in
+                    self.collectionView?.mj_header.beginRefreshing()
+                }
             default:
                 break
             }

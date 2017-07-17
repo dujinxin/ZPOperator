@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ModifyPasswordViewController: ZPTableViewController {
 
@@ -56,8 +57,9 @@ class ModifyPasswordViewController: ZPTableViewController {
             return
         }
         
-        
+        MBProgressHUD.showAdded(to: view, animated: true)
         self.vm.modifyPassword(old: oldPassword, new: newPassword) { (data, msg, isSuccess) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if isSuccess {
                 self.navigationController?.popViewController(animated: true)
             }else{
@@ -72,13 +74,12 @@ class ModifyPasswordViewController: ZPTableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
         confirmButton.layer.cornerRadius = 5
-        confirmButton.backgroundColor = UIColor.gray
+        confirmButton.backgroundColor = JXGrayColor
         confirmButton.isEnabled = false
         
         newLookButton.isSelected = false
         againTextField.isSelected = false
-        
-        //originColor
+ 
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.UITextFieldTextDidChange, object: nil)
@@ -132,10 +133,10 @@ extension ModifyPasswordViewController : UITextFieldDelegate{
         
         if notify.object is UITextField {
             if oldTextField.text?.characters.count != 0 && newTextField.text?.characters.count != 0 && againTextField.text?.characters.count != 0 {
-                confirmButton.backgroundColor = UIColor.originColor
+                confirmButton.backgroundColor = JXOrangeColor
                 confirmButton.isEnabled = true
             }else{
-                confirmButton.backgroundColor = UIColor.gray
+                confirmButton.backgroundColor = JXGrayColor
                 confirmButton.isEnabled = false
             }
         }

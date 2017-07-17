@@ -16,7 +16,8 @@ enum TraceRecordWhereFrom : Int{
 }
 
 private let reuseIdentifier = "reuseIdentifier"
-private let reuseIdentifierNib = "reuseIdentifierNib"
+private let reuseIdentifierNib1 = "reuseIdentifierNib1"
+private let reuseIdentifierNib2 = "reuseIdentifierNib2"
 
 class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -24,6 +25,8 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
     
+    @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addButtonWidthConstraint: NSLayoutConstraint!
     var traceBatchId : NSNumber? //溯源批次id,详情用
     var batchId : NSNumber? //批次id ,全程溯源用
     var tagCode : String? //查询编号 ,标签查询结果用
@@ -44,19 +47,11 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
 
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
-        //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        self.addButtonWidthConstraint.constant = 44 * kPercent
+        self.addButtonHeightConstraint.constant = 44 * kPercent
         
-//        if !isFromTag {
-//            self.detailVM.traceSourceDetail(page:1,traceBatchId: traceBatchId!) { (data, msg, isSuccess) in
-//                if isSuccess {
-//                    self.tableView.reloadData()
-//                }else{
-//                    print(msg)
-//                }
-//            }
-//        }
-        
+        self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib1)
+        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib2)
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.currentPage = 1
             self.loadData(page: 1)
@@ -137,6 +132,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 44)
                     lab.backgroundColor = UIColor.white
                     lab.textAlignment = .left
+                    lab.textColor = JX333333Color
                     lab.font = UIFont.systemFont(ofSize: 15)
                     lab.tag = 10
                     
@@ -164,6 +160,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
                     lab1.backgroundColor = UIColor.white
                     lab1.textAlignment = .left
+                    lab1.textColor = JX333333Color
                     lab1.font = UIFont.systemFont(ofSize: 15)
                     lab1.tag = 10
                     
@@ -174,6 +171,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                     lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
                     lab2.backgroundColor = UIColor.white
                     lab2.textAlignment = .left
+                    lab2.textColor = JX333333Color
                     lab2.font = UIFont.systemFont(ofSize: 13)
                     lab2.tag = 11
                     
@@ -193,7 +191,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
                 
                 return cell!
             }else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib, for: indexPath) as! TraceSourceCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell
                 // Configure the cell...
                 cell.selectionStyle = .none
                 
@@ -205,60 +203,20 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             }
         }else {
             if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib1, for: indexPath) as? DeliverListCell
+                cell?.selectionStyle = .none
+                cell?.accessoryType = .none
                 
-                var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
-                if cell == nil {
-                    cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
-                    
-                    cell?.contentView.backgroundColor = UIColor.groupTableViewBackground
-                    cell?.selectionStyle = .none
-                    
-                    let lab1 = UILabel()
-                    lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
-                    lab1.backgroundColor = UIColor.white
-                    lab1.textAlignment = .left
-                    lab1.font = UIFont.systemFont(ofSize: 15)
-                    lab1.tag = 10
-                    
-                    cell?.contentView.addSubview(lab1)
-                    
-                    
-                    let lab2 = UILabel()
-                    lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
-                    lab2.backgroundColor = UIColor.white
-                    lab2.textAlignment = .left
-                    lab2.font = UIFont.systemFont(ofSize: 13)
-                    lab2.tag = 11
-                    
-                    cell?.contentView.addSubview(lab2)
-                }
-                let lab1 = cell?.contentView.viewWithTag(10) as? UILabel
-                let lab2 = cell?.contentView.viewWithTag(11) as? UILabel
-                // Configure the cell...
-                //lab1?.text = vm.traceSourceDetail?.traceBatchName
-                
-                if whereFrom == .wholeTrace {
-                    if let traceBatchName = detailVM.traceSourceWhole.batch.goodsName {
-                        lab1?.text = String.init(format: "   %@", traceBatchName)
-                    }
-                    lab2?.text = "   发货批次号："
-                    if let code = detailVM.traceSourceWhole.batch.code {
-                        lab2?.text = String.init(format: "   发货批次号：%@", code)
-                    }
+                cell?.TitleLabel.text = detailVM.traceSourceDetail.traceBatch?.traceBatchName
+                if let code = detailVM.traceSourceDetail.traceBatch?.traceBatchCreateBy {
+                    cell?.DetailTitleLabel.text = String.init(format: "溯源创建人 %@", code)
                 }else{
-                    if let traceBatchName = detailVM.traceSourceDetail.traceBatch?.traceBatchName {
-                        lab1?.text = String.init(format: "   %@", traceBatchName)
-                    }
-                    lab2?.text = "   溯源创建人："
-                    if let code = detailVM.traceSourceDetail.traceBatch?.traceBatchCreateBy {
-                        lab2?.text = String.init(format: "   溯源创建人：%@", code)
-                    }
+                    cell?.DetailTitleLabel.text = "溯源创建人"
                 }
-                
-                
                 return cell!
+            
             }else{
-                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib, for: indexPath) as! TraceSourceCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell
                 cell.selectionStyle = .none
                 // Configure the cell...
                 
@@ -307,7 +265,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             }
         }else{
             if indexPath.row == 0 {
-                return 60 + 10
+                return 54
             }else{
                 return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 1].images)
             }

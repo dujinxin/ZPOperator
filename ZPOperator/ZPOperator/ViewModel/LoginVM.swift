@@ -40,8 +40,10 @@ class LoginVM {
                 for (key,value) in dict {
                     mDict[key] = value
                 }
-                JXNetworkManager.manager.userAccound = UserModel()
                 print("保存（登录-设置）信息成功：\(self.userModel.saveAccound(dict: mDict))")
+                JXNetworkManager.manager.userAccound = UserModel()
+                
+                self.userModel.setValuesForKeys(mDict)
                 completion(data,message,true)
             })
             

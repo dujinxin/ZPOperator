@@ -18,6 +18,7 @@ enum JXNetworkError : Int {
     case kResponseTokenDisabled      = 201  //token过期
     case kResponseFailed      = 202
     case kResponseUnknow      = 203
+    case kResponseDeliverTagNotEnough = 204
     
     
     case kResponseDataError = 3840    /*数据有误*/

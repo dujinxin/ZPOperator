@@ -62,7 +62,7 @@ class DeliveredManagerController: ZPTableViewController {
         
         self.deliveredBatchId = (self.traceDeliverSubModel?.id?.intValue)!
         
-        self.traceDetailButton.backgroundColor = UIColor.originColor
+        self.traceDetailButton.backgroundColor = JXOrangeColor
         self.traceDetailButton.layer.cornerRadius = 5
         
 
@@ -79,8 +79,10 @@ class DeliveredManagerController: ZPTableViewController {
             self.receiveAddressLabel.text = province + city + country + address
         }
         
-        
-        self.remarkLabel.text = self.traceDeliverSubModel?.remarks
+        if let remarks = self.traceDeliverSubModel?.remarks,
+            remarks.isEmpty == false{
+            self.remarkLabel.text = self.traceDeliverSubModel?.remarks
+        }
         self.traceBatchLabel.text = self.traceDeliverSubModel?.traceBatch
         self.startNumLabel.text = self.traceDeliverSubModel?.startCode
         self.endNumLabel.text = self.traceDeliverSubModel?.endCode

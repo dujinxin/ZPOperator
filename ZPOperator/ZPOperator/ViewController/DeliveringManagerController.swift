@@ -56,7 +56,7 @@ class DeliveringManagerController: ZPTableViewController {
         
         
         submitButton.layer.cornerRadius = 5
-        submitButton.backgroundColor = UIColor.gray
+        submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
         
         self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
@@ -85,7 +85,8 @@ class DeliveringManagerController: ZPTableViewController {
             let button = UIButton()
             button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
             //button.center = CGPoint(x: 30, y: view.jxCenterY)
-            button.setTitle("×", for: .normal)
+            //button.setTitle("×", for: .normal)
+            button.setImage(UIImage(named:"cancel"), for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
             button.setTitleColor(JX333333Color, for: .normal)
             button.contentVerticalAlignment = .center
@@ -104,7 +105,7 @@ class DeliveringManagerController: ZPTableViewController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notify:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
       
         
-        self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess) in
+        self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess,code) in
             if isSuccess {
                 self.startTextField.text = self.vm.deliveringManagerModel.startCode
                 self.endTextField.text = self.vm.deliveringManagerModel.endCode
@@ -117,7 +118,14 @@ class DeliveringManagerController: ZPTableViewController {
             }else{
                 self.traceSourceButton.isEnabled = false
                 self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
-                ViewManager.showNotice(notice: msg)
+                
+                if code == JXNetworkError.kResponseDeliverTagNotEnough {
+                    let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                    alert.tag = 11
+                    alert.show()
+                }else{
+                    ViewManager.showNotice(notice: msg)
+                }
             }
         }
         
@@ -143,13 +151,21 @@ class DeliveringManagerController: ZPTableViewController {
         if identifier ==  "traceSourceAdd" {
             let vc = segue.destination as! TraceSAddViewController
             vc.traceSAddBlock = {()->() in
-                self.vm.loadDeliveringBatch(batchId: self.deliverModel?.id as! Int) { (data, msg, isSuccess) in
+                self.vm.loadDeliveringBatch(batchId: self.deliverModel?.id as! Int) { (data, msg, isSuccess,code) in
                     if isSuccess {
                         self.batchArray.removeAll()
                         for modal in self.vm.deliveringManagerModel.traceBatches {
                             self.batchArray.append(modal.name!)
                         }
                         self.batchArray.append("暂无溯源批次")
+                    }else{
+                        if code == JXNetworkError.kResponseDeliverTagNotEnough {
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            alert.tag = 11
+                            alert.show()
+                        }else{
+                            ViewManager.showNotice(notice: msg)
+                        }
                     }
                 }
             }
@@ -185,12 +201,12 @@ class DeliveringManagerController: ZPTableViewController {
                 return
             }
             self.confirmArray.removeAll()
-            self.confirmArray.append(String.init(format: "溯源批次：%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
-            self.confirmArray.append(String.init(format: "开始编码：%@", startCode))
-            self.confirmArray.append(String.init(format: "结束编码：%@", endCode))
-            self.confirmArray.append(String.init(format: "标签数量：%d", self.vm.deliveringManagerModel.counts))
-            self.confirmArray.append(String.init(format: "操作网点：%@", station))
-            self.confirmArray.append(String.init(format: "操作人：%@", name))
+            self.confirmArray.append(String.init(format: "%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
+            self.confirmArray.append(String.init(format: "%@", startCode))
+            self.confirmArray.append(String.init(format: "%@", endCode))
+            self.confirmArray.append(String.init(format: "%d", self.vm.deliveringManagerModel.counts))
+            self.confirmArray.append(String.init(format: "%@", station))
+            self.confirmArray.append(String.init(format: "%@", name))
             
             self.selectView?.resetFrame(height: 44 * 6 + 88)
             self.selectView?.show()
@@ -203,7 +219,7 @@ class DeliveringManagerController: ZPTableViewController {
 
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
+        if section == 2 {
             
             let contentView = UIView()
             contentView.frame = CGRect.init(x: 0, y: 0, width: view.frame.width, height: 30)
@@ -211,10 +227,10 @@ class DeliveringManagerController: ZPTableViewController {
             
             let titleLabel = UILabel()
             titleLabel.frame = CGRect.init(x: 15, y: 0, width: view.frame.width - 30, height: 30)
-            titleLabel.text = "输入已按顺序贴码标签的编码"
+            titleLabel.text = "结尾编码可修改为更大数值"
             titleLabel.font = UIFont.systemFont(ofSize: 14)
             titleLabel.textAlignment = .left
-            titleLabel.textColor = UIColor.black
+            titleLabel.textColor = JX666666Color
             
             contentView.addSubview(titleLabel)
             
@@ -227,10 +243,10 @@ class DeliveringManagerController: ZPTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 0
-        }else if section == 1 {
-            return 30
-        }else if section == 2 || section == 3 {
+        }else if section == 1 || section == 3 {
             return 10
+        }else if section == 2{
+            return 30
         }else{
             return 64
         }
@@ -254,38 +270,44 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
             batchId = model.id as! Int
             
             if (endTextField.text?.characters.isEmpty)! {
-                submitButton.backgroundColor = UIColor.gray
+                submitButton.backgroundColor = JXGrayColor
                 submitButton.isEnabled = false
             }else{
-                submitButton.backgroundColor = UIColor.originColor
+                submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }
         }else{
             let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+            alert.tag = 10
             alert.show()
         }
         
         
     }
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-        if buttonIndex == 0 {
-            //
-            print("添加溯源")
-            
-            self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
-        }else{
-            batchId = -1
-            self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
-            print("发货")
-            
-            if (endTextField.text?.characters.isEmpty)! {
-                submitButton.backgroundColor = UIColor.gray
-                submitButton.isEnabled = false
+        if alertView.tag == 10 {
+            if buttonIndex == 0 {
+                //
+                print("添加溯源")
+                
+                self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
             }else{
-                submitButton.backgroundColor = UIColor.originColor
-                submitButton.isEnabled = true
+                batchId = -1
+                self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
+                print("发货")
+                
+                if (endTextField.text?.characters.isEmpty)! {
+                    submitButton.backgroundColor = JXGrayColor
+                    submitButton.isEnabled = false
+                }else{
+                    submitButton.backgroundColor = JXOrangeColor
+                    submitButton.isEnabled = true
+                }
             }
+        }else{
+            self.navigationController?.popViewController(animated: true)
         }
+        
     }
     func dismissSelectView() {
         self.selectView?.dismiss()
@@ -356,17 +378,18 @@ extension DeliveringManagerController: UITextFieldDelegate{
             let endCode = self.vm.deliveringManagerModel.endCode,
             let endNumber = Int(endCode),
             let number = Int(endStr),
-            endStr.characters.count == 12
+            endStr.characters.count == 12,
+            batchId > -2
         {
             
             if number >= endNumber {
-                submitButton.backgroundColor = UIColor.originColor
+                submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{
                 ViewManager.showNotice(notice: "不能小于默认结束编码")
             }
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
     }
@@ -449,27 +472,35 @@ extension DeliveringManagerController: JXSelectViewDataSource{
         }
     }
     func jxSelectView(_: JXSelectView, viewForRow row: Int) -> UIView? {
-//        var view : UIView?
-//        let titleArray = ["发货","收货","备注"]
-//        
-//        if row == 1 || row == 2 || row == 3{
-//            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
-//            
-//            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
-//            leftLabel.textColor = UIColor.black
-//            leftLabel.textAlignment = .left
-//            leftLabel.font = UIFont.systemFont(ofSize: 14)
-//            leftLabel.text = titleArray[row - 1]
-//            view?.addSubview(leftLabel)
-//            
-//        }else
-            if row == 6{
+        var view : UIView?
+        let titleArray = ["溯源批次","开始编码","结束编码","标签数量","操作网点","操作人"]
+        
+        
+        if row < 6{
+            view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 60, height: 44))
+            leftLabel.textColor = JX999999Color
+            leftLabel.textAlignment = .left
+            leftLabel.font = UIFont.systemFont(ofSize: 14)
+            leftLabel.text = titleArray[row]
+            view?.addSubview(leftLabel)
+            
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 80 - 20, height: 44))
+            rightLabel.textColor = JX333333Color
+            rightLabel.textAlignment = .left
+            rightLabel.font = UIFont.systemFont(ofSize: 13)
+            rightLabel.text = self.confirmArray[row]
+            view?.addSubview(rightLabel)
+            
+            
+        }else{
+ 
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
             button.setTitle("确认发货批次", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
-            button.backgroundColor = UIColor.orange
+            button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5
             button.addTarget(self, action: #selector(confirmDeliver), for: UIControlEvents.touchUpInside)
             return button
@@ -543,6 +574,6 @@ extension DeliveringManagerController: JXSelectViewDataSource{
 //            
 //            view?.addSubview(addressLabel)
 //        }
-        return nil
+        return view
     }
 }

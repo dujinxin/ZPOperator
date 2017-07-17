@@ -27,7 +27,7 @@ class DeliveredViewController: ZPTableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.rowHeight = 54
-        
+        self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: Bundle.main), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             
             self.vm.loadMainData(batchStatus: 1) { (data, msg, isSuccess) in
@@ -66,19 +66,14 @@ class DeliveredViewController: ZPTableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? DeliverListCell
     
-        if cell == nil {
-            cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
-            cell?.accessoryType = .disclosureIndicator
-        }
-        
         // Configure the cell...
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         
-        cell?.textLabel?.text = model.goodsName
-        cell?.detailTextLabel?.text = model.remarks
-        
+        cell?.TitleLabel.text = model.goodsName
+        cell?.DetailTitleLabel.text = model.remarks
+    
         return cell!
     }
     

@@ -74,10 +74,10 @@ class TraceSRecordController: ZPTableViewController {
         
 
         productLabel.text = self.traceSource?.traceBatchName
-        operatorLabel.text = "操作人：" + LoginVM.loginVMManager.userModel.userName!
+        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
         
         submitButton.layer.cornerRadius = 5
-        submitButton.backgroundColor = UIColor.gray
+        submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
         
         setImages(images: self.imageArray)
@@ -387,14 +387,14 @@ extension TraceSRecordController : JXAlertViewDelegate{
            let process = processLabel.text,
            let text = textView.text{
             if text.characters.count > 0 && address.characters.count > 0 && process.characters.count > 0 {
-                submitButton.backgroundColor = UIColor.originColor
+                submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{
-                submitButton.backgroundColor = UIColor.gray
+                submitButton.backgroundColor = JXGrayColor
                 submitButton.isEnabled = false
             }
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
         
@@ -542,10 +542,10 @@ extension TraceSRecordController: UITextViewDelegate{
             placeHolderLabel.isEnabled = false
         }
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false && textView.text.isEmpty == false{
-            submitButton.backgroundColor = UIColor.originColor
+            submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
     }
@@ -557,10 +557,10 @@ extension TraceSRecordController: UITextViewDelegate{
             placeHolderLabel.isEnabled = false
         }
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
-            submitButton.backgroundColor = UIColor.originColor
+            submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
 

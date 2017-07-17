@@ -15,20 +15,29 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var lookButton: UIButton!
-    
-    lazy var vm = LoginVM()
-    
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
         
+        let attributeString1 = NSMutableAttributedString.init(string: "请向企业管理员提供手机号")
+        attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
+        userTextField.attributedPlaceholder = attributeString1
+        
+        let attributeString2 = NSMutableAttributedString.init(string: "请联系管理员")
+        attributeString2.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
+        passwordTextField.attributedPlaceholder = attributeString2
+        
+        
         lookButton.setImage(UIImage(named:"look_normal"), for: .normal)
         lookButton.setImage(UIImage(named:"look_highlight"), for: .highlighted)
         lookButton.isSelected = false
+        
+        loginButton.backgroundColor = UIColor.rgbColor(from: 153, 153, 153)
         loginButton.layer.cornerRadius = 22
+        //loginButton.alpha = 0.4
         
         
         
@@ -66,7 +75,7 @@ class LoginViewController: UIViewController {
                 return
         }
         if !String.validateTelephone(tel: phone) {
-            ViewManager.showNotice(notice: "密码格式错误")
+            ViewManager.showNotice(notice: "手机号格式错误")
             return
         }
         if password.isEmpty == true {
@@ -76,7 +85,7 @@ class LoginViewController: UIViewController {
         
         MBProgressHUD.showAdded(to: view, animated: true)
         
-        vm.login(userName: phone, password: password) { (data, msg, isSuccess) in
+        LoginVM.loginVMManager.login(userName: phone, password: password) { (data, msg, isSuccess) in
             MBProgressHUD.hide(for: self.view, animated: true)
             if isSuccess {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)

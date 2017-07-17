@@ -71,11 +71,11 @@ class DeliveredWholeRecordController: ZPTableViewController {
         self.jxAlertView?.isSetCancelView = true
         self.jxAlertView?.delegate = self
         
-        productLabel.text = self.traceBatch
-        operatorLabel.text = "操作人：" + LoginVM.loginVMManager.userModel.userName!
+//        productLabel.text = self.traceBatch
+//        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
         
         submitButton.layer.cornerRadius = 5
-        submitButton.backgroundColor = UIColor.gray
+        submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
         
         setImages(images: self.imageArray)
@@ -103,7 +103,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
                     if isSuccess{
                         //格式化数组
-                        
+                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                        self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
                         for model in self.vm.traceSourceWholeModify.traceProcesses{
                             self.processArray.append(model.name!)
                         }
@@ -118,7 +119,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
                     if isSuccess{
                         //格式化数组
-                        
+                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                        self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
                         for model in self.vm.traceSourceWholeModify.traceProcesses{
                             self.processArray.append(model.name!)
                         }
@@ -327,14 +329,14 @@ extension DeliveredWholeRecordController : JXAlertViewDelegate{
             let process = processLabel.text,
             let text = textView.text{
             if text.characters.count > 0 && address.characters.count > 0 && process.characters.count > 0 {
-                submitButton.backgroundColor = UIColor.originColor
+                submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{
-                submitButton.backgroundColor = UIColor.gray
+                submitButton.backgroundColor = JXGrayColor
                 submitButton.isEnabled = false
             }
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
         
@@ -441,10 +443,10 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
             placeHolderLabel.isEnabled = false
         }
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
-            submitButton.backgroundColor = UIColor.originColor
+            submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
     }
@@ -455,10 +457,10 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
             placeHolderLabel.isEnabled = false
         }
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false && textView.text.isEmpty == false{
-            submitButton.backgroundColor = UIColor.originColor
+            submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
         }
         

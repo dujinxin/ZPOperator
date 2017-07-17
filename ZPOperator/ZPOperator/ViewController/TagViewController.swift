@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class TagViewController: BaseViewController {
 
@@ -22,7 +23,7 @@ class TagViewController: BaseViewController {
         //searchTextField.text = "210000100101"
         
         self.searchButton.layer.cornerRadius = 5
-        self.searchButton.backgroundColor = UIColor.gray
+        self.searchButton.backgroundColor = JXGrayColor
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
@@ -48,7 +49,9 @@ class TagViewController: BaseViewController {
             ViewManager.showNotice(notice: "请输入12位纯数字标签编码")
             return
         }
+        MBProgressHUD.showAdded(to: view, animated: true)
         self.vm.traceSourceTag(page:1,code: text) { (data, msg, isSuccess) in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if isSuccess{
                 if let status = self.vm.traceSourceTag.status?.intValue{
                     switch  status{
@@ -106,10 +109,10 @@ extension TagViewController : UITextFieldDelegate{
         
         if notify.object is UITextField {
             if searchTextField.text?.characters.count != 0 {
-                searchButton.backgroundColor = UIColor.originColor
+                searchButton.backgroundColor = JXOrangeColor
                 searchButton.isEnabled = true
             }else{
-                searchButton.backgroundColor = UIColor.gray
+                searchButton.backgroundColor = JXGrayColor
                 searchButton.isEnabled = false
             }
         }

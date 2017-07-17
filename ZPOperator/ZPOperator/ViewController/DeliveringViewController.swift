@@ -76,15 +76,14 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             let button = UIButton()
             button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
             //button.center = CGPoint(x: 30, y: view.jxCenterY)
-            button.setTitle("×", for: .normal)
+            //button.setTitle("×", for: .normal)
+            button.setImage(UIImage(named:"cancel"), for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
             button.setTitleColor(JX333333Color, for: .normal)
             button.contentVerticalAlignment = .center
             button.contentHorizontalAlignment = .center
             button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
             view.addSubview(button)
-            
-            
             
             return view
         }()
@@ -118,20 +117,27 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //1.才用这种方式，cell不需要提前注册，拿不到的话会走if;如果注册，且可以正确获取，那么不走if
-        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
+        var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as? DeliverListCell
         //2.才用这种，cell必须提前注册，不注册会crash,而且注册后获取不到cell也会crash，不走if(总之不能自定义UITableViewCellStyle)
         //var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         if cell == nil {
             
-            cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
+            //cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
+            cell = Bundle.main.loadNibNamed("DeliverListCell", owner: nil, options: nil)?.last as? DeliverListCell
         }
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         // Configure the cell...
-        cell?.accessoryType = .disclosureIndicator
-        cell?.textLabel?.text = model.goodsName
-        //cell?.textLabel?.textColor = UIColor.red
-        cell?.detailTextLabel?.text = model.remarks
+        //cell?.accessoryType = .disclosureIndicator
+        //cell?.textLabel?.text = model.goodsName
+        //cell?.textLabel?.textColor = JX333333Color
+        //cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
+        //cell?.detailTextLabel?.text = model.remarks
+        //cell?.detailTextLabel?.textColor = JX999999Color
+        //cell?.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
+        
+        cell?.TitleLabel.text = model.goodsName
+        cell?.DetailTitleLabel.text = model.remarks
 
         return cell!
     }
@@ -163,23 +169,23 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             let address = deliveringModel?.address{
             
             let detailAddress = province + city + county + address
-            address2Height = 30 + calculateHeight(string: detailAddress)
+            address2Height = calculateHeight(string: detailAddress)
         }
 
         if let remark = deliveringModel?.remarks {
-            remarkHeight = 30 + calculateHeight(string: remark)
+            remarkHeight = calculateHeight(string: remark)
         }
         
         selectViewHeight = 44.0  + address1Height + address2Height + remarkHeight + 88.0
         return selectViewHeight
     }
-    func calculateHeight(string:String?,width:CGFloat = kScreenWidth - 90,fontSize:CGFloat = 14) -> CGFloat {
+    func calculateHeight(string:String?,width:CGFloat = kScreenWidth - 90,fontSize:CGFloat = 13) -> CGFloat {
         guard let contentStr = string  else{
-            return 14
+            return 44
         }
         let height = contentStr.calculate(width: width, fontSize: fontSize, lineSpace: 5).height
-        if height < CGFloat(20) {
-            return 14
+        if height < CGFloat(44) {
+            return 44
         }else{
             return height
         }
@@ -220,7 +226,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
             let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
-            leftLabel.textColor = UIColor.black
+            leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
             leftLabel.text = titleArray[row - 1]
@@ -232,51 +238,56 @@ extension DeliveringViewController: JXSelectViewDataSource{
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
             button.setTitle("确认发货批次", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
-            button.backgroundColor = UIColor.orange
+            button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5
             button.addTarget(self, action: #selector(confirmDeliver), for: UIControlEvents.touchUpInside)
             return button
             
         }else{
             let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: kScreenWidth - 40, height: 44))
-            leftLabel.textColor = UIColor.black
+            leftLabel.textColor = JX333333Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
-            leftLabel.text = "发货批次号："
+            var string = "发货批次号   "
+            let length = string.characters.count
+            
             if let batchCode = deliveringModel?.batchCode{
-                leftLabel.text = "发货批次号：" + batchCode
+                string += batchCode
             }
+            let attributeString = NSMutableAttributedString.init(string: string)
+            attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName:JX999999Color], range: NSRange.init(location: 0, length: length))
+            attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:JX333333Color], range: NSRange.init(location: length, length: attributeString.length - length))
+            leftLabel.attributedText = attributeString
             return leftLabel
             
         }
         
         if row == 1 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address1Height)
-            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: kScreenWidth - 90, height: 14))
-            rightLabel.textColor = UIColor.black
+       
+            let weightLabel = UILabel.init(frame: CGRect.init(x: kScreenWidth - 40 - 10, y: 15, width: 40, height: 14))
+            weightLabel.textColor = JX333333Color
+            weightLabel.textAlignment = .right
+            weightLabel.font = UIFont.systemFont(ofSize: 14)
+            if let counts = deliveringModel?.counts{
+                weightLabel.text = "\(counts)"
+            }
+            view?.addSubview(weightLabel)
+            
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: kScreenWidth - 90 - 50, height: 14))
+            rightLabel.textColor = JX333333Color
             rightLabel.textAlignment = .left
-            rightLabel.font = UIFont.systemFont(ofSize: 14)
-            rightLabel.lineBreakMode = .byTruncatingMiddle
-            if let goodsName = deliveringModel?.goodsName,
-               let counts = deliveringModel?.counts{
-                rightLabel.text = goodsName + "      " + String(format: "%@", counts)
+            rightLabel.font = UIFont.systemFont(ofSize: 13)
+            //rightLabel.lineBreakMode = .byTruncatingMiddle
+            if let goodsName = deliveringModel?.goodsName{
+                rightLabel.text = goodsName
             }
             view?.addSubview(rightLabel)
-       
-//            let weightLabel = UILabel.init(frame: CGRect.init(x: kScreenWidth - 60 - 10, y: 15, width: 60, height: 14))
-//            weightLabel.textColor = UIColor.black
-//            weightLabel.textAlignment = .right
-//            weightLabel.font = UIFont.systemFont(ofSize: 14)
-//            if let goodsName = deliveringModel?.goodsName,
-//                let counts = deliveringModel?.counts{
-//                weightLabel.text = goodsName + "      " + counts
-//            }
-//            view?.addSubview(weightLabel)
             
             let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: kScreenWidth - 90, height: address1Height - 30))
-            addressLabel.textColor = UIColor.black
+            addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
-            addressLabel.font = UIFont.systemFont(ofSize: 14)
+            addressLabel.font = UIFont.systemFont(ofSize: 13)
             addressLabel.numberOfLines = 0
             addressLabel.text = deliveringModel?.stationName
             view?.addSubview(addressLabel)
@@ -285,9 +296,9 @@ extension DeliveringViewController: JXSelectViewDataSource{
         if row == 2 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address2Height)
             let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: address2Height))
-            addressLabel.textColor = UIColor.black
+            addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
-            addressLabel.font = UIFont.systemFont(ofSize: 14)
+            addressLabel.font = UIFont.systemFont(ofSize: 13)
             addressLabel.numberOfLines = 0
             if let province = deliveringModel?.province,
                 let city = deliveringModel?.city,
@@ -304,11 +315,12 @@ extension DeliveringViewController: JXSelectViewDataSource{
         if row == 3 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: remarkHeight)
             let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: remarkHeight))
-            addressLabel.textColor = UIColor.black
+            addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
-            addressLabel.font = UIFont.systemFont(ofSize: 14)
+            addressLabel.font = UIFont.systemFont(ofSize: 13)
             addressLabel.numberOfLines = 0
-            if let remarks = deliveringModel?.remarks {
+            if let remarks = deliveringModel?.remarks,
+                remarks.isEmpty == false{
                 addressLabel.text = remarks
             }else{
                 addressLabel.text = "暂无"

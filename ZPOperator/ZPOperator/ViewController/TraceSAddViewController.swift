@@ -39,7 +39,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         
 
         submitButton.layer.cornerRadius = 5
-        submitButton.backgroundColor = UIColor.gray
+        submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
         
         
@@ -104,11 +104,11 @@ extension TraceSAddViewController : JXAlertViewDelegate{
         if let _ = addressButton.currentTitle,
             let _ = productButton.currentTitle{
             
-            submitButton.backgroundColor = UIColor.originColor
+            submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
             
         }else{
-            submitButton.backgroundColor = UIColor.gray
+            submitButton.backgroundColor = JXGrayColor
             submitButton.isEnabled = false
             
         }

@@ -10,7 +10,8 @@ import UIKit
 import MJRefresh
 
 private let reuseIdentifier = "reuseIdentifier"
-private let reuseIdentifierNib = "reuseIdentifierNib"
+private let reuseIdentifierNib1 = "reuseIdentifierNib1"
+private let reuseIdentifierNib2 = "reuseIdentifierNib2"
 
 class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -29,8 +30,9 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         
         self.automaticallyAdjustsScrollViewInsets = false
-        
-        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
+     
+        self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib1)
+        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib2)
 
         
 //        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
@@ -85,6 +87,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
                 lab.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 44)
                 lab.backgroundColor = UIColor.white
                 lab.textAlignment = .left
+                lab.textColor = JX333333Color
                 lab.font = UIFont.systemFont(ofSize: 15)
                 lab.tag = 10
                 
@@ -101,47 +104,19 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
             
             return cell!
         }else if indexPath.row == 1{
-            var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier2")
-            if cell == nil {
-                cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier2")
-                
-                cell?.contentView.backgroundColor = UIColor.groupTableViewBackground
-                cell?.selectionStyle = .none
-                
-                let lab1 = UILabel()
-                lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
-                lab1.backgroundColor = UIColor.white
-                lab1.textAlignment = .left
-                lab1.font = UIFont.systemFont(ofSize: 15)
-                lab1.tag = 10
-                
-                cell?.contentView.addSubview(lab1)
-                
-                
-                let lab2 = UILabel()
-                lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
-                lab2.backgroundColor = UIColor.white
-                lab2.textAlignment = .left
-                lab2.font = UIFont.systemFont(ofSize: 13)
-                lab2.tag = 11
-                
-                cell?.contentView.addSubview(lab2)
-            }
-            let lab1 = cell?.contentView.viewWithTag(10) as? UILabel
-            let lab2 = cell?.contentView.viewWithTag(11) as? UILabel
-            // Configure the cell...
-            //lab1?.text = vm.traceSourceTag?.goodsName
-            if let goodsName = detailVM.traceSourceTag.goodsName {
-                lab1?.text = String.init(format: "   %@", goodsName)
-            }
-            lab2?.text = "   发货批次号："
-            if let code = detailVM.traceSourceTag.batchCode {
-                lab2?.text = String.init(format: "   发货批次号：%@", code)
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib1, for: indexPath) as? DeliverListCell
+            cell?.selectionStyle = .none
+            cell?.accessoryType = .none
             
+            cell?.TitleLabel.text = detailVM.traceSourceTag.goodsName
+            if let code = detailVM.traceSourceTag.batchCode {
+                cell?.DetailTitleLabel.text = String.init(format: "发货批次号 %@", code)
+            }else{
+                cell?.DetailTitleLabel.text = "发货批次号"
+            }
             return cell!
         }else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib, for: indexPath) as! TraceSourceCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell
             // Configure the cell...
             cell.selectionStyle = .none
             
@@ -167,7 +142,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
         if indexPath.row == 0 {
             return 44 + 10
         }else if indexPath.row == 1 {
-            return 60 + 10
+            return 54 + 10
         }else{
             return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 2].images)
         }

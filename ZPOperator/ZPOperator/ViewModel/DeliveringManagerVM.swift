@@ -31,7 +31,7 @@ class DeliveringManagerVM {
         }
     }
     
-    func loadDeliveringBatch(batchId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func loadDeliveringBatch(batchId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool,_ code:JXNetworkError)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.deliveringManager.rawValue, param: ["batchId":batchId], success: { (data, message) in
@@ -40,7 +40,7 @@ class DeliveringManagerVM {
                 let dict = data as? Dictionary<String,Any>,
                 let array = dict["traceBatches"] as? Array<Dictionary<String,Any>>
                 else{
-                    completion(data, message, false)
+                    completion(data, message, false,JXNetworkError.kResponseUnknow)
                     return
             }
             self.deliveringManagerModel.setValuesForKeys(dict)
@@ -51,11 +51,11 @@ class DeliveringManagerVM {
                 self.deliveringManagerModel.traceBatches.append(model)
             }
             
-            completion(data, message, true)
+            completion(data, message, true, JXNetworkError.kResponseSuccess)
             
         }) { (message, code) in
             
-            completion(nil, message, false)
+            completion(nil, message, false ,code)
         }
     }
 }

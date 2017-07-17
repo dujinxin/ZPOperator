@@ -76,10 +76,14 @@ class JXNoticeView: UIView {
     }
     func show(inView view:UIView? ,animate:Bool = true) {
     
-        guard let msg = message,
-              let msgLabel = textLabel else {
+        guard let msg = message,msg.isEmpty != true else {
             return
         }
+        guard let msgLabel = textLabel  else {
+            assert(true, "noticeView textLabel can not be nil")
+            return
+        }
+        
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.lineSpacing = 7
         let attributes = [NSFontAttributeName:font,NSParagraphStyleAttributeName:paragraphStyle] as [String : Any]

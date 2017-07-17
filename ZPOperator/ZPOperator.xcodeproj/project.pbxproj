@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */; };
+		3514D65E1F18AF11001744DD /* DeliverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D65C1F18AF11001744DD /* DeliverListCell.swift */; };
+		3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3514D65D1F18AF11001744DD /* DeliverListCell.xib */; };
 		351DD2F41F14E18800E90170 /* JXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DD2F21F14E18800E90170 /* JXLocationManager.swift */; };
 		351DD2F51F14E18800E90170 /* QiNiuUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DD2F31F14E18800E90170 /* QiNiuUploadManager.swift */; };
 		354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F21EFA1A5300D9EDA7 /* MainCell.swift */; };
@@ -87,6 +89,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3514D65C1F18AF11001744DD /* DeliverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverListCell.swift; sourceTree = "<group>"; };
+		3514D65D1F18AF11001744DD /* DeliverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliverListCell.xib; sourceTree = "<group>"; };
 		351DD2F21F14E18800E90170 /* JXLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXLocationManager.swift; sourceTree = "<group>"; };
 		351DD2F31F14E18800E90170 /* QiNiuUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiNiuUploadManager.swift; sourceTree = "<group>"; };
 		354502F21EFA1A5300D9EDA7 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
@@ -94,7 +98,7 @@
 		354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainReusableView.swift; sourceTree = "<group>"; };
 		354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainReusableView.xib; sourceTree = "<group>"; };
 		354502F71EFA1A5300D9EDA7 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		354502F81EFA1A5300D9EDA7 /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		354502F81EFA1A5300D9EDA7 /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TagViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		354502F91EFA1A5300D9EDA7 /* TraceSourcesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourcesController.swift; sourceTree = "<group>"; };
 		354502FA1EFA1A5300D9EDA7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		354503041EFA439C00D9EDA7 /* MainVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
@@ -128,7 +132,7 @@
 		3597508B1EF8BE9100419474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AE7FF51EFCEE0A00528D6A /* MainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		35AE7FF71EFD17F600528D6A /* TraceSourceVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceVM.swift; sourceTree = "<group>"; };
-		35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSAddViewController.swift; sourceTree = "<group>"; };
+		35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TraceSAddViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35AE7FFB1EFD1D2100528D6A /* TraceSAddVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSAddVM.swift; sourceTree = "<group>"; };
 		35AE7FFD1EFD429800528D6A /* JXNetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNetworkError.swift; sourceTree = "<group>"; };
 		35DE9E8C1F14A1A5006F271E /* JXBaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXBaseRequest.swift; sourceTree = "<group>"; };
@@ -139,7 +143,7 @@
 		35E020821F0630F900852BBD /* DeliveredManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredManagerController.swift; sourceTree = "<group>"; };
 		35E020841F0640E500852BBD /* DeliveredManagerVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredManagerVM.swift; sourceTree = "<group>"; };
 		35E020861F0671D600852BBD /* DeliveredWholeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredWholeController.swift; sourceTree = "<group>"; };
-		35E020881F06746400852BBD /* DeliveredWholeRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredWholeRecordController.swift; sourceTree = "<group>"; };
+		35E020881F06746400852BBD /* DeliveredWholeRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeliveredWholeRecordController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E0208A1F06807E00852BBD /* TagResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResultController.swift; sourceTree = "<group>"; };
 		35E0208C1F07638600852BBD /* ZPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPTableViewController.swift; sourceTree = "<group>"; };
 		35E0208E1F07639700852BBD /* ZPCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPCollectionViewController.swift; sourceTree = "<group>"; };
@@ -157,13 +161,13 @@
 		35E7DD661EFF7EF800E1F7E9 /* JXAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXAlertView.swift; sourceTree = "<group>"; };
 		35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDeliverVM.swift; sourceTree = "<group>"; };
 		35E7DD6A1F00B5CB00E1F7E9 /* TraceDeliverModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDeliverModel.swift; sourceTree = "<group>"; };
-		35E7DD6C1F0122DA00E1F7E9 /* DeliveringManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringManagerController.swift; sourceTree = "<group>"; };
+		35E7DD6C1F0122DA00E1F7E9 /* DeliveringManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeliveringManagerController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E7DD6E1F01329100E1F7E9 /* DeliveringManagerVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringManagerVM.swift; sourceTree = "<group>"; };
 		35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTag.swift; sourceTree = "<group>"; };
 		35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTagVM.swift; sourceTree = "<group>"; };
-		35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordController.swift; sourceTree = "<group>"; };
+		35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TraceSRecordController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordVM.swift; sourceTree = "<group>"; };
-		35E7DD7A1F02575C00E1F7E9 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		35E7DD7A1F02575C00E1F7E9 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E7DD7E1F02815A00E1F7E9 /* NotificationEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationEnum.swift; sourceTree = "<group>"; };
 		855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZPOperator.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZPOperator/Pods-ZPOperator.release.xcconfig"; sourceTree = "<group>"; };
 		9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZPOperator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +217,8 @@
 				354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */,
 				35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */,
 				35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */,
+				3514D65C1F18AF11001744DD /* DeliverListCell.swift */,
+				3514D65D1F18AF11001744DD /* DeliverListCell.xib */,
 				354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */,
 				354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */,
 			);
@@ -482,6 +488,7 @@
 				359750871EF8BE9100419474 /* Assets.xcassets in Resources */,
 				354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */,
 				359750851EF8BE9100419474 /* Main.storyboard in Resources */,
+				3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */,
 				354503211EFBD29300D9EDA7 /* LoginViewController.xib in Resources */,
 				354502FF1EFA1A5300D9EDA7 /* MainReusableView.xib in Resources */,
 				35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */,
@@ -586,6 +593,7 @@
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
 				35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */,
 				354503031EFA1A5300D9EDA7 /* ViewController.swift in Sources */,
+				3514D65E1F18AF11001744DD /* DeliverListCell.swift in Sources */,
 				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
 				35E0209D1F0F1B9800852BBD /* ProjectHeader.swift in Sources */,
@@ -739,7 +747,7 @@
 				INFOPLIST_FILE = ZPOperator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.zpsy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.operator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -756,7 +764,7 @@
 				INFOPLIST_FILE = ZPOperator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.zpsy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.operator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

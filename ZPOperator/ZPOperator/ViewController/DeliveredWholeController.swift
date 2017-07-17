@@ -12,13 +12,18 @@ import MJRefresh
 
 
 private let reuseIdentifier = "reuseIdentifier"
-private let reuseIdentifierNib = "reuseIdentifierNib"
+private let reuseIdentifierNib1 = "reuseIdentifierNib1"
+private let reuseIdentifierNib2 = "reuseIdentifierNib2"
 
 class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
+    
+    @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addButtonWidthConstraint: NSLayoutConstraint!
+    
 
     var batchId : NSNumber? //批次id ,全程溯源用
     
@@ -37,7 +42,11 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib)
+        self.addButtonHeightConstraint.constant = 44 * kPercent
+        self.addButtonWidthConstraint.constant = 44 * kPercent
+        
+        self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib1)
+        self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib2)
 
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.currentPage = 1
@@ -105,48 +114,19 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib1, for: indexPath) as? DeliverListCell
+            cell?.selectionStyle = .none
+            cell?.accessoryType = .none
             
-            var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
-            if cell == nil {
-                cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
-                
-                cell?.contentView.backgroundColor = UIColor.groupTableViewBackground
-                cell?.selectionStyle = .none
-                
-                let lab1 = UILabel()
-                lab1.frame = CGRect(x: 0, y: 10, width: kScreenWidth, height: 30)
-                lab1.backgroundColor = UIColor.white
-                lab1.textAlignment = .left
-                lab1.font = UIFont.systemFont(ofSize: 15)
-                lab1.tag = 10
-                
-                cell?.contentView.addSubview(lab1)
-                
-                
-                let lab2 = UILabel()
-                lab2.frame = CGRect(x: 0, y: 40, width: kScreenWidth, height: 30)
-                lab2.backgroundColor = UIColor.white
-                lab2.textAlignment = .left
-                lab2.font = UIFont.systemFont(ofSize: 13)
-                lab2.tag = 11
-                
-                cell?.contentView.addSubview(lab2)
-            }
-            let lab1 = cell?.contentView.viewWithTag(10) as? UILabel
-            let lab2 = cell?.contentView.viewWithTag(11) as? UILabel
-            // Configure the cell...
-        
-            if let traceBatchName = detailVM.traceSourceWhole.batch.goodsName {
-                lab1?.text = String.init(format: "   %@", traceBatchName)
-            }
-            lab2?.text = "   发货批次号："
+            cell?.TitleLabel.text = detailVM.traceSourceWhole.batch.goodsName
             if let code = detailVM.traceSourceWhole.batch.code {
-                lab2?.text = String.init(format: "   发货批次号：%@", code)
+                cell?.DetailTitleLabel.text = String.init(format: "发货批次号 %@", code)
+            }else{
+                cell?.DetailTitleLabel.text = "发货批次号"
             }
-            
             return cell!
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib, for: indexPath) as! TraceSourceCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell
             cell.selectionStyle = .none
             // Configure the cell...
             
@@ -158,9 +138,6 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
                 vc.images = model.images!
                 self.navigationController?.present(vc, animated: true, completion: nil)
             }
-            //PLBuildVersion is implemented in both 
-            ///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/PrivateFrameworks/AssetsLibraryServices.framework/AssetsLibraryServices (0x11e681cc0)
-            ///Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/PrivateFrameworks/PhotoLibraryServices.framework/PhotoLibraryServices (0x11e4986f0).
             return cell
         }
         
@@ -187,7 +164,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         if indexPath.row == 0 {
-            return 60 + 10
+            return 54
         }else{
             return calculateCellHeight(array: self.detailVM.dataArray[indexPath.row - 1].images)
         }

@@ -159,6 +159,7 @@ class JXAlertView: UIView {
         table.bounces = false
         table.showsVerticalScrollIndicator = false
         table.showsHorizontalScrollIndicator = false
+        table.separatorStyle = .none
         table.register(listViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         return table
     }()
@@ -166,7 +167,7 @@ class JXAlertView: UIView {
         let btn = UIButton()
         btn.backgroundColor = UIColor.white
         btn.setTitle("取消", for: UIControlState.normal)
-        btn.setTitleColor(UIColor.black, for: UIControlState.normal)
+        btn.setTitleColor(JX333333Color, for: UIControlState.normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(tapClick), for: UIControlEvents.touchUpInside)
         return btn
@@ -398,7 +399,7 @@ class listViewCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.darkText
+        label.textColor = JX333333Color
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
         
