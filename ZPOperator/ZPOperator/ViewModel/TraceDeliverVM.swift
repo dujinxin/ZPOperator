@@ -18,10 +18,10 @@ class TraceDeliverVM {
     /// - Parameters:
     ///   - batchStatus: 0未发货，1已发货
     ///   - completion: 请求完成回调闭包
-    func loadMainData(batchStatus:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func loadMainData(page: Int,batchStatus:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
-        JXRequest.request(url: ApiString.deliverList.rawValue, param: ["batchStatus":batchStatus], success: { (data, message) in
+        JXRequest.request(url: ApiString.deliverList.rawValue, param: ["batchStatus":batchStatus,"pageNo":page,"pageSize":20], success: { (data, message) in
             
             guard let dict = data as? Dictionary<String,Any>,
                   let Operator = dict["operator"] as? Dictionary<String,Any>,
@@ -31,7 +31,9 @@ class TraceDeliverVM {
             }
             self.traceDeliverModel.Operator.setValuesForKeys(Operator)
             self.traceDeliverModel.count = dict["count"] as! Int
-            self.traceDeliverModel.batches.removeAll()
+            if page == 1 {
+                self.traceDeliverModel.batches.removeAll()
+            }
             for d in array{
                 let model = TraceDeliverSubModel()
                 model.setValuesForKeys(d)

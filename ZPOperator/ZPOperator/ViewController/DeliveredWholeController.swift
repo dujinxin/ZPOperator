@@ -79,7 +79,6 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             case "addTraceSourceWholeRecord":
                 
                 vc.isAddTraceSource = sender as! Bool
-                vc.traceBatch = self.detailVM.traceSourceWhole.batch.traceBatch
                 vc.batchId = self.detailVM.traceSourceWhole.batch.id
                 vc.block = {()->()in
                     print("回调")

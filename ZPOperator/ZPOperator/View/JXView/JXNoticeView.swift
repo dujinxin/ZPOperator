@@ -87,9 +87,9 @@ class JXNoticeView: UIView {
         let paragraphStyle = NSMutableParagraphStyle.init()
         paragraphStyle.lineSpacing = 7
         let attributes = [NSFontAttributeName:font,NSParagraphStyleAttributeName:paragraphStyle] as [String : Any]
-        let rect = msg.boundingRect(with: CGSize.init(width: UIScreen.main.bounds.width - 60, height: CGFloat.greatestFiniteMagnitude), options: [.usesDeviceMetrics,.usesFontLeading,.usesLineFragmentOrigin], attributes: attributes, context: nil)
+        let rect = msg.boundingRect(with: CGSize.init(width: UIScreen.main.bounds.width - 70, height: CGFloat.greatestFiniteMagnitude), options: [.usesDeviceMetrics,.usesFontLeading,.usesLineFragmentOrigin], attributes: attributes, context: nil)
         
-        msgLabel.frame = CGRect.init(x: 0, y: 0, width: rect.width + 10, height: rect.height + 5)
+        msgLabel.frame = CGRect.init(x: 0, y: 0, width: rect.width + 20, height: rect.height + 10)
         self.frame = CGRect.init(x: 0, y: 0, width: rect.width + 20, height: rect.height + 20)
         msgLabel.font = font
 

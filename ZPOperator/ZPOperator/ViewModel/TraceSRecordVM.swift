@@ -40,13 +40,13 @@ class TraceSRecordVM {
         }
     }
     ///新增和修改 -- 详情进入
-    func updateTraceSourceRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
+    func updateTraceSourceRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
         
         let param : Dictionary<String,Any>
         if let id = id {
-            param = ["id":id,"traceTemplateBatch.id":traceTemplateBatchId,"traceProcess.id":traceProcessId,"location":location,"file":file ?? "","contents":contents ?? ""]
+            param = ["id":id,"traceTemplateBatch.id":traceTemplateBatchId,"traceProcessId":traceProcessId,"traceProcessName":traceProcessName,"location":location,"file":file ?? "","contents":contents ?? ""]
         }else{
-            param = ["traceTemplateBatch.id":traceTemplateBatchId,"traceProcess.id":traceProcessId,"location":location,"file":file ?? "","contents":contents ?? ""]
+            param = ["traceTemplateBatch.id":traceTemplateBatchId,"traceProcessId":traceProcessId,"traceProcessName":traceProcessName,"location":location,"file":file ?? "","contents":contents ?? ""]
         }
         
         JXRequest.request(url: ApiString.saveTSRecord.rawValue, param: param, success: { (data, msg) in
@@ -142,13 +142,13 @@ class TraceSRecordVM {
     }
     
     ///新增和修改 -- 全程进入
-    func updateTraceSourceWholeRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
+    func updateTraceSourceWholeRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
         
         let param : Dictionary<String,Any>
         if let id = id {
-            param = ["id":id,"batch.id":traceTemplateBatchId,"traceProcess.id":traceProcessId,"location":location,"file":file ?? "","contents":contents ?? ""]
+            param = ["id":id,"batch.id":traceTemplateBatchId,"traceProcessId":traceProcessId,"traceProcessName":traceProcessName,"location":location,"file":file ?? "","contents":contents ?? ""]
         }else{
-            param = ["batch.id":traceTemplateBatchId,"traceProcess.id":traceProcessId,"location":location,"file":file ?? "","contents":contents ?? ""]
+            param = ["batch.id":traceTemplateBatchId,"traceProcessId":traceProcessId,"traceProcessName":traceProcessName,"location":location,"file":file ?? "","contents":contents ?? ""]
         }
         
         JXRequest.request(url: ApiString.deliveredWholeUpdateRecord.rawValue, param: param, success: { (data, msg) in

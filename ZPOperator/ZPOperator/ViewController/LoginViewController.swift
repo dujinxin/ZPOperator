@@ -16,18 +16,29 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var lookButton: UIButton!
    
+    @IBOutlet weak var leadingConstraints: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraints: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //textFieldTopConstraint.constant = CGFloat(333) * kPercent - 80
         
+        var font = UIFont.systemFont(ofSize: 13)
+        
+        if kScreenWidth < 375 {
+            self.leadingConstraints.constant = 15
+            self.trailingConstraints.constant = 15
+            font = UIFont.systemFont(ofSize: 12)
+        }
+        
         let attributeString1 = NSMutableAttributedString.init(string: "请向企业管理员提供手机号")
-        attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
+        attributeString1.addAttributes([NSFontAttributeName:font,NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
         userTextField.attributedPlaceholder = attributeString1
         
-        let attributeString2 = NSMutableAttributedString.init(string: "请联系管理员")
-        attributeString2.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
+        let attributeString2 = NSMutableAttributedString.init(string: "如果忘记密码，请联系管理员")
+        attributeString2.addAttributes([NSFontAttributeName:font,NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
         passwordTextField.attributedPlaceholder = attributeString2
         
         

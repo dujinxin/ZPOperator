@@ -44,6 +44,32 @@ extension UIImage {
         return newImage
     }
 
+    func image(originalImage:UIImage?,rect:CGRect,radius:CGFloat) -> UIImage? {
+        guard let image = originalImage else {
+            return UIImage.init()
+        }
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 1.0)
+        
+        
+        //let path = UIBezierPath(arcCenter: self.center, radius: radius, startAngle: pid_t * 0, endAngle: pid_t * 2, clockwise: true)
+        let path = UIBezierPath(ovalIn: rect)
+        //剪切
+        path.addClip()
+        
+        image.draw(in: rect)
+        
+        path.lineCapStyle = .round
+        UIColor.darkGray.setStroke()
+        path.lineWidth = 2
+        path.stroke(with: .color, alpha: 0.8)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+  
+        return newImage
+    }
     class func imageScreenshot(view: UIView) -> UIImage? {
         let rect = view.bounds
         UIGraphicsBeginImageContext(rect.size)

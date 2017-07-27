@@ -10,6 +10,7 @@
 		20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */; };
 		3514D65E1F18AF11001744DD /* DeliverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D65C1F18AF11001744DD /* DeliverListCell.swift */; };
 		3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3514D65D1F18AF11001744DD /* DeliverListCell.xib */; };
+		3514D71E1F1DFEA2001744DD /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */; };
 		351DD2F41F14E18800E90170 /* JXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DD2F21F14E18800E90170 /* JXLocationManager.swift */; };
 		351DD2F51F14E18800E90170 /* QiNiuUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DD2F31F14E18800E90170 /* QiNiuUploadManager.swift */; };
 		354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F21EFA1A5300D9EDA7 /* MainCell.swift */; };
@@ -46,7 +47,6 @@
 		359750801EF8BE9100419474 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597507F1EF8BE9100419474 /* AppDelegate.swift */; };
 		359750851EF8BE9100419474 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359750831EF8BE9100419474 /* Main.storyboard */; };
 		359750871EF8BE9100419474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 359750861EF8BE9100419474 /* Assets.xcassets */; };
-		3597508A1EF8BE9100419474 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359750881EF8BE9100419474 /* LaunchScreen.storyboard */; };
 		35AE7FF61EFCEE0A00528D6A /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FF51EFCEE0A00528D6A /* MainModel.swift */; };
 		35AE7FF81EFD17F600528D6A /* TraceSourceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FF71EFD17F600528D6A /* TraceSourceVM.swift */; };
 		35AE7FFA1EFD1BFF00528D6A /* TraceSAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE7FF91EFD1BFF00528D6A /* TraceSAddViewController.swift */; };
@@ -91,6 +91,7 @@
 /* Begin PBXFileReference section */
 		3514D65C1F18AF11001744DD /* DeliverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverListCell.swift; sourceTree = "<group>"; };
 		3514D65D1F18AF11001744DD /* DeliverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliverListCell.xib; sourceTree = "<group>"; };
+		3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		351DD2F21F14E18800E90170 /* JXLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXLocationManager.swift; sourceTree = "<group>"; };
 		351DD2F31F14E18800E90170 /* QiNiuUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiNiuUploadManager.swift; sourceTree = "<group>"; };
 		354502F21EFA1A5300D9EDA7 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		3597507F1EF8BE9100419474 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359750841EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		359750861EF8BE9100419474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		359750891EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3597508B1EF8BE9100419474 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AE7FF51EFCEE0A00528D6A /* MainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		35AE7FF71EFD17F600528D6A /* TraceSourceVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceVM.swift; sourceTree = "<group>"; };
@@ -347,6 +347,7 @@
 				3545032E1EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift */,
 				3545032F1EFBDF8800D9EDA7 /* UIColor+Extension.swift */,
 				354503301EFBDF8800D9EDA7 /* UIView+Extension.swift */,
+				3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */,
 				35E0207A1F04C76B00852BBD /* String+Extension.swift */,
 				35E020901F07A67A00852BBD /* UIImage+Extension.swift */,
 				35E020921F09F66600852BBD /* UIScreen+Extension.swift */,
@@ -397,7 +398,6 @@
 				359750831EF8BE9100419474 /* Main.storyboard */,
 				3597507F1EF8BE9100419474 /* AppDelegate.swift */,
 				359750861EF8BE9100419474 /* Assets.xcassets */,
-				359750881EF8BE9100419474 /* LaunchScreen.storyboard */,
 				3597508B1EF8BE9100419474 /* Info.plist */,
 			);
 			path = ZPOperator;
@@ -484,7 +484,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3545031B1EFBBFDB00D9EDA7 /* TraceSourceCell.xib in Resources */,
-				3597508A1EF8BE9100419474 /* LaunchScreen.storyboard in Resources */,
 				359750871EF8BE9100419474 /* Assets.xcassets in Resources */,
 				354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */,
 				359750851EF8BE9100419474 /* Main.storyboard in Resources */,
@@ -580,6 +579,7 @@
 				35E0207B1F04C76B00852BBD /* String+Extension.swift in Sources */,
 				35E020811F050D9A00852BBD /* BaseModel.swift in Sources */,
 				35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */,
+				3514D71E1F1DFEA2001744DD /* UIImageView+Extension.swift in Sources */,
 				35E7DD6D1F0122DA00E1F7E9 /* DeliveringManagerController.swift in Sources */,
 				354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */,
 				3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */,
@@ -631,14 +631,6 @@
 				359750841EF8BE9100419474 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		359750881EF8BE9100419474 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				359750891EF8BE9100419474 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -742,11 +734,39 @@
 			baseConfigurationReference = E9944F939AFA426004CAE461 /* Pods-ZPOperator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PZN2XEQRUA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/AFNetworking\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/HappyDNS\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MBProgressHUD\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/MJRefresh\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/Qiniu\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SDWebImage\"",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/TZImagePickerController\"",
+				);
 				INFOPLIST_FILE = ZPOperator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AFNetworking\"",
+					"-framework",
+					"\"HappyDNS\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Qiniu\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"TZImagePickerController\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.operator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -759,6 +779,7 @@
 			baseConfigurationReference = 855C91B6BBC75FACA6235B60 /* Pods-ZPOperator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PZN2XEQRUA;
 				INFOPLIST_FILE = ZPOperator/Info.plist;

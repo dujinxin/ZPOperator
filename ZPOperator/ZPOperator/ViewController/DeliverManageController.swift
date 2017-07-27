@@ -44,6 +44,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
             self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
         }
+        
         horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
         view.addSubview(horizontalView!)
         

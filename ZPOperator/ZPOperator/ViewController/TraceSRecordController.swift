@@ -40,6 +40,8 @@ class TraceSRecordController: ZPTableViewController {
     
     var traceSource : TraceSourceDetailSubModel?
     var processId : NSNumber?
+    var processName : String?
+    
     var addressStr : String?
     var isProcessAlert : Int = 0
     
@@ -47,9 +49,6 @@ class TraceSRecordController: ZPTableViewController {
     var isAdd = true
     
     var traceRecordId : NSNumber?//溯源详情来源需要用
-    
-    
-    var batchId : NSNumber? //全程溯源来源需要用
     
     var vm = TraceSRecordVM()
     var jxAlertView : JXAlertView?
@@ -101,24 +100,31 @@ class TraceSRecordController: ZPTableViewController {
                 
                 if isSuccess{
                     //格式化数组
-                    //self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
                     for model in self.vm.traceSourceProgress.traceProcesses{
                         if model.id == self.vm.traceSourceModify.traceProcessRecord?.traceProcessId {
                             self.processLabel.text = model.name
+                            self.processName = model.name
+                            self.processId = model.id
                         }
                         self.processArray.append(model.name!)
                     }
-                    
-                    self.processId = self.vm.traceSourceModify.traceProcessRecord?.traceProcessId
-                    
                     self.addressLabel.text = self.vm.traceSourceModify.traceProcessRecord?.location
-                    self.textView.text = self.vm.traceSourceModify.traceProcessRecord?.contents
-                    self.placeHolderLabel.isHidden = true
+                    
+                    if
+                        let contents = self.vm.traceSourceModify.traceProcessRecord?.contents,
+                        contents.isEmpty == false {
+                        self.textView.text = contents
+                        self.placeHolderLabel.isHidden = true
+                    }
+                    self.submitButton.backgroundColor = JXOrangeColor
+                    self.submitButton.isEnabled = true
                 }
             })
         }else{  //添加
-            if let goodsId = traceSource?.goodsId,
+            if
+                let goodsId = traceSource?.goodsId,
                 let traceBatchId = traceSource?.traceBatchId{//详情来源
+                
                 self.vm.loadProgress(goodsId: goodsId, traceBatchId: traceBatchId) { (data, msg, isSuccess) in
                     if isSuccess{
                         //格式化数组
@@ -126,23 +132,10 @@ class TraceSRecordController: ZPTableViewController {
                         for model in self.vm.traceSourceProgress.traceProcesses{
                             self.processArray.append(model.name!)
                         }
+                        self.processLabel.text = "请选择"
                     }
                 }
                 
-            }else{//全程溯源
-                if let batchId = batchId {
-                    self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
-                        if isSuccess{
-                            //格式化数组
-                            //self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
-                            for model in self.vm.traceSourceWholeModify.traceProcesses{
-                                self.processArray.append(model.name!)
-                            }
-                            self.placeHolderLabel.isHidden = false
-                            self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
-                        }
-                    })
-                }
             }
         }
         
@@ -208,44 +201,24 @@ class TraceSRecordController: ZPTableViewController {
         
     }
     func submitLast(file:String?) {
+
+        let id : NSNumber?
         
-        if let batchId = batchId {//全程 deliveredWholeUpdateRecord
-            let id : NSNumber?
+        if isAdd == false {
+            id = self.traceRecordId
+        }else{
+            id = nil
+        }
+        
+        self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId!,traceProcessName:self.processName!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
             
-            if isAdd == false {
-                id = batchId
-            }else{
-                id = nil
-            }
-            self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: (self.vm.traceSourceWholeModify.traceSourceWholeProduct.id)!, traceProcessId: self.processId!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
-                if isSuccess{
-                    if let myblock = self.block {
-                        myblock()
-                    }
-                    self.navigationController?.popViewController(animated: true)
-                }else{
-                    ViewManager.showNotice(notice: msg)
+            MBProgressHUD.hide(for: self.view, animated: true)
+            ViewManager.showNotice(notice: msg)
+            if isSuccess{
+                if let myblock = self.block {
+                    myblock()
                 }
-            }
-        }else {
-            let id : NSNumber?
-            
-            if isAdd == false {
-                id = self.traceRecordId
-            }else{
-                id = nil
-            }
-            
-            self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
-                
-                MBProgressHUD.hide(for: self.view, animated: true)
-                ViewManager.showNotice(notice: msg)
-                if isSuccess{
-                    if let myblock = self.block {
-                        myblock()
-                    }
-                    self.navigationController?.popViewController(animated: true)
-                }
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -320,13 +293,9 @@ class TraceSRecordController: ZPTableViewController {
 extension TraceSRecordController : JXAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
         if isProcessAlert == 0{
-            if let _ = batchId {
-                self.processLabel.text = self.vm.traceSourceWholeModify.traceProcesses[index].name
-                self.processId = self.vm.traceSourceWholeModify.traceProcesses[index].id
-            }else{
-                self.processLabel.text = self.vm.traceSourceProgress.traceProcesses[index].name
-                self.processId = self.vm.traceSourceProgress.traceProcesses[index].id
-            }
+            self.processLabel.text = self.vm.traceSourceProgress.traceProcesses[index].name
+            self.processId = self.vm.traceSourceProgress.traceProcesses[index].id
+            self.processName = self.vm.traceSourceProgress.traceProcesses[index].name
         }else if isProcessAlert == 1{
             self.addressLabel.text = self.addressArray[index]
         }else{
@@ -410,45 +379,6 @@ extension TraceSRecordController {
                 
             }
         }
-//        if let isSuccess = notify.object as? Bool,
-//            isSuccess == true{
-//            self.addressArray.append(JXLocationManager.manager.address)
-//        }
-//        if isAdd == false {
-//            self.vm.fetchTraceSourceRecord(id: self.traceRecordId!, goodsId: (self.traceSource?.goodsId)!, completion: { (data, msg, isSuccess) in
-//                
-//                if isSuccess{
-//                    //格式化数组
-//                    self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
-//                    for model in self.vm.traceSourceProgress.traceProcesses{
-//                        if model.id == self.vm.traceSourceModify.traceProcessRecord?.traceProcessId {
-//                            self.processLabel.text = model.name
-//                        }
-//                        self.processArray.append(model.name!)
-//                    }
-//                    
-//                    self.processId = self.vm.traceSourceModify.traceProcessRecord?.traceProcessId
-//                    
-//                    self.addressLabel.text = self.vm.traceSourceModify.traceProcessRecord?.location
-//                    self.textView.text = self.vm.traceSourceModify.traceProcessRecord?.contents
-//                    self.placeHolderLabel.isHidden = true
-//                }
-//            })
-//        }else{
-//            if let goodsId = traceSource?.goodsId,
-//                let traceBatchId = traceSource?.traceBatchId{
-//                self.vm.loadProgress(goodsId: goodsId, traceBatchId: traceBatchId) { (data, msg, isSuccess) in
-//                    if isSuccess{
-//                        //格式化数组
-//                        self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
-//                        for model in self.vm.traceSourceProgress.traceProcesses{
-//                            self.processArray.append(model.name!)
-//                        }
-//                    }
-//                }
-//            
-//            }
-//        }
     }
 }
 extension TraceSRecordController :TZImagePickerControllerDelegate{

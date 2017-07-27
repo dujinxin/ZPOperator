@@ -12,7 +12,7 @@ import MJRefresh
 class DeliveredViewController: ZPTableViewController {
 
     var vm = TraceDeliverVM()
-    
+    var currentPage = 1
     
     var deliveredBlock : ((_ deliveringModel:TraceDeliverSubModel,_ deliverOperatorModel:TraceDeliverOperatorModel)->())?
     
@@ -24,20 +24,18 @@ class DeliveredViewController: ZPTableViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        self.tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54)
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.rowHeight = 54
         self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: Bundle.main), forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-            
-            self.vm.loadMainData(batchStatus: 1) { (data, msg, isSuccess) in
-                self.tableView.mj_header.endRefreshing()
-                if isSuccess{
-                    self.tableView.reloadData()
-                }else{
-                    ViewManager.showNotice(notice: msg)
-                }
-            }
+            self.currentPage = 1
+            self.loadData(page: 1)
+        })
+        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
+            self.currentPage += 1
+            self.loadData(page: self.currentPage)
         })
         self.tableView.mj_header.beginRefreshing()
         
@@ -67,7 +65,7 @@ class DeliveredViewController: ZPTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? DeliverListCell
-    
+        cell?.contentView.backgroundColor = UIColor.white
         // Configure the cell...
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         
@@ -89,6 +87,19 @@ class DeliveredViewController: ZPTableViewController {
         
         if let block = deliveredBlock {
             block(model,self.vm.traceDeliverModel.Operator)
+        }
+    }
+    func loadData(page:Int) {
+        
+        self.vm.loadMainData(page: page,batchStatus: 1) { (data, msg, isSuccess) in
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            if isSuccess{
+                self.tableView.reloadData()
+                NotificationCenter.default.post(name:NSNotification.Name(rawValue: NotificationMainDeliveringNumber) , object: self.vm.traceDeliverModel.batches.count)
+            }else{
+                print(msg)
+            }
         }
     }
 }

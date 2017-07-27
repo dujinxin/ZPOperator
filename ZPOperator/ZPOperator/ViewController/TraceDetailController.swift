@@ -82,7 +82,6 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             
                 vc.isAdd = sender as! Bool
                 vc.traceSource = self.detailVM.traceSourceDetail.traceBatch
-                vc.batchId = self.detailVM.traceSourceWhole.batch.id
                 vc.block = {()->()in
                     print("回调")
                     self.tableView.mj_header.beginRefreshing()

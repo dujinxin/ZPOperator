@@ -39,15 +39,16 @@ class DeliveredWholeRecordController: ZPTableViewController {
     
     
     var traceSourceRecord : TraceSourceRecord?
-    var processId : NSNumber?
+    var processId : NSNumber?//溯源批次id
+    var processName : String?//溯源批次名称
+    
     var addressStr : String?
     var isProcessAlert : Int = 0
     
     var block : (()->())?
     var isAddTraceSource = true
     var traceRecordId : NSNumber?//修改时用
-    
-    var traceBatch : String?//溯源批次名称
+
     var batchId : NSNumber? //全程溯源来源需要用
     
     var vm = TraceSRecordVM()
@@ -94,11 +95,19 @@ class DeliveredWholeRecordController: ZPTableViewController {
         
 
         
+        
         if isAddTraceSource == false { //修改
-            self.processLabel.text = self.traceSourceRecord?.traceProcess
-            self.placeHolderLabel.isHidden = true
             
+            self.processName = self.traceSourceRecord?.traceProcess
+            self.processId = self.traceSourceRecord?.traceProcessId
+            self.processLabel.text = self.processName
             
+            if
+                let contents = self.traceSourceRecord?.contents,
+                contents.isEmpty == false {
+                self.placeHolderLabel.isHidden = true
+                self.textView.text = contents
+            }
             if let batchId = batchId {
                 self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
                     if isSuccess{
@@ -108,9 +117,10 @@ class DeliveredWholeRecordController: ZPTableViewController {
                         for model in self.vm.traceSourceWholeModify.traceProcesses{
                             self.processArray.append(model.name!)
                         }
-                        //self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
                         self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.station
-                        self.operatorLabel.text = self.vm.traceSourceWholeModify.Operator.name
+                        
+                        self.submitButton.backgroundColor = JXOrangeColor
+                        self.submitButton.isEnabled = true
                     }
                 })
             }
@@ -125,7 +135,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
                             self.processArray.append(model.name!)
                         }
                         self.placeHolderLabel.isHidden = false
-                        //self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                        
+                        self.processLabel.text = "请选择"
                     }
                 })
             }
@@ -196,7 +207,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
         }else{
             id = nil
         }
-        self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: batchId!, traceProcessId: self.processId!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
+        self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: batchId!, traceProcessId: self.processId!, traceProcessName: self.processName!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
             MBProgressHUD.hide(for: self.view, animated: true)
             ViewManager.showNotice(notice: msg)
             if isSuccess{
@@ -275,6 +286,7 @@ extension DeliveredWholeRecordController : JXAlertViewDelegate{
         if isProcessAlert == 0 {
             self.processLabel.text = self.vm.traceSourceWholeModify.traceProcesses[index].name
             self.processId = self.vm.traceSourceWholeModify.traceProcesses[index].id
+            self.processName = self.vm.traceSourceWholeModify.traceProcesses[index].name
         }else if isProcessAlert == 1{
             self.addressLabel.text = self.addressArray[index]
         }else {

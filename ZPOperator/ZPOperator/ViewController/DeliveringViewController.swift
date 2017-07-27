@@ -12,6 +12,7 @@ import MJRefresh
 class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
     var tableView = UITableView.init(frame: CGRect.zero, style: .plain)
+    var currentPage = 1
     var vm = TraceDeliverVM()
     var selectView : JXSelectView?
     var deliveringModel : TraceDeliverSubModel?
@@ -33,7 +34,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         self.automaticallyAdjustsScrollViewInsets = false
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
-        self.tableView.frame = view.bounds
+        self.tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = 54
@@ -42,16 +43,12 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         view.addSubview(self.tableView)
         
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-            
-            self.vm.loadMainData(batchStatus: 0) { (data, msg, isSuccess) in
-                self.tableView.mj_header.endRefreshing()
-                if isSuccess{
-                    self.tableView.reloadData()
-                    NotificationCenter.default.post(name:NSNotification.Name(rawValue: NotificationMainDeliveringNumber) , object: self.vm.traceDeliverModel.batches.count)
-                }else{
-                    print(msg)
-                }
-            }
+            self.currentPage = 1
+            self.loadData(page: 1)
+        })
+        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
+            self.currentPage += 1
+            self.loadData(page: self.currentPage)
         })
         self.tableView.mj_header.beginRefreshing()
         
@@ -116,15 +113,16 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //1.才用这种方式，cell不需要提前注册，拿不到的话会走if;如果注册，且可以正确获取，那么不走if
+        //1.采用这种方式，cell不需要提前注册，拿不到的话会走if;如果注册，且可以正确获取，那么不走if
         var cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier") as? DeliverListCell
-        //2.才用这种，cell必须提前注册，不注册会crash,而且注册后获取不到cell也会crash，不走if(总之不能自定义UITableViewCellStyle)
+        //2.采用这种，cell必须提前注册，不注册会crash,而且注册后获取不到cell也会crash，不走if(总之不能自定义UITableViewCellStyle)
         //var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         
         if cell == nil {
             
             //cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
             cell = Bundle.main.loadNibNamed("DeliverListCell", owner: nil, options: nil)?.last as? DeliverListCell
+            cell?.contentView.backgroundColor = UIColor.white
         }
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         // Configure the cell...
@@ -188,6 +186,19 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             return 44
         }else{
             return height
+        }
+    }
+    func loadData(page:Int) {
+        
+        self.vm.loadMainData(page: page,batchStatus: 0) { (data, msg, isSuccess) in
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            if isSuccess{
+                self.tableView.reloadData()
+                NotificationCenter.default.post(name:NSNotification.Name(rawValue: NotificationMainDeliveringNumber) , object: self.vm.traceDeliverModel.count)
+            }else{
+                print(msg)
+            }
         }
     }
 }
