@@ -11,7 +11,7 @@ import Foundation
 enum JXNetworkError : Int {
     
     
-    case kResponseSuccessForUploadToken     = 0
+    case kResponseSuccessForUploadToken     = -1
     case kResponseFailureForUploadToken     = -2
     
     case kResponseSuccess     = 200

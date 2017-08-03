@@ -116,20 +116,18 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        let s = textField.text! as NSString
-        
+
         if textField == userTextField {
             if range.location > 10 {
-                
-                let str = s.substring(to: 10)
-                textField.text = str
-                ViewManager.showNotice(notice: "字符个数为11位")
+                //let s = textField.text! as NSString
+                //let str = s.substring(to: 10)
+                //textField.text = str
+                //ViewManager.showNotice(notice: "字符个数为11位")
+                return false
             }
         }
         return true
     }
-    
     func textChange(notify:NSNotification) {
         
     }

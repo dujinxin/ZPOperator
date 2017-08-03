@@ -29,6 +29,8 @@ class LoginVM {
                     completion(nil,message,false)
                     return
             }
+            JXNetworkManager.manager.userAccound = UserModel()
+            JXNetworkManager.manager.userAccound?.setValuesForKeys(dict)
             var mDict = dict
             //print("保存登录信息成功：\(self.userModel.saveAccound(dict: dict))")
             self.loadSet(completion: { (data, msg, isSuccess) in

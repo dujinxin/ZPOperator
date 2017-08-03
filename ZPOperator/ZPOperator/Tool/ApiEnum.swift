@@ -37,4 +37,6 @@ enum ApiString : String {
     case deliver       = "/batch/deliver"
     case codeSearch    = "/code/search"
     
+    case uploadGetToken = "/user/upload/getToken"
+    
 }

@@ -65,7 +65,7 @@ class JXBaseRequest: NSObject {
     ///   - param: 请求参数
     ///   - success: 成功回调
     ///   - failure: 失败回调
-    class func request(tag:Int = 0, method:JXRequestMethod = .post, url:String, param:Dictionary<String, Any>,success:@escaping successCompletion,failure:@escaping failureCompletion) {
+    class func request(tag:Int = 0, method:JXRequestMethod = .post, url:String, param:Dictionary<String, Any>?,success:@escaping successCompletion,failure:@escaping failureCompletion) {
         
         let request = self.init(tag: tag, url: url, param: param, success: success, failure: failure)
         
@@ -76,7 +76,7 @@ class JXBaseRequest: NSObject {
         super.init()
     }
     
-    required init(tag:Int,url:String ,param:Dictionary<String, Any>,success:@escaping successCompletion,failure:@escaping failureCompletion) {
+    required init(tag:Int,url:String ,param:Dictionary<String, Any>?,success:@escaping successCompletion,failure:@escaping failureCompletion) {
         
         self.tag = tag
         self.requestUrl = url

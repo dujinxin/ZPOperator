@@ -227,14 +227,14 @@ extension JXNetworkManager {
         }
         
         if url.hasPrefix("http") == true{
-            afmanager.requestSerializer = AFJSONRequestSerializer.init()
-            afmanager.requestSerializer.timeoutInterval = 10
-            afmanager.requestSerializer.setValue("ceccm", forHTTPHeaderField: "source")
-            print("afmanager.requestSerializer = \(afmanager.requestSerializer)")
+//            afmanager.requestSerializer = AFJSONRequestSerializer.init()
+//            afmanager.requestSerializer.timeoutInterval = 10
+//            afmanager.requestSerializer.setValue("ceccm", forHTTPHeaderField: "source")
+//            print("afmanager.requestSerializer = \(afmanager.requestSerializer)")
             return url
         }else{
-            afmanager.requestSerializer = AFHTTPRequestSerializer.init()
-            afmanager.requestSerializer.timeoutInterval = 10
+//            afmanager.requestSerializer = AFHTTPRequestSerializer.init()
+//            afmanager.requestSerializer.timeoutInterval = 10
         }
        
         let ssss = kBaseUrl + url //"http://192.168.10.12:8086\(url)"

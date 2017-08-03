@@ -203,7 +203,7 @@ class JXRequest: JXBaseRequest {
             
             if (code == .kResponseSuccessForUploadToken){
                 print("请求成功")
-                data = jsonDict["result"]
+                data = jsonDict["body"]
                 msg = message ?? "请求成功"
                 isSuccess = true
             }else{
