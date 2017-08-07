@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import MBProgressHUD
 
 class ZPTableViewController: UITableViewController {
 
@@ -38,4 +39,17 @@ class ZPTableViewController: UITableViewController {
     // MARK: - Table view data source
 
 
+}
+extension ZPTableViewController {
+    func showMBProgressHUD() {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        //        hud.backgroundView.color = UIColor.black
+        //        hud.contentColor = UIColor.black
+        //        hud.bezelView.backgroundColor = UIColor.black
+        //        hud.label.text = "加载中..."
+        
+    }
+    func hideMBProgressHUD() {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
 }

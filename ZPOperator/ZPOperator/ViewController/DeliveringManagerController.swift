@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 
 class DeliveringManagerController: ZPTableViewController {
 
@@ -52,53 +51,12 @@ class DeliveringManagerController: ZPTableViewController {
         super.viewDidLoad()
         
         self.operatorLabel.text = LoginVM.loginVMManager.userModel.userName
-        
-        
+
         
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
-        
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
-        
-        selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
-        selectView?.dataSource = self
-        selectView?.topBarView = {
-            let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
-            view.backgroundColor = JX999999Color
-            
-            let label = UILabel()
-            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
-            label.backgroundColor = UIColor.white
-            //label.center = view.center
-            label.text = "确认发货编号"
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 18)
-            label.textColor = JX333333Color
-            view.addSubview(label)
-            //label.sizeToFit()
-            
-            let button = UIButton()
-            button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
-            //button.center = CGPoint(x: 30, y: view.jxCenterY)
-            //button.setTitle("×", for: .normal)
-            button.setImage(UIImage(named:"cancel"), for: .normal)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
-            button.setTitleColor(JX333333Color, for: .normal)
-            button.contentVerticalAlignment = .center
-            button.contentHorizontalAlignment = .center
-            button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
-            view.addSubview(button)
-            
-            return view
-        }()
-        selectView?.isUseTopBar = true
-        selectView?.isEnabled = false
-        selectView?.isScrollEnabled = false
+
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notify:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -177,6 +135,7 @@ class DeliveringManagerController: ZPTableViewController {
 
     @IBAction func deleveringManagerSelect(_ sender: UIButton) {
         self.view.endEditing(true)
+        self.setAlertView()
         self.jxAlertView?.actions = batchArray
         self.jxAlertView?.show()
     }
@@ -208,13 +167,56 @@ class DeliveringManagerController: ZPTableViewController {
             self.confirmArray.append(String.init(format: "%@", station))
             self.confirmArray.append(String.init(format: "%@", name))
             
+            setSelectView()
             self.selectView?.resetFrame(height: 44 * 6 + 88)
             self.selectView?.show()
         }
-        
-        
     }
-
+    func setSelectView() {
+        selectView = nil
+        selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
+        selectView?.dataSource = self
+        selectView?.topBarView = {
+            let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 260))
+            view.backgroundColor = JX999999Color
+            
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
+            label.backgroundColor = UIColor.white
+            //label.center = view.center
+            label.text = "确认发货编号"
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 18)
+            label.textColor = JX333333Color
+            view.addSubview(label)
+            //label.sizeToFit()
+            
+            let button = UIButton()
+            button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
+            //button.center = CGPoint(x: 30, y: view.jxCenterY)
+            //button.setTitle("×", for: .normal)
+            button.setImage(UIImage(named:"cancel"), for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+            button.setTitleColor(JX333333Color, for: .normal)
+            button.contentVerticalAlignment = .center
+            button.contentHorizontalAlignment = .center
+            button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
+            view.addSubview(button)
+            
+            return view
+        }()
+        selectView?.isUseTopBar = true
+        selectView?.isEnabled = false
+        selectView?.isScrollEnabled = false
+    }
+    func setAlertView() {
+        self.jxAlertView = nil
+        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        
+        self.jxAlertView?.position = .bottom
+        self.jxAlertView?.isSetCancelView = true
+        self.jxAlertView?.delegate = self
+    }
     // MARK: - Table view data source
 
 
@@ -315,10 +317,10 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
     func confirmDeliver() {
      
         self.selectView?.dismiss()
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.showMBProgressHUD()
         self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliveringManagerModel.counts) { (data, msg, isSuccess) in
             
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if isSuccess{
                 if let block = self.deliveringManageBlock {

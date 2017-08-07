@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 
 class ModifyPasswordViewController: ZPTableViewController {
 
@@ -57,9 +56,9 @@ class ModifyPasswordViewController: ZPTableViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        self.showMBProgressHUD()
         self.vm.modifyPassword(old: oldPassword, new: newPassword) { (data, msg, isSuccess) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             if isSuccess {
                 self.navigationController?.popViewController(animated: true)
             }else{

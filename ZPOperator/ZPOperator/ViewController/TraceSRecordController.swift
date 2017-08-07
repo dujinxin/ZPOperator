@@ -8,7 +8,6 @@
 
 import UIKit
 import TZImagePickerController
-import MBProgressHUD
 
 class TraceSRecordController: ZPTableViewController {
 
@@ -17,9 +16,8 @@ class TraceSRecordController: ZPTableViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var processLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var placeHolderLabel: UILabel!
 
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: JXPlaceHolderTextView!
     
     @IBOutlet weak var contentView1: UIView!
     @IBOutlet weak var contentView2: UIView!
@@ -75,6 +73,8 @@ class TraceSRecordController: ZPTableViewController {
         productLabel.text = self.traceSource?.traceBatchName
         operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
         
+        textView.placeHolderText = "请输入溯源信息内容"
+        
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
@@ -114,7 +114,6 @@ class TraceSRecordController: ZPTableViewController {
                         let contents = self.vm.traceSourceModify.traceProcessRecord?.contents,
                         contents.isEmpty == false {
                         self.textView.text = contents
-                        self.placeHolderLabel.isHidden = true
                     }
                     self.submitButton.backgroundColor = JXOrangeColor
                     self.submitButton.isEnabled = true
@@ -176,7 +175,7 @@ class TraceSRecordController: ZPTableViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.showMBProgressHUD()
         
         if self.imageDataArray.count != 0 {
             self.uploadManager.qiniuUpload(datas: self.imageDataArray) { (array) in
@@ -212,7 +211,7 @@ class TraceSRecordController: ZPTableViewController {
         
         self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId!,traceProcessName:self.processName!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
             
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if isSuccess{
                 if let myblock = self.block {
@@ -462,15 +461,8 @@ extension TraceSRecordController :TZImagePickerControllerDelegate{
 
 extension TraceSRecordController: UITextViewDelegate{
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        self.placeHolderLabel.isHidden = true
-    }
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.characters.count > 0 {
-            placeHolderLabel.isHidden = true
-        }else{
-            placeHolderLabel.isEnabled = false
-        }
+
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false && textView.text.isEmpty == false{
             submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
@@ -481,11 +473,7 @@ extension TraceSRecordController: UITextViewDelegate{
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView.text.characters.count > 0 {
-            placeHolderLabel.isHidden = true
-        }else{
-            placeHolderLabel.isEnabled = false
-        }
+
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
             submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true

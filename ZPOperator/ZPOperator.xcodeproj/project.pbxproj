@@ -44,6 +44,7 @@
 		354503401EFCB21D00D9EDA7 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545033F1EFCB21D00D9EDA7 /* LoginVM.swift */; };
 		354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */; };
 		354503441EFCBDAF00D9EDA7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503431EFCBDAF00D9EDA7 /* UserModel.swift */; };
+		3559482E1F381712008145BB /* JXPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3559482D1F381712008145BB /* JXPlaceHolderTextView.swift */; };
 		359750801EF8BE9100419474 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597507F1EF8BE9100419474 /* AppDelegate.swift */; };
 		359750851EF8BE9100419474 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359750831EF8BE9100419474 /* Main.storyboard */; };
 		359750871EF8BE9100419474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 359750861EF8BE9100419474 /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		3545033F1EFCB21D00D9EDA7 /* LoginVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JXNetworkManager+Extention.swift"; sourceTree = "<group>"; };
 		354503431EFCBDAF00D9EDA7 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		3559482D1F381712008145BB /* JXPlaceHolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPlaceHolderTextView.swift; sourceTree = "<group>"; };
 		3597507C1EF8BE9100419474 /* ZPOperator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZPOperator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3597507F1EF8BE9100419474 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359750841EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		354503081EFA514200D9EDA7 /* JXView */ = {
 			isa = PBXGroup;
 			children = (
+				3559482D1F381712008145BB /* JXPlaceHolderTextView.swift */,
 				354503091EFA529E00D9EDA7 /* JXHorizontalView.swift */,
 				35E020A01F0F716100852BBD /* JXPhotoBrowserController.swift */,
 				354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */,
@@ -589,6 +592,7 @@
 				35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */,
 				354503011EFA1A5300D9EDA7 /* TagViewController.swift in Sources */,
 				3545033D1EFBDF8800D9EDA7 /* JXNetworkManager.swift in Sources */,
+				3559482E1F381712008145BB /* JXPlaceHolderTextView.swift in Sources */,
 				35E020991F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift in Sources */,
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
 				35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */,

@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MBProgressHUD
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
 
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -94,10 +93,10 @@ class LoginViewController: UIViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: view, animated: true)
+        self.showMBProgressHUD()
         
         LoginVM.loginVMManager.login(userName: phone, password: password) { (data, msg, isSuccess) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             if isSuccess {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: true)
                 self.dismiss(animated: true, completion: nil)

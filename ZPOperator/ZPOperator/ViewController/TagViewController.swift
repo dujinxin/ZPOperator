@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MBProgressHUD
 
 class TagViewController: BaseViewController {
 
@@ -49,9 +48,10 @@ class TagViewController: BaseViewController {
             ViewManager.showNotice(notice: "请输入12位纯数字标签编码")
             return
         }
-        MBProgressHUD.showAdded(to: view, animated: true)
+        
+        self.showMBProgressHUD()
         self.vm.traceSourceTag(page:1,code: text) { (data, msg, isSuccess) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             if isSuccess{
                 if let status = self.vm.traceSourceTag.status?.intValue{
                     switch  status{

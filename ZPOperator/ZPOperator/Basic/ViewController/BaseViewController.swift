@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class BaseViewController: UIViewController {
     
@@ -123,5 +124,15 @@ extension BaseViewController {
 }
 
 extension BaseViewController {
-    
+    func showMBProgressHUD() {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        hud.backgroundView.color = UIColor.black
+//        hud.contentColor = UIColor.black
+//        hud.bezelView.backgroundColor = UIColor.black
+//        hud.label.text = "加载中..."
+        
+    }
+    func hideMBProgressHUD() {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
 }

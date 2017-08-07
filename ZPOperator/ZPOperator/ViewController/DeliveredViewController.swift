@@ -96,7 +96,6 @@ class DeliveredViewController: ZPTableViewController {
             self.tableView.mj_footer.endRefreshing()
             if isSuccess{
                 self.tableView.reloadData()
-                NotificationCenter.default.post(name:NSNotification.Name(rawValue: NotificationMainDeliveringNumber) , object: self.vm.traceDeliverModel.batches.count)
             }else{
                 print(msg)
             }

@@ -8,7 +8,6 @@
 
 import UIKit
 import TZImagePickerController
-import MBProgressHUD
 
 class DeliveredWholeRecordController: ZPTableViewController {
     
@@ -17,9 +16,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var processLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var placeHolderLabel: UILabel!
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: JXPlaceHolderTextView!
     
     @IBOutlet weak var contentView1: UIView!
     @IBOutlet weak var contentView2: UIView!
@@ -75,6 +73,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
 //        productLabel.text = self.traceBatch
 //        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
         
+        textView.placeHolderText = "请输入溯源信息内容"
+        
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
@@ -105,7 +105,6 @@ class DeliveredWholeRecordController: ZPTableViewController {
             if
                 let contents = self.traceSourceRecord?.contents,
                 contents.isEmpty == false {
-                self.placeHolderLabel.isHidden = true
                 self.textView.text = contents
             }
             if let batchId = batchId {
@@ -134,7 +133,6 @@ class DeliveredWholeRecordController: ZPTableViewController {
                         for model in self.vm.traceSourceWholeModify.traceProcesses{
                             self.processArray.append(model.name!)
                         }
-                        self.placeHolderLabel.isHidden = false
                         
                         self.processLabel.text = "请选择"
                     }
@@ -178,7 +176,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
             return
         }
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        self.showMBProgressHUD()
         if self.imageDataArray.count != 0 {
             self.uploadManager.qiniuUpload(datas: self.imageDataArray) { (array) in
                 print("imageArrayUrl = \(String(describing: array))")
@@ -208,7 +206,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
             id = nil
         }
         self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: batchId!, traceProcessId: self.processId!, traceProcessName: self.processName!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if isSuccess{
                 if let myblock = self.block {
@@ -445,15 +443,9 @@ extension DeliveredWholeRecordController :TZImagePickerControllerDelegate{
 }
 
 extension DeliveredWholeRecordController: UITextViewDelegate{
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        placeHolderLabel.isHidden = true
-    }
+
     func textViewDidChange(_ textView: UITextView) {
-        if textView.text.characters.count > 0 {
-            placeHolderLabel.isHidden = true
-        }else{
-            placeHolderLabel.isEnabled = false
-        }
+
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false{
             submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true
@@ -463,11 +455,7 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
         }
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if textView.text.characters.count > 0 {
-            placeHolderLabel.isHidden = true
-        }else{
-            placeHolderLabel.isEnabled = false
-        }
+
         if processLabel.text?.isEmpty == false && addressLabel.text?.isEmpty == false && textView.text.isEmpty == false{
             submitButton.backgroundColor = JXOrangeColor
             submitButton.isEnabled = true

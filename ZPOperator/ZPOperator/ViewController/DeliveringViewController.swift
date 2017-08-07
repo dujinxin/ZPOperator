@@ -52,6 +52,18 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         })
         self.tableView.mj_header.beginRefreshing()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func setSelectView() {
+        selectView = nil
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
         
@@ -87,18 +99,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         selectView?.isUseTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -151,8 +152,9 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         deliveringModel = model
-        self.selectView?.resetFrame(height: calculateHeight(model: model))
         
+        self.setSelectView()
+        self.selectView?.resetFrame(height: calculateHeight(model: model))
         selectView?.show()
     }
     

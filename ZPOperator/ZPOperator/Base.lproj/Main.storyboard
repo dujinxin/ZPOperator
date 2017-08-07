@@ -983,7 +983,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9pY-zD-3FB">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9pY-zD-3FB" customClass="JXPlaceHolderTextView" customModule="ZPOperator" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="0.0" width="355" height="94"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -1083,21 +1083,10 @@
                                                         <constraint firstAttribute="trailing" secondItem="ZyS-vC-lEM" secondAttribute="trailing" id="pCw-fg-rEb"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入溯源信息内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlb-m6-uDO">
-                                                    <rect key="frame" x="20" y="8" width="156" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="156" id="KZP-pe-iLg"/>
-                                                        <constraint firstAttribute="height" constant="21" id="MTo-fu-eoL"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="V3u-Hn-gdU" firstAttribute="leading" secondItem="UAJ-cK-DOw" secondAttribute="trailing" constant="20" id="03D-bc-C8c"/>
                                                 <constraint firstItem="UC4-Hw-3GU" firstAttribute="height" secondItem="UAJ-cK-DOw" secondAttribute="height" id="3Vc-yL-ddy"/>
-                                                <constraint firstItem="vlb-m6-uDO" firstAttribute="top" secondItem="d0W-rl-Et3" secondAttribute="top" constant="8" id="4UJ-kB-NfN"/>
                                                 <constraint firstItem="UAJ-cK-DOw" firstAttribute="top" secondItem="9pY-zD-3FB" secondAttribute="bottom" id="6Fn-A0-gSR"/>
                                                 <constraint firstItem="V3u-Hn-gdU" firstAttribute="height" secondItem="UAJ-cK-DOw" secondAttribute="height" id="Dap-gC-n77"/>
                                                 <constraint firstItem="9pY-zD-3FB" firstAttribute="leading" secondItem="d0W-rl-Et3" secondAttribute="leading" constant="10" id="FTv-j5-cJj"/>
@@ -1109,7 +1098,6 @@
                                                 <constraint firstItem="UC4-Hw-3GU" firstAttribute="width" secondItem="UAJ-cK-DOw" secondAttribute="width" id="ctl-Nf-lmT"/>
                                                 <constraint firstItem="UC4-Hw-3GU" firstAttribute="top" secondItem="9pY-zD-3FB" secondAttribute="bottom" id="jSi-Uz-8kT"/>
                                                 <constraint firstItem="V3u-Hn-gdU" firstAttribute="width" secondItem="UAJ-cK-DOw" secondAttribute="width" id="pZ4-A7-Um3"/>
-                                                <constraint firstItem="vlb-m6-uDO" firstAttribute="leading" secondItem="d0W-rl-Et3" secondAttribute="leading" constant="20" id="qOo-Uc-ipk"/>
                                                 <constraint firstItem="UC4-Hw-3GU" firstAttribute="leading" secondItem="d0W-rl-Et3" secondAttribute="leading" constant="10" id="tcx-ZS-Wmp"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1166,7 +1154,6 @@
                         <outlet property="imageView2" destination="auT-Jg-4do" id="OXI-k7-jbc"/>
                         <outlet property="imageView3" destination="yaB-pg-PAJ" id="99c-Ig-q3f"/>
                         <outlet property="operatorLabel" destination="J5a-HS-QQL" id="mqG-Ws-aJA"/>
-                        <outlet property="placeHolderLabel" destination="vlb-m6-uDO" id="QN4-hj-e16"/>
                         <outlet property="processLabel" destination="53c-U3-cFw" id="n8I-sn-UTT"/>
                         <outlet property="productLabel" destination="wTm-AQ-MdX" id="VUU-gl-Q4y"/>
                         <outlet property="submitButton" destination="mYn-ov-oZf" id="pC1-a8-p72"/>
@@ -2086,7 +2073,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="219.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="66m-Sw-fmM">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="66m-Sw-fmM" customClass="JXPlaceHolderTextView" customModule="ZPOperator" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="0.0" width="355" height="94"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2186,23 +2173,11 @@
                                                         <constraint firstAttribute="trailing" secondItem="yPl-Hv-Mgl" secondAttribute="trailing" id="zGD-KK-lxb"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入溯源信息内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPR-AK-go4">
-                                                    <rect key="frame" x="20" y="8" width="156" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="156" id="KGK-yN-5sg"/>
-                                                        <constraint firstAttribute="height" constant="21" id="sqa-U8-hfD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Xaq-Xs-fcy" firstAttribute="width" secondItem="8bu-pv-ejS" secondAttribute="width" id="01X-Xl-Obd"/>
-                                                <constraint firstItem="wPR-AK-go4" firstAttribute="leading" secondItem="KXl-qj-L4D" secondAttribute="leading" constant="20" id="2l1-uS-bvm"/>
                                                 <constraint firstAttribute="trailing" secondItem="Xaq-Xs-fcy" secondAttribute="trailing" constant="10" id="7gY-M4-GV8"/>
                                                 <constraint firstItem="h58-XI-TDO" firstAttribute="height" secondItem="8bu-pv-ejS" secondAttribute="height" id="Bim-lZ-URw"/>
-                                                <constraint firstItem="wPR-AK-go4" firstAttribute="top" secondItem="KXl-qj-L4D" secondAttribute="top" constant="8" id="DlI-bM-wZr"/>
                                                 <constraint firstAttribute="trailing" secondItem="66m-Sw-fmM" secondAttribute="trailing" constant="10" id="EtF-WR-qhS"/>
                                                 <constraint firstItem="h58-XI-TDO" firstAttribute="top" secondItem="66m-Sw-fmM" secondAttribute="bottom" id="Jx5-96-1BX"/>
                                                 <constraint firstItem="66m-Sw-fmM" firstAttribute="leading" secondItem="KXl-qj-L4D" secondAttribute="leading" constant="10" id="WBv-wD-YNU"/>
@@ -2269,7 +2244,6 @@
                         <outlet property="imageView2" destination="fxu-Ur-83K" id="V3T-E1-kEM"/>
                         <outlet property="imageView3" destination="OfH-Wp-A1s" id="EBC-D5-Asd"/>
                         <outlet property="operatorLabel" destination="BGH-cu-yib" id="RuP-AG-zHp"/>
-                        <outlet property="placeHolderLabel" destination="wPR-AK-go4" id="vft-Uf-Htu"/>
                         <outlet property="processLabel" destination="vwS-c9-UNA" id="8Oy-D9-DrR"/>
                         <outlet property="productLabel" destination="Vdv-Vj-nqE" id="BTM-I3-lq3"/>
                         <outlet property="submitButton" destination="fJb-6H-b69" id="nBv-oc-gUA"/>
