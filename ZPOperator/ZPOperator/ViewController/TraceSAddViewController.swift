@@ -35,24 +35,15 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
-
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
         
         
         self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        
         self.jxAlertView?.position = .bottom
         self.jxAlertView?.isSetCancelView = true
         self.jxAlertView?.delegate = self
-        
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(locationStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
-        //开启定位
-        //JXLocationManager.manager.startUpdateLocation()
         
         self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
             if isSuccess{
@@ -82,7 +73,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         
         let model = self.vm.dataArray[selectIndex]
         
-        self.vm.submitTS(goodId:model.id!,goodName:model.name!, completion: { (data, msg, isSuccess) in
+        self.vm.submitTS(goodId:model.id,goodName:model.name!, completion: { (data, msg, isSuccess) in
             ViewManager.showNotice(notice: msg)
             if isSuccess {
                 print("message = \(msg)")

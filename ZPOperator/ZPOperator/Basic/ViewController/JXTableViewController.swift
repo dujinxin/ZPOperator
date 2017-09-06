@@ -17,6 +17,7 @@ class JXTableViewController: BaseViewController{
     //data array
     var dataArray = NSMutableArray()
     
+    var backBlock : (()->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()

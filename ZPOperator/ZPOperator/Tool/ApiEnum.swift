@@ -35,6 +35,17 @@ enum ApiString : String {
     case deliveringBatch = "/batch/traceList" //发货产品相关联的 批次列表 //暂时废弃
     case deliveringManager = "/batch/deliverPage"
     case deliver       = "/batch/deliver"
+    
+    case deliverNewBatchInfo = "/batch/new" //新增发货批次，信息
+    case deliverNewBatchSave = "/batch/save" //新增发货批次，保存
+    case deliverAddress = "/common/getAreaByPid" //三级地址获取
+    
+    case deliverDirectInfo = "/batch/directPage" //直接发货，信息
+    case deliverDirectBatchs = "/batch/getTracesByGoods"//直接发货，获取产品溯源批次
+    case deliverDirectCode = "/batch/getStartAndEndCode"//直接发货，获取标签
+    case deliverSave = "/batch/directDeliver"//直接发货，发货
+    //batch/directDeliver
+    
     case codeSearch    = "/code/search"
     
     case uploadGetToken = "/user/upload/getToken"

@@ -50,16 +50,24 @@ class TraceDeliverSubModel: BaseModel {
     var operatorName : String?
     var operateTime : String?
     
-    
-    
-//    override func setValue(_ value: Any?, forUndefinedKey key: String) {
-//        print("undefinedKey:\(key) Value:\(String(describing: value))")
-//    }
 }
 
-class DeliveringManagerModel: BaseModel {
+class DeliverManagerModel: BaseModel {
     var startCode : String?
     var endCode : String?
     var counts : Int = 0
     var traceBatches = Array<MainSubModel>()
+}
+
+class DeliverNewBatchModel: BaseModel {
+    var Operator = TraceDeliverOperatorModel()
+    var goodsList = Array<MainSubModel>()
+    var provinceList = Array<MainSubModel>()
+    //
+    var cityList = Array<MainSubModel>()
+    var areaList = Array<MainSubModel>()
+}
+class DeliverDirectCodeModel: BaseModel {
+    var startCode : String?
+    var endCode : String?
 }

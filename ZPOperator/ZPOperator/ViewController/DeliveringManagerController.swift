@@ -13,7 +13,7 @@ class DeliveringManagerController: ZPTableViewController {
     var deliverModel : TraceDeliverSubModel?
     var deliverOperatorModel : TraceDeliverOperatorModel?
     
-    var vm = DeliveringManagerVM()
+    var vm = DeliverManagerVM()
     
     var selectView : JXSelectView?
     var jxAlertView : JXAlertView?
@@ -65,11 +65,11 @@ class DeliveringManagerController: ZPTableViewController {
         
         self.vm.loadDeliveringBatch(batchId: deliverModel?.id as! Int) { (data, msg, isSuccess,code) in
             if isSuccess {
-                self.startTextField.text = self.vm.deliveringManagerModel.startCode
-                self.endTextField.text = self.vm.deliveringManagerModel.endCode
-                self.numberLabel.text = String(format: "%d", self.vm.deliveringManagerModel.counts)
+                self.startTextField.text = self.vm.deliverManagerModel.startCode
+                self.endTextField.text = self.vm.deliverManagerModel.endCode
+                self.numberLabel.text = String(format: "%d", self.vm.deliverManagerModel.counts)
                 
-                for modal in self.vm.deliveringManagerModel.traceBatches {
+                for modal in self.vm.deliverManagerModel.traceBatches {
                     self.batchArray.append(modal.name!)
                 }
                 self.batchArray.append("暂无溯源批次")
@@ -98,7 +98,7 @@ class DeliveringManagerController: ZPTableViewController {
         // Dispose of any resources that can be recreated.
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: NotificationLocatedStatus), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
@@ -112,7 +112,7 @@ class DeliveringManagerController: ZPTableViewController {
                 self.vm.loadDeliveringBatch(batchId: self.deliverModel?.id as! Int) { (data, msg, isSuccess,code) in
                     if isSuccess {
                         self.batchArray.removeAll()
-                        for modal in self.vm.deliveringManagerModel.traceBatches {
+                        for modal in self.vm.deliverManagerModel.traceBatches {
                             self.batchArray.append(modal.name!)
                         }
                         self.batchArray.append("暂无溯源批次")
@@ -155,7 +155,7 @@ class DeliveringManagerController: ZPTableViewController {
                 ViewManager.showNotice(notice: "请输入12位纯数字编码")
                 return
             }
-            if Int(endCode)! < Int(self.vm.deliveringManagerModel.endCode!)!{
+            if Int(endCode)! < Int(self.vm.deliverManagerModel.endCode!)!{
                 ViewManager.showNotice(notice: "结束编码不能小于默认编码")
                 return
             }
@@ -163,7 +163,7 @@ class DeliveringManagerController: ZPTableViewController {
             self.confirmArray.append(String.init(format: "%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
             self.confirmArray.append(String.init(format: "%@", startCode))
             self.confirmArray.append(String.init(format: "%@", endCode))
-            self.confirmArray.append(String.init(format: "%d", self.vm.deliveringManagerModel.counts))
+            self.confirmArray.append(String.init(format: "%d", self.vm.deliverManagerModel.counts))
             self.confirmArray.append(String.init(format: "%@", station))
             self.confirmArray.append(String.init(format: "%@", name))
             
@@ -205,7 +205,7 @@ class DeliveringManagerController: ZPTableViewController {
             
             return view
         }()
-        selectView?.isUseTopBar = true
+        selectView?.isUseCustomTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
     }
@@ -266,10 +266,10 @@ class DeliveringManagerController: ZPTableViewController {
 
 extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
     func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
-        if index < self.vm.deliveringManagerModel.traceBatches.count {
-            let model = self.vm.deliveringManagerModel.traceBatches[index]
+        if index < self.vm.deliverManagerModel.traceBatches.count {
+            let model = self.vm.deliverManagerModel.traceBatches[index]
             self.traceSourceButton.setTitle(model.name, for: .normal)
-            batchId = model.id as! Int
+            batchId = model.id
             
             if (endTextField.text?.characters.isEmpty)! {
                 submitButton.backgroundColor = JXGrayColor
@@ -318,7 +318,7 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
      
         self.selectView?.dismiss()
         self.showMBProgressHUD()
-        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliveringManagerModel.counts) { (data, msg, isSuccess) in
+        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliverManagerModel.counts) { (data, msg, isSuccess) in
             
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
@@ -377,7 +377,7 @@ extension DeliveringManagerController: UITextFieldDelegate{
         
         if  notify.object is UITextField,
             let endStr = endTextField.text,
-            let endCode = self.vm.deliveringManagerModel.endCode,
+            let endCode = self.vm.deliverManagerModel.endCode,
             let endNumber = Int(endCode),
             let number = Int(endStr),
             endStr.characters.count == 12,
@@ -447,17 +447,17 @@ extension DeliveringManagerController: UITextFieldDelegate{
     }
 }
 extension DeliveringManagerController: JXSelectViewDataSource{
-    func jxSelectView(_: JXSelectView, numberOfRowsInSection section: Int) -> Int {
+    func jxSelectView(jxSelectView: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }
-    func jxSelectView(_: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
+    func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
         if row < 6 {
             return confirmArray[row]
         }else {
             return ""
         }
     }
-    func jxSelectView(_: JXSelectView, heightForRowAt row: Int) -> CGFloat {
+    func jxSelectView(jxSelectView: JXSelectView, heightForRowAt row: Int) -> CGFloat {
         
         if row < 6{
             return 44
@@ -473,7 +473,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
             return 88
         }
     }
-    func jxSelectView(_: JXSelectView, viewForRow row: Int) -> UIView? {
+    func jxSelectView(jxSelectView: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
         let titleArray = ["溯源批次","开始编码","结束编码","标签数量","操作网点","操作人"]
         

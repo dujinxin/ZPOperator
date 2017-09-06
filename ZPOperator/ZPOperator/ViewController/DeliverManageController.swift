@@ -29,26 +29,33 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.automaticallyAdjustsScrollViewInsets = false
         
-        
-        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
-        topBar?.delegate = self
-        topBar?.isBottomLineEnabled = true
-        view.addSubview(topBar!)
-        
-        
-        
-        deliveringVC.deliveringBlock = {(deliveringModel,deliveringOperatorModel)->() in
-            self.performSegue(withIdentifier: "deliveringManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
+        if LoginVM.loginVMManager.userModel.type == 1 {
+            deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
+                self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
+            }
+            deliveredVC.view.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
+            view.addSubview(deliveredVC.view)
+        }else{
+            topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
+            topBar?.delegate = self
+            topBar?.isBottomLineEnabled = true
+            view.addSubview(topBar!)
+            
+            
+            
+            deliveringVC.deliveringBlock = {(deliveringModel,deliveringOperatorModel)->() in
+                self.performSegue(withIdentifier: "deliveringManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
+            }
+            
+            deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
+                self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
+            }
+            
+            horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
+            view.addSubview(horizontalView!)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
         }
-
-        deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
-            self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
-        }
-        
-        horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
-        view.addSubview(horizontalView!)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +63,13 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func additionAction(_ sender: UIBarButtonItem) {
+        if LoginVM.loginVMManager.userModel.type == 1 {
+            self.performSegue(withIdentifier: "delivery", sender: nil)
+        }else{
+            self.performSegue(withIdentifier: "newBatch", sender: nil)
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let identifier = segue.identifier{
@@ -92,7 +106,19 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
 //                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
 //                    }
                 }
-                    
+            case "newBatch":
+                let dvc = segue.destination as! DeliverNewBatchController
+                dvc.backBlock = {
+                    let indexPath = IndexPath.init(item: 0, section: 0)
+                    self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+                    self.deliveringVC.tableView.mj_header.beginRefreshing()
+                }
+            case "delivery":
+                let dvc = segue.destination as! DeliveryViewController
+                dvc.backBlock = {
+                    self.deliveredVC.tableView.mj_header.beginRefreshing()
+                }
+                
             default:
                 break
             }

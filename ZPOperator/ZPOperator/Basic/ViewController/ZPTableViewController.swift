@@ -12,6 +12,8 @@ import MBProgressHUD
 
 class ZPTableViewController: UITableViewController {
 
+    var backBlock : (()->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

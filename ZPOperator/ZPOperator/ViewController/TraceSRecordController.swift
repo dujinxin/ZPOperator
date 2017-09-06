@@ -37,7 +37,7 @@ class TraceSRecordController: ZPTableViewController {
     
     
     var traceSource : TraceSourceDetailSubModel?
-    var processId : NSNumber?
+    var processId : Int = -1
     var processName : String?
     
     var addressStr : String?
@@ -170,7 +170,7 @@ class TraceSRecordController: ZPTableViewController {
             ViewManager.showNotice(notice: "请选择操作地点")
             return
         }
-        guard let _ = self.processId else {
+        if self.processId == -1{
             ViewManager.showNotice(notice: "请选择操作过程")
             return
         }
@@ -209,7 +209,7 @@ class TraceSRecordController: ZPTableViewController {
             id = nil
         }
         
-        self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId!,traceProcessName:self.processName!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
+        self.vm.updateTraceSourceRecord(id: id, traceTemplateBatchId: (self.traceSource?.traceBatchId)!, traceProcessId: self.processId,traceProcessName:self.processName!, location: (self.addressLabel.text)!, file: file?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed), contents: self.textView.text) { (data, msg, isSuccess) in
             
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)

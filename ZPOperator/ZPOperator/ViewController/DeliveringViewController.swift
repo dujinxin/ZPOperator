@@ -96,7 +96,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             
             return view
         }()
-        selectView?.isUseTopBar = true
+        selectView?.isUseCustomTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
     }
@@ -150,6 +150,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let model = self.vm.traceDeliverModel.batches[indexPath.row]
         deliveringModel = model
         
@@ -206,10 +207,10 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
 }
 
 extension DeliveringViewController: JXSelectViewDataSource{
-    func jxSelectView(_: JXSelectView, numberOfRowsInSection section: Int) -> Int {
+    func jxSelectView(jxSelectView: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-    func jxSelectView(_: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
+    func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
         if let batch = deliveringModel?.Batch,
             row == 0
         {
@@ -217,7 +218,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         }
         return "测试\(row)"
     }
-    func jxSelectView(_: JXSelectView, heightForRowAt row: Int) -> CGFloat {
+    func jxSelectView(jxSelectView: JXSelectView, heightForRowAt row: Int) -> CGFloat {
         
         if row == 0{
             return 44
@@ -231,7 +232,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             return 88
         }
     }
-    func jxSelectView(_: JXSelectView, viewForRow row: Int) -> UIView? {
+    func jxSelectView(jxSelectView: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
         let titleArray = ["发货","收货","备注"]
         

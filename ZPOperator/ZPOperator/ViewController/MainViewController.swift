@@ -106,17 +106,14 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MainCell
     
-        // Configure the cell
-        //cell.backgroundColor = UIColor.red
         cell.contentView.layer.cornerRadius = 5
-        //cell.contentView.layer.borderColor = UIColor.rgbColor(from: 35, 68, 120).cgColor
-        cell.contentView.layer.borderColor = UIColor.rgbColor(rgbValue: 0x0469c8).cgColor
+        cell.contentView.layer.borderColor = JXMainColor.cgColor
         cell.contentView.layer.borderWidth = 1
         
         if indexPath.item < self.mainVM.dataArray.count {
             let model = self.mainVM.dataArray[indexPath.item]
             cell.MainContentLabel.text = model.name
-            cell.MainContentLabel.textColor = UIColor.rgbColor(rgbValue: 0x0469c8)
+            cell.MainContentLabel.textColor = JXMainColor
             cell.MainContentLabel.font = UIFont.systemFont(ofSize: 15)
         }else{
             cell.MainContentLabel.text = "+"

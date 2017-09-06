@@ -41,7 +41,7 @@ class TraceSourceCell: UITableViewCell {
             
             self.timeLabel.text = model?.operationTime
             if let isMine = model?.isMine,isMine == true {
-                self.labelDetail1.textColor = UIColor.rgbColor(rgbValue: 0x0469c8)
+                self.labelDetail1.textColor = JXMainColor
             }else{
                 self.labelDetail1.textColor = UIColor.rgbColor(rgbValue: 0x333333)
             }
@@ -59,7 +59,7 @@ class TraceSourceCell: UITableViewCell {
                 }else if array.count == 2{
                     self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: nil)
                     self.imageView2.setImageWith(URL.init(string: array[1])!, placeholderImage: nil)
-                    self.imageView2.image = nil
+                    self.imageView3.image = nil
                     
                     self.imageView1.isHidden = false
                     self.imageView2.isHidden = false

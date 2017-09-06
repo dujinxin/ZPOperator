@@ -15,7 +15,7 @@ class TraceSRecordVM {
     lazy var traceSourceWholeModify = TraceSourceRecordWholeModify()//全程
     
     
-    func loadProgress(goodsId:NSNumber,traceBatchId:NSNumber, completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
+    func loadProgress(goodsId:Int,traceBatchId:Int, completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->()))  {
         
         JXRequest.request(url: ApiString.addTSRecord.rawValue, param: ["goodsId":goodsId,"traceBatchId":traceBatchId], success: { (data, msg) in
             //
@@ -40,7 +40,7 @@ class TraceSRecordVM {
         }
     }
     ///新增和修改 -- 详情进入
-    func updateTraceSourceRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
+    func updateTraceSourceRecord(id:NSNumber?, traceTemplateBatchId:Int, traceProcessId:Int,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
         
         let param : Dictionary<String,Any>
         if let id = id {
@@ -71,7 +71,7 @@ class TraceSRecordVM {
     }
     
     //获取要修改的信息   --- 详情进入
-    func fetchTraceSourceRecord(id:NSNumber,goodsId:NSNumber,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func fetchTraceSourceRecord(id:NSNumber,goodsId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.modifyTSRecord.rawValue, param: ["id":id,"goodsId":goodsId], success: { (data, msg) in
@@ -108,7 +108,7 @@ class TraceSRecordVM {
     
     
     //获取要修改的信息
-    func fetchTraceSourceWholeRecord(batchId:NSNumber,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func fetchTraceSourceWholeRecord(batchId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.deliveredWholeFetchRecord.rawValue, param: ["batchId":batchId], success: { (data, msg) in
@@ -142,7 +142,7 @@ class TraceSRecordVM {
     }
     
     ///新增和修改 -- 全程进入
-    func updateTraceSourceWholeRecord(id:NSNumber?, traceTemplateBatchId:NSNumber, traceProcessId:NSNumber,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
+    func updateTraceSourceWholeRecord(id:NSNumber?, traceTemplateBatchId:Int, traceProcessId:Int,traceProcessName:String, location:String, file:String?, contents:String?, completion:@escaping ((_ data:Any?,_ msg:String, _ isSuccess:Bool)->())) {
         
         let param : Dictionary<String,Any>
         if let id = id {

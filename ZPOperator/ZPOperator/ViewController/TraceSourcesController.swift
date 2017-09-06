@@ -109,7 +109,7 @@ class TraceSourcesController: ZPCollectionViewController {
         // Configure the cell
         
         cell.contentView.layer.cornerRadius = 5
-        cell.contentView.layer.borderColor = UIColor.rgbColor(rgbValue: 0x0469c8).cgColor
+        cell.contentView.layer.borderColor = JXMainColor.cgColor
         cell.contentView.layer.borderWidth = 1
         
         let model = self.vm.dataArray[indexPath.item]

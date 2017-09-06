@@ -40,13 +40,13 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
             }
         }
     }
-    func jxSelectView(_: JXSelectView, numberOfRowsInSection section: Int) -> Int {
+    func jxSelectView(jxSelectView: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-    func jxSelectView(_: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
+    func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
         return "测试\(row)"
     }
-    func jxSelectView(_: JXSelectView, heightForRowAt row: Int) -> CGFloat {
+    func jxSelectView(jxSelectView: JXSelectView, heightForRowAt row: Int) -> CGFloat {
         return 44
     }
     
@@ -87,7 +87,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
         
         select = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: //300), customView: view1)
             300), style:.list)
-        select?.isUseTopBar = true
+        select?.isUseCustomTopBar = true
         select?.dataSource = self
         //select?.customView = view1
         

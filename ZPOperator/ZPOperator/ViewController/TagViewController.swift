@@ -53,17 +53,16 @@ class TagViewController: BaseViewController {
         self.vm.traceSourceTag(page:1,code: text) { (data, msg, isSuccess) in
             self.hideMBProgressHUD()
             if isSuccess{
-                if let status = self.vm.traceSourceTag.status?.intValue{
-                    switch  status{
-                    case 1://正常
-                        self.performSegue(withIdentifier: "TraceSourceTag", sender: self.vm.traceSourceTag)
-                    case 3://未绑定
-                        let alert = UIAlertView.init(title: "标签已被停用", message: msg, delegate: nil, cancelButtonTitle: "确定")
-                        alert.show()
-                    default:
-                        ViewManager.showNotice(notice: msg)
-                        break
-                    }
+                let status = self.vm.traceSourceTag.status
+                switch  status{
+                case 1://正常
+                    self.performSegue(withIdentifier: "TraceSourceTag", sender: self.vm.traceSourceTag)
+                case 3://未绑定
+                    let alert = UIAlertView.init(title: "标签已被停用", message: msg, delegate: nil, cancelButtonTitle: "确定")
+                    alert.show()
+                default:
+                    ViewManager.showNotice(notice: msg)
+                    break
                 }
                 
             }else{

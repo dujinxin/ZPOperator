@@ -19,5 +19,5 @@ class MainModel: BaseModel {
 
 class MainSubModel: BaseModel {
     var name : String?
-    var id : NSNumber?
+    var id : Int = -1
 }

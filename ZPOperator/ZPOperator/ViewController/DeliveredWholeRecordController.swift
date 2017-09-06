@@ -37,7 +37,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
     
     
     var traceSourceRecord : TraceSourceRecord?
-    var processId : NSNumber?//溯源批次id
+    var processId : Int = -1//溯源批次id
     var processName : String?//溯源批次名称
     
     var addressStr : String?
@@ -47,7 +47,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
     var isAddTraceSource = true
     var traceRecordId : NSNumber?//修改时用
 
-    var batchId : NSNumber? //全程溯源来源需要用
+    var batchId : Int = -1 //全程溯源来源需要用
     
     var vm = TraceSRecordVM()
     var jxAlertView : JXAlertView?
@@ -99,7 +99,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
         if isAddTraceSource == false { //修改
             
             self.processName = self.traceSourceRecord?.traceProcess
-            self.processId = self.traceSourceRecord?.traceProcessId
+            self.processId = (self.traceSourceRecord?.traceProcessId)!
             self.processLabel.text = self.processName
             
             if
@@ -107,37 +107,33 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 contents.isEmpty == false {
                 self.textView.text = contents
             }
-            if let batchId = batchId {
-                self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
-                    if isSuccess{
-                        //格式化数组
-                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
-                        self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
-                        for model in self.vm.traceSourceWholeModify.traceProcesses{
-                            self.processArray.append(model.name!)
-                        }
-                        self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.station
-                        
-                        self.submitButton.backgroundColor = JXOrangeColor
-                        self.submitButton.isEnabled = true
+            self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
+                if isSuccess{
+                    //格式化数组
+                    self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                    self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
+                    for model in self.vm.traceSourceWholeModify.traceProcesses{
+                        self.processArray.append(model.name!)
                     }
-                })
-            }
+                    self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.station
+                    
+                    self.submitButton.backgroundColor = JXOrangeColor
+                    self.submitButton.isEnabled = true
+                }
+            })
         }else{  //添加
-            if let batchId = batchId {
-                self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
-                    if isSuccess{
-                        //格式化数组
-                        self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
-                        self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
-                        for model in self.vm.traceSourceWholeModify.traceProcesses{
-                            self.processArray.append(model.name!)
-                        }
-                        
-                        self.processLabel.text = "请选择"
+            self.vm.fetchTraceSourceWholeRecord(batchId: batchId, completion: { (data, msg, isSuccess) in
+                if isSuccess{
+                    //格式化数组
+                    self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
+                    self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
+                    for model in self.vm.traceSourceWholeModify.traceProcesses{
+                        self.processArray.append(model.name!)
                     }
-                })
-            }
+                    
+                    self.processLabel.text = "请选择"
+                }
+            })
         }
         
     }
@@ -171,7 +167,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
             ViewManager.showNotice(notice: "请选择操作地点")
             return
         }
-        guard let _ = self.processId else {
+        if self.processId == -1 {
             ViewManager.showNotice(notice: "请选择操作过程")
             return
         }
@@ -205,7 +201,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
         }else{
             id = nil
         }
-        self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: batchId!, traceProcessId: self.processId!, traceProcessName: self.processName!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
+        self.vm.updateTraceSourceWholeRecord(id: id, traceTemplateBatchId: batchId, traceProcessId: self.processId, traceProcessName: self.processName!, location: (self.addressLabel.text)!, file: file, contents: self.textView.text) { (data, msg, isSuccess) in
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if isSuccess{

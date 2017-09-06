@@ -15,8 +15,8 @@ class TraceSourceDetailModel: BaseModel {
 }
 class TraceSourceDetailSubModel: BaseModel {
     
-    var goodsId : NSNumber?
-    var traceBatchId : NSNumber?
+    var goodsId : Int = -1
+    var traceBatchId : Int = -1
     var traceBatchName : String?
     var traceBatchCreateBy : String?
 }
@@ -24,7 +24,7 @@ class TraceSourceDetailSubModel: BaseModel {
 class TraceSourceTagModel: BaseModel {
     
     var code : NSNumber?
-    var status : NSNumber? //1:正常,2:未绑定,3:停用,4:废弃
+    var status : Int = -1 //1:正常,2:未绑定,3:停用,4:废弃
     var goodsName : String?
     var batchCode : String?
     var remarks : String?
@@ -44,7 +44,7 @@ class TraceSourceWholeModel:BaseModel {
 
 class TraceSourceWholeProduct: BaseModel {
     
-    var id : NSNumber?
+    var id : Int = -1
     var goodsName : String?
     var code : String?
     var traceBatch:String?
@@ -57,7 +57,7 @@ class TraceSourceRecord: BaseModel {
     var createBy : String?
     var contents : String?
     var traceProcess : String?
-    var traceProcessId : NSNumber?//全程
+    var traceProcessId : Int = -1//全程
     var location : String?
     var isMine : Bool = false
     var operationTime :String?
@@ -71,7 +71,7 @@ class TraceSourceRecord: BaseModel {
 //获取溯源过程
 class TraceSourceProgress: BaseModel {
     var stationLocation :String?
-    var traceBatchId : NSNumber?
+    var traceBatchId : Int = -1
     
     var traceProcesses = Array<MainSubModel>()
 }
@@ -88,9 +88,9 @@ class TraceSourceModify: BaseModel {
 //要修改的溯源记录
 class TraceSourceRecordModify: BaseModel {
     
-    var id : NSNumber?
+    var id : Int = -1
     var contents : String?
-    var traceProcessId : NSNumber?
+    var traceProcessId : Int = -1
     var location : String?
     var isMine : Bool = false
     var operationTime :String?

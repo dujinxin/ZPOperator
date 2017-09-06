@@ -1,5 +1,5 @@
 //
-//  DeliveringManagerVM.swift
+//  DeliverManagerVM.swift
 //  ZPOperator
 //
 //  Created by 杜进新 on 2017/6/26.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class DeliveringManagerVM {
+class DeliverManagerVM {
     
-    var deliveringManagerModel = DeliveringManagerModel()
+    var deliverManagerModel = DeliverManagerModel()
     
     func deliveringManagerSubmit(id:Int,traceBatchId:Int,startCode:String,endCode:String,counts:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
@@ -43,12 +43,12 @@ class DeliveringManagerVM {
                     completion(data, message, false,JXNetworkError.kResponseUnknow)
                     return
             }
-            self.deliveringManagerModel.setValuesForKeys(dict)
-            self.deliveringManagerModel.traceBatches.removeAll()
+            self.deliverManagerModel.setValuesForKeys(dict)
+            self.deliverManagerModel.traceBatches.removeAll()
             for d in array{
                 let model = MainSubModel()
                 model.setValuesForKeys(d)
-                self.deliveringManagerModel.traceBatches.append(model)
+                self.deliverManagerModel.traceBatches.append(model)
             }
             
             completion(data, message, true, JXNetworkError.kResponseSuccess)

@@ -15,6 +15,8 @@ class UserModel: BaseModel {
     
     //登录接口获取
     var sid : String?
+    var type : Int = 1 //操作员类型:1无网点2有网点
+    
     
     //设置接口获取
     var mobile : String?

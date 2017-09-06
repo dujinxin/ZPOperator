@@ -46,6 +46,46 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
         return predicate.evaluate(with: code)
     }
+    /// 纯数字
+    ///
+    /// - Parameter string: 要检验的字符串
+    /// - Returns: 返回结果true/false
+    static func validateNumber(string:String) -> Bool {
+        
+        let passWordRegex = "[0-9]*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: string)
+    }
+    /// 纯字母
+    ///
+    /// - Parameter string: 要检验的字符串
+    /// - Returns: 返回结果true/false
+    static func validateLetter(string:String) -> Bool {
+        
+        let passWordRegex = "[a-zA-Z]*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: string)
+    }
+    /// 纯汉字
+    ///
+    /// - Parameter string: 要检验的字符串
+    /// - Returns: 返回结果true/false
+    static func validateChinese(string:String) -> Bool {
+        
+        let passWordRegex = "[\\u4e00-\\u9fa5]+"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: string)
+    }
+    /// 字母或数字
+    ///
+    /// - Parameter string: 要检验的字符串
+    /// - Returns: 返回结果true/false
+    static func validateNumberOrLetter(string:String) -> Bool {
+        
+        let passWordRegex = "[a-zA-Z0-9]*"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: string)
+    }
 }
 
 extension String {
