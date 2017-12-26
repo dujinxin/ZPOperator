@@ -21,14 +21,15 @@ class DeliveredViewController: ZPTableViewController {
 
         view.backgroundColor = UIColor.groupTableViewBackground
         
-        self.automaticallyAdjustsScrollViewInsets = false
-        
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         self.tableView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54)
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.rowHeight = 54
         self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: Bundle.main), forCellReuseIdentifier: "reuseIdentifier")
+        
         self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
             self.currentPage = 1
             self.loadData(page: 1)

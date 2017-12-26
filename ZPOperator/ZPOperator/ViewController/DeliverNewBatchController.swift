@@ -28,7 +28,7 @@ class DeliverNewBatchController: ZPTableViewController {
 //    }()
     
     var vm = DeliverNewBatchVM()
-    var jxAlertView : JXAlertView?
+    var actionView : JXActionView?
     var productArray = Array<String>()
     
     var productId : Int = -1
@@ -90,14 +90,13 @@ class DeliverNewBatchController: ZPTableViewController {
         super.viewDidLoad()
 
         submitButton.layer.cornerRadius = 5
-        submitButton.backgroundColor = JXGrayColor
+        //submitButton.backgroundColor = JXGrayColor
+        submitButton.backgroundColor = JXMainColor
 //        submitButton.isEnabled = false
         
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
-        
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        self.actionView?.delegate = self
+        self.actionView?.isUseBottomView = true
         
         self.vm.deliverNewBatchInfo { (data, msg, isSuccess) in
             guard isSuccess == true ,self.vm.deliverNewBatchModel.provinceList.isEmpty == false else{
@@ -108,7 +107,7 @@ class DeliverNewBatchController: ZPTableViewController {
             for model in self.vm.deliverNewBatchModel.goodsList{
                 self.productArray.append(model.name!)
             }
-            self.jxAlertView?.actions = self.productArray
+            self.actionView?.actions = self.productArray
         }
     }
 
@@ -157,7 +156,7 @@ class DeliverNewBatchController: ZPTableViewController {
         if indexPath.section == 0 {
             self.view.endEditing(true)
             if indexPath.row == 1 {
-                self.jxAlertView?.show()
+                self.actionView?.show()
             }else if indexPath.row == 3{
                 guard self.vm.deliverNewBatchModel.provinceList.isEmpty == false else {
                     return
@@ -189,8 +188,8 @@ class DeliverNewBatchController: ZPTableViewController {
     }
 
 }
-extension DeliverNewBatchController:JXAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension DeliverNewBatchController:JXActionViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         
         //selectIndex = index
         self.productLabel.text = self.productArray[index]

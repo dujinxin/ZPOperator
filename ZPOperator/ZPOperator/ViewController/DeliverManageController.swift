@@ -29,7 +29,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.automaticallyAdjustsScrollViewInsets = false
         
-        if LoginVM.loginVMManager.userModel.type == 1 {
+        if UserManager.manager.userAccound.type == 1 {
             deliveredVC.deliveredBlock = { (deliveringModel,deliveringOperatorModel)->() in
                 self.performSegue(withIdentifier: "deliveredManager", sender: ["deliveringModel":deliveringModel,"deliveringOperatorModel":deliveringOperatorModel])
             }
@@ -64,7 +64,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
     }
     
     @IBAction func additionAction(_ sender: UIBarButtonItem) {
-        if LoginVM.loginVMManager.userModel.type == 1 {
+        if UserManager.manager.userAccound.type == 1 {
             self.performSegue(withIdentifier: "delivery", sender: nil)
         }else{
             self.performSegue(withIdentifier: "newBatch", sender: nil)

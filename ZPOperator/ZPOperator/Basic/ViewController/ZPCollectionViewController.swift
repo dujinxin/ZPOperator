@@ -25,6 +25,15 @@ class ZPCollectionViewController: UICollectionViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
         self.navigationController?.navigationBar.tintColor = UIColor.white //item图片文字颜色
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]//标题设置
+        
+        if #available(iOS 11.0, *) {
+            self.collectionView?.contentInsetAdjustmentBehavior = .never
+            self.collectionView?.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
+            self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = true
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

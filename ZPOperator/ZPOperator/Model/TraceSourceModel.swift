@@ -63,6 +63,9 @@ class TraceSourceRecord: BaseModel {
     var operationTime :String?
     var images : Array<String>?
     
+    var canEdit : Bool = false //是否可以编辑,只在全程溯源中有
+    
+    
 }
 
 

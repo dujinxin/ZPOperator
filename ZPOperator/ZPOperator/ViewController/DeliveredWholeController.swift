@@ -40,7 +40,13 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.automaticallyAdjustsScrollViewInsets = false
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInsetAdjustmentBehavior = .never
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
+            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         
         self.addButtonHeightConstraint.constant = 44 * kPercent
         self.addButtonWidthConstraint.constant = 44 * kPercent
@@ -139,25 +145,24 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             }
             return cell
         }
-        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row > 0 {
             currentRecord = self.detailVM.dataArray[indexPath.row - 1]
-            
+
             if currentRecord?.isMine == false {
                 return
             }
-            let jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-            
-            jxAlertView.position = .bottom
-            jxAlertView.isSetCancelView = true
-            jxAlertView.delegate = self
-            jxAlertView.actions = ["修改","删除"]
-            jxAlertView.tag = indexPath.row - 1
-            jxAlertView.show()
+            if currentRecord?.canEdit == false {
+                return
+            }
+            let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+            actionView.isUseBottomView = true
+            actionView.delegate = self
+            actionView.actions = ["修改","删除"]
+            actionView.tag = indexPath.row - 1
+            actionView.show()
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -179,8 +184,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
         }
         return height
     }
-    
-    
+ 
     func loadData(page:Int) {
         
         self.detailVM.traceSourceWholeTrace(page: page, batchId: batchId!, completion: { (data, msg, isSuccess) in
@@ -192,18 +196,17 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
                 ViewManager.showNotice(notice: msg)
             }
         })
- 
     }
 }
-extension DeliveredWholeController : JXAlertViewDelegate,UIAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension DeliveredWholeController : JXActionViewDelegate,UIAlertViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         if index == 0 {
             //修改
             performSegue(withIdentifier: "addTraceSourceWholeRecord", sender: false)
         }else{
             //删除
             let alert = UIAlertView.init(title: "确认删除本条溯源信息？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确认删除")
-            alert.tag = alertView.tag
+            alert.tag = actionView.tag
             alert.show()
         }
         
@@ -212,8 +215,7 @@ extension DeliveredWholeController : JXAlertViewDelegate,UIAlertViewDelegate{
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if buttonIndex == 1 {
             //let model = self.detailVM.dataArray[alertView.tag]
-            
-            
+        
             self.recordVM.deleteTraceSourceRecord(id: currentRecord!.id!, completion: { (data, msg, isSuccess) in
                 ViewManager.showNotice(notice: msg)
                 if isSuccess  {

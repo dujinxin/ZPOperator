@@ -49,7 +49,7 @@ class TraceSRecordController: ZPTableViewController {
     var traceRecordId : NSNumber?//溯源详情来源需要用
     
     var vm = TraceSRecordVM()
-    var jxAlertView : JXAlertView?
+    var actionView : JXActionView?
     var uploadManager = QiNiuUploadManager()
     
     var processArray = Array<String>()
@@ -63,15 +63,14 @@ class TraceSRecordController: ZPTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+      
+        self.actionView?.isUseBottomView = true
+        self.actionView?.delegate = self
         
 
         productLabel.text = self.traceSource?.traceBatchName
-        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
+        operatorLabel.text = "操作人 " + UserManager.manager.userAccound.userName!
         
         textView.placeHolderText = "请输入溯源信息内容"
         
@@ -262,8 +261,8 @@ class TraceSRecordController: ZPTableViewController {
             
             if indexPath.row == 0 {
                 isProcessAlert = 0
-                self.jxAlertView?.actions = processArray
-                self.jxAlertView?.show()
+                self.actionView?.actions = processArray
+                self.actionView?.show()
             }else if indexPath.row == 1{
                 isProcessAlert = 1
                 self.addressArray.removeAll()
@@ -280,8 +279,8 @@ class TraceSRecordController: ZPTableViewController {
                     }
                     
                 }
-                self.jxAlertView?.actions = addressArray
-                self.jxAlertView?.show()
+                self.actionView?.actions = addressArray
+                self.actionView?.show()
                 
             }else{
                 
@@ -289,8 +288,8 @@ class TraceSRecordController: ZPTableViewController {
         }
     }
 }
-extension TraceSRecordController : JXAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension TraceSRecordController : JXActionViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         if isProcessAlert == 0{
             self.processLabel.text = self.vm.traceSourceProgress.traceProcesses[index].name
             self.processId = self.vm.traceSourceProgress.traceProcesses[index].id
@@ -301,9 +300,11 @@ extension TraceSRecordController : JXAlertViewDelegate{
             if index == 0 {
                 let imagePickerVC = TZImagePickerController.init(maxImagesCount: 3 - self.imageArray.count, delegate: self)
                 imagePickerVC?.allowTakePicture = false
+                imagePickerVC?.allowPickingVideo = false
                 
                 imagePickerVC?.allowPickingImage = true
                 imagePickerVC?.allowPickingOriginalPhoto = true
+                
                 
                 imagePickerVC?.sortAscendingByModificationDate = true
                 
@@ -384,8 +385,8 @@ extension TraceSRecordController :TZImagePickerControllerDelegate{
     func photo11() {
         self.textView.resignFirstResponder()
         isProcessAlert = 2
-        self.jxAlertView?.actions = ["从相册中选择（最多三张）","拍照"]
-        self.jxAlertView?.show()
+        self.actionView?.actions = ["从相册中选择（最多三张）","拍照"]
+        self.actionView?.show()
         
     }
     

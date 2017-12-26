@@ -26,6 +26,7 @@ class DeliveredManagerController: ZPTableViewController {
     
     @IBOutlet weak var remarkLabel: UILabel!
     @IBOutlet weak var traceBatchLabel: UILabel!
+    @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var startNumLabel: UILabel!
     @IBOutlet weak var endNumLabel: UILabel!
     @IBOutlet weak var tagNumLabel: UILabel!
@@ -47,8 +48,6 @@ class DeliveredManagerController: ZPTableViewController {
             vc.batchId = sender as? NSNumber
         
         }
-        
-        
     }
 
     override func viewDidLoad() {
@@ -84,6 +83,7 @@ class DeliveredManagerController: ZPTableViewController {
             self.remarkLabel.text = self.traceDeliverSubModel?.remarks
         }
         self.traceBatchLabel.text = self.traceDeliverSubModel?.traceBatch
+        self.sizeLabel.text = self.traceDeliverSubModel?.spec
         self.startNumLabel.text = self.traceDeliverSubModel?.startCode
         self.endNumLabel.text = self.traceDeliverSubModel?.endCode
         if let totalCount = self.traceDeliverSubModel?.totalCount {
@@ -117,33 +117,37 @@ class DeliveredManagerController: ZPTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 1 {
-            return 74
-        }else if indexPath.row == 2{
-//            if let province = self.traceDeliverSubModel?.province,
-//                let city = self.traceDeliverSubModel?.city,
-//                let country = self.traceDeliverSubModel?.county,
-//                let address = self.traceDeliverSubModel?.address{
-//                
-//                self.receiveAddressLabel.text = province + city + country + address
-//            }
-            let size = self.receiveAddressLabel.text?.calculate(width: kScreenWidth - 120, fontSize: 14)
-            if (size?.height)! < CGFloat(20) {
-                return 44
-            }else{
-                return (size?.height)! + CGFloat(10)
-            }
-
-        }else if indexPath.row == 3{
-            let size = self.traceDeliverSubModel?.remarks?.calculate(width: kScreenWidth - 120, fontSize: 14)
-            if (size?.height)! < CGFloat(20) {
-                return 44
-            }else{
-                return (size?.height)! + CGFloat(10)
-            }
-
-        }else{
+        if indexPath.section == 1 {
             return 44
+        }else{
+            if indexPath.row == 1 {
+                return 74
+            }else if indexPath.row == 2{
+                //            if let province = self.traceDeliverSubModel?.province,
+                //                let city = self.traceDeliverSubModel?.city,
+                //                let country = self.traceDeliverSubModel?.county,
+                //                let address = self.traceDeliverSubModel?.address{
+                //
+                //                self.receiveAddressLabel.text = province + city + country + address
+                //            }
+                let size = self.receiveAddressLabel.text?.calculate(width: kScreenWidth - 120, fontSize: 14)
+                if (size?.height)! < CGFloat(20) {
+                    return 44
+                }else{
+                    return (size?.height)! + CGFloat(10)
+                }
+                
+            }else if indexPath.row == 3{
+                let size = self.traceDeliverSubModel?.remarks?.calculate(width: kScreenWidth - 120, fontSize: 14)
+                if (size?.height)! < CGFloat(20) {
+                    return 44
+                }else{
+                    return (size?.height)! + CGFloat(10)
+                }
+                
+            }else{
+                return 44
+            }
         }
     }
 

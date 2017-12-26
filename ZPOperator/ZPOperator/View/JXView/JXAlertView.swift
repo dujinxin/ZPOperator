@@ -21,7 +21,7 @@ enum JXAlertViewShowPosition {
 private let reuseIdentifier = "reuseIdentifier"
 
 private let topBarHeight : CGFloat = 40
-private let alertViewMargin : CGFloat = 0
+private let alertViewMargin : CGFloat = kScreenWidth * 0.1
 private let alertViewWidth : CGFloat = UIScreen.main.bounds.width - 2 * alertViewMargin
 private let listHeight : CGFloat = 40
 private let cancelViewHeight : CGFloat = 40
@@ -35,17 +35,6 @@ class JXAlertView: UIView {
     var title : String?
     var message : String?
     var actions : Array<String> = [String](){
-//        willSet{//默认newValue，可以自己指定：（myValue）
-//            if newValue.count > 5 {
-//                self.tableView.isScrollEnabled = true
-//                self.tableView.bounces = true
-//                self.tableView.showsVerticalScrollIndicator = true
-//            }else{
-//                self.tableView.isScrollEnabled = false
-//                self.tableView.bounces = false
-//                self.tableView.showsVerticalScrollIndicator = false
-//            }
-//        }
         didSet{
             if actions.count > 5 {
                 self.tableView.isScrollEnabled = true
@@ -68,7 +57,7 @@ class JXAlertView: UIView {
             self.resetFrame()
         }
     }
-
+    var selectRow : Int = -1
     var contentHeight : CGFloat {
         set{//可以自己指定值带来替默认值eg: （myValue）
             var h : CGFloat = 0
@@ -92,20 +81,6 @@ class JXAlertView: UIView {
         }
     }
     
-    var selectRow : Int = -1
-    
-    private var contentView : UIView?
-
-//    var alertViewTopHeight : CGFloat = 40 {
-//        didSet{
-//            if (self.topBarView.superview == nil){
-//                self.addSubview(self.topBarView)
-//            }
-//            selectViewTop = topBarHeight
-//            self.resetFrame()
-//            self.layoutSubviews()
-//        }
-//    }
     var isScrollEnabled : Bool = false {
         didSet{
             if isScrollEnabled == true {
@@ -145,7 +120,12 @@ class JXAlertView: UIView {
             }
         }
     }
-    
+    private var contentView : UIView?
+    var customView: UIView? {
+        didSet{
+            self.contentView = customView
+        }
+    }
     var topBarView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.groupTableViewBackground
@@ -198,6 +178,9 @@ class JXAlertView: UIView {
         //self.rect = frame
         //self.frame = CGRect.init(x: 0, y: 0, width: frame.width, height: frame.height)
         self.backgroundColor = UIColor.clear
+        self.layer.cornerRadius = 15.0
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
         self.style = style
         
         if style == .list {
@@ -214,22 +197,6 @@ class JXAlertView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-//    func resetFrame() {
-//        var height = rect.height
-//        
-//        if isUseTopBar {
-//            height += topBarHeight
-//        }
-//        if isSetCancelView {
-//            height += cancelViewHeight
-//            
-//            if position == .bottom {
-//                height += 10
-//            }
-//        }
-//        
-//        self.frame = CGRect.init(x: (UIScreen.main.bounds.width - alertViewWidth)/2, y: 0, width: alertViewWidth, height:height)
-//    }
     func resetFrame(height:CGFloat = 0.0) {
         var h : CGFloat = 0
         if height > 0 {
@@ -248,6 +215,10 @@ class JXAlertView: UIView {
         if isSetCancelView {
             h += cancelViewHeight + 10
         }
+        //如果为iPhoneX，则把底部的34空间让出来
+//        if deviceModel == .iPhoneX {
+//            h += 34
+//        }
         self.frame = CGRect.init(x: (UIScreen.main.bounds.width - alertViewWidth)/2, y: 0, width: alertViewWidth, height:h)
         
     }
@@ -311,10 +282,7 @@ class JXAlertView: UIView {
                 if self.style == .list {
                     self.tableView.reloadData()
                 }else if self.style == .plain {
-//                    self.pickView.reloadComponent(0)
-//                    if self.selectRow >= 0 {
-//                        self.pickView.selectRow(self.selectRow, inComponent: 0, animated: true)
-//                    }
+
                 }
             })
         }

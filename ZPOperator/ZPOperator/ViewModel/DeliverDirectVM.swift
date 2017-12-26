@@ -13,6 +13,7 @@ class DeliverDirectVM {
     var deliverDirectModel = DeliverNewBatchModel()
     
     var batchs = Array<MainSubModel>()
+    //获取编码
     var deliverDirectCodeModel = DeliverDirectCodeModel()
     
     
@@ -23,7 +24,8 @@ class DeliverDirectVM {
                 let dict = data as? Dictionary<String,Any>,
                 let Operator = dict["operator"] as? Dictionary<String,Any>,
                 let goodsList = dict["goodsList"] as? Array<Dictionary<String,Any>>,
-                let provinceList = dict["provinceList"] as? Array<Dictionary<String,Any>>
+                let provinceList = dict["provinceList"] as? Array<Dictionary<String,Any>>,
+                let codeSpecList = dict["codeSpecList"]
                 else{
                     completion(data, message, false)
                     return
@@ -38,6 +40,13 @@ class DeliverDirectVM {
                 let model = MainSubModel()
                 model.setValuesForKeys(d)
                 self.deliverDirectModel.provinceList.append(model)
+            }
+            if let codeList = codeSpecList as? Array<Dictionary<String,Any>> {
+                for d in codeList{
+                    let model = DeliverDirectCodeSizeModel()
+                    model.setValuesForKeys(d)
+                    self.deliverDirectModel.codeSpecList.append(model)
+                }
             }
             completion(data, message, true)
             
@@ -111,9 +120,9 @@ class DeliverDirectVM {
             completion(nil, msg, false)
         }
     }
-    func deliverSave(goodsId:Int,counts:String,provinceId:Int,cityId:Int,countyId:Int,province:String,city:String,county:String,address:String,remarks:String,startCode:String,endCode:String,traceBatchId:Int,codeType:Int = 1,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func deliverSave(goodsId:Int,counts:String,provinceId:Int,cityId:Int,countyId:Int,province:String,city:String,county:String,address:String,remarks:String,startCode:String,endCode:String,traceBatchId:Int,codeType:Int = 0,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
-        JXRequest.request(url: ApiString.deliverSave.rawValue, param: ["goods.id":goodsId,"counts":counts,"provinceId":provinceId,"cityId":cityId,"countyId":countyId,"province":province,"city":city,"county":county,"address":address,"remarks":remarks,"startCode":startCode,"endCode":endCode,"traceBatchId":traceBatchId,"codeType":codeType], success: { (data, message) in
+        JXRequest.request(url: ApiString.deliverSave.rawValue, param: ["goods.id":goodsId,"counts":counts,"provinceId":provinceId,"cityId":cityId,"countyId":countyId,"province":province,"city":city,"county":county,"address":address,"remarks":remarks,"startCode":startCode,"endCode":endCode,"traceBatchId":traceBatchId,"codeSpec.id":codeType], success: { (data, message) in
             
             completion(data, message, true)
             

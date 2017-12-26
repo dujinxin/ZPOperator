@@ -12,6 +12,9 @@ class DeliveryViewController: ZPTableViewController {
     // MARK: - Properties
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var batchLabel: UILabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var sizePreview: UIImageView!
+    
     @IBOutlet weak var orderNumTextField: UITextField!
     
     @IBOutlet weak var codeButton: UIButton!
@@ -26,24 +29,31 @@ class DeliveryViewController: ZPTableViewController {
     @IBOutlet weak var submitButton: UIButton!
     
     var vm = DeliverDirectVM()
-    var jxAlertView : JXAlertView?
+    var actionView : JXActionView?
     var selectView : JXSelectView?
+    
+    let confirmTitleArray = ["产品","溯源批次","标签规格","订单数量","开始编码","结束编码","收货","备注","操作人"]
     var confirmArray = Array<String>()
+    
+    var alertView : JXAlertView?
     
     
     var isProcessAlert : Int = 0
     var productArray = Array<String>()
     var batchArray = Array<String>()
-    
-    
+    //产品
     var productId : Int = -1
     var productName : String?
-    
+    //批次
     var batchId : Int = -1
     var batchName : String?
+    //规格
+    var sizeId : Int = -1
+    var sizeName : String?
     
-    var orderString : String?
+    var orderString : String?//138
     
+    //省市区
     var provinceId : Int = -1
     var provinceString : String?
     var cityId : Int = -1
@@ -64,12 +74,14 @@ class DeliveryViewController: ZPTableViewController {
         codeButton.layer.cornerRadius = 5
         codeButton.backgroundColor = JXMainColor
         
+        self.sizePreview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(codeSizePreview)))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        self.actionView?.tag = 10
+        self.actionView?.isUseBottomView = true
+        self.actionView?.delegate = self
         
         
         self.vm.fetchDeliverInfo { (data, msg, isSuccess) in
@@ -91,6 +103,13 @@ class DeliveryViewController: ZPTableViewController {
         // Dispose of any resources that can be recreated.
     }
     // MARK: - Custom Methods
+    func codeSizePreview() {
+        let customView = setSizeSelectView()
+        let alertView = JXAlertView.init(frame: customView.bounds, style: .custom)
+        alertView.customView = customView
+        self.alertView = alertView
+        self.alertView?.show()
+    }
     @IBAction func fetchCode(_ sender: Any) {
         
         if productId == -1 {
@@ -145,6 +164,10 @@ class DeliveryViewController: ZPTableViewController {
             ViewManager.showNotice(notice: "订单数量输入有误，请输入纯数字")
             return
         }
+        if sizeLabel.text?.isEmpty == true {
+            ViewManager.showNotice(notice: "请先选择标签规格")
+            return
+        }
         guard
             pcaArray.count == 3,
             let provinceName = pcaArray[0]["name"] as? String,
@@ -178,6 +201,7 @@ class DeliveryViewController: ZPTableViewController {
         self.confirmArray.removeAll()
         self.confirmArray.append(String.init(format: "%@", self.productName ?? ""))
         self.confirmArray.append(String.init(format: "%@", self.batchName ?? "暂无溯源批次"))
+        self.confirmArray.append(String.init(format: "%@", self.sizeLabel.text ?? "暂无可用标签"))
         self.confirmArray.append(String.init(format: "%d", orderStr))
         self.confirmArray.append(String.init(format: "%@", startCode))
         self.confirmArray.append(String.init(format: "%@", endCode))
@@ -186,7 +210,7 @@ class DeliveryViewController: ZPTableViewController {
         self.confirmArray.append(String.init(format: "%@", remarkText))
         self.confirmArray.append(String.init(format: "%@", self.vm.deliverDirectModel.Operator.name ?? ""))
         
-        setSelectView()
+        setConfirmSelectView()
         
     }
     func validate() {
@@ -213,7 +237,7 @@ class DeliveryViewController: ZPTableViewController {
             let endCode = self.vm.deliverDirectCodeModel.endCode,
             let endNumber = Int(endCode),
             let number = Int(endStr),
-            endStr.characters.count == 12,
+            endStr.count == 12,
             number >= endNumber
         {
             submitButton.backgroundColor = JXOrangeColor
@@ -224,7 +248,7 @@ class DeliveryViewController: ZPTableViewController {
         }
     }
     
-    func setSelectView() {
+    func setConfirmSelectView() {
         selectView = nil
         selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
         selectView?.dataSource = self
@@ -261,8 +285,70 @@ class DeliveryViewController: ZPTableViewController {
         selectView?.isUseCustomTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
-        self.selectView?.resetFrame(height: 44 * 8 + 88)
+        self.selectView?.resetFrame(height: CGFloat(44 * confirmTitleArray.count + 88))
         selectView?.show()
+    }
+    func setSizeSelectView() -> UIView {
+        
+        let contentView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth * 0.8, height:
+            260))
+        contentView.backgroundColor = JXFfffffColor
+        //view.layer.cornerRadius =
+        
+        let titleArray = ["35mm*20mm","27mm*17mm"]
+        let imageArray = ["size_2035","size_1727"]
+        let sizeArray = [CGSize(width: 275.0 * 0.6, height: 275.0 * 0.6 * (20.0 / 35.0)),CGSize(width: 212.0 * 0.6, height: 212.0 * 0.6 * (17.0 / 27.0))]
+        
+        
+        //let imageViewSize = CGSize(width: view.jxWidth * 0.8, height: view.jxWidth * 0.6 * (17.0 / 24.0))
+        var H : CGFloat = 0.0
+        for i in 0..<titleArray.count {
+            let size = sizeArray[i]
+            var height : CGFloat = 0
+            if i > 0 {
+                height = sizeArray[0].height + 10.0 * 2.0 + 14.0
+            }
+            
+            let imageView = UIImageView()
+            imageView.frame = CGRect(x: 0, y: 10.0 + height, width: size.width, height: size.height)
+            imageView.image = UIImage(named: imageArray[i])
+            contentView.addSubview(imageView)
+            imageView.center = CGPoint(x: contentView.center.x, y: imageView.center.y)
+            
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: imageView.jxBottom + 10.0, width: contentView.jxWidth, height: 14)
+            label.text = titleArray[i]
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.textColor = JX333333Color
+            contentView.addSubview(label)
+            
+            H = label.jxBottom
+      
+        }
+        
+        let separateLine = UIView(frame: CGRect(x: 0, y: H + 10 - 0.5, width: contentView.frame.width, height:
+            0.5))
+        separateLine.backgroundColor = UIColor.groupTableViewBackground
+        contentView.addSubview(separateLine)
+        
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: H + 10, width: contentView.frame.width, height: 44)
+        button.setTitle("确定", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setTitleColor(JXMainColor, for: .normal)
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(dismissAlertView), for: .touchUpInside)
+        contentView.addSubview(button)
+
+        contentView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth * 0.8, height:
+            H + 10 + 44)
+   
+        return contentView
+    }
+    func dismissAlertView() {
+        self.alertView?.dismiss()
     }
     func dismissSelectView() {
         self.selectView?.dismiss()
@@ -310,7 +396,7 @@ class DeliveryViewController: ZPTableViewController {
         self.selectView?.dismiss()
         self.showMBProgressHUD()
         
-        self.vm.deliverSave(goodsId: productId, counts: orderStr, provinceId: provinceID, cityId: cityID, countyId: areaID, province: provinceName, city: cityName, county: areaName, address: detailString, remarks: remarkTextField.text ?? "", startCode: startCode, endCode: endCode, traceBatchId: self.batchId) { (data, msg, isSuccess) in
+        self.vm.deliverSave(goodsId: productId, counts: orderStr, provinceId: provinceID, cityId: cityID, countyId: areaID, province: provinceName, city: cityName, county: areaName, address: detailString, remarks: remarkTextField.text ?? "", startCode: startCode, endCode: endCode, traceBatchId: self.batchId,codeType: self.sizeId) { (data, msg, isSuccess) in
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if
@@ -365,8 +451,8 @@ class DeliveryViewController: ZPTableViewController {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 isProcessAlert = 1
-                self.jxAlertView?.actions = self.productArray
-                self.jxAlertView?.show()
+                self.actionView?.actions = self.productArray
+                self.actionView?.show()
             }else if indexPath.row == 1{
                 isProcessAlert = 0
                 if self.productId == -1 {
@@ -374,8 +460,8 @@ class DeliveryViewController: ZPTableViewController {
                     return
                 }
                 if self.batchId != -1 {
-                    self.jxAlertView?.actions = self.batchArray
-                    self.jxAlertView?.show()
+                    self.actionView?.actions = self.batchArray
+                    self.actionView?.show()
                     return
                 }
                 self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess) in
@@ -391,16 +477,31 @@ class DeliveryViewController: ZPTableViewController {
                     for model in self.vm.batchs{
                         self.batchArray.append(model.name!)
                     }
-                    self.jxAlertView?.actions = self.batchArray
-                    self.jxAlertView?.show()
+                    self.actionView?.actions = self.batchArray
+                    self.actionView?.show()
                 })
+            }else if indexPath.row == 2 {
+                
+                if self.vm.deliverDirectModel.codeSpecList.isEmpty == false {
+                    var titleArray = Array<String>()
+                    for model in self.vm.deliverDirectModel.codeSpecList {
+                        titleArray.append(model.desc!)
+                    }
+                    
+                    let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+                    actionView.isUseBottomView = true
+                    actionView.delegate = self
+                    actionView.actions = titleArray
+                    actionView.tag = 11
+                    actionView.show()
+                } else {
+                    ViewManager.showNotice(notice: "暂无可用标签，请先申请标签")
+                    return
+                }
             }
         }
         if indexPath.section == 3 {
-            
-            if indexPath.row == 1 {
-                self.jxAlertView?.show()
-            }else if indexPath.row == 0{
+            if indexPath.row == 0{
                 guard self.vm.deliverDirectModel.provinceList.isEmpty == false else {
                     return
                 }
@@ -431,49 +532,34 @@ class DeliveryViewController: ZPTableViewController {
     }
     
 }
-extension DeliveryViewController:JXAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension DeliveryViewController:JXActionViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         
-        //selectIndex = index
-        if isProcessAlert == 0 {
-            self.batchLabel.text = self.batchArray[index]
-            self.batchId = self.vm.batchs[index].id
-            self.batchName = self.vm.batchs[index].name
-        }else{
-            
-            if self.productLabel.text == self.productArray[index] && self.productId == self.vm.deliverDirectModel.goodsList[index].id {
-                return
+        if actionView.tag == 10 {
+            if isProcessAlert == 0 {
+                self.batchLabel.text = self.batchArray[index]
+                self.batchId = self.vm.batchs[index].id
+                self.batchName = self.vm.batchs[index].name
             }else{
-                self.productLabel.text = self.productArray[index]
-                self.productId = self.vm.deliverDirectModel.goodsList[index].id
-                self.productName = self.vm.deliverDirectModel.goodsList[index].name
                 
-                self.batchLabel.text = "请选择"
-                self.batchId = -1
-                self.batchName = nil
-                self.batchArray.removeAll()
+                if self.productLabel.text == self.productArray[index] && self.productId == self.vm.deliverDirectModel.goodsList[index].id {
+                    return
+                }else{
+                    self.productLabel.text = self.productArray[index]
+                    self.productId = self.vm.deliverDirectModel.goodsList[index].id
+                    self.productName = self.vm.deliverDirectModel.goodsList[index].name
+                    
+                    self.batchLabel.text = "请选择"
+                    self.batchId = -1
+                    self.batchName = nil
+                    self.batchArray.removeAll()
+                }
             }
+        }else if actionView.tag == 11 {
+            self.sizeName = self.vm.deliverDirectModel.codeSpecList[index].desc
+            self.sizeId = self.vm.deliverDirectModel.codeSpecList[index].id
+            self.sizeLabel.text = self.vm.deliverDirectModel.codeSpecList[index].desc
         }
-        
-        
-        //        if let _ = addressButton.currentTitle,
-        //            let _ = productButton.currentTitle{
-        //
-        //            submitButton.backgroundColor = JXOrangeColor
-        //            submitButton.isEnabled = true
-        //
-        //        }else{
-        //            submitButton.backgroundColor = JXGrayColor
-        //            submitButton.isEnabled = false
-        //
-        //        }
-        
-        //        if let _ = productButton.currentTitle {
-        //            placeHolderLabel.isHidden = true
-        //        }else{
-        //            placeHolderLabel.isHidden = false
-        //        }
-        
     }
 }
 extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
@@ -555,7 +641,7 @@ extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
                 return self.vm.deliverDirectModel.areaList.count
             }
         }else{
-            return 9
+            return confirmTitleArray.count + 1
         }
     }
     func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
@@ -571,7 +657,7 @@ extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
         if jxSelectView.style == .pick {
             return 40
         }else{
-            if row < 8{
+            if row < confirmTitleArray.count{
                 return 44
             }else{
                 return 88
@@ -586,17 +672,15 @@ extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
     }
     func jxSelectView(jxSelectView: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
-        let titleArray = ["产品","溯源批次","订单数量","开始编码","结束编码","收货","备注","操作人"]
         
-        
-        if row < 8{
+        if row < confirmTitleArray.count{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
             let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 60, height: 44))
             leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
-            leftLabel.text = titleArray[row]
+            leftLabel.text = confirmTitleArray[row]
             view?.addSubview(leftLabel)
             
             let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 80 - 20, height: 44))

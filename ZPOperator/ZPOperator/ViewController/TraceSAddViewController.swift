@@ -20,7 +20,7 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
     
     
     lazy var vm = TraceSAddVM()
-    var jxAlertView : JXAlertView?
+    var actionView : JXActionView?
     var isAddressAlert = true
     var traceSAddBlock : (()->())?
     
@@ -40,10 +40,9 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
         submitButton.isEnabled = false
         
         
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        self.actionView?.isUseBottomView = true
+        self.actionView?.delegate = self
         
         self.vm.loadMainData(append: true, completion: { (data, msg, isSuccess) in
             if isSuccess{
@@ -64,8 +63,8 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
     @IBAction func productAction(_ sender: UIButton) {
         
         isAddressAlert = false
-        self.jxAlertView?.actions = self.productArray
-        self.jxAlertView?.show()
+        self.actionView?.actions = self.productArray
+        self.actionView?.show()
     }
     
     @IBAction func submit(_ sender: Any) {
@@ -86,8 +85,8 @@ class TraceSAddViewController: BaseViewController,UITextFieldDelegate{
     }
 
 }
-extension TraceSAddViewController : JXAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension TraceSAddViewController : JXActionViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
 
         selectIndex = index
         self.productButton.setTitle(self.productArray[index], for: .normal)

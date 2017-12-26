@@ -85,6 +85,52 @@ extension UIImage {
 }
 extension UIImage {
     
+//    /// 保存图片到文件中
+//    ///
+//    /// - Parameters:
+//    ///   - image: 图片
+//    ///   - name: 图片名称
+//    class func save(image:UIImage,name:String) {
+//        let imageData = UIImageJPEGRepresentation(image, 1.0)
+//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let path = paths[0]
+//        let imagePath = path + "/\(name).jpg"
+//        let imagePathUrl = URL.init(fileURLWithPath: imagePath)
+//
+//        try? imageData?.write(to: imagePathUrl)
+//
+//        if FileManager.default.fileExists(atPath: imagePath) {
+//            print("保存成功",imageData ?? "null",imagePath)
+//        }
+//    }
+//    /// 获取文件中的图片
+//    ///
+//    /// - Parameters:
+//    ///   - image: 图片
+//    ///   - name: 图片名称
+//    class func get(name:String) -> Data? {
+//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let path = paths[0]
+//        let imagePath = path + "/\(name).jpg"
+//        let imagePathUrl = URL.init(fileURLWithPath: imagePath)
+//
+//        let data = try? Data.init(contentsOf: imagePathUrl)
+//
+//        return data
+//    }
+//    /// 移除文件中图片
+//    ///
+//    /// - Parameter name: 图片名称
+//    class func remove(name:String) {
+//        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+//        let path = paths[0]
+//        let imagePath = path + "/\(name).jpg"
+//
+//        try? FileManager.default.removeItem(atPath: imagePath)
+//        if FileManager.default.fileExists(atPath: imagePath) {
+//            print("移除成功",imagePath)
+//        }
+//    }
     
     class func save(image:UIImage,completion:((_ isSuccess:Bool)->())?) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(image:didFinishSavingWithError:contextInfo:)), nil)
@@ -98,12 +144,17 @@ extension UIImage {
         }
     }
     
+    /// 保存图片到相册
+    ///
+    /// - Parameters:
+    ///   - image: 图片
+    ///   - isAlbum: 是否新建相册
+    ///   - completion: 回调
     class func saveImage(image:UIImage,isAlbum:Bool = false,completion:@escaping ((_ isSuccess:Bool,_ msg:String)->())) -> Void {
         
         //let isGo = authorizationStatus()
         
         saveImageToAlbum(image: image, isCreateAlbum: isAlbum, albumName: "操作员", completion: completion)
-
     }
     private func authorizationStatus() -> Bool {
         if PHPhotoLibrary.authorizationStatus() == .authorized{
@@ -117,6 +168,14 @@ extension UIImage {
 //            }
 //        })
     }
+    
+    /// 保存图片到相册
+    ///
+    /// - Parameters:
+    ///   - image: 图片
+    ///   - isCreateAlbum: 是否新建相册（如果有就不会创建）
+    ///   - albumName: 相册名字
+    ///   - completion: 回调
     class private func saveImageToAlbum(image:UIImage,isCreateAlbum:Bool,albumName:String,completion:@escaping ((_ isSuccess:Bool,_ msg:String)->())) -> Void {
         //同步执行
 //        try? PHPhotoLibrary.shared().performChangesAndWait({
@@ -215,5 +274,49 @@ extension UIImage {
                 print("保存到胶卷相册失败 error = \(String(describing: error?.localizedDescription))")
             }
         })
+    }
+}
+//MARK:保存到文件中
+extension UIImage {
+    
+    /// 保存图片到文件中
+    ///
+    /// - Parameters:
+    ///   - image: 图片
+    ///   - name: 数据名称
+    /// - Returns: 操作结果
+    static func insert(image:UIImage,name:String) ->Bool{
+        guard let data = UIImageJPEGRepresentation(image, 1.0) else {
+            return false
+        }
+        return FileManager.insert(data: data, toFile: name)
+    }
+    /// 修改文件中的图片
+    ///
+    /// - Parameters:
+    ///   - image: 图片
+    ///   - name: 数据名称
+    /// - Returns: 操作结果
+    static func update(image:UIImage,name:String) ->Bool {
+        guard let data = UIImageJPEGRepresentation(image, 1.0) else {
+            return false
+        }
+        return FileManager.update(inFile: data, name: name)
+    }
+    /// 获取文件中的图片
+    ///
+    /// - Parameters:
+    ///   - name: 数据名称
+    /// - Returns: 操作结果
+    static func select(name:String) -> Data? {
+        let data = FileManager.select(fromFile: name) as? Data
+        return data
+    }
+    /// 移除图片
+    ///
+    /// - Parameter name: 数据名称
+    /// - Returns: 操作结果
+    static func delete(name:String) ->Bool{
+        return FileManager.delete(fromFile: name)
     }
 }

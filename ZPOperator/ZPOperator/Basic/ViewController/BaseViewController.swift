@@ -14,7 +14,7 @@ class BaseViewController: UIViewController {
     //MARK: - custom NavigationBar
     //自定义导航栏
     lazy var customNavigationBar : UINavigationBar = {
-        let navigationBar = UINavigationBar(frame:CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
+        let navigationBar = UINavigationBar(frame:CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: kNavStatusHeight))
         navigationBar.barTintColor = UIColor.cyan//导航条颜色
         navigationBar.tintColor = UIColor.brown //item图片文字颜色
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.red,NSFontAttributeName:UIFont.systemFont(ofSize: 22)]//标题设置
@@ -125,7 +125,7 @@ extension BaseViewController {
 
 extension BaseViewController {
     func showMBProgressHUD() {
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
 //        hud.backgroundView.color = UIColor.black
 //        hud.contentColor = UIColor.black
 //        hud.bezelView.backgroundColor = UIColor.black

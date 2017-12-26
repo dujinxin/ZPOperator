@@ -9,6 +9,10 @@
 import UIKit
 
 class TraceSourceCell: UITableViewCell {
+    
+    let placeHolderImage = UIImage(named: "addPhoto")
+    
+    
     @IBOutlet weak var mainContentView: UIView!
 
     @IBOutlet weak var label1: UILabel!
@@ -49,23 +53,23 @@ class TraceSourceCell: UITableViewCell {
             
             if let array = model?.images {
                 if array.count > 2 {
-                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: nil)
-                    self.imageView2.setImageWith(URL.init(string: array[1])!, placeholderImage: nil)
-                    self.imageView3.setImageWith(URL.init(string: array[2])!, placeholderImage: nil)
+                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: placeHolderImage)
+                    self.imageView2.setImageWith(URL.init(string: array[1])!, placeholderImage: placeHolderImage)
+                    self.imageView3.setImageWith(URL.init(string: array[2])!, placeholderImage: placeHolderImage)
                     
                     self.imageView1.isHidden = false
                     self.imageView2.isHidden = false
                     self.imageView3.isHidden = false
                 }else if array.count == 2{
-                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: nil)
-                    self.imageView2.setImageWith(URL.init(string: array[1])!, placeholderImage: nil)
+                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: placeHolderImage)
+                    self.imageView2.setImageWith(URL.init(string: array[1])!, placeholderImage: placeHolderImage)
                     self.imageView3.image = nil
                     
                     self.imageView1.isHidden = false
                     self.imageView2.isHidden = false
                     self.imageView3.isHidden = true
                 }else if array.count == 1{
-                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: nil)
+                    self.imageView1.setImageWith(URL.init(string: array[0])!, placeholderImage: placeHolderImage)
                     self.imageView2.image = nil
                     self.imageView3.image = nil
                     

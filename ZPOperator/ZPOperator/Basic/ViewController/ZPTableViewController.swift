@@ -26,6 +26,15 @@ class ZPTableViewController: UITableViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.rgbColor(rgbValue: 0x046ac9)//导航条颜色
         self.navigationController?.navigationBar.tintColor = UIColor.white //item图片文字颜色
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.systemFont(ofSize: 19)]//标题设置
+        
+        if #available(iOS 11.0, *) {
+            self.tableView?.contentInsetAdjustmentBehavior = .never
+            self.tableView?.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
+            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+            
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = true
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -44,7 +53,7 @@ class ZPTableViewController: UITableViewController {
 }
 extension ZPTableViewController {
     func showMBProgressHUD() {
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        let _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         //        hud.backgroundView.color = UIColor.black
         //        hud.contentColor = UIColor.black
         //        hud.bezelView.backgroundColor = UIColor.black

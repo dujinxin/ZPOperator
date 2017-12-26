@@ -20,7 +20,6 @@ class JXLocationManager :NSObject{
     
     var address : String = ""
     
-    
     override init() {
        
         locationManager = CLLocationManager.init()

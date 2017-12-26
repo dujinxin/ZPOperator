@@ -50,4 +50,6 @@ enum ApiString : String {
     
     case uploadGetToken = "/user/upload/getToken"
     
+    case identifyInfo  = "/identityAuth" //人脸识别
+    
 }

@@ -15,13 +15,17 @@ class DeliveringManagerController: ZPTableViewController {
     
     var vm = DeliverManagerVM()
     
+    var actionView : JXActionView?
+    var alertView : JXAlertView?
     var selectView : JXSelectView?
-    var jxAlertView : JXAlertView?
+    
     var addressHeight : CGFloat = 44.0
     var selectViewHeight : CGFloat = 44.0 * 6.0 + 88
     
 
     @IBOutlet weak var traceSourceButton: UIButton!
+    @IBOutlet weak var sizeLabel: UIButton!
+    @IBOutlet weak var previewView: UIImageView!
     @IBOutlet weak var startTextField: UITextField!
     @IBOutlet weak var endTextField: UITextField!
     @IBOutlet weak var numberLabel: UILabel!
@@ -30,6 +34,11 @@ class DeliveringManagerController: ZPTableViewController {
     
     var batchId : Int = -2 //不做选择为-2，选择暂无溯源批次为 -1，大于0的已选的批次
     var batchArray = Array<String>()
+    
+    var sizeName : String?
+    var sizeId : Int = -1
+    
+    let confirmTitleArray = ["溯源批次","标签规格","开始编码","结束编码","标签数量","操作网点","操作人"]
     var confirmArray = Array<String>()
     var tagNum : Int = 0
     
@@ -50,8 +59,10 @@ class DeliveringManagerController: ZPTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.operatorLabel.text = LoginVM.loginVMManager.userModel.userName
+        self.operatorLabel.text = UserManager.manager.userAccound.userName
 
+        self.previewView.isUserInteractionEnabled = true
+        self.previewView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(codeSizePreview)))
         
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
@@ -131,19 +142,53 @@ class DeliveringManagerController: ZPTableViewController {
         }
         
     }
-    
-
+    // MARK: - Custom Methods
+    func codeSizePreview() {
+        let customView = setSizeSelectView()
+        let alertView = JXAlertView.init(frame: customView.bounds, style: .custom)
+        alertView.customView = customView
+        self.alertView = alertView
+        self.alertView?.show()
+    }
     @IBAction func deleveringManagerSelect(_ sender: UIButton) {
         self.view.endEditing(true)
-        self.setAlertView()
-        self.jxAlertView?.actions = batchArray
-        self.jxAlertView?.show()
+        
+        self.actionView = nil
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        self.actionView?.isUseBottomView = true
+        self.actionView?.delegate = self
+        self.actionView?.actions = batchArray
+        self.actionView?.tag = 10
+        self.actionView?.show()
     }
+    @IBAction func sizeSelect(_ sender: UIButton) {
+        if self.vm.deliverManagerModel.codeSpecList.isEmpty == false {
+            var titleArray = Array<String>()
+            for model in self.vm.deliverManagerModel.codeSpecList {
+                titleArray.append(model.desc!)
+            }
+            
+            let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+            actionView.isUseBottomView = true
+            actionView.delegate = self
+            actionView.actions = titleArray
+            actionView.tag = 11
+            actionView.show()
+        } else {
+            ViewManager.showNotice(notice: "暂无可用标签，请先申请标签")
+            return
+        }
+    }
+    
     @IBAction func submit(_ sender: UIButton) {
         
         startTextField.resignFirstResponder()
         endTextField.resignFirstResponder()
         
+        if sizeLabel.currentTitle?.isEmpty == true {
+            ViewManager.showNotice(notice: "请先选择标签规格")
+            return
+        }
         
         if
             let startCode = self.startTextField.text,
@@ -161,6 +206,7 @@ class DeliveringManagerController: ZPTableViewController {
             }
             self.confirmArray.removeAll()
             self.confirmArray.append(String.init(format: "%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
+            self.confirmArray.append(String.init(format: "%@", self.sizeName ?? "出错了！"))
             self.confirmArray.append(String.init(format: "%@", startCode))
             self.confirmArray.append(String.init(format: "%@", endCode))
             self.confirmArray.append(String.init(format: "%d", self.vm.deliverManagerModel.counts))
@@ -168,9 +214,117 @@ class DeliveringManagerController: ZPTableViewController {
             self.confirmArray.append(String.init(format: "%@", name))
             
             setSelectView()
-            self.selectView?.resetFrame(height: 44 * 6 + 88)
+            self.selectView?.resetFrame(height: CGFloat(44 * self.confirmTitleArray.count + 88))
             self.selectView?.show()
         }
+    }
+    func observeButtonEnabled() {
+        if let _ = self.sizeName, endTextField.text?.isEmpty == false{
+            submitButton.backgroundColor = JXOrangeColor
+            submitButton.isEnabled = true
+        }else{
+            submitButton.backgroundColor = JXGrayColor
+            submitButton.isEnabled = false
+        }
+    }
+    func setConfirmSelectView() {
+        selectView = nil
+        selectView = JXSelectView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height: 200), style:.list)
+        selectView?.dataSource = self
+        selectView?.topBarView = {
+            let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 300, height:
+                260))
+            view.backgroundColor = JX999999Color
+            
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
+            label.backgroundColor = UIColor.white
+            //label.center = view.center
+            label.text = "确认发货信息"
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 18)
+            label.textColor = JX333333Color
+            view.addSubview(label)
+            //label.sizeToFit()
+            
+            let button = UIButton()
+            button.frame = CGRect(x: 10, y: 8.5, width: 40, height: 40)
+            //button.center = CGPoint(x: 30, y: view.jxCenterY)
+            //button.setTitle("×", for: .normal)
+            button.setImage(UIImage(named:"cancel"), for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
+            button.setTitleColor(JX333333Color, for: .normal)
+            button.contentVerticalAlignment = .center
+            button.contentHorizontalAlignment = .center
+            button.addTarget(self, action: #selector(dismissSelectView), for: .touchUpInside)
+            view.addSubview(button)
+            
+            return view
+        }()
+        selectView?.isUseCustomTopBar = true
+        selectView?.isEnabled = false
+        selectView?.isScrollEnabled = false
+        self.selectView?.resetFrame(height: CGFloat(44 * confirmTitleArray.count + 88))
+        selectView?.show()
+    }
+    func setSizeSelectView() -> UIView {
+        
+        let contentView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth * 0.8, height:
+            260))
+        contentView.backgroundColor = JXFfffffColor
+        //view.layer.cornerRadius =
+        
+        let titleArray = ["35mm*20mm","27mm*17mm"]
+        let imageArray = ["size_2035","size_1727"]
+        let sizeArray = [CGSize(width: 275.0 * 0.6, height: 275.0 * 0.6 * (20.0 / 35.0)),CGSize(width: 212.0 * 0.6, height: 212.0 * 0.6 * (17.0 / 27.0))]
+        
+        
+        //let imageViewSize = CGSize(width: view.jxWidth * 0.8, height: view.jxWidth * 0.6 * (17.0 / 24.0))
+        var H : CGFloat = 0.0
+        for i in 0..<titleArray.count {
+            let size = sizeArray[i]
+            var height : CGFloat = 0
+            if i > 0 {
+                height = sizeArray[0].height + 10.0 * 2.0 + 14.0
+            }
+            
+            let imageView = UIImageView()
+            imageView.frame = CGRect(x: 0, y: 10.0 + height, width: size.width, height: size.height)
+            imageView.image = UIImage(named: imageArray[i])
+            contentView.addSubview(imageView)
+            imageView.center = CGPoint(x: contentView.center.x, y: imageView.center.y)
+            
+            let label = UILabel()
+            label.frame = CGRect(x: 0, y: imageView.jxBottom + 10.0, width: contentView.jxWidth, height: 14)
+            label.text = titleArray[i]
+            label.textAlignment = .center
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.textColor = JX333333Color
+            contentView.addSubview(label)
+            
+            H = label.jxBottom
+            
+        }
+        
+        let separateLine = UIView(frame: CGRect(x: 0, y: H + 10 - 0.5, width: contentView.frame.width, height:
+            0.5))
+        separateLine.backgroundColor = UIColor.groupTableViewBackground
+        contentView.addSubview(separateLine)
+        
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: H + 10, width: contentView.frame.width, height: 44)
+        button.setTitle("确定", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setTitleColor(JXMainColor, for: .normal)
+        button.contentVerticalAlignment = .center
+        button.contentHorizontalAlignment = .center
+        button.addTarget(self, action: #selector(dismissAlertView), for: .touchUpInside)
+        contentView.addSubview(button)
+        
+        contentView.frame = CGRect.init(x: 0, y: 0, width: kScreenWidth * 0.8, height:
+            H + 10 + 44)
+        
+        return contentView
     }
     func setSelectView() {
         selectView = nil
@@ -208,14 +362,6 @@ class DeliveringManagerController: ZPTableViewController {
         selectView?.isUseCustomTopBar = true
         selectView?.isEnabled = false
         selectView?.isScrollEnabled = false
-    }
-    func setAlertView() {
-        self.jxAlertView = nil
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
     }
     // MARK: - Table view data source
 
@@ -264,27 +410,25 @@ class DeliveringManagerController: ZPTableViewController {
     }
 }
 
-extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
-        if index < self.vm.deliverManagerModel.traceBatches.count {
-            let model = self.vm.deliverManagerModel.traceBatches[index]
-            self.traceSourceButton.setTitle(model.name, for: .normal)
-            batchId = model.id
-            
-            if (endTextField.text?.characters.isEmpty)! {
-                submitButton.backgroundColor = JXGrayColor
-                submitButton.isEnabled = false
+extension DeliveringManagerController : JXActionViewDelegate,UIAlertViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
+        
+        if actionView.tag == 10 {
+            if index < self.vm.deliverManagerModel.traceBatches.count {
+                let model = self.vm.deliverManagerModel.traceBatches[index]
+                self.traceSourceButton.setTitle(model.name, for: .normal)
+                batchId = model.id
             }else{
-                submitButton.backgroundColor = JXOrangeColor
-                submitButton.isEnabled = true
+                let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+                alert.tag = 10
+                alert.show()
             }
-        }else{
-            let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
-            alert.tag = 10
-            alert.show()
+        } else if actionView.tag == 11 {
+            self.sizeName = self.vm.deliverManagerModel.codeSpecList[index].desc
+            self.sizeId = self.vm.deliverManagerModel.codeSpecList[index].id
+        self.sizeLabel.setTitle(self.vm.deliverManagerModel.codeSpecList[index].desc, for: .normal)
         }
-        
-        
+        self.observeButtonEnabled()
     }
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if alertView.tag == 10 {
@@ -297,19 +441,14 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
                 batchId = -1
                 self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
                 print("发货")
-                
-                if (endTextField.text?.characters.isEmpty)! {
-                    submitButton.backgroundColor = JXGrayColor
-                    submitButton.isEnabled = false
-                }else{
-                    submitButton.backgroundColor = JXOrangeColor
-                    submitButton.isEnabled = true
-                }
             }
         }else{
             self.navigationController?.popViewController(animated: true)
         }
         
+    }
+    func dismissAlertView() {
+        self.alertView?.dismiss()
     }
     func dismissSelectView() {
         self.selectView?.dismiss()
@@ -318,7 +457,7 @@ extension DeliveringManagerController : JXAlertViewDelegate,UIAlertViewDelegate{
      
         self.selectView?.dismiss()
         self.showMBProgressHUD()
-        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliverManagerModel.counts) { (data, msg, isSuccess) in
+        self.vm.deliveringManagerSubmit(id: deliverModel?.id as! Int, traceBatchId: batchId, startCode: startTextField.text!, endCode: endTextField.text!, counts: self.vm.deliverManagerModel.counts, codeSpecId: self.sizeId) { (data, msg, isSuccess) in
             
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
@@ -448,18 +587,18 @@ extension DeliveringManagerController: UITextFieldDelegate{
 }
 extension DeliveringManagerController: JXSelectViewDataSource{
     func jxSelectView(jxSelectView: JXSelectView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return self.confirmTitleArray.count + 1
     }
     func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
-        if row < 6 {
-            return confirmArray[row]
+        if row < self.confirmTitleArray.count {
+            return self.confirmArray[row]
         }else {
             return ""
         }
     }
     func jxSelectView(jxSelectView: JXSelectView, heightForRowAt row: Int) -> CGFloat {
         
-        if row < 6{
+        if row < self.confirmTitleArray.count{
             return 44
         }
 //        else if row == 1{
@@ -475,17 +614,15 @@ extension DeliveringManagerController: JXSelectViewDataSource{
     }
     func jxSelectView(jxSelectView: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
-        let titleArray = ["溯源批次","开始编码","结束编码","标签数量","操作网点","操作人"]
         
-        
-        if row < 6{
+        if row < self.confirmTitleArray.count{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
             let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 60, height: 44))
             leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
-            leftLabel.text = titleArray[row]
+            leftLabel.text = self.confirmTitleArray[row]
             view?.addSubview(leftLabel)
             
             let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 80 - 20, height: 44))
@@ -500,7 +637,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
  
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
-            button.setTitle("确认发货批次", for: UIControlState.normal)
+            button.setTitle("确认发货", for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5

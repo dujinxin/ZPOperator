@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+
+//MARK:设备
+let deviceModel = UIScreen.main.modelSize
+
 //MARK:尺寸类
 let kScreenWidth = UIScreen.main.bounds.width
 let kScreenHeight = UIScreen.main.bounds.height
 let kScreenBounds = UIScreen.main.bounds
 
-let kStatusBarHeight = CGFloat(20)
+let kStatusBarHeight = (deviceModel == .iPhoneX) ? CGFloat(44) : CGFloat(20)
 let kNavBarHeight = CGFloat(44)
 let kNavStatusHeight = kStatusBarHeight + kNavBarHeight
 let kTabBarHeight = CGFloat(49)

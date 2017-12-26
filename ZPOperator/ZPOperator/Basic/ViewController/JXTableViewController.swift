@@ -47,6 +47,14 @@ extension JXTableViewController : UITableViewDelegate,UITableViewDataSource{
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
         
+        if #available(iOS 11.0, *) {
+            self.tableView?.contentInsetAdjustmentBehavior = .never
+            self.tableView?.contentInset = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)//有tabbar时下为49，iPhoneX是88
+            self.tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(kNavStatusHeight, 0, 0, 0)
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = true
+        }
+        
         self.view.addSubview(self.tableView!)
         
         refreshControl = UIRefreshControl()

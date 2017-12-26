@@ -50,7 +50,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
     var batchId : Int = -1 //全程溯源来源需要用
     
     var vm = TraceSRecordVM()
-    var jxAlertView : JXAlertView?
+    var actionView : JXActionView?
     var uploadManager = QiNiuUploadManager()
     
     var processArray = Array<String>()
@@ -64,11 +64,9 @@ class DeliveredWholeRecordController: ZPTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
-        
-        self.jxAlertView?.position = .bottom
-        self.jxAlertView?.isSetCancelView = true
-        self.jxAlertView?.delegate = self
+        self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+        self.actionView?.isUseBottomView = true
+        self.actionView?.delegate = self
         
 //        productLabel.text = self.traceBatch
 //        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
@@ -253,8 +251,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
         if indexPath.section == 1 {
             if indexPath.row == 0 {
                 isProcessAlert = 0
-                self.jxAlertView?.actions = processArray
-                self.jxAlertView?.show()
+                self.actionView?.actions = processArray
+                self.actionView?.show()
             }else if indexPath.row == 1{
                 isProcessAlert = 1
                 self.addressArray.removeAll()
@@ -266,8 +264,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 }else {
                     self.addressArray.append(self.vm.traceSourceWholeModify.Operator.station!)
                 }
-                self.jxAlertView?.actions = addressArray
-                self.jxAlertView?.show()
+                self.actionView?.actions = addressArray
+                self.actionView?.show()
                 
             }else{
                 
@@ -275,8 +273,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
         }
     }
 }
-extension DeliveredWholeRecordController : JXAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension DeliveredWholeRecordController : JXActionViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         if isProcessAlert == 0 {
             self.processLabel.text = self.vm.traceSourceWholeModify.traceProcesses[index].name
             self.processId = self.vm.traceSourceWholeModify.traceProcesses[index].id
@@ -364,8 +362,8 @@ extension DeliveredWholeRecordController :TZImagePickerControllerDelegate{
     func photo11() {
         self.textView.resignFirstResponder()
         isProcessAlert = 2
-        self.jxAlertView?.actions = ["从相册中选择（最多三张）","拍照"]
-        self.jxAlertView?.show()
+        self.actionView?.actions = ["从相册中选择（最多三张）","拍照"]
+        self.actionView?.show()
     }
     
     func setImages(images:Array<UIImage>?)  {

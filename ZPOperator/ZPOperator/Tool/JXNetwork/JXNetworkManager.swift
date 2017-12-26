@@ -11,34 +11,29 @@ import UIKit
 import AFNetworking
 
 class JXNetworkManager: NSObject {
-    
+    /// afHttpManager
     var afmanager = AFHTTPSessionManager()
-    
+    /// request缓存
     var requestCache = [String:JXBaseRequest]()
-    
+    /// 网络状态
     var networkStatus : AFNetworkReachabilityStatus = .reachableViaWiFi
-    
-    var userAccound : UserModel?
-    
-    var isLogin : Bool {
-        if userAccound == nil {
-            userAccound = UserModel()
-        }
-        return userAccound!.sid != nil
+    /// 是否已获取
+    var isHasSid : Bool {
+        return UserManager.manager.isLogin
     }
-    
+    /// request缓存
     var sid : String? {
         return ""
     }
     
-    
+    /// JXRequestManager
     static let manager = JXNetworkManager()
     
     override init() {
         super.init()
         //返回数据格式AFHTTPResponseSerializer(http) AFJSONResponseSerializer(json) AFXMLDocumentResponseSerializer ...
         afmanager.responseSerializer = AFHTTPResponseSerializer.init()
-        afmanager.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html","application/json") as? Set<String>
+        afmanager.responseSerializer.acceptableContentTypes = NSSet(objects: "text/html","application/json","text/plain") as? Set<String>
         
         afmanager.operationQueue.maxConcurrentOperationCount = 5
         //请求参数格式AFHTTPRequestSerializer（http） AFJSONRequestSerializer(json) AFPropertyListRequestSerializer (plist)
@@ -55,7 +50,10 @@ class JXNetworkManager: NSObject {
             self.networkStatus = AFNetworkReachabilityStatus(rawValue: status.rawValue)!
         }
     }
-
+    
+    /// 构建request
+    ///
+    /// - Parameter request: JXBaseRequest 的子类
     func buildRequest(request:JXBaseRequest) {
 
         ///网络判断
@@ -67,9 +65,11 @@ class JXNetworkManager: NSObject {
         ///获取URL
         let url = buildUrl(url: request.requestUrl)
         
-        if isLogin == true,
-           let sid = userAccound?.sid {
+        if isHasSid == true,
+           let sid = UserManager.manager.userAccound.sid {
             afmanager.requestSerializer.setValue("sid=\(sid)", forHTTPHeaderField: "Cookie")
+        }else{
+            afmanager.requestSerializer.setValue("", forHTTPHeaderField: "Cookie")
         }
         
         if let customUrlRequest = request.buildCustomUrlRequest() {
@@ -227,20 +227,13 @@ extension JXNetworkManager {
         }
         
         if url.hasPrefix("http") == true{
-//            afmanager.requestSerializer = AFJSONRequestSerializer.init()
-//            afmanager.requestSerializer.timeoutInterval = 10
-//            afmanager.requestSerializer.setValue("ceccm", forHTTPHeaderField: "source")
-//            print("afmanager.requestSerializer = \(afmanager.requestSerializer)")
             return url
-        }else{
-//            afmanager.requestSerializer = AFHTTPRequestSerializer.init()
-//            afmanager.requestSerializer.timeoutInterval = 10
         }
        
-        let ssss = kBaseUrl + url //"http://192.168.10.12:8086\(url)"
-        let sssss = ssss.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let newUrl = kBaseUrl + url //"http://192.168.10.12:8086\(url)"
+        let encodeUrl = newUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
-        return sssss!
+        return encodeUrl!
     }
 }
 //MARK: 结果处理 response handle

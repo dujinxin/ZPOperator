@@ -13,11 +13,11 @@ extension  UIBarButtonItem {
     /// custom UIBarButtonItem
     ///
     /// - Parameters:
-    ///   - title:
+    ///   - title: 文字
     ///   - fontSize: default 13
-    ///   - imageName:
-    ///   - target:
-    ///   - action:
+    ///   - imageName:图片名称
+    ///   - target:target
+    ///   - action:action
     convenience init(title:String = "",fontSize:CGFloat = 13, imageName:String = "",target:Any,action:Selector) {
         
         let btn = UIButton()

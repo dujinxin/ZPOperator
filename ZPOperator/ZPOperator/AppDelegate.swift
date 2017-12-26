@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //window?.isHidden = false
         
+        print("device size",UIScreen.main.screenSize)
+        print("device mode",UIScreen.main.modelName)
+        print("device mode",UIScreen.main.modelSize)
+//        print("device mode",iPhone6p)
+//        print("device mode",iPhoneX)
+        
         return true
     }
 

@@ -44,11 +44,13 @@ class TraceDeliverSubModel: BaseModel {
     var mobile : String?
     var remarks : String?
     //已发货
-    var startCode : String?
-    var endCode : String?
-    var totalCount : NSNumber?
-    var operatorName : String?
-    var operateTime : String?
+    
+    var spec : String?         //标签规格
+    var startCode : String?    //开始编码
+    var endCode : String?      //结束编码
+    var totalCount : NSNumber? //
+    var operatorName : String? //
+    var operateTime : String?  //
     
 }
 
@@ -57,17 +59,25 @@ class DeliverManagerModel: BaseModel {
     var endCode : String?
     var counts : Int = 0
     var traceBatches = Array<MainSubModel>()
+    var codeSpecList = Array<DeliverDirectCodeSizeModel>()
+    
 }
 
 class DeliverNewBatchModel: BaseModel {
     var Operator = TraceDeliverOperatorModel()
     var goodsList = Array<MainSubModel>()
+    //省市区
     var provinceList = Array<MainSubModel>()
-    //
     var cityList = Array<MainSubModel>()
     var areaList = Array<MainSubModel>()
+    //标签规格
+    var codeSpecList = Array<DeliverDirectCodeSizeModel>()
 }
 class DeliverDirectCodeModel: BaseModel {
     var startCode : String?
     var endCode : String?
+}
+class DeliverDirectCodeSizeModel: BaseModel {
+    var id : Int = 0
+    var desc : String?
 }

@@ -16,8 +16,6 @@ private let reuseIndentifierFooter = "reuseIndentifierFooter"
 class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlowLayout {
     
     lazy var mainVM = MainVM()
-    //log state
-    var isLogin = JXNetworkManager.manager.isLogin
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,21 +55,30 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         })
     
         NotificationCenter.default.addObserver(self, selector: #selector(loginStatus(notify:)), name: NSNotification.Name(rawValue: NotificationLoginStatus), object: nil)
-        if !isLogin {
-            let login = LoginViewController()
-            self.navigationController?.present(login, animated: false, completion: nil)
-        }else{
-            self.collectionView?.mj_header.beginRefreshing()
-        }
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
+        //实名认证   您还没有通过认证，认证成功后才能使用全部功能   退出登录，立即认证，
+        
+        if UserManager.manager.isLogin {
+            self.collectionView?.mj_header.beginRefreshing()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.mainVM.loadMainData(append: true, completion: { (data, msg, isSuccess) in
-//            print(data)
-//        })
+        
+        if !UserManager.manager.isLogin {
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+            let loginVC = UINavigationController.init(rootViewController: login)
+            
+            self.navigationController?.present(loginVC, animated: false, completion: nil)
+        }else{
+            self.showAuthAlert()
+        }
+        
+        print("1230",UIImage.select(name: "idCardFront.jpg"))
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,9 +127,6 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
             cell.MainContentLabel.textColor = UIColor.rgbColor(from: 200, 228, 255)
             cell.MainContentLabel.font = UIFont.systemFont(ofSize: 40)
         }
-        
-        
-    
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -150,7 +154,6 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
     }
     
     func deliverManagement() {
-        print("12345")
         
         //1
         //let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
@@ -170,7 +173,13 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         performSegue(withIdentifier: "TraceSources", sender: nil)
     }
     func tagManagement() {
-        performSegue(withIdentifier: "tagManagement", sender: nil)
+        //performSegue(withIdentifier: "tagManagement", sender: nil)
+        
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+        let loginVC = UINavigationController.init(rootViewController: login)
+        
+        self.navigationController?.present(loginVC, animated: false, completion: nil)
     }
 
 
@@ -179,7 +188,6 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.item == (self.mainVM.dataArray.count){
-            
             performSegue(withIdentifier: "traceSourceAdd", sender: nil)
         }else{
             let model = self.mainVM.dataArray[indexPath.item]
@@ -208,15 +216,46 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         if let isSuccess = notify.object as? Bool,
             isSuccess == true{
             self.collectionView?.mj_header.beginRefreshing()
+            self.showAuthAlert()
+
         }else{
-            let login = LoginViewController()
-            self.navigationController?.present(login, animated: false, completion: nil)
+            UserManager.manager.removeAccound()
+
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
+            let loginVC = UINavigationController.init(rootViewController: login)
+            
+            self.navigationController?.present(loginVC, animated: false, completion: nil)
+            //self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     func deliveringNumberChange(notify:Notification) {
         if let number = notify.object as? Int {
             self.mainVM.orderCount = number
             self.collectionView?.reloadData()
+        }
+    }
+    func showAuthAlert() {
+        if UserManager.manager.userAccound.isAuthed == 0 {
+            let alert = UIAlertController(title: "实名认证", message: "您还没有通过认证，认证成功后才能使用全部功能", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "退出登录", style: .cancel, handler: { (action) in
+                let loginVM = LoginVM()
+                loginVM.logout { (data, msg, isSuccess) in
+                    if isSuccess {
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
+                    }
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "立即认证", style: .destructive, handler: { (action) in
+                let cwvc = CWLivessViewController()
+                cwvc.allActionArry = [blink,openMouth,headLeft,headRight]
+                //cwvc.delegate = self
+                cwvc.setLivessParam(AuthCodeString, livessNumber: 4, isShowResultView: true)
+                self.navigationController?.pushViewController(cwvc, animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            print("已认证")
         }
     }
 }

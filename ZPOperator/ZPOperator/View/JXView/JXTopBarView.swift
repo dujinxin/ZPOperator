@@ -19,16 +19,6 @@ class JXTopBarView: UIView {
     var delegate : JXTopBarViewDelegate?
     var selectedIndex = 0
     var attribute = TopBarAttribute.init()
-//    {
-//        didSet{
-//            for (i,v) in subviews {
-//                if v {
-//                    <#code#>
-//                }
-//            }
-//        }
-//    }
-    
     
     var isBottomLineEnabled : Bool = false{
         didSet{

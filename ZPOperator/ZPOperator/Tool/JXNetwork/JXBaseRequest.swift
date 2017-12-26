@@ -67,7 +67,7 @@ class JXBaseRequest: NSObject {
     ///   - failure: 失败回调
     class func request(tag:Int = 0, method:JXRequestMethod = .post, url:String, param:Dictionary<String, Any>?,success:@escaping successCompletion,failure:@escaping failureCompletion) {
         
-        let request = self.init(tag: tag, url: url, param: param, success: success, failure: failure)
+        let request = self.init(tag: tag, method: method, url: url, param: param, success: success, failure: failure)
         
         request.startRequest()
     }
@@ -76,9 +76,10 @@ class JXBaseRequest: NSObject {
         super.init()
     }
     
-    required init(tag:Int,url:String ,param:Dictionary<String, Any>?,success:@escaping successCompletion,failure:@escaping failureCompletion) {
+    required init(tag:Int,method:JXRequestMethod,url:String ,param:Dictionary<String, Any>?,success:@escaping successCompletion,failure:@escaping failureCompletion) {
         
         self.tag = tag
+        self.method = method
         self.requestUrl = url
         self.param = param
         
@@ -90,7 +91,7 @@ class JXBaseRequest: NSObject {
     
    
     //子类实现
-    func customConstruct() ->constructingBlock?  {
+    func customConstruct() ->constructingBlock? {
         return nil
     }
     func buildCustomUrlRequest() -> URLRequest?{

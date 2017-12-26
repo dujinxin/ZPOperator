@@ -12,6 +12,10 @@ import UIKit
 extension String {
     
     
+    /// 手机号，只做1开头11位的基本校验
+    ///
+    /// - Parameter tel: 手机号码
+    /// - Returns: 返回是否符合校验
     static func validateTelephone(tel:String) -> Bool {
         //手机号以13， 15，18开头，八个 \d 数字字符
         //NSString *phoneRegex = @"^((13[0-9])|(15[^4,\\D])|(18[0,0-9]))\\d{8}$";
@@ -19,6 +23,13 @@ extension String {
         let phoneRegex = "^1\\d{10}$"
         let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
         return predicate.evaluate(with: tel)
+    }
+    ///身份证号
+    static func validateID(id:String) -> Bool {
+        
+        let passWordRegex = "^(\\d{14}|\\d{17})(\\d|[xX])$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: id)
     }
     //用户名 6-16位只含有汉字、数字、字母、下划线，下划线位置不限
 //    func validateUserName(name:String) -> Bool {
@@ -87,7 +98,7 @@ extension String {
         return predicate.evaluate(with: string)
     }
 }
-
+//MARK:计算
 extension String {
     
     func calculate(width: CGFloat,fontSize:CGFloat,lineSpace:CGFloat = -1) -> CGSize {
@@ -117,5 +128,17 @@ extension String {
         }
         
         return CGSize(width: width, height: height)
+    }
+}
+//MARK:加密
+extension String {
+    func md5(string:String) -> String {
+        return MD5.encode(string)
+    }
+    func base64encode(string:String) -> String? {
+        return Base64.stringDecode(string)
+    }
+    func base64decode(string:String) -> String? {
+        return Base64.stringDecode(string)
     }
 }

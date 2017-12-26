@@ -40,7 +40,7 @@ extension JXNetworkManager{
                 else{
                 return
             }
-           let issss = userModel.saveAccound(dict: dict)
+           let issss = UserManager.manager.saveAccound(dict: dict)
             
            print("保存成功：\(issss)")
             

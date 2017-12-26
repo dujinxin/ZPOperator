@@ -202,6 +202,9 @@ class JXSelectView: UIView {
         if isUseCustomTopBar || isUseSystemItemBar {
             h += selectViewTop
         }
+        if deviceModel == .iPhoneX {
+            h += 34
+        }
         self.frame = CGRect(x: 0, y: 0, width: selectViewWidth, height:h)
         self.layoutSubviews()
     }
@@ -405,8 +408,11 @@ extension JXSelectView : UITableViewDelegate,UITableViewDataSource{
         }else{
             
         }
-        
     }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+    
 }
 extension JXSelectView : UIPickerViewDelegate, UIPickerViewDataSource{
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -241,14 +241,13 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             if currentRecord?.isMine == false {
                 return
             }
-            let jxAlertView = JXAlertView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
+            let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
             
-            jxAlertView.position = .bottom
-            jxAlertView.isSetCancelView = true
-            jxAlertView.delegate = self
-            jxAlertView.actions = ["修改","删除"]
-            jxAlertView.tag = indexPath.row - 1
-            jxAlertView.show()
+            actionView.isUseBottomView = true
+            actionView.delegate = self
+            actionView.actions = ["修改","删除"]
+            actionView.tag = indexPath.row - 1
+            actionView.show()
         }
         
     }
@@ -324,15 +323,15 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
 
     }
 }
-extension TraceDetailController : JXAlertViewDelegate,UIAlertViewDelegate{
-    func jxAlertView(_ alertView: JXAlertView, clickButtonAtIndex index: Int) {
+extension TraceDetailController : JXActionViewDelegate,UIAlertViewDelegate{
+    func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         if index == 0 {
             //修改
             performSegue(withIdentifier: "addTraceSourceRecord", sender: false)
         }else{
             //删除
             let alert = UIAlertView.init(title: "确认删除本条溯源信息？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确认删除")
-            alert.tag = alertView.tag
+            alert.tag = actionView.tag
             alert.show()
         }
         
