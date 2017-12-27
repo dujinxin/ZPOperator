@@ -256,12 +256,10 @@ class DeliveredWholeRecordController: ZPTableViewController {
             }else if indexPath.row == 1{
                 isProcessAlert = 1
                 self.addressArray.removeAll()
-                if JXLocationManager.manager.address.characters.count > 0 {
+                if JXLocationManager.manager.address.count > 0 {
                     self.addressArray.append(JXLocationManager.manager.address)
                 }
-                if isAddTraceSource == false {
-                    self.addressArray.append(self.vm.traceSourceWholeModify.Operator.station!)
-                }else {
+                if let station = self.vm.traceSourceWholeModify.Operator.station, station.isEmpty == false {
                     self.addressArray.append(self.vm.traceSourceWholeModify.Operator.station!)
                 }
                 self.actionView?.actions = addressArray

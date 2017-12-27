@@ -266,7 +266,7 @@ class TraceSRecordController: ZPTableViewController {
             }else if indexPath.row == 1{
                 isProcessAlert = 1
                 self.addressArray.removeAll()
-                if JXLocationManager.manager.address.characters.count > 0 {
+                if JXLocationManager.manager.address.count > 0 {
                     self.addressArray.append(JXLocationManager.manager.address)
                 }
                 if isAdd == false {
@@ -483,7 +483,7 @@ extension TraceSRecordController: UITextViewDelegate{
             submitButton.isEnabled = false
         }
 
-        if textView.text.characters.count > 100 {
+        if textView.text.count > 100 {
             if let string = textView.text {
                 textView.text = string.substring(to: string.index(string.startIndex, offsetBy: 100))
                 
