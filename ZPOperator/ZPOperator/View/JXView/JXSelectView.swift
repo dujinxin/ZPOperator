@@ -439,7 +439,7 @@ extension JXSelectView : UIPickerViewDelegate, UIPickerViewDataSource{
         if self.dataSource != nil {
             let string = self.dataSource?.jxSelectView(jxSelectView: self, contentForRow: row, InSection: component)
             let attributeString = NSMutableAttributedString.init(string: string!)
-            attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:JXMainColor], range: NSRange.init(location: 0, length: (string?.characters.count)!))
+            attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 13),NSForegroundColorAttributeName:JXMainColor], range: NSRange.init(location: 0, length: (string?.count)!))
             print(attributeString)
             return attributeString
         }

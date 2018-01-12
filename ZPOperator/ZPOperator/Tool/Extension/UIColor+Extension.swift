@@ -78,8 +78,12 @@ extension UIColor{
     class var jxf1f1f1Color : UIColor {
         return UIColor.rgbColor(rgbValue: 0xf1f1f1)
     }
+    //
     class var mainColor: UIColor {
         return UIColor.rgbColor(rgbValue: 0x0469c8)
+    }
+    class var operatorOrangeColor: UIColor {
+        return UIColor.rgbColor(from: 219, 80, 8)
     }
 }
 

@@ -263,7 +263,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
             var string = "发货批次号   "
-            let length = string.characters.count
+            let length = string.count
             
             if let batchCode = deliveringModel?.batchCode{
                 string += batchCode

@@ -46,7 +46,7 @@ class JXTopBarView: UIView {
 //        context?.setLineCap(CGLineCap.round)
 //        context?.setLineWidth(1)
 //        context?.setAllowsAntialiasing(true)
-//        context?.setStrokeColor(UIColor.groupTableViewBackground.cgColor)
+//        context?.setStrokeColor(JXSeparatorColor.cgColor)
 //        context?.beginPath()
 //        
 //        if titles.count > 0 {
@@ -87,14 +87,14 @@ class JXTopBarView: UIView {
                 button.isSelected = true
                 let attributeString = NSMutableAttributedString.init(string: title)
                 attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 0, length: 3))
-                attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 3, length: title.characters.count - 3))
+                attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 3, length: title.count - 3))
                 
                 button.setAttributedTitle(attributeString, for: .selected)
                 
                 
                 let attributeString1 = NSMutableAttributedString.init(string: title)
                 attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 0, length: 3))
-                attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 3, length: title.characters.count - 3))
+                attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 3, length: title.count - 3))
                 
                 button.setAttributedTitle(attributeString1, for: .normal)
                 
@@ -153,14 +153,14 @@ class JXTopBarView: UIView {
                 
                     let attributeString = NSMutableAttributedString.init(string: title)
                     attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 0, length: 3))
-                    attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 3, length: title.characters.count - 3))
+                    attributeString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.highlightedColor], range: NSRange.init(location: 3, length: title.count - 3))
                     
                     button.setAttributedTitle(attributeString, for: .selected)
                     
                     
                     let attributeString1 = NSMutableAttributedString.init(string: title)
                     attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 0, length: 3))
-                    attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 3, length: title.characters.count - 3))
+                    attributeString1.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 15),NSForegroundColorAttributeName:attribute.normalColor], range: NSRange.init(location: 3, length: title.count - 3))
                     
                     button.setAttributedTitle(attributeString1, for: .normal)
                 }
@@ -197,14 +197,14 @@ protocol JXTopBarViewDelegate {
 class TopBarAttribute: NSObject {
     var normalColor = UIColor.darkGray
     var highlightedColor = UIColor.rgbColor(rgbValue: 0xf64a07)
-    var separatorColor = UIColor.groupTableViewBackground
+    var separatorColor = JXSeparatorColor
     
     
     
     override init() {
         normalColor = UIColor.darkGray
         highlightedColor = UIColor.rgbColor(rgbValue: 0xf64a07)
-        separatorColor = UIColor.groupTableViewBackground
+        separatorColor = JXSeparatorColor
     }
 }
         

@@ -238,7 +238,7 @@
 /**
  *  @brief 相机拍照代理方法
  *
- *  @param image 拍摄的身份证图片
+ *  @param cardImage 拍摄的身份证图片
  */
 
 -(void)cwIdCardDetectionCardImage:(UIImage *)cardImage imageScore:(double)score{

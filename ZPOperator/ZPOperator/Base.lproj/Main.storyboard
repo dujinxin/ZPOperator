@@ -253,42 +253,8 @@
                             </tableViewSection>
                             <tableViewSection footerTitle=" " id="Wt6-jW-vke">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="6qh-6A-m3b">
-                                        <rect key="frame" x="0.0" y="133" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6qh-6A-m3b" id="rt4-bT-3Es">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份认证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kta-rv-5ft">
-                                                    <rect key="frame" x="10" y="0.0" width="80" height="43.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="5oj-q9-GED"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="已认证" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pQ-76-Nyz">
-                                                    <rect key="frame" x="90" y="0.0" width="275" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Kta-rv-5ft" secondAttribute="bottom" id="6hL-Mr-ZE9"/>
-                                                <constraint firstItem="5pQ-76-Nyz" firstAttribute="leading" secondItem="Kta-rv-5ft" secondAttribute="trailing" id="Y3j-iq-t47"/>
-                                                <constraint firstAttribute="bottom" secondItem="5pQ-76-Nyz" secondAttribute="bottom" id="a8t-TH-Jkc"/>
-                                                <constraint firstItem="Kta-rv-5ft" firstAttribute="top" secondItem="rt4-bT-3Es" secondAttribute="top" id="cTv-WD-48n"/>
-                                                <constraint firstAttribute="trailing" secondItem="5pQ-76-Nyz" secondAttribute="trailing" constant="10" id="dRw-9I-z7f"/>
-                                                <constraint firstItem="5pQ-76-Nyz" firstAttribute="top" secondItem="rt4-bT-3Es" secondAttribute="top" id="fvH-25-QjT"/>
-                                                <constraint firstItem="Kta-rv-5ft" firstAttribute="leading" secondItem="rt4-bT-3Es" secondAttribute="leading" constant="10" id="pyE-Vm-BmQ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="4yD-bi-fTD">
-                                        <rect key="frame" x="0.0" y="177" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="133" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4yD-bi-fTD" id="cOS-ij-NCZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -322,7 +288,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="os8-Hm-qah">
-                                        <rect key="frame" x="0.0" y="221" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="177" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="os8-Hm-qah" id="l7c-Tx-Me2">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -347,7 +313,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="9is-El-VPi">
-                                        <rect key="frame" x="0.0" y="265" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="221" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9is-El-VPi" id="Rsk-jM-9Jp">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -376,7 +342,7 @@
                             <tableViewSection footerTitle=" " id="Qug-dc-OLF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="DtF-6r-1DL">
-                                        <rect key="frame" x="0.0" y="310" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="266" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DtF-6r-1DL" id="QAo-qR-85Z">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -2498,6 +2464,7 @@
                         <outlet property="sizePreview" destination="3qB-e9-Zk7" id="6Im-O7-kzZ"/>
                         <outlet property="startLabel" destination="SvS-N8-lno" id="W0m-Xe-OfB"/>
                         <outlet property="submitButton" destination="g9D-WN-6Oj" id="Z1c-W8-oEh"/>
+                        <segue destination="bD2-Vv-D4I" kind="show" identifier="traceSourceAdd" id="RS7-0C-Wsv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv3-P5-8WV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3248,6 +3215,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Fc2-Pk-Bhi"/>
-        <segue reference="Mxn-DK-VFw"/>
+        <segue reference="RS7-0C-Wsv"/>
     </inferredMetricsTieBreakers>
 </document>

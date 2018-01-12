@@ -67,6 +67,9 @@ class DeliveringManagerController: ZPTableViewController {
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
         submitButton.isEnabled = false
+        
+        
+        self.endTextField.keyboardType = .numberPad
 
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
@@ -162,6 +165,8 @@ class DeliveringManagerController: ZPTableViewController {
         self.actionView?.show()
     }
     @IBAction func sizeSelect(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         if self.vm.deliverManagerModel.codeSpecList.isEmpty == false {
             var titleArray = Array<String>()
             for model in self.vm.deliverManagerModel.codeSpecList {
@@ -308,7 +313,7 @@ class DeliveringManagerController: ZPTableViewController {
         
         let separateLine = UIView(frame: CGRect(x: 0, y: H + 10 - 0.5, width: contentView.frame.width, height:
             0.5))
-        separateLine.backgroundColor = UIColor.groupTableViewBackground
+        separateLine.backgroundColor = JXSeparatorColor
         contentView.addSubview(separateLine)
         
         let button = UIButton()
@@ -403,7 +408,9 @@ class DeliveringManagerController: ZPTableViewController {
         return 0.1
     }
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        if scrollView.isDragging {
+            self.view.endEditing(true)
+        }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -424,9 +431,19 @@ extension DeliveringManagerController : JXActionViewDelegate,UIAlertViewDelegate
                 alert.show()
             }
         } else if actionView.tag == 11 {
+            if self.vm.deliverManagerModel.codeSpecList.count > 1 && self.vm.deliverManagerModel.codeSpecList[index].id != self.sizeId{
+                self.vm.fetchDeliveryCode(batchId: self.deliverModel?.id as! Int, codeSpecId: self.vm.deliverManagerModel.codeSpecList[index].id, completion: { (data, msg, isSuccess) in
+                    if isSuccess {
+                        self.startTextField.text = self.vm.deliverManagerModel.startCode
+                        self.endTextField.text = self.vm.deliverManagerModel.endCode
+                    } else {
+                        ViewManager.showNotice(notice: msg)
+                    }
+                })
+            }
             self.sizeName = self.vm.deliverManagerModel.codeSpecList[index].desc
             self.sizeId = self.vm.deliverManagerModel.codeSpecList[index].id
-        self.sizeLabel.setTitle(self.vm.deliverManagerModel.codeSpecList[index].desc, for: .normal)
+            self.sizeLabel.setTitle(self.vm.deliverManagerModel.codeSpecList[index].desc, for: .normal)
         }
         self.observeButtonEnabled()
     }
@@ -519,7 +536,7 @@ extension DeliveringManagerController: UITextFieldDelegate{
             let endCode = self.vm.deliverManagerModel.endCode,
             let endNumber = Int(endCode),
             let number = Int(endStr),
-            endStr.characters.count == 12,
+            endStr.count == 12,
             batchId > -2
         {
             

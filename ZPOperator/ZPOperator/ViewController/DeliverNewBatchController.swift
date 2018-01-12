@@ -41,6 +41,13 @@ class DeliverNewBatchController: ZPTableViewController {
     var areaString : String?
     var detailString : String?
     
+    var currentProvinceId : Int = -1
+    var currentProvinceString : String?
+    var currentCityId : Int = -1
+    var currentCityString : String?
+    var currentAreaId : Int = -1
+    var currentAreaString : String?
+    
 
     @IBAction func submitClick(_ sender: UIButton) {
         if productId == -1 {
@@ -61,9 +68,7 @@ class DeliverNewBatchController: ZPTableViewController {
             let provinceString = provinceString,
             let cityString = cityString,
             let areaString = areaString,
-            productId != -1,
-            cityId != -1,
-            areaId != -1
+            provinceId != -1
             else {
             ViewManager.showNotice(notice: "请填写收货地址")
             return
@@ -75,7 +80,7 @@ class DeliverNewBatchController: ZPTableViewController {
             return
         }
         self.showMBProgressHUD()
-        self.vm.deliverNewBatchSave(goodsId: productId, counts: orderString, provinceId: productId, cityId: cityId, countyId: areaId, province: provinceString, city: cityString, county: areaString, address: detailString, remarks: remarkTextField.text ?? "") { (data, msg, isSuccess) in
+        self.vm.deliverNewBatchSave(goodsId: productId, counts: orderString, provinceId: provinceId, cityId: cityId, countyId: areaId, province: provinceString, city: cityString, county: areaString, address: detailString, remarks: remarkTextField.text ?? "") { (data, msg, isSuccess) in
             self.hideMBProgressHUD()
             ViewManager.showNotice(notice: msg)
             if
@@ -91,7 +96,7 @@ class DeliverNewBatchController: ZPTableViewController {
 
         submitButton.layer.cornerRadius = 5
         //submitButton.backgroundColor = JXGrayColor
-        submitButton.backgroundColor = JXMainColor
+        submitButton.backgroundColor = JXOrangeColor
 //        submitButton.isEnabled = false
         
         self.actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
@@ -161,20 +166,20 @@ class DeliverNewBatchController: ZPTableViewController {
                 guard self.vm.deliverNewBatchModel.provinceList.isEmpty == false else {
                     return
                 }
-                self.provinceId = self.vm.deliverNewBatchModel.provinceList[0].id
-                self.provinceString = self.vm.deliverNewBatchModel.provinceList[0].name
-                self.vm.deliverAddress(pid: self.vm.deliverNewBatchModel.provinceList[0].id, isCity: true) { (data, msg, isSuccess) in
+                self.currentProvinceId = self.vm.deliverNewBatchModel.provinceList[0].id
+                self.currentProvinceString = self.vm.deliverNewBatchModel.provinceList[0].name
+                self.vm.deliverAddress(pid: self.currentProvinceId, isCity: true) { (data, msg, isSuccess) in
                     guard isSuccess == true ,self.vm.deliverNewBatchModel.cityList.isEmpty == false else{
                         return
                     }
-                    self.cityId = self.vm.deliverNewBatchModel.cityList[0].id
-                    self.cityString = self.vm.deliverNewBatchModel.cityList[0].name
-                    self.vm.deliverAddress(pid: self.vm.deliverNewBatchModel.cityList[0].id, isCity: false) { (data, msg, isSuccess) in
+                    self.currentCityId = self.vm.deliverNewBatchModel.cityList[0].id
+                    self.currentCityString = self.vm.deliverNewBatchModel.cityList[0].name
+                    self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                         guard isSuccess == true ,self.vm.deliverNewBatchModel.areaList.isEmpty == false else{
                             return
                         }
-                        self.areaId = self.vm.deliverNewBatchModel.areaList[0].id
-                        self.areaString = self.vm.deliverNewBatchModel.areaList[0].name
+                        self.currentAreaId = self.vm.deliverNewBatchModel.areaList[0].id
+                        self.currentAreaString = self.vm.deliverNewBatchModel.areaList[0].name
                         
                         let select = JXSelectView(frame: CGRect(), style: .pick)
                         select.isUseSystemItemBar = true
@@ -219,63 +224,90 @@ extension DeliverNewBatchController : JXSelectViewDelegate,JXSelectViewDataSourc
     func jxSelectView(jxSelectView: JXSelectView, didSelectRowAt row: Int, inSection section: Int) {
         
         if section == 0 {
-            self.provinceId = self.vm.deliverNewBatchModel.provinceList[row].id
-            self.provinceString = self.vm.deliverNewBatchModel.provinceList[row].name
+            self.currentProvinceId = self.vm.deliverNewBatchModel.provinceList[row].id
+            self.currentProvinceString = self.vm.deliverNewBatchModel.provinceList[row].name
             
-            self.vm.deliverAddress(pid: self.provinceId, isCity: true) { (data, msg, isSuccess) in
+            self.vm.deliverAddress(pid: self.currentProvinceId, isCity: true) { (data, msg, isSuccess) in
                 guard isSuccess == true ,self.vm.deliverNewBatchModel.cityList.isEmpty == false else{
+                    self.currentCityId = -1
+                    self.currentCityString = ""
+                    jxSelectView.pickView.reloadComponent(1)
+                    jxSelectView.pickView.selectRow(0, inComponent: 1, animated: true)
+                    
+                    self.currentAreaId = -1
+                    self.currentAreaString = ""
+                    jxSelectView.pickView.reloadComponent(2)
+                    jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
                     return
                 }
-                self.cityId = self.vm.deliverNewBatchModel.cityList[0].id
-                self.cityString = self.vm.deliverNewBatchModel.cityList[0].name
+                self.currentCityId = self.vm.deliverNewBatchModel.cityList[0].id
+                self.currentCityString = self.vm.deliverNewBatchModel.cityList[0].name
                 jxSelectView.pickView.reloadComponent(1)
                 jxSelectView.pickView.selectRow(0, inComponent: 1, animated: true)
-                self.vm.deliverAddress(pid: self.cityId, isCity: false) { (data, msg, isSuccess) in
+                self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                     guard isSuccess == true ,self.vm.deliverNewBatchModel.areaList.isEmpty == false else{
+                
+                        self.currentAreaId = -1
+                        self.currentAreaString = ""
+                        jxSelectView.pickView.reloadComponent(2)
+                        jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
+                        
                         return
                     }
-                    self.areaId = self.vm.deliverNewBatchModel.areaList[0].id
-                    self.areaString = self.vm.deliverNewBatchModel.areaList[0].name
+                    self.currentAreaId = self.vm.deliverNewBatchModel.areaList[0].id
+                    self.currentAreaString = self.vm.deliverNewBatchModel.areaList[0].name
                     jxSelectView.pickView.reloadComponent(2)
                     jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
                 }
                
             }
         }else if section == 1{
-            self.cityId = self.vm.deliverNewBatchModel.cityList[row].id
-            self.cityString = self.vm.deliverNewBatchModel.cityList[row].name
-            self.vm.deliverAddress(pid: self.cityId, isCity: false) { (data, msg, isSuccess) in
+            self.currentCityId = self.vm.deliverNewBatchModel.cityList[row].id
+            self.currentCityString = self.vm.deliverNewBatchModel.cityList[row].name
+            self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                 guard isSuccess == true ,self.vm.deliverNewBatchModel.areaList.isEmpty == false else{
+                    self.currentAreaId = -1
+                    self.currentAreaString = ""
+                    jxSelectView.pickView.reloadComponent(2)
+                    jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
+                    
                     return
                 }
-                self.areaId = self.vm.deliverNewBatchModel.areaList[0].id
-                self.areaString = self.vm.deliverNewBatchModel.areaList[0].name
+                self.currentAreaId = self.vm.deliverNewBatchModel.areaList[0].id
+                self.currentAreaString = self.vm.deliverNewBatchModel.areaList[0].name
                 jxSelectView.pickView.reloadComponent(2)
                 jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
             }
         }else{
-            self.areaId = self.vm.deliverNewBatchModel.areaList[row].id
-            self.areaString = self.vm.deliverNewBatchModel.areaList[row].name
+            self.currentAreaId = self.vm.deliverNewBatchModel.areaList[row].id
+            self.currentAreaString = self.vm.deliverNewBatchModel.areaList[row].name
         }
         
     }
     func jxSelectView(jxSelectView: JXSelectView, clickButtonAtIndex index: Int) {
         if index == 1 {
             guard
-                let ps = self.provinceString,
-                let cs = self.cityString,
-                let As = self.areaString
+                let ps = self.currentProvinceString,
+                let cs = self.currentCityString,
+                let As = self.currentAreaString
                 else {
                 return
             }
+            self.provinceString = self.currentProvinceString
+            self.provinceId = self.currentProvinceId
+            self.cityString = self.currentCityString
+            self.cityId = self.currentCityId
+            self.areaString = self.currentAreaString
+            self.areaId = self.currentAreaId
+            
             self.pcaAddressLabel.text = "\(ps)\(cs)\(As)"
         }else{
-            self.provinceString = nil
-            self.cityString = nil
-            self.areaString = nil
-            self.provinceId = -1
-            self.cityId = -1
-            self.areaId = -1
+            self.currentProvinceString = nil
+            self.currentCityString = nil
+            self.currentAreaString = nil
+            self.currentProvinceId = -1
+            self.currentCityId = -1
+            self.currentAreaId = -1
         }
         print(self.pcaAddressLabel)
     }

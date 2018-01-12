@@ -321,7 +321,7 @@
 /**
  发送结果代理方法
  
- @param dict 身份证识别结果
+ @param cardImage 身份证识别结果
  */
 -(void)sendDeteDelegate:(double)score cardImage:(UIImage *)cardImage{
     

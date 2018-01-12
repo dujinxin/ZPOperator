@@ -33,17 +33,15 @@ extension JXNetworkManager{
             
             completion(data, message, true)
             
-            let userModel = UserModel()
+            //let userModel = UserModel()
             
             guard let dict = data as? Dictionary<String, Any>
             
                 else{
                 return
             }
-           let issss = UserManager.manager.saveAccound(dict: dict)
-            
-           print("保存成功：\(issss)")
-            
+           UserManager.manager.saveAccound(dict: dict)
+           
             //self.isLogin = true
             
         }) { (message, code) in

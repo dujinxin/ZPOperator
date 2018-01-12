@@ -131,7 +131,7 @@ extension ModifyPasswordViewController : UITextFieldDelegate{
     func textChange(notify:NSNotification) {
         
         if notify.object is UITextField {
-            if oldTextField.text?.characters.count != 0 && newTextField.text?.characters.count != 0 && againTextField.text?.characters.count != 0 {
+            if oldTextField.text?.count != 0 && newTextField.text?.count != 0 && againTextField.text?.count != 0 {
                 confirmButton.backgroundColor = JXOrangeColor
                 confirmButton.isEnabled = true
             }else{

@@ -119,7 +119,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     self.redoButton.titleLabel.textColor=[UIColor whiteColor];
     self.redoButton.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.redoButton.titleLabel.font=[UIFont systemFontOfSize:20];
-    [self.redoButton setBackgroundColor:[UIColor mainColor]];
+    [self.redoButton setBackgroundColor:[UIColor operatorOrangeColor]];
     //[self.redoButton setBackgroundColor:CW_ColorFromRGB(232,0,0)];
     self.redoButton.layer.cornerRadius=5;
     self.redoButton.layer.masksToBounds=YES;
@@ -245,7 +245,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [self.suerButton setTitle:@"下一步" forState:UIControlStateNormal];
     self.suerButton.titleLabel.textColor=[UIColor whiteColor];
     self.suerButton.titleLabel.font=[UIFont systemFontOfSize:20];
-    [self.suerButton setBackgroundColor:[UIColor mainColor]];
+    [self.suerButton setBackgroundColor:[UIColor operatorOrangeColor]];
     //[self.suerButton setBackgroundColor:CW_ColorFromRGB(232,0,0)];
     self.suerButton.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.suerButton.layer.cornerRadius=5;

@@ -121,7 +121,7 @@ typedef void(^NSurlSessionFinishedBlock)(NSData * __nonnull data,NSError * __non
  *  @param serverIp     OCR服务器地址
  *  @param apiKey        云从科技获取的apikey
  *  @param secretKey   云从科技获取的secretkey
- *  @param idCardImageData     身份证图片二进制数据
+ *  @param idCardBaseStr     身份证图片二进制数据
  *  @param completion              返回身份证信息字典
  */
 -(void)cwIDOcr:(NSString * __nonnull)serverIp apiKey:(NSString *__nonnull)apiKey  secretKey:(NSString *__nonnull)secretKey cardImageData:(NSString *__nonnull)idCardBaseStr  block:(__nullable cardOCRBlock)completion;
@@ -144,7 +144,7 @@ typedef void(^NSurlSessionFinishedBlock)(NSData * __nonnull data,NSError * __non
 #pragma mark-----------cwBankCardOcr 银行卡图片Url OCR识别
 /**
  *  银行卡OCR识别
- *  @param serverIp      OCR服务器地址
+ *  @param serverUrl      OCR服务器地址
  *  @param apiKey        云从科技获取的apikey
  *  @param secretKey   云从科技获取的secretkey
  *  @param imageUrl    图片url地址
@@ -224,8 +224,6 @@ typedef void(^NSurlSessionFinishedBlock)(NSData * __nonnull data,NSError * __non
  *  @param apiKey     授权apiKey
  *  @param secretKey  授权secretkey
  *  @param gropID     组id
- *  @param tagInfo    额外信息 限128字节
- *  @param completion 结果返回
  */
 
 -(void)cwDeleteGrop:(NSString * __nonnull)serverIp apiKey:(NSString * __nonnull)apiKey secretKey:(NSString * __nonnull)secretKey gropID:(NSString * __nonnull)gropID;
@@ -252,7 +250,7 @@ typedef void(^NSurlSessionFinishedBlock)(NSData * __nonnull data,NSError * __non
  *  @param serverIp     服务器地址
  *  @param apiKey        云从科技获取的apikey
  *  @param secretKey   云从科技获取的secretkey
- *  @param faceId        人脸id 唯一标示字符串
+ *  @param gropID        人脸id 唯一标示字符串
  *  @param faceBase64Str       人脸图片base64编码字符串
  *  @param topN       返回比对分数最高的N个人
  *  @param completion            result     返回结果 0成功 非0错误号          infoStr       返回详细信息   faceInfoArray人脸信息字典数组
@@ -290,8 +288,6 @@ typedef void(^LivessBlock)(NSInteger result,NSInteger param,NSString * __nullabl
  *  @brief 添加图片水印
  *
  *  @param serverIp         服务器ip地址
- *  @param watermarkImage   返回结果0成功 非0失败
- *  @param maskStr          文字水印
  *  @param block            验证结果Block
  */
 -(void)cwAddWaterMarImage:(NSString * _Nonnull)serverIp  image:(UIImage * _Nonnull)originalImage maskImage:(UIImage * _Nonnull)maskImage completion:(cardOCRBlock _Nonnull)block;

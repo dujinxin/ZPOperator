@@ -66,4 +66,25 @@ class DeliverManagerVM {
             completion(nil, message, false ,code)
         }
     }
+    func fetchDeliveryCode(batchId:Int,codeSpecId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) {
+        JXRequest.request(url: ApiString.deliveringCode.rawValue, param: ["batchId":batchId,"codeSpecId":codeSpecId], success: { (data, message) in
+            
+            guard
+                let dict = data as? Dictionary<String,Any>,
+                let startCode = dict["startCode"] as? String,
+                let endCode = dict["endCode"] as? String
+                else{
+                    completion(data, message, false)
+                    return
+            }
+            self.deliverManagerModel.startCode = startCode
+            self.deliverManagerModel.endCode = endCode
+            
+            completion(data, message, true)
+            
+        }) { (message, code) in
+            
+            completion(nil, message, false)
+        }
+    }
 }

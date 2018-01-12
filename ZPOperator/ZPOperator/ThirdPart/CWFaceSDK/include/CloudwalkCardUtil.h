@@ -112,7 +112,7 @@ typedef void(^CWSampleBufferBlock)(unsigned char * frameData,int width,int heigh
 /**
  *  @brief BGRA转uiimage
  *
- *  @param sampleBuffer BGRA视频流
+ *  @param imageAddress BGRA视频流
  *
  *  @return UIImage
  */

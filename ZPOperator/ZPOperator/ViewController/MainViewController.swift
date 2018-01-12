@@ -77,8 +77,6 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         }else{
             self.showAuthAlert()
         }
-        
-        print("1230",UIImage.select(name: "idCardFront.jpg"))
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -173,13 +171,7 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         performSegue(withIdentifier: "TraceSources", sender: nil)
     }
     func tagManagement() {
-        //performSegue(withIdentifier: "tagManagement", sender: nil)
-        
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let login = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginViewController
-        let loginVC = UINavigationController.init(rootViewController: login)
-        
-        self.navigationController?.present(loginVC, animated: false, completion: nil)
+        performSegue(withIdentifier: "tagManagement", sender: nil)
     }
 
 
@@ -236,26 +228,28 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         }
     }
     func showAuthAlert() {
-        if UserManager.manager.userAccound.isAuthed == 0 {
-            let alert = UIAlertController(title: "实名认证", message: "您还没有通过认证，认证成功后才能使用全部功能", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "退出登录", style: .cancel, handler: { (action) in
-                let loginVM = LoginVM()
-                loginVM.logout { (data, msg, isSuccess) in
-                    if isSuccess {
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
-                    }
-                }
-            }))
-            alert.addAction(UIAlertAction(title: "立即认证", style: .destructive, handler: { (action) in
-                let cwvc = CWLivessViewController()
-                cwvc.allActionArry = [blink,openMouth,headLeft,headRight]
-                //cwvc.delegate = self
-                cwvc.setLivessParam(AuthCodeString, livessNumber: 4, isShowResultView: true)
-                self.navigationController?.pushViewController(cwvc, animated: true)
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }else{
-            print("已认证")
-        }
+        
+        //人脸识别功能暂停
+//        if UserManager.manager.userAccound.isAuthed == 0 {
+//            let alert = UIAlertController(title: "实名认证", message: "您还没有通过认证，认证成功后才能使用全部功能", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "退出登录", style: .cancel, handler: { (action) in
+//                let loginVM = LoginVM()
+//                loginVM.logout { (data, msg, isSuccess) in
+//                    if isSuccess {
+//                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationLoginStatus), object: false)
+//                    }
+//                }
+//            }))
+//            alert.addAction(UIAlertAction(title: "立即认证", style: .destructive, handler: { (action) in
+//                let cwvc = CWLivessViewController()
+//                cwvc.allActionArry = [blink,openMouth,headLeft,headRight]
+//                //cwvc.delegate = self
+//                cwvc.setLivessParam(AuthCodeString, livessNumber: 4, isShowResultView: true)
+//                self.navigationController?.pushViewController(cwvc, animated: true)
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//        }else{
+//            print("已认证")
+//        }
     }
 }

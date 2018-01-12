@@ -43,7 +43,7 @@
     button.titleLabel.textColor=[UIColor whiteColor];
     button.titleLabel.font=[UIFont systemFontOfSize:20];
     //[button setBackgroundColor:CWHacker_ColorFromRGB(232,0,0)];
-    [button setBackgroundColor:[UIColor mainColor]];
+    [button setBackgroundColor:[UIColor operatorOrangeColor]];
     button.titleLabel.textAlignment=NSTextAlignmentCenter;
     button.layer.cornerRadius=5;
     button.layer.masksToBounds=YES;

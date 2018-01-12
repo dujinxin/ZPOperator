@@ -226,7 +226,7 @@
     startLiveButton.layer.cornerRadius=5;
     startLiveButton.layer.masksToBounds=YES;
     startLiveButton.clipsToBounds = YES;
-    [startLiveButton setBackgroundColor:[UIColor mainColor]];
+    [startLiveButton setBackgroundColor:[UIColor operatorOrangeColor]];
     //[startLiveButton setBackgroundColor:CWFR_ColorFromRGB(232,0,0)];
     startLiveButton.frame = CGRectMake(CWLIVESSSCREEN_WIDTH*  0.11, tipLabel2.frame.origin.y + tipLabel2.frame.size.height + CWLIVESSSCREEN_HEIGHT * 0.04, CWLIVESSSCREEN_WIDTH * 0.78, CWLIVESSSCREEN_HEIGHT * 0.07);
     [guideView addSubview:startLiveButton];
@@ -525,7 +525,6 @@
  *
  *  @param sampleBuffer 视频流buffer
  *  @param bufferType   视频格式 1-BGRA kCVPixelFormatType_32BGRA  2-YUV420  kCVPixelFormatType_420YpCbCr8BiPlanarFullRange
- *  @param direction 屏幕方向
  */
 
 -(void)captureOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer bufferType:(NSInteger)bufferType{
@@ -643,8 +642,6 @@
 #pragma mark-----------  playAudioFileName // 播放提示音
 /**
  *  @brief 播放语音
- *
- *  @param audioFileName 语音文件名
  */
 -(void)playAudioFileName{
     //如果当前正在播放语音  先停止播放
@@ -1024,12 +1021,6 @@
 #pragma mark cwFaceliveness  后端活体验证
 /**
  后端活体验证
- 
- @param bestFace      最佳人脸图片
- @param keyPointArray 关键点数组
- @param pitch         抬头的角度
- @param yaw           偏头的角度
- @param roll          转头的角度
  */
 -(void)cwFaceliveness:(NSString *)jsonStr{
     
@@ -1069,8 +1060,6 @@
 #pragma mark showHackerCheckView 显示后端防hack攻击是否成功的View
 /**
  显示后端防hack攻击是否成功的View
- 
- @param isFailed 是否成功
  */
 
 -(void)showHackerCheckView:(BOOL)isDetectFailed hackerDetect:(BOOL) isHackerFailed{

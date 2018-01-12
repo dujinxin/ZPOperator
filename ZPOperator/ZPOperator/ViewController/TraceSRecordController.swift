@@ -355,7 +355,7 @@ extension TraceSRecordController : JXActionViewDelegate{
         if let address = addressLabel.text,
            let process = processLabel.text,
            let text = textView.text{
-            if text.characters.count > 0 && address.characters.count > 0 && process.characters.count > 0 {
+            if text.count > 0 && address.count > 0 && process.count > 0 {
                 submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{

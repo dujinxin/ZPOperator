@@ -113,7 +113,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
                     for model in self.vm.traceSourceWholeModify.traceProcesses{
                         self.processArray.append(model.name!)
                     }
-                    self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.station
+                    self.addressLabel.text = self.vm.traceSourceWholeModify.Operator.stationLocation
                     
                     self.submitButton.backgroundColor = JXOrangeColor
                     self.submitButton.isEnabled = true
@@ -259,8 +259,8 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 if JXLocationManager.manager.address.count > 0 {
                     self.addressArray.append(JXLocationManager.manager.address)
                 }
-                if let station = self.vm.traceSourceWholeModify.Operator.station, station.isEmpty == false {
-                    self.addressArray.append(self.vm.traceSourceWholeModify.Operator.station!)
+                if let station = self.vm.traceSourceWholeModify.Operator.stationLocation, station.isEmpty == false {
+                    self.addressArray.append(station)
                 }
                 self.actionView?.actions = addressArray
                 self.actionView?.show()
@@ -330,7 +330,7 @@ extension DeliveredWholeRecordController : JXActionViewDelegate{
         if let address = addressLabel.text,
             let process = processLabel.text,
             let text = textView.text{
-            if text.characters.count > 0 && address.characters.count > 0 && process.characters.count > 0 {
+            if text.count > 0 && address.count > 0 && process.count > 0 {
                 submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{
@@ -457,7 +457,7 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
         }
         
         
-        if textView.text.characters.count > 100 {
+        if textView.text.count > 100 {
             if let string = textView.text {
                 textView.text = string.substring(to: string.index(string.startIndex, offsetBy: 100))
                 

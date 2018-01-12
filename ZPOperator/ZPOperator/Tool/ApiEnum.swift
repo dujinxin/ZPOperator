@@ -32,8 +32,9 @@ enum ApiString : String {
     case deliveredWholeFetchRecord = "/batch/traceProcess"
     case deliveredWholeUpdateRecord = "/batch/saveTrace"
     
-    case deliveringBatch = "/batch/traceList" //发货产品相关联的 批次列表 //暂时废弃
+    case deliveringBatch = "/batch/traceList" //发货产品相关联的 批次列表       //暂时废弃
     case deliveringManager = "/batch/deliverPage"
+    case deliveringCode  = "/batch/getCodeBySpec" //获取开始结束编码
     case deliver       = "/batch/deliver"
     
     case deliverNewBatchInfo = "/batch/new" //新增发货批次，信息

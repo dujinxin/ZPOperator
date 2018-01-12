@@ -40,7 +40,7 @@ class TagViewController: BaseViewController {
         guard let text = searchTextField.text else {
             return
         }
-        if text.characters.count != 12 {
+        if text.count != 12 {
             ViewManager.showNotice(notice: "请输入正确的12位标签编码")
             return
         }
@@ -107,7 +107,7 @@ extension TagViewController : UITextFieldDelegate{
     func textChange(notify:NSNotification) {
         
         if notify.object is UITextField {
-            if searchTextField.text?.characters.count != 0 {
+            if searchTextField.text?.count != 0 {
                 searchButton.backgroundColor = JXOrangeColor
                 searchButton.isEnabled = true
             }else{

@@ -54,12 +54,19 @@ class DeliveryViewController: ZPTableViewController {
     var orderString : String?//138
     
     //省市区
-    var provinceId : Int = -1
-    var provinceString : String?
-    var cityId : Int = -1
-    var cityString : String?
-    var areaId : Int = -1
-    var areaString : String?
+//    var provinceId : Int = -1
+//    var provinceString : String?
+//    var cityId : Int = -1
+//    var cityString : String?
+//    var areaId : Int = -1
+//    var areaString : String?
+    
+    var currentProvinceId : Int = -1
+    var currentProvinceString : String?
+    var currentCityId : Int = -1
+    var currentCityString : String?
+    var currentAreaId : Int = -1
+    var currentAreaString : String?
     
     var pcaArray = Array<Dictionary<String,Any>>()
     var detailString : String?
@@ -72,9 +79,11 @@ class DeliveryViewController: ZPTableViewController {
         submitButton.isEnabled = false
         
         codeButton.layer.cornerRadius = 5
-        codeButton.backgroundColor = JXMainColor
+        codeButton.backgroundColor = JXOrangeColor
         
         self.sizePreview.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(codeSizePreview)))
+        
+        self.endTextField.keyboardType = .numberPad
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(notify:)), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
@@ -95,6 +104,36 @@ class DeliveryViewController: ZPTableViewController {
             }
         }
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier
+        if identifier ==  "traceSourceAdd" {
+            let vc = segue.destination as! TraceSAddViewController
+            vc.traceSAddBlock = {()->() in
+                
+                self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess, code) in
+                    if isSuccess == false {
+                        if code == JXNetworkError.kResponseDeliverTagNotEnough {
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            alert.tag = 11
+                            alert.show()
+                        }else{
+                            ViewManager.showNotice(notice: msg)
+                        }
+                    }
+                    guard isSuccess == true,self.vm.batchs.isEmpty == false else{
+                        self.batchLabel.text = "暂无溯源批次"
+                        self.batchId = -1
+                        return
+                    }
+                    self.batchArray.removeAll()
+                    for model in self.vm.batchs{
+                        self.batchArray.append(model.name!)
+                    }
+                    self.batchArray.append("暂无溯源批次")
+                })
+            }
+        }
+    }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
     }
@@ -104,6 +143,8 @@ class DeliveryViewController: ZPTableViewController {
     }
     // MARK: - Custom Methods
     func codeSizePreview() {
+        self.view.endEditing(true)
+        
         let customView = setSizeSelectView()
         let alertView = JXAlertView.init(frame: customView.bounds, style: .custom)
         alertView.customView = customView
@@ -111,6 +152,7 @@ class DeliveryViewController: ZPTableViewController {
         self.alertView?.show()
     }
     @IBAction func fetchCode(_ sender: Any) {
+        self.view.endEditing(true)
         
         if productId == -1 {
             ViewManager.showNotice(notice: "请选择产品")
@@ -138,7 +180,7 @@ class DeliveryViewController: ZPTableViewController {
         }
         self.orderString = orderStr
         self.showMBProgressHUD()
-        self.vm.fetchCode(counts: Int(orderStr)!) { (data, msg, isSuccess) in
+        self.vm.fetchCode(counts: Int(orderStr)!,codeType: self.sizeId) { (data, msg, isSuccess) in
             self.hideMBProgressHUD()
             if isSuccess == true{
                 self.startLabel.text = self.vm.deliverDirectCodeModel.startCode
@@ -150,6 +192,8 @@ class DeliveryViewController: ZPTableViewController {
     }
     
     @IBAction func submitClick(_ sender: UIButton) {
+        self.view.endEditing(true)
+        
         if productId == -1 {
             ViewManager.showNotice(notice: "请选择产品")
             return
@@ -192,12 +236,6 @@ class DeliveryViewController: ZPTableViewController {
             endCode.isEmpty == false else {
             return
         }
-        var remarkText = "暂无"
-        if
-            let text = self.remarkTextField.text,
-            text.isEmpty == false{
-            remarkText = text
-        }
         self.confirmArray.removeAll()
         self.confirmArray.append(String.init(format: "%@", self.productName ?? ""))
         self.confirmArray.append(String.init(format: "%@", self.batchName ?? "暂无溯源批次"))
@@ -207,7 +245,7 @@ class DeliveryViewController: ZPTableViewController {
         self.confirmArray.append(String.init(format: "%@", endCode))
         self.confirmArray.append(String.init(format: "%@%@%@%@", provinceName,cityName,areaName,detailString))
         
-        self.confirmArray.append(String.init(format: "%@", remarkText))
+        self.confirmArray.append(String.init(format: "%@", self.remarkTextField.text ?? "暂无"))
         self.confirmArray.append(String.init(format: "%@", self.vm.deliverDirectModel.Operator.name ?? ""))
         
         setConfirmSelectView()
@@ -329,7 +367,7 @@ class DeliveryViewController: ZPTableViewController {
         
         let separateLine = UIView(frame: CGRect(x: 0, y: H + 10 - 0.5, width: contentView.frame.width, height:
             0.5))
-        separateLine.backgroundColor = UIColor.groupTableViewBackground
+        separateLine.backgroundColor = JXSeparatorColor
         contentView.addSubview(separateLine)
         
         let button = UIButton()
@@ -464,19 +502,27 @@ class DeliveryViewController: ZPTableViewController {
                     self.actionView?.show()
                     return
                 }
-                self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess) in
+                self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess, code) in
                     if isSuccess == false {
-                        ViewManager.showNotice(notice: msg)
+                        if code == JXNetworkError.kResponseDeliverTagNotEnough {
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            alert.tag = 11
+                            alert.show()
+                        }else{
+                            ViewManager.showNotice(notice: msg)
+                        }
                     }
-                    guard isSuccess == true ,self.vm.batchs.isEmpty == false else{
+                    guard isSuccess == true,self.vm.batchs.isEmpty == false else{
                         self.batchLabel.text = "暂无溯源批次"
                         self.batchId = -1
+                        self.batchName = "暂无溯源批次"
                         return
                     }
                     self.batchArray.removeAll()
                     for model in self.vm.batchs{
                         self.batchArray.append(model.name!)
                     }
+                    self.batchArray.append("暂无溯源批次")
                     self.actionView?.actions = self.batchArray
                     self.actionView?.show()
                 })
@@ -505,20 +551,20 @@ class DeliveryViewController: ZPTableViewController {
                 guard self.vm.deliverDirectModel.provinceList.isEmpty == false else {
                     return
                 }
-                self.provinceId = self.vm.deliverDirectModel.provinceList[0].id
-                self.provinceString = self.vm.deliverDirectModel.provinceList[0].name
-                self.vm.deliverAddress(pid: self.vm.deliverDirectModel.provinceList[0].id, isCity: true) { (data, msg, isSuccess) in
+                self.currentProvinceId = self.vm.deliverDirectModel.provinceList[0].id
+                self.currentProvinceString = self.vm.deliverDirectModel.provinceList[0].name
+                self.vm.deliverAddress(pid: self.currentProvinceId, isCity: true) { (data, msg, isSuccess) in
                     guard isSuccess == true ,self.vm.deliverDirectModel.cityList.isEmpty == false else{
                         return
                     }
-                    self.cityId = self.vm.deliverDirectModel.cityList[0].id
-                    self.cityString = self.vm.deliverDirectModel.cityList[0].name
-                    self.vm.deliverAddress(pid: self.vm.deliverDirectModel.cityList[0].id, isCity: false) { (data, msg, isSuccess) in
+                    self.currentCityId = self.vm.deliverDirectModel.cityList[0].id
+                    self.currentCityString = self.vm.deliverDirectModel.cityList[0].name
+                    self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                         guard isSuccess == true ,self.vm.deliverDirectModel.areaList.isEmpty == false else{
                             return
                         }
-                        self.areaId = self.vm.deliverDirectModel.areaList[0].id
-                        self.areaString = self.vm.deliverDirectModel.areaList[0].name
+                        self.currentAreaId = self.vm.deliverDirectModel.areaList[0].id
+                        self.currentAreaString = self.vm.deliverDirectModel.areaList[0].name
                         
                         let select = JXSelectView(frame: CGRect(), style: .pick)
                         select.isUseSystemItemBar = true
@@ -530,16 +576,34 @@ class DeliveryViewController: ZPTableViewController {
             }
         }
     }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isDragging {
+            self.view.endEditing(true)
+        }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
 }
-extension DeliveryViewController:JXActionViewDelegate{
+extension DeliveryViewController:JXActionViewDelegate,UIAlertViewDelegate{
     func jxActionView(_ actionView: JXActionView, clickButtonAtIndex index: Int) {
         
         if actionView.tag == 10 {
             if isProcessAlert == 0 {
-                self.batchLabel.text = self.batchArray[index]
-                self.batchId = self.vm.batchs[index].id
-                self.batchName = self.vm.batchs[index].name
+                if index < self.vm.batchs.count {
+                    let model = self.vm.batchs[index]
+                    
+                    self.batchLabel.text = self.batchArray[index]
+                    self.batchId = model.id
+                    self.batchName = model.name
+                    
+                }else{
+                    let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+                    alert.tag = 10
+                    alert.show()
+                    
+                }
             }else{
                 
                 if self.productLabel.text == self.productArray[index] && self.productId == self.vm.deliverDirectModel.goodsList[index].id {
@@ -556,78 +620,126 @@ extension DeliveryViewController:JXActionViewDelegate{
                 }
             }
         }else if actionView.tag == 11 {
+            if self.sizeId != self.vm.deliverDirectModel.codeSpecList[index].id && self.sizeId != -1 && self.endTextField.text?.isEmpty == false{
+                
+                self.orderString = nil
+                self.vm.deliverDirectCodeModel = DeliverDirectCodeModel()
+                self.startLabel.text = "自动获取"
+                self.endTextField.text = ""
+                
+                ViewManager.showNotice(notice: "请重新获取标签")
+            }
             self.sizeName = self.vm.deliverDirectModel.codeSpecList[index].desc
             self.sizeId = self.vm.deliverDirectModel.codeSpecList[index].id
             self.sizeLabel.text = self.vm.deliverDirectModel.codeSpecList[index].desc
         }
+    }
+    
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        if alertView.tag == 10 {
+            if buttonIndex == 0 {
+                //
+                print("添加溯源")
+                
+                self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
+            }else{
+                
+                print("发货")
+                self.batchLabel.text = "暂无溯源批次"
+                self.batchId = -1
+                self.batchName = "暂无溯源批次"
+            }
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
+        
     }
 }
 extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
     func jxSelectView(jxSelectView: JXSelectView, didSelectRowAt row: Int, inSection section: Int) {
         
         if section == 0 {
-            self.provinceId = self.vm.deliverDirectModel.provinceList[row].id
-            self.provinceString = self.vm.deliverDirectModel.provinceList[row].name
+            self.currentProvinceId = self.vm.deliverDirectModel.provinceList[row].id
+            self.currentProvinceString = self.vm.deliverDirectModel.provinceList[row].name
             
-            self.vm.deliverAddress(pid: self.provinceId, isCity: true) { (data, msg, isSuccess) in
+            self.vm.deliverAddress(pid: self.currentProvinceId, isCity: true) { (data, msg, isSuccess) in
                 guard isSuccess == true ,self.vm.deliverDirectModel.cityList.isEmpty == false else{
+                    self.currentCityId = -1
+                    self.currentCityString = ""
+                    jxSelectView.pickView.reloadComponent(1)
+                    jxSelectView.pickView.selectRow(0, inComponent: 1, animated: true)
+                    
+                    self.currentAreaId = -1
+                    self.currentAreaString = ""
+                    jxSelectView.pickView.reloadComponent(2)
+                    jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
                     return
                 }
-                self.cityId = self.vm.deliverDirectModel.cityList[0].id
-                self.cityString = self.vm.deliverDirectModel.cityList[0].name
+                self.currentCityId = self.vm.deliverDirectModel.cityList[0].id
+                self.currentCityString = self.vm.deliverDirectModel.cityList[0].name
                 jxSelectView.pickView.reloadComponent(1)
                 jxSelectView.pickView.selectRow(0, inComponent: 1, animated: true)
-                self.vm.deliverAddress(pid: self.cityId, isCity: false) { (data, msg, isSuccess) in
+                self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                     guard isSuccess == true ,self.vm.deliverDirectModel.areaList.isEmpty == false else{
+                        self.currentAreaId = -1
+                        self.currentAreaString = ""
+                        jxSelectView.pickView.reloadComponent(2)
+                        jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
+                        
                         return
                     }
-                    self.areaId = self.vm.deliverDirectModel.areaList[0].id
-                    self.areaString = self.vm.deliverDirectModel.areaList[0].name
+                    self.currentAreaId = self.vm.deliverDirectModel.areaList[0].id
+                    self.currentAreaString = self.vm.deliverDirectModel.areaList[0].name
                     jxSelectView.pickView.reloadComponent(2)
                     jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
                 }
                 
             }
         }else if section == 1{
-            self.cityId = self.vm.deliverDirectModel.cityList[row].id
-            self.cityString = self.vm.deliverDirectModel.cityList[row].name
-            self.vm.deliverAddress(pid: self.cityId, isCity: false) { (data, msg, isSuccess) in
+            self.currentCityId = self.vm.deliverDirectModel.cityList[row].id
+            self.currentCityString = self.vm.deliverDirectModel.cityList[row].name
+            self.vm.deliverAddress(pid: self.currentCityId, isCity: false) { (data, msg, isSuccess) in
                 guard isSuccess == true ,self.vm.deliverDirectModel.areaList.isEmpty == false else{
+                    self.currentAreaId = -1
+                    self.currentAreaString = ""
+                    jxSelectView.pickView.reloadComponent(2)
+                    jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
+                    
                     return
                 }
-                self.areaId = self.vm.deliverDirectModel.areaList[0].id
-                self.areaString = self.vm.deliverDirectModel.areaList[0].name
+                self.currentAreaId = self.vm.deliverDirectModel.areaList[0].id
+                self.currentAreaString = self.vm.deliverDirectModel.areaList[0].name
                 jxSelectView.pickView.reloadComponent(2)
                 jxSelectView.pickView.selectRow(0, inComponent: 2, animated: true)
             }
         }else{
-            self.areaId = self.vm.deliverDirectModel.areaList[row].id
-            self.areaString = self.vm.deliverDirectModel.areaList[row].name
+            self.currentAreaId = self.vm.deliverDirectModel.areaList[row].id
+            self.currentAreaString = self.vm.deliverDirectModel.areaList[row].name
         }
         
     }
     func jxSelectView(jxSelectView: JXSelectView, clickButtonAtIndex index: Int) {
         if index == 1 {
             guard
-                let ps = self.provinceString,
-                let cs = self.cityString,
-                let As = self.areaString
+                let ps = self.currentProvinceString,
+                let cs = self.currentCityString,
+                let As = self.currentAreaString
                 else {
                     return
             }
             self.pcaArray.removeAll()
-            self.pcaArray.append(["name":ps,"id":self.provinceId])
-            self.pcaArray.append(["name":cs,"id":self.cityId])
-            self.pcaArray.append(["name":As,"id":self.areaId])
+            self.pcaArray.append(["name":ps,"id":self.currentProvinceId])
+            self.pcaArray.append(["name":cs,"id":self.currentCityId])
+            self.pcaArray.append(["name":As,"id":self.currentAreaId])
             
             self.pcaAddressLabel.text = "\(ps)\(cs)\(As)"
         }else{
-            self.provinceString = nil
-            self.cityString = nil
-            self.areaString = nil
-            self.provinceId = -1
-            self.cityId = -1
-            self.areaId = -1
+            self.currentProvinceString = nil
+            self.currentCityString = nil
+            self.currentAreaString = nil
+            self.currentProvinceId = -1
+            self.currentCityId = -1
+            self.currentAreaId = -1
         }
         print(self.pcaAddressLabel)
     }
@@ -736,7 +848,7 @@ extension DeliveryViewController:UITextFieldDelegate{
                     let endCode = self.vm.deliverDirectCodeModel.endCode,
                     let endNumber = Int(endCode),
                     let number = Int(endStr),
-                    endStr.characters.count == 12,
+                    endStr.count == 12,
                     number < endNumber
                 {
                     ViewManager.showNotice(notice: "不能小于默认结束编码")
@@ -745,7 +857,8 @@ extension DeliveryViewController:UITextFieldDelegate{
                 if
                     let orderStr = orderString,
                     let text = textField.text,
-                    orderStr != text{
+                    orderStr != text,
+                    self.endTextField.text?.isEmpty == false{
                     
                     self.orderString = nil
                     self.vm.deliverDirectCodeModel = DeliverDirectCodeModel()

@@ -31,7 +31,7 @@
 /**
  *  @brief 禁用init方法 改用 initWithNibName:bundle
  *
- *  @return
+ *  @return ...
  */
 -(id)init NS_DEPRECATED_IOS(6_0,6_0,"Use -initWithFrame:WithIsSuccessed: instead");
 

@@ -101,9 +101,7 @@ class SettingViewController: ZPTableViewController ,JXSelectViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
             if indexPath.row == 0 {
                 
-            }else if indexPath.row == 1 {
-             
-            }else if indexPath.row == 2{
+            }else if indexPath.row == 1{
                 performSegue(withIdentifier: "AboutUs", sender: nil)
             }else{
                 performSegue(withIdentifier: "modifyPassword", sender: nil)

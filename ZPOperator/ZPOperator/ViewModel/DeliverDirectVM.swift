@@ -87,12 +87,12 @@ class DeliverDirectVM {
         }
     }
     
-    func fetchBatchs(goodsId:Int,completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->())) {
+    func fetchBatchs(goodsId:Int,completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool,_ code:JXNetworkError)->())) {
         JXRequest.request(url: ApiString.deliverDirectBatchs.rawValue, param: ["goodsId":goodsId], success: { (data, msg) in
             guard
                 let array = data as? Array<Dictionary<String,Any>>
                 else{
-                    completion(data, msg, false)
+                    completion(data, msg, false,.kResponseUnknow)
                     return
             }
             self.batchs.removeAll()
@@ -101,13 +101,13 @@ class DeliverDirectVM {
                 model.setValuesForKeys(d)
                 self.batchs.append(model)
             }
-            completion(data, msg, true)
+            completion(data, msg, true, .kResponseSuccess)
         }) { (msg, code) in
-            completion(nil, msg, false)
+            completion(nil, msg, false, code)
         }
     }
     func fetchCode(counts:Int,codeType:Int = 1/*1表示自定义2表示通用（以后会用到）*/,completion:@escaping ((_ data:Any?,_ msg:String,_ isSuccess:Bool)->())) {
-        JXRequest.request(url: ApiString.deliverDirectCode.rawValue, param: ["counts":counts,"codeType":codeType], success: { (data, msg) in
+        JXRequest.request(url: ApiString.deliverDirectCode.rawValue, param: ["counts":counts,"codeSpecId":codeType], success: { (data, msg) in
             guard
                 let dict = data as? Dictionary<String,Any>
                 else{

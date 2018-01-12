@@ -127,7 +127,7 @@
 /**
  *  @brief  添加视频输入
  *
- *  @param cameratype  摄像头类型
+ *  @param cameraType  摄像头类型
  */
 
 -(void)addVideoInput:(CWCameraType)cameraType{
@@ -161,7 +161,7 @@
 /**
  *  @brief 添加视频输出
  *
- *  @param cameratype  摄像头类型
+ *  @param cameraType  摄像头类型
  */
 
 -(void)addVideoOutPut:(CWCameraType)cameraType{
@@ -668,9 +668,9 @@
 /**
  *  @brief 视频、音频流回调
  *
- *  @param captureOutput
+ *  @param captureOutput ...
  *  @param sampleBuffer  视频流数据
- *  @param connection
+ *  @param connection    ...
  */
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{

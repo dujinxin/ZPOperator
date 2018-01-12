@@ -343,7 +343,7 @@ class ActionlistViewCell: UITableViewCell {
     }()
     lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.groupTableViewBackground
+        view.backgroundColor = JXSeparatorColor
         return view
     }()
     
