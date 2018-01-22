@@ -107,7 +107,7 @@ class TraceSourceDetailVM {
         }
         
     }
-    func traceSourceWholeTrace(page:Int,batchId:NSNumber,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func traceSourceWholeTrace(page:Int,batchId:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.deliveredWholeTrace.rawValue, param: ["batchId":batchId,"pageNo":page,"pageSize":5], success: { (data, message) in
@@ -120,7 +120,7 @@ class TraceSourceDetailVM {
                     return
             }
             self.traceSourceWhole.batch = TraceSourceWholeProduct()
-            self.traceSourceWhole.Operator = TraceDeliverOperatorModel()
+            self.traceSourceWhole.Operator = OperatorModel()
             self.traceSourceWhole.batch.setValuesForKeys(batch)
             self.traceSourceWhole.Operator.setValuesForKeys(Operator)
             self.traceSourceWhole.count = dict["count"] as? Int ?? 0

@@ -34,7 +34,7 @@ class TraceSourceTagModel: BaseModel {
 }
 //溯源-全程
 class TraceSourceWholeModel:BaseModel {
-    var Operator = TraceDeliverOperatorModel()
+    var Operator = OperatorModel()
     
     var count : Int = 0
     var batch = TraceSourceWholeProduct()
@@ -105,7 +105,7 @@ class TraceSourceRecordModify: BaseModel {
 //要修改的溯源记录
 class TraceSourceRecordWholeModify: BaseModel {
     
-    var Operator = TraceDeliverOperatorModel()
+    var Operator = OperatorModel()
     var traceSourceWholeProduct = TraceSourceWholeProduct()
     var traceProcesses = Array<MainSubModel>()
 }

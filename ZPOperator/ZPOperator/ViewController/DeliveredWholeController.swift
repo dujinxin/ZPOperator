@@ -25,8 +25,9 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var addButtonWidthConstraint: NSLayoutConstraint!
     
 
-    var batchId : NSNumber? //批次id ,全程溯源用
+    var comefrom : Int = 0 //来源跑步鸡，则不为1,需要禁止对溯源记录做增删改操作
     
+    var batchId : Int = 0 //批次id ,全程溯源用
     
     lazy var detailVM = TraceSourceDetailVM()
     lazy var recordVM = TraceSRecordVM()
@@ -48,8 +49,12 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             self.automaticallyAdjustsScrollViewInsets = false
         }
         
-        self.addButtonHeightConstraint.constant = 44 * kPercent
-        self.addButtonWidthConstraint.constant = 44 * kPercent
+        if comefrom != 0 {
+            self.addButton.isHidden = true
+        }else{
+            self.addButtonHeightConstraint.constant = 44 * kPercent
+            self.addButtonWidthConstraint.constant = 44 * kPercent
+        }
         
         self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib1)
         self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib2)
@@ -148,14 +153,18 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row > 0 {
-            currentRecord = self.detailVM.dataArray[indexPath.row - 1]
-
+            if comefrom != 0 {
+                return
+            }
             if currentRecord?.isMine == false {
                 return
             }
             if currentRecord?.canEdit == false {
                 return
             }
+            
+            currentRecord = self.detailVM.dataArray[indexPath.row - 1]
+
             let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
             actionView.isUseBottomView = true
             actionView.delegate = self
@@ -187,7 +196,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
  
     func loadData(page:Int) {
         
-        self.detailVM.traceSourceWholeTrace(page: page, batchId: batchId!, completion: { (data, msg, isSuccess) in
+        self.detailVM.traceSourceWholeTrace(page: page, batchId: batchId, completion: { (data, msg, isSuccess) in
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             if isSuccess {

@@ -10,11 +10,11 @@ import Foundation
 
 let kVersion = "v1.0.2"
 
-//let kBaseUrl = "http://192.168.10.12:8086"
-//let getTokenUrl     = "http://192.168.10.12:8082/genuine/user/getUploadToken"
+let kBaseUrl = "http://192.168.10.12:8086"
+let getTokenUrl     = "http://192.168.10.12:8082/genuine/user/getUploadToken"
 
-let kBaseUrl = "https://operator.izheng.org"
-let getTokenUrl  = "https://app.izheng.org/genuine/user/getUploadToken"
+//let kBaseUrl = "https://operator.izheng.org"
+//let getTokenUrl  = "https://app.izheng.org/genuine/user/getUploadToken"
 
 
 let isShowLog : Bool = true

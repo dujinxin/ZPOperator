@@ -57,6 +57,12 @@ extension String {
         let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
         return predicate.evaluate(with: code)
     }
+    static func validateFootCode(code:String) -> Bool {
+        
+        let passWordRegex = "^[0-9]{8}+$"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", passWordRegex)
+        return predicate.evaluate(with: code)
+    }
     /// 纯数字
     ///
     /// - Parameter string: 要检验的字符串

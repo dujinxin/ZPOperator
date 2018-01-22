@@ -1,63 +1,56 @@
 //
-//  DeliverManageController.swift
+//  DeliverManagerController.swift
 //  ZPOperator
 //
-//  Created by 杜进新 on 2017/6/21.
-//  Copyright © 2017年 dujinxin. All rights reserved.
+//  Created by 杜进新 on 2018/1/18.
+//  Copyright © 2018年 dujinxin. All rights reserved.
 //
 
 import UIKit
 
-class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizontalViewDelegate{
+class DeliverManagerController: BaseViewController ,JXTopBarViewDelegate,JXHorizontalViewDelegate{
     
     var topBar : JXTopBarView?
     
     var horizontalView : JXHorizontalView?
     
-    let deliveringVC = DeliveringViewController()
-    let deliveredVC = DeliveredViewController()
+    let deliveringVC = DeliveringController()
+    let deliveredVC = DeliveredController()
     
     var deliverManagerBlock : (()->())?
     var isBlockShouldRun : Bool = false
     
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.automaticallyAdjustsScrollViewInsets = false
         
-        if UserManager.manager.userAccound.type == 1 {
-            deliveredVC.deliveredBlock = { (deliverModel,operatorModel)->() in
-                self.performSegue(withIdentifier: "deliveredManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
-            }
-            deliveredVC.view.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
-            view.addSubview(deliveredVC.view)
-        }else{
-            topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
-            topBar?.delegate = self
-            topBar?.isBottomLineEnabled = true
-            view.addSubview(topBar!)
-            
-            
-            
-            deliveringVC.deliveringBlock = {(deliverModel,operatorModel)->() in
-                self.performSegue(withIdentifier: "deliveringManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
-            }
-            
-            deliveredVC.deliveredBlock = { (deliverModel,operatorModel)->() in
-                self.performSegue(withIdentifier: "deliveredManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
-            }
-            
-            horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
-            view.addSubview(horizontalView!)
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
+        topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
+        topBar?.delegate = self
+        topBar?.isBottomLineEnabled = true
+        view.addSubview(topBar!)
+        
+        
+        
+        deliveringVC.deliveringBlock = {(deliverModel,operatorModel)->() in
+            self.performSegue(withIdentifier: "chickenDeliveringManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
         }
+        
+        deliveredVC.deliveredBlock = { (deliverModel,operatorModel)->() in
+            self.performSegue(withIdentifier: "chickenDeliveredManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
+        }
+        
+        horizontalView = JXHorizontalView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight + 54, width: view.bounds.width, height: UIScreen.main.bounds.height - kNavStatusHeight - 54), containers: [deliveringVC,deliveredVC], parentViewController: self)
+        view.addSubview(horizontalView!)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(deliveringNumberChange), name: NSNotification.Name(rawValue: NotificationMainDeliveringNumber), object: nil)
+   
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,37 +67,37 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         
         if let identifier = segue.identifier{
             switch identifier {
-            case "deliveringManager":
-                let dvc = segue.destination as! DeliveringManagerController
+            case "chickenDeliveringManager":
+                let dvc = segue.destination as! DeliveringMController
                 if let dict = sender as? Dictionary<String,Any>,
-                   let deliverModel = dict["deliverModel"] as? DeliverSubModel,
-                   let operatorModel = dict["operatorModel"] as? OperatorModel{
+                    let deliverModel = dict["deliverModel"] as? DeliverChickenSubModel,
+                    let _ = dict["operatorModel"] as? OperatorModel{
                     dvc.deliverModel = deliverModel
-                    dvc.operatorModel = operatorModel
+                    //dvc.operatorModel = operatorModel
                     
                     dvc.deliveringManageBlock = { (isSuccess)->() in
                         
-//                        let indexPath = IndexPath.init(item: 1, section: 0)
-//                        self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
-//                        self.resetTopBarStatus(index: indexPath.item)
+                        //                        let indexPath = IndexPath.init(item: 1, section: 0)
+                        //                        self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+                        //                        self.resetTopBarStatus(index: indexPath.item)
                         
                         self.deliveringVC.tableView.mj_header.beginRefreshing()
                         
                     }
                 }
-            case "deliveredManager":
-                let dvc = segue.destination as! DeliveredManagerController
+            case "chickenDeliveredManager":
+                let dvc = segue.destination as! DeliveredMController
                 if let dict = sender as? Dictionary<String,Any>,
-                    let deliverModel = dict["deliverModel"] as? DeliverSubModel,
+                    let deliverModel = dict["deliverModel"] as? DeliverChickenSubModel,
                     let operatorModel = dict["operatorModel"] as? OperatorModel{
-                    dvc.traceDeliverSubModel = deliverModel
+                    dvc.deliverModel = deliverModel
                     dvc.operatorModel = operatorModel
                     
-//                    dvc.deliveringManageBlock = { (isSuccess)->() in
-//                        
-//                        let indexPath = IndexPath.init(item: 1, section: 0)
-//                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
-//                    }
+                    //                    dvc.deliveringManageBlock = { (isSuccess)->() in
+                    //
+                    //                        let indexPath = IndexPath.init(item: 1, section: 0)
+                    //                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+                    //                    }
                 }
             case "newBatch":
                 let dvc = segue.destination as! DeliverNewBatchController
@@ -131,10 +124,9 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
             self.topBar?.titles = [title,"已发货"]
         }
     }
-
 }
 
-extension DeliverManageController {
+extension DeliverManagerController {
     func jxTopBarView(topBarView: JXTopBarView, didSelectTabAt index: Int) {
         let indexPath = IndexPath.init(item: index, section: 0)
         self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)

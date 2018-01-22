@@ -28,6 +28,11 @@ enum ApiString : String {
     
     case deliverList   = "/batch/list"
     
+    case deliverList_chicken = "/do/list"                     //跑步鸡   订单列表
+    case deliveringInfo_chicken = "/do/deliverPage"           //跑步鸡   发货信息
+    case deliveringCode_chicken = "/do/getSjyCode"            //跑步鸡   获取开始结束编码
+    case deliverSubmit_chicken  = "/do/deliver"               //跑步鸡   发货
+    
     case deliveredWholeTrace = "/batch/allTrace"
     case deliveredWholeFetchRecord = "/batch/traceProcess"
     case deliveredWholeUpdateRecord = "/batch/saveTrace"

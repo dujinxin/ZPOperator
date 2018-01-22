@@ -9,15 +9,6 @@
 import UIKit
 
 class MainModel: BaseModel {
-    
     var orderCount : String?
-    
     var traceBatchList : Array<Dictionary<String, Any>>?
-    
-
-}
-
-class MainSubModel: BaseModel {
-    var name : String?
-    var id : Int = -1
 }

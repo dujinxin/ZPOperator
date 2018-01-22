@@ -163,8 +163,8 @@ class MainViewController: ZPCollectionViewController,SBCollectionViewDelegateFlo
         //self.navigationController?.pushViewController(vc, animated: true)
         
         //3
-        performSegue(withIdentifier: "deliverManagement", sender: nil)
-        
+        //performSegue(withIdentifier: "deliverManagement", sender: nil)
+        performSegue(withIdentifier: "chickenDeliverManagement", sender: nil)
         
     }
     func moreTraceSources() {

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */; };
+		350B11E72010843F002B8A6D /* DeliverManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11E62010843F002B8A6D /* DeliverManagerController.swift */; };
+		350B11EB201084D5002B8A6D /* DeliveredController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11EA201084D5002B8A6D /* DeliveredController.swift */; };
+		350B11EF20108A8B002B8A6D /* DeliveredMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11EE20108A8B002B8A6D /* DeliveredMController.swift */; };
+		350B11F120109D1A002B8A6D /* DeliverChickenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */; };
 		3514D65E1F18AF11001744DD /* DeliverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D65C1F18AF11001744DD /* DeliverListCell.swift */; };
 		3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3514D65D1F18AF11001744DD /* DeliverListCell.xib */; };
 		3514D71E1F1DFEA2001744DD /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */; };
@@ -38,6 +42,10 @@
 		35249C3D1FC826F9005E52E3 /* CWOCRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35249C391FC826F8005E52E3 /* CWOCRViewController.m */; };
 		35249C411FC8274D005E52E3 /* CWCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 35249C3F1FC8274D005E52E3 /* CWCommon.m */; };
 		352F49521FECAE42007C4F65 /* JXActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352F49511FECAE42007C4F65 /* JXActionView.swift */; };
+		353F3CAB20120842008EDB82 /* CommenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAA20120842008EDB82 /* CommenModel.swift */; };
+		353F3CAE20120E12008EDB82 /* DeliveringMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAC20120E11008EDB82 /* DeliveringMController.swift */; };
+		353F3CAF20120E12008EDB82 /* DeliveringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAD20120E12008EDB82 /* DeliveringController.swift */; };
+		353F3CB120121772008EDB82 /* DeliverVM_Chicken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */; };
 		354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F21EFA1A5300D9EDA7 /* MainCell.swift */; };
 		354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354502F31EFA1A5300D9EDA7 /* MainCell.xib */; };
 		354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */; };
@@ -106,11 +114,10 @@
 		35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */; };
 		35E7DD651EFEBA1D00E1F7E9 /* JXSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD641EFEBA1D00E1F7E9 /* JXSelectView.swift */; };
 		35E7DD671EFF7EF800E1F7E9 /* JXAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD661EFF7EF800E1F7E9 /* JXAlertView.swift */; };
-		35E7DD691F00B4DD00E1F7E9 /* TraceDeliverVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */; };
-		35E7DD6B1F00B5CB00E1F7E9 /* TraceDeliverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD6A1F00B5CB00E1F7E9 /* TraceDeliverModel.swift */; };
+		35E7DD691F00B4DD00E1F7E9 /* DeliverVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD681F00B4DD00E1F7E9 /* DeliverVM.swift */; };
+		35E7DD6B1F00B5CB00E1F7E9 /* DeliverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD6A1F00B5CB00E1F7E9 /* DeliverModel.swift */; };
 		35E7DD6D1F0122DA00E1F7E9 /* DeliveringManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD6C1F0122DA00E1F7E9 /* DeliveringManagerController.swift */; };
 		35E7DD6F1F01329100E1F7E9 /* DeliverManagerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD6E1F01329100E1F7E9 /* DeliverManagerVM.swift */; };
-		35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */; };
 		35E7DD731F013CA000E1F7E9 /* TraceSourceTagVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */; };
 		35E7DD751F01FE5900E1F7E9 /* TraceSRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */; };
 		35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */; };
@@ -119,6 +126,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350B11E62010843F002B8A6D /* DeliverManagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverManagerController.swift; sourceTree = "<group>"; };
+		350B11EA201084D5002B8A6D /* DeliveredController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveredController.swift; sourceTree = "<group>"; };
+		350B11EE20108A8B002B8A6D /* DeliveredMController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveredMController.swift; sourceTree = "<group>"; };
+		350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverChickenModel.swift; sourceTree = "<group>"; };
 		3514D65C1F18AF11001744DD /* DeliverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverListCell.swift; sourceTree = "<group>"; };
 		3514D65D1F18AF11001744DD /* DeliverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliverListCell.xib; sourceTree = "<group>"; };
 		3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -171,6 +182,10 @@
 		35249C3F1FC8274D005E52E3 /* CWCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWCommon.m; sourceTree = "<group>"; };
 		35249C401FC8274D005E52E3 /* CWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWCommon.h; sourceTree = "<group>"; };
 		352F49511FECAE42007C4F65 /* JXActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXActionView.swift; sourceTree = "<group>"; };
+		353F3CAA20120842008EDB82 /* CommenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenModel.swift; sourceTree = "<group>"; };
+		353F3CAC20120E11008EDB82 /* DeliveringMController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringMController.swift; sourceTree = "<group>"; };
+		353F3CAD20120E12008EDB82 /* DeliveringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringController.swift; sourceTree = "<group>"; };
+		353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverVM_Chicken.swift; sourceTree = "<group>"; };
 		354502F21EFA1A5300D9EDA7 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		354502F31EFA1A5300D9EDA7 /* MainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
 		354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainReusableView.swift; sourceTree = "<group>"; };
@@ -241,11 +256,10 @@
 		35E7DD621EFEA16700E1F7E9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		35E7DD641EFEBA1D00E1F7E9 /* JXSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXSelectView.swift; sourceTree = "<group>"; };
 		35E7DD661EFF7EF800E1F7E9 /* JXAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXAlertView.swift; sourceTree = "<group>"; };
-		35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDeliverVM.swift; sourceTree = "<group>"; };
-		35E7DD6A1F00B5CB00E1F7E9 /* TraceDeliverModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDeliverModel.swift; sourceTree = "<group>"; };
+		35E7DD681F00B4DD00E1F7E9 /* DeliverVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverVM.swift; sourceTree = "<group>"; };
+		35E7DD6A1F00B5CB00E1F7E9 /* DeliverModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverModel.swift; sourceTree = "<group>"; };
 		35E7DD6C1F0122DA00E1F7E9 /* DeliveringManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DeliveringManagerController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E7DD6E1F01329100E1F7E9 /* DeliverManagerVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverManagerVM.swift; sourceTree = "<group>"; };
-		35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTag.swift; sourceTree = "<group>"; };
 		35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceTagVM.swift; sourceTree = "<group>"; };
 		35E7DD741F01FE5900E1F7E9 /* TraceSRecordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TraceSRecordController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSRecordVM.swift; sourceTree = "<group>"; };
@@ -273,6 +287,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		350B11E5201083A5002B8A6D /* Chicken */ = {
+			isa = PBXGroup;
+			children = (
+				350B11E62010843F002B8A6D /* DeliverManagerController.swift */,
+				353F3CAD20120E12008EDB82 /* DeliveringController.swift */,
+				353F3CAC20120E11008EDB82 /* DeliveringMController.swift */,
+				350B11EA201084D5002B8A6D /* DeliveredController.swift */,
+				350B11EE20108A8B002B8A6D /* DeliveredMController.swift */,
+			);
+			path = Chicken;
+			sourceTree = "<group>";
+		};
 		351A06D91FC27B9C00A88FBD /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,11 +491,12 @@
 		354502F01EFA1A5300D9EDA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				353F3CAA20120842008EDB82 /* CommenModel.swift */,
 				354503431EFCBDAF00D9EDA7 /* UserModel.swift */,
 				35AE7FF51EFCEE0A00528D6A /* MainModel.swift */,
 				35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */,
-				35E7DD6A1F00B5CB00E1F7E9 /* TraceDeliverModel.swift */,
-				35E7DD701F013B9F00E1F7E9 /* TraceSourceTag.swift */,
+				35E7DD6A1F00B5CB00E1F7E9 /* DeliverModel.swift */,
+				350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -495,6 +522,7 @@
 		354502F61EFA1A5300D9EDA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				350B11E5201083A5002B8A6D /* Chicken */,
 				354502F71EFA1A5300D9EDA7 /* MainViewController.swift */,
 				354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */,
 				3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */,
@@ -523,14 +551,15 @@
 			children = (
 				354503041EFA439C00D9EDA7 /* MainVM.swift */,
 				3545033F1EFCB21D00D9EDA7 /* LoginVM.swift */,
+				35E7DD681F00B4DD00E1F7E9 /* DeliverVM.swift */,
+				353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */,
+				35E7DD6E1F01329100E1F7E9 /* DeliverManagerVM.swift */,
+				35BF03881F41528D004A77E9 /* DeliverNewBatchVM.swift */,
+				35BF03DC1F4AD066004A77E9 /* DeliverDirectVM.swift */,
 				35AE7FF71EFD17F600528D6A /* TraceSourceVM.swift */,
 				35AE7FFB1EFD1D2100528D6A /* TraceSAddVM.swift */,
 				35E7DD601EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift */,
 				35E7DD761F020A5700E1F7E9 /* TraceSRecordVM.swift */,
-				35E7DD681F00B4DD00E1F7E9 /* TraceDeliverVM.swift */,
-				35E7DD6E1F01329100E1F7E9 /* DeliverManagerVM.swift */,
-				35BF03881F41528D004A77E9 /* DeliverNewBatchVM.swift */,
-				35BF03DC1F4AD066004A77E9 /* DeliverDirectVM.swift */,
 				35E7DD721F013CA000E1F7E9 /* TraceSourceTagVM.swift */,
 			);
 			name = ViewModel;
@@ -835,15 +864,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				35DE9E8D1F14A1A5006F271E /* JXBaseRequest.swift in Sources */,
+				350B11EB201084D5002B8A6D /* DeliveredController.swift in Sources */,
 				35CB1FDE1FD7FA59001EBA33 /* FileManager+Extension.swift in Sources */,
 				35249C2B1FC7F5F8005E52E3 /* CWHackerCheckView.m in Sources */,
+				353F3CAB20120842008EDB82 /* CommenModel.swift in Sources */,
 				354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */,
 				354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */,
 				35BF03DD1F4AD066004A77E9 /* DeliverDirectVM.swift in Sources */,
 				35CB1FD41FD6B911001EBA33 /* Data+Extension.swift in Sources */,
 				35AE7FFA1EFD1BFF00528D6A /* TraceSAddViewController.swift in Sources */,
 				354503351EFBDF8800D9EDA7 /* JXDefaultView.swift in Sources */,
-				35E7DD691F00B4DD00E1F7E9 /* TraceDeliverVM.swift in Sources */,
+				35E7DD691F00B4DD00E1F7E9 /* DeliverVM.swift in Sources */,
 				35249C411FC8274D005E52E3 /* CWCommon.m in Sources */,
 				35BF03891F41528D004A77E9 /* DeliverNewBatchVM.swift in Sources */,
 				35249C311FC7F5F8005E52E3 /* CWURLSession.m in Sources */,
@@ -856,7 +887,7 @@
 				35E7DD651EFEBA1D00E1F7E9 /* JXSelectView.swift in Sources */,
 				35E0208B1F06807E00852BBD /* TagResultController.swift in Sources */,
 				35249C2C1FC7F5F8005E52E3 /* CWProgressView.m in Sources */,
-				35E7DD6B1F00B5CB00E1F7E9 /* TraceDeliverModel.swift in Sources */,
+				35E7DD6B1F00B5CB00E1F7E9 /* DeliverModel.swift in Sources */,
 				35E7DD6F1F01329100E1F7E9 /* DeliverManagerVM.swift in Sources */,
 				35249C281FC7F5F8005E52E3 /* CWLivessViewController.m in Sources */,
 				3545030A1EFA529E00D9EDA7 /* JXHorizontalView.swift in Sources */,
@@ -865,6 +896,7 @@
 				35249C251FC7F5F8005E52E3 /* CWAudioPlayer.m in Sources */,
 				354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */,
 				35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */,
+				350B11EF20108A8B002B8A6D /* DeliveredMController.swift in Sources */,
 				354503361EFBDF8800D9EDA7 /* BaseViewController.swift in Sources */,
 				35CB1FD21FD6430F001EBA33 /* UserManager.swift in Sources */,
 				35AE7FFC1EFD1D2100528D6A /* TraceSAddVM.swift in Sources */,
@@ -872,12 +904,12 @@
 				35E020A11F0F716100852BBD /* JXPhotoBrowserController.swift in Sources */,
 				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,
 				35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */,
+				350B11E72010843F002B8A6D /* DeliverManagerController.swift in Sources */,
 				35E7DD7F1F02815A00E1F7E9 /* NotificationEnum.swift in Sources */,
 				35E020931F09F66600852BBD /* UIScreen+Extension.swift in Sources */,
 				351A06DB1FC27C7F00A88FBD /* Encryption.swift in Sources */,
 				35E0207B1F04C76B00852BBD /* String+Extension.swift in Sources */,
 				35E020811F050D9A00852BBD /* BaseModel.swift in Sources */,
-				35E7DD711F013B9F00E1F7E9 /* TraceSourceTag.swift in Sources */,
 				3514D71E1F1DFEA2001744DD /* UIImageView+Extension.swift in Sources */,
 				35E7DD6D1F0122DA00E1F7E9 /* DeliveringManagerController.swift in Sources */,
 				354503021EFA1A5300D9EDA7 /* TraceSourcesController.swift in Sources */,
@@ -885,6 +917,7 @@
 				3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */,
 				35249C2A1FC7F5F8005E52E3 /* CWFinishedView.m in Sources */,
 				35249C2D1FC7F5F8005E52E3 /* CWBankCardCaptureController.mm in Sources */,
+				353F3CAF20120E12008EDB82 /* DeliveringController.swift in Sources */,
 				35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */,
 				35249C291FC7F5F8005E52E3 /* CWAnimationView.m in Sources */,
 				3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */,
@@ -903,9 +936,11 @@
 				35249C2F1FC7F5F8005E52E3 /* CWCaptureManager.m in Sources */,
 				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
+				353F3CAE20120E12008EDB82 /* DeliveringMController.swift in Sources */,
 				35E0209D1F0F1B9800852BBD /* ProjectHeader.swift in Sources */,
 				354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */,
 				35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */,
+				353F3CB120121772008EDB82 /* DeliverVM_Chicken.swift in Sources */,
 				35BF03DB1F4AC68C004A77E9 /* DeliveryViewController.swift in Sources */,
 				35E020891F06746400852BBD /* DeliveredWholeRecordController.swift in Sources */,
 				3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */,
@@ -919,6 +954,7 @@
 				35249C271FC7F5F8005E52E3 /* CWMBProgressHud.m in Sources */,
 				351DD2F51F14E18800E90170 /* QiNiuUploadManager.swift in Sources */,
 				35AE7FFE1EFD429800528D6A /* JXNetworkError.swift in Sources */,
+				350B11F120109D1A002B8A6D /* DeliverChickenModel.swift in Sources */,
 				354503001EFA1A5300D9EDA7 /* MainViewController.swift in Sources */,
 				351DD2F41F14E18800E90170 /* JXLocationManager.swift in Sources */,
 				354503071EFA50FA00D9EDA7 /* DeliverManageController.swift in Sources */,

@@ -28,7 +28,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
     @IBOutlet weak var addButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var addButtonWidthConstraint: NSLayoutConstraint!
     var traceBatchId : NSNumber? //溯源批次id,详情用
-    var batchId : NSNumber? //批次id ,全程溯源用
+    var batchId : Int = 0 //批次id ,全程溯源用
     var tagCode : String? //查询编号 ,标签查询结果用
     
     lazy var detailVM = TraceSourceDetailVM()
@@ -310,7 +310,7 @@ class TraceDetailController: BaseViewController,UITableViewDelegate,UITableViewD
             print("标签")
         case .wholeTrace:
             print("全程溯源")
-            self.detailVM.traceSourceWholeTrace(page: page, batchId: batchId!, completion: { (data, msg, isSuccess) in
+            self.detailVM.traceSourceWholeTrace(page: page, batchId: batchId, completion: { (data, msg, isSuccess) in
                 self.tableView.mj_header.endRefreshing()
                 self.tableView.mj_footer.endRefreshing()
                 if isSuccess {

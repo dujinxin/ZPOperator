@@ -1,5 +1,5 @@
 //
-//  TraceDeliverVM.swift
+//  DeliverVM.swift
 //  ZPOperator
 //
 //  Created by 杜进新 on 2017/6/26.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class TraceDeliverVM {
+class DeliverListVM {
     
-    var traceDeliverModel = TraceDeliverModel()
+    var deliverListModel = DeliverListModel()
     
     
     /// 发货列表
@@ -18,7 +18,7 @@ class TraceDeliverVM {
     /// - Parameters:
     ///   - batchStatus: 0未发货，1已发货
     ///   - completion: 请求完成回调闭包
-    func loadMainData(page: Int,batchStatus:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+    func deliverList(page: Int,batchStatus:Int,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
         
         JXRequest.request(url: ApiString.deliverList.rawValue, param: ["batchStatus":batchStatus,"pageNo":page,"pageSize":20], success: { (data, message) in
@@ -29,15 +29,15 @@ class TraceDeliverVM {
                 else{
                     return
             }
-            self.traceDeliverModel.Operator.setValuesForKeys(Operator)
-            self.traceDeliverModel.count = dict["count"] as! Int
+            self.deliverListModel.Operator.setValuesForKeys(Operator)
+            self.deliverListModel.count = dict["count"] as! Int
             if page == 1 {
-                self.traceDeliverModel.batches.removeAll()
+                self.deliverListModel.batches.removeAll()
             }
             for d in array{
-                let model = TraceDeliverSubModel()
+                let model = DeliverSubModel()
                 model.setValuesForKeys(d)
-                self.traceDeliverModel.batches.append(model)
+                self.deliverListModel.batches.append(model)
             }
             
             completion(data, message, true)
@@ -47,5 +47,4 @@ class TraceDeliverVM {
             completion(nil, message, false)
         }
     }
-    
 }

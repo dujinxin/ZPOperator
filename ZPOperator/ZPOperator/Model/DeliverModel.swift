@@ -9,22 +9,14 @@
 import UIKit
 
 
-class TraceDeliverModel: BaseModel {
-    var Operator = TraceDeliverOperatorModel()
-    
+/// 发货列表model
+class DeliverListModel: BaseModel {
+    var Operator = OperatorModel()
     var count : Int = 0
-    
-    var batches = Array<TraceDeliverSubModel>()
+    var batches = Array<DeliverSubModel>()
 }
 
-class TraceDeliverOperatorModel: BaseModel {
-    var name : String?
-    var station : String?
-    
-    var stationLocation : String? //全程溯源中独有
-}
-
-class TraceDeliverSubModel: BaseModel {
+class DeliverSubModel: BaseModel {
 
     var id : NSNumber?
     var Batch : String?
@@ -64,7 +56,7 @@ class DeliverManagerModel: BaseModel {
 }
 
 class DeliverNewBatchModel: BaseModel {
-    var Operator = TraceDeliverOperatorModel()
+    var Operator = OperatorModel()
     var goodsList = Array<MainSubModel>()
     //省市区
     var provinceList = Array<MainSubModel>()
@@ -77,7 +69,4 @@ class DeliverDirectCodeModel: BaseModel {
     var startCode : String?
     var endCode : String?
 }
-class DeliverDirectCodeSizeModel: BaseModel {
-    var id : Int = 0
-    var desc : String?
-}
+

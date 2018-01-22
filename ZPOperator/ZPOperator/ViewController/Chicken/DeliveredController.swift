@@ -1,24 +1,24 @@
 //
-//  DeliveredViewController.swift
+//  DeliveredController.swift
 //  ZPOperator
 //
-//  Created by 杜进新 on 2017/6/21.
-//  Copyright © 2017年 dujinxin. All rights reserved.
+//  Created by 杜进新 on 2018/1/18.
+//  Copyright © 2018年 dujinxin. All rights reserved.
 //
 
 import UIKit
 import MJRefresh
 
-class DeliveredViewController: ZPTableViewController {
-
-    var vm = DeliverListVM()
+class DeliveredController: ZPTableViewController {
+    
+    var vm = DeliverListVM_Chicken()
     var currentPage = 1
     
-    var deliveredBlock : ((_ deliveringModel:DeliverSubModel,_ operatorModel:OperatorModel)->())?
+    var deliveredBlock : ((_ deliverModel:DeliverChickenSubModel,_ operatorModel:OperatorModel)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.groupTableViewBackground
         
         //self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
@@ -44,13 +44,13 @@ class DeliveredViewController: ZPTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,7 +60,7 @@ class DeliveredViewController: ZPTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vm.deliverListModel.batches.count
+        return self.vm.deliverListModel.orderList.count
     }
     
     
@@ -68,11 +68,11 @@ class DeliveredViewController: ZPTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as? DeliverListCell
         cell?.contentView.backgroundColor = UIColor.white
         // Configure the cell...
-        let model = self.vm.deliverListModel.batches[indexPath.row]
+        let model = self.vm.deliverListModel.orderList[indexPath.row]
         
-        cell?.TitleLabel.text = model.goodsName
+        cell?.TitleLabel.text = model.title
         cell?.DetailTitleLabel.text = model.remarks
-    
+        
         return cell!
     }
     
@@ -85,7 +85,7 @@ class DeliveredViewController: ZPTableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = self.vm.deliverListModel.batches[indexPath.row]
+        let model = self.vm.deliverListModel.orderList[indexPath.row]
         
         if let block = deliveredBlock {
             block(model,self.vm.deliverListModel.Operator)
@@ -93,7 +93,7 @@ class DeliveredViewController: ZPTableViewController {
     }
     func loadData(page:Int) {
         
-        self.vm.deliverList(page: page,batchStatus: 1) { (data, msg, isSuccess) in
+        self.vm.deliverList(page: page,deliverStatus: 1) { (data, msg, isSuccess) in
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             if isSuccess{

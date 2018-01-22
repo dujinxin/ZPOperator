@@ -1,21 +1,23 @@
 //
-//  DeliveringViewController.swift
+//  DeliveringController.swift
 //  ZPOperator
 //
-//  Created by 杜进新 on 2017/6/21.
-//  Copyright © 2017年 dujinxin. All rights reserved.
+//  Created by 杜进新 on 2018/1/18.
+//  Copyright © 2018年 dujinxin. All rights reserved.
 //
 
 import UIKit
 import MJRefresh
 
-class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource{
+class DeliveringController: BaseViewController,UITableViewDelegate,UITableViewDataSource{
     
     var tableView = UITableView.init(frame: CGRect.zero, style: .plain)
     var currentPage = 1
-    var vm = DeliverListVM()
+    var vm = DeliverListVM_Chicken()
     var selectView : JXSelectView?
-    var deliveringModel : DeliverSubModel?
+    var deliveringModel : DeliverChickenSubModel?
+    var operatorModel : OperatorModel?
+    
     
     var address1Height : CGFloat = 44.0
     var address2Height : CGFloat = 44.0
@@ -24,12 +26,12 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     var addressStr : String = ""
     
-    var deliveringBlock : ((_ deliveringModel:DeliverSubModel,_ operatorModel:OperatorModel)->())?
+    var deliveringBlock : ((_ deliveringModel:DeliverChickenSubModel,_ operatorModel:OperatorModel)->())?
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.groupTableViewBackground
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -56,7 +58,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -109,7 +111,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.vm.deliverListModel.batches.count
+        return vm.deliverListModel.orderList.count
     }
     
     
@@ -121,23 +123,14 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         
         if cell == nil {
             
-            //cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "reuseIdentifier")
             cell = Bundle.main.loadNibNamed("DeliverListCell", owner: nil, options: nil)?.last as? DeliverListCell
             cell?.contentView.backgroundColor = UIColor.white
         }
-        let model = self.vm.deliverListModel.batches[indexPath.row]
-        // Configure the cell...
-        //cell?.accessoryType = .disclosureIndicator
-        //cell?.textLabel?.text = model.goodsName
-        //cell?.textLabel?.textColor = JX333333Color
-        //cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
-        //cell?.detailTextLabel?.text = model.remarks
-        //cell?.detailTextLabel?.textColor = JX999999Color
-        //cell?.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
+        let model = self.vm.deliverListModel.orderList[indexPath.row]
         
-        cell?.TitleLabel.text = model.goodsName
+        cell?.TitleLabel.text = model.title
         cell?.DetailTitleLabel.text = model.remarks
-
+        
         return cell!
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -151,15 +144,15 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = self.vm.deliverListModel.batches[indexPath.row]
-        deliveringModel = model
+        let model = self.vm.deliverListModel.orderList[indexPath.row]
+        self.deliveringModel = model
         
         self.setSelectView()
         self.selectView?.resetFrame(height: calculateHeight(model: model))
         selectView?.show()
     }
     
-    func calculateHeight(model:DeliverSubModel) -> CGFloat {
+    func calculateHeight(model:DeliverChickenSubModel) -> CGFloat {
         if let sendAddress = deliveringModel?.stationName {
             address1Height = 30.0 + 14 + calculateHeight(string: sendAddress)
         }
@@ -167,12 +160,12 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
         if let province = deliveringModel?.province,
             let city = deliveringModel?.city,
             let county = deliveringModel?.county,
-            let address = deliveringModel?.address{
+            let address = deliveringModel?.detailAddress{
             
             let detailAddress = province + city + county + address
             address2Height = calculateHeight(string: detailAddress)
         }
-
+        
         if let remark = deliveringModel?.remarks {
             remarkHeight = calculateHeight(string: remark)
         }
@@ -193,7 +186,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     }
     func loadData(page:Int) {
         
-        self.vm.deliverList(page: page,batchStatus: 0) { (data, msg, isSuccess) in
+        self.vm.deliverList(page: page,deliverStatus: 0) { (data, msg, isSuccess) in
             self.tableView.mj_header.endRefreshing()
             self.tableView.mj_footer.endRefreshing()
             if isSuccess{
@@ -206,12 +199,12 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     }
 }
 
-extension DeliveringViewController: JXSelectViewDataSource{
+extension DeliveringController: JXSelectViewDataSource{
     func jxSelectView(jxSelectView: JXSelectView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     func jxSelectView(jxSelectView: JXSelectView, contentForRow row: Int, InSection section: Int) -> String {
-        if let batch = deliveringModel?.Batch,
+        if let batch = deliveringModel?.orderNum,
             row == 0
         {
             return "发货批次号：" + batch
@@ -245,7 +238,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             leftLabel.font = UIFont.systemFont(ofSize: 14)
             leftLabel.text = titleArray[row - 1]
             view?.addSubview(leftLabel)
-
+            
         }else if row == 4{
             
             let button = UIButton()
@@ -265,7 +258,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             var string = "发货批次号   "
             let length = string.count
             
-            if let batchCode = deliveringModel?.batchCode{
+            if let batchCode = deliveringModel?.orderNum{
                 string += batchCode
             }
             let attributeString = NSMutableAttributedString.init(string: string)
@@ -278,7 +271,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         
         if row == 1 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address1Height)
-       
+            
             let weightLabel = UILabel.init(frame: CGRect.init(x: kScreenWidth - 40 - 10, y: 15, width: 40, height: 14))
             weightLabel.textColor = JX333333Color
             weightLabel.textAlignment = .right
@@ -293,7 +286,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             rightLabel.textAlignment = .left
             rightLabel.font = UIFont.systemFont(ofSize: 13)
             //rightLabel.lineBreakMode = .byTruncatingMiddle
-            if let goodsName = deliveringModel?.goodsName{
+            if let goodsName = deliveringModel?.title{
                 rightLabel.text = goodsName
             }
             view?.addSubview(rightLabel)
@@ -317,11 +310,11 @@ extension DeliveringViewController: JXSelectViewDataSource{
             if let province = deliveringModel?.province,
                 let city = deliveringModel?.city,
                 let county = deliveringModel?.county,
-                let address = deliveringModel?.address{
+                let address = deliveringModel?.detailAddress{
                 
                 addressLabel.text = province + city + county + address
             }
-
+            
             
             view?.addSubview(addressLabel)
         }
@@ -349,17 +342,16 @@ extension DeliveringViewController: JXSelectViewDataSource{
     }
     func confirmDeliver() {
         self.selectView?.dismiss()
-        if let block = deliveringBlock {
-            block(deliveringModel!,self.vm.deliverListModel.Operator)
+        if let block = deliveringBlock,let model = deliveringModel {
+            block(model,self.vm.deliverListModel.Operator)
         }
         
-//        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-//        let dmVC = storyboard.instantiateViewController(withIdentifier: "deliveringManager")
-//        
-//        self.navigationController?.pushViewController(dmVC, animated: true)
+        //        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        //        let dmVC = storyboard.instantiateViewController(withIdentifier: "deliveringManager")
+        //
+        //        self.navigationController?.pushViewController(dmVC, animated: true)
         //dmVC.performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
         
         ///performSegue(withIdentifier: "deliveringManager", sender: deliveringModel)
     }
 }
-
