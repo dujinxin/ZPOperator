@@ -46,6 +46,9 @@
 		353F3CAE20120E12008EDB82 /* DeliveringMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAC20120E11008EDB82 /* DeliveringMController.swift */; };
 		353F3CAF20120E12008EDB82 /* DeliveringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAD20120E12008EDB82 /* DeliveringController.swift */; };
 		353F3CB120121772008EDB82 /* DeliverVM_Chicken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */; };
+		353F3CBF20171131008EDB82 /* NewMainCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */; };
+		353F3CC220171247008EDB82 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CC020171247008EDB82 /* LabelCell.swift */; };
+		353F3CC320171247008EDB82 /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 353F3CC120171247008EDB82 /* LabelCell.xib */; };
 		354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F21EFA1A5300D9EDA7 /* MainCell.swift */; };
 		354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354502F31EFA1A5300D9EDA7 /* MainCell.xib */; };
 		354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */; };
@@ -186,6 +189,9 @@
 		353F3CAC20120E11008EDB82 /* DeliveringMController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringMController.swift; sourceTree = "<group>"; };
 		353F3CAD20120E12008EDB82 /* DeliveringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringController.swift; sourceTree = "<group>"; };
 		353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverVM_Chicken.swift; sourceTree = "<group>"; };
+		353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainCollectionController.swift; sourceTree = "<group>"; };
+		353F3CC020171247008EDB82 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		353F3CC120171247008EDB82 /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
 		354502F21EFA1A5300D9EDA7 /* MainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		354502F31EFA1A5300D9EDA7 /* MainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainCell.xib; sourceTree = "<group>"; };
 		354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainReusableView.swift; sourceTree = "<group>"; };
@@ -488,6 +494,28 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		353F3CB42016DD5F008EDB82 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				354502F21EFA1A5300D9EDA7 /* MainCell.swift */,
+				354502F31EFA1A5300D9EDA7 /* MainCell.xib */,
+				354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */,
+				354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */,
+				35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */,
+				35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		353F3CB52016DDD9008EDB82 /* NewMain */ = {
+			isa = PBXGroup;
+			children = (
+				353F3CC020171247008EDB82 /* LabelCell.swift */,
+				353F3CC120171247008EDB82 /* LabelCell.xib */,
+			);
+			path = NewMain;
+			sourceTree = "<group>";
+		};
 		354502F01EFA1A5300D9EDA7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,13 +532,9 @@
 		354502F11EFA1A5300D9EDA7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				353F3CB52016DDD9008EDB82 /* NewMain */,
+				353F3CB42016DD5F008EDB82 /* Main */,
 				354503081EFA514200D9EDA7 /* JXView */,
-				354502F21EFA1A5300D9EDA7 /* MainCell.swift */,
-				354502F31EFA1A5300D9EDA7 /* MainCell.xib */,
-				354502F41EFA1A5300D9EDA7 /* MainReusableView.swift */,
-				354502F51EFA1A5300D9EDA7 /* MainReusableView.xib */,
-				35E020961F0CD93E00852BBD /* MainReusableViewHeader.xib */,
-				35E020981F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift */,
 				3514D65C1F18AF11001744DD /* DeliverListCell.swift */,
 				3514D65D1F18AF11001744DD /* DeliverListCell.xib */,
 				354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */,
@@ -524,6 +548,7 @@
 			children = (
 				350B11E5201083A5002B8A6D /* Chicken */,
 				354502F71EFA1A5300D9EDA7 /* MainViewController.swift */,
+				353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */,
 				354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */,
 				3545030B1EFA657D00D9EDA7 /* DeliveringViewController.swift */,
 				3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */,
@@ -804,6 +829,7 @@
 				35249C371FC7F5F8005E52E3 /* CWResource.bundle in Resources */,
 				354502FF1EFA1A5300D9EDA7 /* MainReusableView.xib in Resources */,
 				35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */,
+				353F3CC320171247008EDB82 /* LabelCell.xib in Resources */,
 				3517CFD41FC7CA9A009D127A /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -869,6 +895,7 @@
 				35249C2B1FC7F5F8005E52E3 /* CWHackerCheckView.m in Sources */,
 				353F3CAB20120842008EDB82 /* CommenModel.swift in Sources */,
 				354502FC1EFA1A5300D9EDA7 /* MainCell.swift in Sources */,
+				353F3CC220171247008EDB82 /* LabelCell.swift in Sources */,
 				354502FE1EFA1A5300D9EDA7 /* MainReusableView.swift in Sources */,
 				35BF03DD1F4AD066004A77E9 /* DeliverDirectVM.swift in Sources */,
 				35CB1FD41FD6B911001EBA33 /* Data+Extension.swift in Sources */,
@@ -929,6 +956,7 @@
 				3559482E1F381712008145BB /* JXPlaceHolderTextView.swift in Sources */,
 				35E020991F0CEA0500852BBD /* MainCollectionViewFlowLayout.swift in Sources */,
 				354503391EFBDF8800D9EDA7 /* UIBarButtonItem+Extension.swift in Sources */,
+				353F3CBF20171131008EDB82 /* NewMainCollectionController.swift in Sources */,
 				35249C301FC7F5F8005E52E3 /* CWIDCardCaptureController.m in Sources */,
 				35E020831F0630F900852BBD /* DeliveredManagerController.swift in Sources */,
 				35BF03871F4143BF004A77E9 /* DeliverNewBatchController.swift in Sources */,

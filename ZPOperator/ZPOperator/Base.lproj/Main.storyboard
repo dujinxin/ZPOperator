@@ -14,12 +14,17 @@
         <!--首页-->
         <scene sceneID="ts9-yi-zFn">
             <objects>
-                <collectionViewController restorationIdentifier="MainViewController" id="hPL-aV-wOM" customClass="MainViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController restorationIdentifier="MainViewController" id="hPL-aV-wOM" customClass="NewMainViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Cell" dataMode="prototypes" id="Hnr-M4-Urx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <collectionViewLayout key="collectionViewLayout" id="4eY-Jk-vyv" customClass="MainCollectionViewFlowLayout" customModule="ZPOperator" customModuleProvider="target"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eQR-WO-7pP">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="d4K-sH-pmR" customClass="MainCell" customModule="ZPOperator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -4012,6 +4017,39 @@
             </objects>
             <point key="canvasLocation" x="929" y="-350"/>
         </scene>
+        <!--首页-->
+        <scene sceneID="K0X-vZ-MAl">
+            <objects>
+                <collectionViewController restorationIdentifier="MainViewController" id="pzM-Jl-3eX" customClass="MainViewController" customModule="ZPOperator" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Cell" dataMode="prototypes" id="1sV-I8-7oI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <collectionViewLayout key="collectionViewLayout" id="nhY-wQ-3y9" customClass="MainCollectionViewFlowLayout" customModule="ZPOperator" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="ny0-jb-ClK" customClass="MainCell" customModule="ZPOperator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <size key="customSize" width="80" height="80"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="pzM-Jl-3eX" id="IG2-ER-xDM"/>
+                            <outlet property="delegate" destination="pzM-Jl-3eX" id="9Ej-iN-QJI"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="首页" id="kf9-OZ-g6C">
+                        <barButtonItem key="rightBarButtonItem" image="reset" style="plain" id="xre-Ia-5Ca"/>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gU4-ji-TOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="142" y="-455"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add" width="41" height="42"/>
@@ -4023,7 +4061,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AQt-58-0Bc"/>
-        <segue reference="Fc2-Pk-Bhi"/>
-        <segue reference="yzO-Ft-xSC"/>
+        <segue reference="qvJ-1Q-AAZ"/>
+        <segue reference="7Nq-N9-mK4"/>
     </inferredMetricsTieBreakers>
 </document>

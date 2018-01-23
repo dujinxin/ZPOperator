@@ -55,14 +55,6 @@ class DeliverManagerController: BaseViewController ,JXTopBarViewDelegate,JXHoriz
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func additionAction(_ sender: UIBarButtonItem) {
-        if UserManager.manager.userAccound.type == 1 {
-            self.performSegue(withIdentifier: "delivery", sender: nil)
-        }else{
-            self.performSegue(withIdentifier: "newBatch", sender: nil)
-        }
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let identifier = segue.identifier{
@@ -99,19 +91,6 @@ class DeliverManagerController: BaseViewController ,JXTopBarViewDelegate,JXHoriz
                     //                        self.horizontalView?.containerView .scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
                     //                    }
                 }
-            case "newBatch":
-                let dvc = segue.destination as! DeliverNewBatchController
-                dvc.backBlock = {
-                    let indexPath = IndexPath.init(item: 0, section: 0)
-                    self.horizontalView?.containerView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
-                    self.deliveringVC.tableView.mj_header.beginRefreshing()
-                }
-            case "delivery":
-                let dvc = segue.destination as! DeliveryViewController
-                dvc.backBlock = {
-                    self.deliveredVC.tableView.mj_header.beginRefreshing()
-                }
-                
             default:
                 break
             }

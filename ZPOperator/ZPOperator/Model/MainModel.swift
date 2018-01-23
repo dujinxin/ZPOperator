@@ -12,3 +12,7 @@ class MainModel: BaseModel {
     var orderCount : String?
     var traceBatchList : Array<Dictionary<String, Any>>?
 }
+class MainModel_New: BaseModel {
+    var moduleName : String?
+    var url : String?
+}

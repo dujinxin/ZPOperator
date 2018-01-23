@@ -13,6 +13,8 @@ class MainVM{
     var orderCount : Int = 0
 
     var dataArray = [MainSubModel]()
+    var dataArray_new = [MainModel_New]()
+    
     
     func loadMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
         
@@ -50,6 +52,29 @@ class MainVM{
         }) { (message, code) in
             //
             //self.isLogin = false
+            completion(nil, message, false)
+        }
+    }
+    
+    func loadNewMainData(append:Bool = false,completion:@escaping ((_ data:Any?, _ msg:String,_ isSuccess:Bool)->())) -> Void{
+        
+        
+        JXRequest.request(url: ApiString.home.rawValue, param: Dictionary(), success: { (data, message) in
+            
+            guard let array = data as? Array<Dictionary<String, Any>>
+                else{
+                    return
+            }
+            self.dataArray_new.removeAll()
+            for i in 0..<array.count{
+                let model = MainModel_New()
+                model.setValuesForKeys(array[i])
+                self.dataArray_new.append(model)
+            }
+            
+            completion(data, message, true)
+            
+        }) { (message, code) in
             completion(nil, message, false)
         }
     }

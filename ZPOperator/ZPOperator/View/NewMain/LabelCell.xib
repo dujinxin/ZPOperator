@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelCell" customModule="ZPOperator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="332" height="118"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="332" height="118"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuH-j4-231">
+                        <rect key="frame" x="0.0" y="0.0" width="332" height="118"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="发货管理">
+                            <color key="titleColor" red="0.015686274510000001" green="0.41176470590000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="PuH-j4-231" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="c05-SV-2LH"/>
+                <constraint firstItem="PuH-j4-231" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cdS-DY-DVX"/>
+                <constraint firstAttribute="trailing" secondItem="PuH-j4-231" secondAttribute="trailing" id="qOm-rj-orE"/>
+                <constraint firstAttribute="bottom" secondItem="PuH-j4-231" secondAttribute="bottom" id="tGD-At-vCc"/>
+            </constraints>
+            <size key="customSize" width="332" height="118"/>
+            <connections>
+                <outlet property="LabelButton" destination="PuH-j4-231" id="Cz9-Hy-xKH"/>
+            </connections>
+            <point key="canvasLocation" x="32" y="121"/>
+        </collectionViewCell>
+    </objects>
+</document>

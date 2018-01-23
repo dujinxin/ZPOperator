@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum DeliverStationStyle {
+    case station //有网点
+    case none    //无网点
+}
+
 class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizontalViewDelegate{
     
     var topBar : JXTopBarView?
@@ -20,6 +25,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
     var deliverManagerBlock : (()->())?
     var isBlockShouldRun : Bool = false
     
+    var style : DeliverStationStyle = .none
     
     
 
@@ -29,7 +35,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
         self.view.backgroundColor = UIColor.groupTableViewBackground
         self.automaticallyAdjustsScrollViewInsets = false
         
-        if UserManager.manager.userAccound.type == 1 {
+        if self.style == .none {
             deliveredVC.deliveredBlock = { (deliverModel,operatorModel)->() in
                 self.performSegue(withIdentifier: "deliveredManager", sender: ["deliverModel":deliverModel,"operatorModel":operatorModel])
             }
@@ -64,7 +70,7 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
     }
     
     @IBAction func additionAction(_ sender: UIBarButtonItem) {
-        if UserManager.manager.userAccound.type == 1 {
+        if self.style == .none {
             self.performSegue(withIdentifier: "delivery", sender: nil)
         }else{
             self.performSegue(withIdentifier: "newBatch", sender: nil)
