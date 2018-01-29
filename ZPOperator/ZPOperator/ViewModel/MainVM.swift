@@ -68,8 +68,13 @@ class MainVM{
             self.dataArray_new.removeAll()
             for i in 0..<array.count{
                 let model = MainModel_New()
-                model.setValuesForKeys(array[i])
-                self.dataArray_new.append(model)
+                let dict = array[i]
+                //iOS 硬件管理只提供脚环信息查询功能，其他的移除
+                if let url = dict["url"] as? String, url != "/device/list", url != "/device/dataUpload"{
+                    model.setValuesForKeys(dict)
+                    self.dataArray_new.append(model)
+                }
+                
             }
             
             completion(data, message, true)

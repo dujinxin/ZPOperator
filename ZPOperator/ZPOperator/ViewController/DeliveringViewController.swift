@@ -161,7 +161,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
     
     func calculateHeight(model:DeliverSubModel) -> CGFloat {
         if let sendAddress = deliveringModel?.stationName {
-            address1Height = 30.0 + 14 + calculateHeight(string: sendAddress)
+            address1Height = 30.0 + calculateHeight(string: sendAddress)
         }
         
         if let province = deliveringModel?.province,

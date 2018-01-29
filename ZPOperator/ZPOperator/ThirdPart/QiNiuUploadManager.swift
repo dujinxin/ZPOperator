@@ -147,21 +147,9 @@ class QiNiuUploadManager {
     }
 
     func qiniuGetToken(bucket:String = "zpsy",completion:@escaping (_ data:Any?,_ msg:String?,_ isSuccess:Bool)->()) {
-//        JXRequest.request(tag: 1, url: getTokenUrl, param: ["bucket":bucket], success: { (data, msg) in
-//            //
-//            //print(data)
-//            completion(data,msg,true)
-//        }) { (msg, error) in
-//            print(msg)
-//            completion(nil,msg,false)
-//        }
-        
         JXRequest.request( url: ApiString.uploadGetToken.rawValue, param: nil, success: { (data, msg) in
-            //
-            //print(data)
             completion(data,msg,true)
         }) { (msg, error) in
-            print(msg)
             completion(nil,msg,false)
         }
     }

@@ -43,14 +43,14 @@ enum ApiString : String {
     case deliveringCode  = "/batch/getCodeBySpec" //获取开始结束编码
     case deliver       = "/batch/deliver"
     
-    case deliverNewBatchInfo = "/batch/new" //新增发货批次，信息
+    case deliverNewBatchInfo = "/batch/new"  //新增发货批次，信息
     case deliverNewBatchSave = "/batch/save" //新增发货批次，保存
     case deliverAddress = "/common/getAreaByPid" //三级地址获取
     
-    case deliverDirectInfo = "/batch/directPage" //直接发货，信息
+    case deliverDirectInfo = "/batch/directPage"        //直接发货，信息
     case deliverDirectBatchs = "/batch/getTracesByGoods"//直接发货，获取产品溯源批次
     case deliverDirectCode = "/batch/getStartAndEndCode"//直接发货，获取标签
-    case deliverSave = "/batch/directDeliver"//直接发货，发货
+    case deliverSave = "/batch/directDeliver"           //直接发货，发货
     //batch/directDeliver
     
     case codeSearch    = "/code/search"

@@ -154,7 +154,7 @@ class DeliveringController: BaseViewController,UITableViewDelegate,UITableViewDa
     
     func calculateHeight(model:DeliverChickenSubModel) -> CGFloat {
         if let sendAddress = deliveringModel?.stationName {
-            address1Height = 30.0 + 14 + calculateHeight(string: sendAddress)
+            address1Height = 30.0 + calculateHeight(string: sendAddress)
         }
         
         if let province = deliveringModel?.province,
@@ -163,7 +163,7 @@ class DeliveringController: BaseViewController,UITableViewDelegate,UITableViewDa
             let address = deliveringModel?.detailAddress{
             
             let detailAddress = province + city + county + address
-            address2Height = calculateHeight(string: detailAddress)
+            address2Height = 30.0 + calculateHeight(string: detailAddress)
         }
         
         if let remark = deliveringModel?.remarks {
@@ -302,7 +302,7 @@ extension DeliveringController: JXSelectViewDataSource{
         
         if row == 2 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address2Height)
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: address2Height))
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: address2Height - 30))
             addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 13)
@@ -314,9 +314,26 @@ extension DeliveringController: JXSelectViewDataSource{
                 
                 addressLabel.text = province + city + county + address
             }
-            
-            
             view?.addSubview(addressLabel)
+            
+            let weightLabel = UILabel.init(frame: CGRect.init(x: kScreenWidth - 100 - 10, y: addressLabel.jxBottom, width: 100, height: 14))
+            weightLabel.textColor = JX333333Color
+            weightLabel.textAlignment = .right
+            weightLabel.font = UIFont.systemFont(ofSize: 14)
+            if let receiverPhone = deliveringModel?.receiverPhone{
+                weightLabel.text = receiverPhone
+            }
+            view?.addSubview(weightLabel)
+            
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: addressLabel.jxBottom, width: kScreenWidth - 90 - 110, height: 14))
+            rightLabel.textColor = JX333333Color
+            rightLabel.textAlignment = .left
+            rightLabel.font = UIFont.systemFont(ofSize: 13)
+            //rightLabel.lineBreakMode = .byTruncatingMiddle
+            if let receiver = deliveringModel?.receiver{
+                rightLabel.text = receiver
+            }
+            view?.addSubview(rightLabel)
         }
         
         if row == 3 {

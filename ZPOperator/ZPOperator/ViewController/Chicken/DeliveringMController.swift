@@ -468,7 +468,7 @@ extension DeliveringMController : JXActionViewDelegate,UIAlertViewDelegate{
             batchId = model.id
             
         } else if actionView.tag == 11 {
-            if self.vm.deliverInfoModel.codeSpecArray.count > 1 && self.vm.deliverInfoModel.codeSpecArray[index].id != self.sizeId{
+            if self.vm.deliverInfoModel.codeSpecArray.count > 0 && self.vm.deliverInfoModel.codeSpecArray[index].id != self.sizeId{
                 self.vm.deliveryCode(codeSpecId: self.vm.deliverInfoModel.codeSpecArray[index].id, completion: { (data, msg, isSuccess) in
                     if isSuccess {
                         self.sizeCodeTextField.text = "\(self.vm.codeSn)"
