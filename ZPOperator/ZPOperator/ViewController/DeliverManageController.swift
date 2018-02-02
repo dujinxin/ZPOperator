@@ -42,7 +42,8 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
             deliveredVC.view.frame = CGRect(x: 0, y: kNavStatusHeight, width: kScreenWidth, height: kScreenHeight - kNavStatusHeight)
             view.addSubview(deliveredVC.view)
         }else{
-            topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
+            //topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["未发货(0)","已发货"])
+            topBar = JXTopBarView.init(frame: CGRect.init(x: 0, y: kNavStatusHeight, width: view.bounds.width, height: 44), titles: ["\(LanguageManager.localizedString("Ship.Shipping"))(0)",LanguageManager.localizedString("Ship.Shipped")])
             topBar?.delegate = self
             topBar?.isBottomLineEnabled = true
             view.addSubview(topBar!)
@@ -133,8 +134,8 @@ class DeliverManageController: BaseViewController ,JXTopBarViewDelegate,JXHorizo
     }
     func deliveringNumberChange(notify:Notification) {
         if let number = notify.object as? Int {
-            let title = String.init(format: "未发货(%d)", number)
-            self.topBar?.titles = [title,"已发货"]
+            let title = String.init(format: "%@(%d)",LanguageManager.localizedString("Ship.Shipping"), number)
+            self.topBar?.titles = [title,LanguageManager.localizedString("Ship.Shipped")]
         }
     }
 

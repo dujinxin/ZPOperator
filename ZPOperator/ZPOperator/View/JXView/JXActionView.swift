@@ -370,7 +370,7 @@ class BottomBarView: UIView {
     lazy var cancelItem: UIButton = {
         let button = UIButton()
         //button.setTitle("暂停", for: .selected)
-        button.setTitle("取消", for: .normal)
+        button.setTitle(LanguageManager.localizedString("Cancel"), for: .normal)
         button.setTitleColor(JX333333Color, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.isSelected = true

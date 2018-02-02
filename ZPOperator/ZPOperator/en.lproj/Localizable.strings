@@ -1,0 +1,156 @@
+/* 
+  Localizable.strings
+  ZPOperator
+
+  Created by 杜进新 on 2018/1/31.
+  Copyright © 2018年 dujinxin. All rights reserved.
+*/
+"Home"="Home";
+"Business"="Business";
+"Discover"="Discover";
+"My"="My";
+
+//common
+"Confirm"="Confirm";
+"Cancel"="Cancel";
+"Complete"="Complete";
+"Done"="Done";
+"Submit"="Submit";
+"Notice"="Notice";
+"Edit"="Edit";
+"Delete"="Delete";
+//notice
+"Notice.Select"="Please select";
+"Notice.SelectProducts"="Please select products";
+"Notice.SelectLocation"="Please choose the location";
+"Notice.SelectProcess"="Please select the operation process";
+"Notice.SelectSpec"="Please select the label specifications first";
+"Notice.EnterOrderNumber"="Please enter the number of orders";
+"Notice.SelectLabelSpec"="Please select label specifications";
+"Notice.EnterFullAddress"="Please enter your full address";
+"Notice.ObtainLabels"="Please Obtain labels again";
+"Notice.EnterStreetAddress"="Please enter your street address";
+"Notice.EewlyAddedTracingInformationNotice"="This newly added tracing information does not affect the tracing information added before shipping.";
+"Notice.Confirm delete"="Confirm delete";
+"Notice.ConfirmDeleteTracingInformation"="Confirm the deletion of this tracing information";
+"Notice.DeleteSuccessfully"="Delete successfully";
+"Notice.SelectFromAlbum"="Select from album (3 photos maximum)";
+"Notice.TakePhoto"="Take photo";
+"Notice.New password should not be same as old password"="New password should not be same as old password";
+"Notice.TwoPasswordsNotMatch"="Passwords do not match";
+"Notice.Username&PasswordBlank"="Username and password cannot be blank";
+"Notice.PasswordBlank"="Password cannot be blank";
+"Notice.IncorrectCellPhone"="Incorrect cell phone number format";
+"Notice.IncorrectPassword"="Incorrect password format";
+"Notice.NoTracingBatchesNotice"="No tracing batches. Still ship?";
+"Notice.Confirm the deactivation of tracing batch"="Confirm the deactivation of tracing batch";
+//home
+"Home"="Home";
+"Pull down to refresh"="Pull down to refresh";
+"Refreshing data…"="Refreshing data…";
+"Release and refresh now"="Release and refresh now";
+"Last update: today"="Last update: today";
+//shipping management
+"Ship.Shipping"="Shipping";
+"Ship.Shipped"="Shipped";
+"Shipping.management"="Shipping management";
+"Shipped.management"="Shipped management";
+"Ship.ConfirmShippingBatch"="Confirm shipping batch";
+"Ship.EnterCodesNotice"="Enter the codes of labels that have been attached to packages in order";
+"Ship.Auto-calculate"="Auto-calculate according to entered code";
+"Ship.AddTracingInformation"="Add tracing information";
+"Ship.ConfirmShippingCode"="Confirm shipping code";
+"Ship.AddShippingBatch"="Add shipping batch";
+"Ship.BatchNumber"="Batch #";
+"Ship.Ship"="Ship from";
+"Ship.Receive"="Ship to";
+"Ship.Note"="Note";
+"Ship.None"="None";
+"Ship.TracingBatch"="Tracing batch";
+"Ship.StartCode"="Start code";
+"Ship.EndCode"="End code";
+"Ship.LabelNumber"="Quantity";
+"Ship.Operator"="Operator";
+"Ship.Outlet"="Outlet";
+"Ship.AllTracingBatches"="All tracing batches";
+
+"Ship.Notice"="Notice";
+"Ship.Product"="Product";
+"Ship.LabelSpecification"="Label spec";
+"Ship.OrderNumber"="Order #";
+"Ship.EnterMinimumNumberLabels"="Please enter the minimum unit number of packages for sticking labels";
+"Ship.ObtainLabels"="Obtain labels";
+"Ship.AutomaticallyObtain"="Automatically obtain";
+"Ship.ShippingAddress"="Address";
+"Ship.StreetAddress"="Area";
+"Ship.EnterFullAddress"="Please enter your full address";
+"Ship.OptionalContent"="Following content is optional";
+"Ship.Note"="Note";
+"Ship.EnterNotes"="Please enter a note";
+
+"Ship.NoLabels"="No labels available";
+"Ship.NotEnoughLabel"="No label specifications to select. Apply first.";
+"Ship.ConfirmShippingInformation"="Confirm shipping information";
+
+"Trace.OperationLocation"="Location";
+"Trace.EnterTracingInformation"="Please enter the content of tracing information";
+"Trace.ViewWholeTracingProcess"="View whole tracing process";
+"Trace.WholeTracingProcess"="Whole tracing process";
+"Trace.TracingProcess"="Process";
+"Trace.TracingLocation"="Location";
+"Trace.TracingInformation"="Information";
+"Trace.NoTracingBatches"="No tracing batches";
+"Trace.Normal"="Normal";
+"Trace.Deactivated"="Deactivated";
+"Trace.TracingBatchDetails"="Tracing batch details";
+"Trace.Creator"="Creator";
+"Trace.AddTracingBatches"="Add tracing batches";
+//label
+"Label.Query"="Label query";
+"Label.Code"="Label code";
+"Label.Notice1"="Please enter a 8 digit code";
+"Label.Notice2"="Please enter a 12 digit code";
+"Label.Notice3"="Please enter a '%@' digit code";
+"Label.Notice4"="Please enter a '%@' digit code";
+"Label.Notice5"="Please enter a '%@' digit code";
+"Query"="Query";
+//setting
+"Name"="Name";
+"Cell phone number"="Cell phone number";
+"Owned outlet"="Owned outlet";
+"Identity certification"="Identity certification";
+"Certified"="Certified";
+"Uncertified"="Uncertified";
+"Current version"="Current version";
+"About us"="About us";
+"Change password"="Change password";
+"Please enter the original password. If you've forgotten your password, please contact administrator for help."="Please enter the original password. If you've forgotten your password, please contact administrator for help.";
+"Please enter a new password. The new password must be more than 8 characters and contain both letters & numbers."="Please enter a new password. The new password must be more than 8 characters and contain both letters & numbers.";
+"Re-enter new password"="Re-enter new password";
+"Save new password"="Save new password";
+"Edit successfully"="Edit successfully";
+"Sign out"="Sign out";
+"Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable."="Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable.";
+//log in
+"Login.CellPhone"="Cell phone number";
+"Login.CellPhoneNotice"="Please contact admin for help";
+"Login.Password"="Password";
+"Login.PasswordNotice"="Forgot password? Contact admin.";
+"Login.SignIn"="Sign in";
+
+
+"Cancel"="Cancel";
+"Save"="Save";
+"Confirm"="Confirm";
+"Edit"="Edit";
+
+
+"Shipped"="Shipped";
+
+"loginInfomationUnavailble" = "your login information is out of date,please log in again";
+"loginAtOtherDevice1" = "your login account has been logged in other places,please log in again";
+"loginUserRemoveFromServer1" = "your account has been removed from the server side,please register to login";
+
+"Loading"="Loading...";
+"Submit"="Submitting...";
+"Saving"="saving...";

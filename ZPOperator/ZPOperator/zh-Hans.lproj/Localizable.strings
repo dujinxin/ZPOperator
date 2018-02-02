@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  ZPOperator
+
+  Created by 杜进新 on 2018/1/31.
+  Copyright © 2018年 dujinxin. All rights reserved.
+*/
+"Home"="首页";
+
+"Confirm"="确定";
+"Cancel"="取消";
+"Complete"="完成";
+"Done"="完成";
+"Submit"="提交";
+"Notice"="注意";
+"Edit"="编辑";
+"Delete"="删除";
+
+"Coupons"="我的优惠券";
+"Records"="晒单、评论记录";
+"Favorites"="收藏店铺";
+"Level"="等级与成长值";
+"Follower"="粉丝";
+"Share"="分享好友";
+"Settings"="设置";
+"Help"="帮助与反馈";
+"Service"="联系客服";
+"OpenShop"="我要开店";
+"Invitation"="邀请人";
+
+
+"Shipped"="已发货";
+
+"loginInfomationUnavailble" = "你的登录信息已过期，请重新登录";
+"loginAtOtherDevice1" = "你的账号已在其他地方登录,请重新登录";
+"loginUserRemoveFromServer1" = "你的账号已被从服务器端移除,请重新注册登录";
+
+"Loading"="加载中...";
+"Submit"="提交中...";
+"Saving"="保存中...";
+
+

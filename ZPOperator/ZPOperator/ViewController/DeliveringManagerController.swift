@@ -37,8 +37,8 @@ class DeliveringManagerController: ZPTableViewController {
     
     var sizeName : String?
     var sizeId : Int = -1
-    
-    let confirmTitleArray = ["溯源批次","标签规格","开始编码","结束编码","标签数量","操作网点","操作人"]
+    //["溯源批次","标签规格","开始编码","结束编码","标签数量","操作网点","操作人"]
+    let confirmTitleArray = [LanguageManager.localizedString("Ship.TracingBatch"),LanguageManager.localizedString("Ship.LabelSpecification"),LanguageManager.localizedString("Ship.StartCode"),LanguageManager.localizedString("Ship.EndCode"),LanguageManager.localizedString("Ship.LabelNumber"),LanguageManager.localizedString("Ship.Outlet"),LanguageManager.localizedString("Ship.Operator")]
     var confirmArray = Array<String>()
     var tagNum : Int = 0
     
@@ -48,7 +48,7 @@ class DeliveringManagerController: ZPTableViewController {
     lazy var doneButton : UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 0, y: kScreenHeight, width: kScreenWidth / 3, height: 53)
-        button.setTitle("完成", for: .normal)
+        button.setTitle(LanguageManager.localizedString("Done"), for: .normal)
         button.setTitleColor(JX333333Color, for: .normal)
         button.addTarget(self, action: #selector(hideKeyboard), for: .touchUpInside)
         
@@ -86,13 +86,13 @@ class DeliveringManagerController: ZPTableViewController {
                 for modal in self.vm.deliverManagerModel.traceBatches {
                     self.batchArray.append(modal.name!)
                 }
-                self.batchArray.append("暂无溯源批次")
+                self.batchArray.append(LanguageManager.localizedString("Trace.NoTracingBatches"))
             }else{
                 self.traceSourceButton.isEnabled = false
-                self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
+                self.traceSourceButton.setTitle(LanguageManager.localizedString("Trace.NoTracingBatches"), for: .normal)
                 
                 if code == JXNetworkError.kResponseDeliverTagNotEnough {
-                    let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                    let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: LanguageManager.localizedString("Confirm"))
                     alert.tag = 11
                     alert.show()
                 }else{
@@ -129,10 +129,10 @@ class DeliveringManagerController: ZPTableViewController {
                         for modal in self.vm.deliverManagerModel.traceBatches {
                             self.batchArray.append(modal.name!)
                         }
-                        self.batchArray.append("暂无溯源批次")
+                        self.batchArray.append(LanguageManager.localizedString("Trace.NoTracingBatches"))
                     }else{
                         if code == JXNetworkError.kResponseDeliverTagNotEnough {
-                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: LanguageManager.localizedString("Confirm"))
                             alert.tag = 11
                             alert.show()
                         }else{
@@ -180,7 +180,7 @@ class DeliveringManagerController: ZPTableViewController {
             actionView.tag = 11
             actionView.show()
         } else {
-            ViewManager.showNotice(notice: "暂无可用标签，请先申请标签")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Ship.NotEnoughLabel"))
             return
         }
     }
@@ -191,7 +191,7 @@ class DeliveringManagerController: ZPTableViewController {
         endTextField.resignFirstResponder()
         
         if sizeLabel.currentTitle?.isEmpty == true {
-            ViewManager.showNotice(notice: "请先选择标签规格")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("SelectSpec"))
             return
         }
         
@@ -202,16 +202,16 @@ class DeliveringManagerController: ZPTableViewController {
             let name = self.operatorModel?.name
         {
             if String.validateCode(code: endCode) == false {
-                ViewManager.showNotice(notice: "请输入12位纯数字编码")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Label.Notice2"))
                 return
             }
             if Int(endCode)! < Int(self.vm.deliverManagerModel.endCode!)!{
-                ViewManager.showNotice(notice: "结束编码不能小于默认编码")
+                ViewManager.showNotice(notice: "End code can not be less than the default code")
                 return
             }
             self.confirmArray.removeAll()
-            self.confirmArray.append(String.init(format: "%@", self.traceSourceButton.currentTitle ?? "暂无溯源批次"))
-            self.confirmArray.append(String.init(format: "%@", self.sizeName ?? "出错了！"))
+            self.confirmArray.append(String.init(format: "%@", self.traceSourceButton.currentTitle ?? LanguageManager.localizedString("Trace.NoTracingBatches")))
+            self.confirmArray.append(String.init(format: "%@", self.sizeName ?? "Error"))
             self.confirmArray.append(String.init(format: "%@", startCode))
             self.confirmArray.append(String.init(format: "%@", endCode))
             self.confirmArray.append(String.init(format: "%d", self.vm.deliverManagerModel.counts))
@@ -245,7 +245,7 @@ class DeliveringManagerController: ZPTableViewController {
             label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
             label.backgroundColor = UIColor.white
             //label.center = view.center
-            label.text = "确认发货信息"
+            label.text = LanguageManager.localizedString("Ship.ConfirmShippingInformation")
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
             label.textColor = JX333333Color
@@ -318,7 +318,7 @@ class DeliveringManagerController: ZPTableViewController {
         
         let button = UIButton()
         button.frame = CGRect(x: 0, y: H + 10, width: contentView.frame.width, height: 44)
-        button.setTitle("确定", for: .normal)
+        button.setTitle(LanguageManager.localizedString("Confirm"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.setTitleColor(JXMainColor, for: .normal)
         button.contentVerticalAlignment = .center
@@ -343,7 +343,7 @@ class DeliveringManagerController: ZPTableViewController {
             label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
             label.backgroundColor = UIColor.white
             //label.center = view.center
-            label.text = "确认发货编号"
+            label.text = LanguageManager.localizedString("Ship.ConfirmShippingCode")
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
             label.textColor = JX333333Color
@@ -380,7 +380,7 @@ class DeliveringManagerController: ZPTableViewController {
             
             let titleLabel = UILabel()
             titleLabel.frame = CGRect.init(x: 15, y: 0, width: view.frame.width - 30, height: 30)
-            titleLabel.text = "结尾编码可修改为更大数值"
+            titleLabel.text = "End code can be modified to a larger number"//结束编码可被修改为更大数值
             titleLabel.font = UIFont.systemFont(ofSize: 14)
             titleLabel.textAlignment = .left
             titleLabel.textColor = JX666666Color
@@ -426,7 +426,7 @@ extension DeliveringManagerController : JXActionViewDelegate,UIAlertViewDelegate
                 self.traceSourceButton.setTitle(model.name, for: .normal)
                 batchId = model.id
             }else{
-                let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+                let alert = UIAlertView.init(title: LanguageManager.localizedString("Notice.NoTracingBatchesNotice"), message: "", delegate: self, cancelButtonTitle: LanguageManager.localizedString("Ship.AddTracingInformation"), otherButtonTitles: LanguageManager.localizedString("Confirm"))
                 alert.tag = 10
                 alert.show()
             }
@@ -450,14 +450,10 @@ extension DeliveringManagerController : JXActionViewDelegate,UIAlertViewDelegate
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if alertView.tag == 10 {
             if buttonIndex == 0 {
-                //
-                print("添加溯源")
-                
                 self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
             }else{
                 batchId = -1
-                self.traceSourceButton.setTitle("暂无溯源批次", for: .normal)
-                print("发货")
+                self.traceSourceButton.setTitle(LanguageManager.localizedString("Trace.NoTracingBatches"), for: .normal)
             }
         }else{
             self.navigationController?.popViewController(animated: true)
@@ -518,7 +514,7 @@ extension DeliveringManagerController: UITextFieldDelegate{
             
             let str = s.substring(to: 11)
             textField.text = str
-            ViewManager.showNotice(notice: "字符个数不能大于12")
+            ViewManager.showNotice(notice: "The number of characters can not be greater than 12")
             
 //            if let string = textField.text?.replacingCharacters(in: range, with: string) {
 //                textField.text = string.substring(to: string.index(string.startIndex, offsetBy: 20))
@@ -544,7 +540,7 @@ extension DeliveringManagerController: UITextFieldDelegate{
                 submitButton.backgroundColor = JXOrangeColor
                 submitButton.isEnabled = true
             }else{
-                ViewManager.showNotice(notice: "不能小于默认结束编码")
+                ViewManager.showNotice(notice: "End code can not be less than the default code")
             }
         }else{
             submitButton.backgroundColor = JXGrayColor
@@ -654,7 +650,7 @@ extension DeliveringManagerController: JXSelectViewDataSource{
  
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
-            button.setTitle("确认发货", for: UIControlState.normal)
+            button.setTitle(LanguageManager.localizedString("Confirm"), for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5

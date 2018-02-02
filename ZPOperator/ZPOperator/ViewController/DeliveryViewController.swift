@@ -32,7 +32,8 @@ class DeliveryViewController: ZPTableViewController {
     var actionView : JXActionView?
     var selectView : JXSelectView?
     
-    let confirmTitleArray = ["产品","溯源批次","标签规格","订单数量","开始编码","结束编码","收货","备注","操作人"]
+    //["产品","溯源批次","标签规格","订单数量","开始编码","结束编码","收货","备注","操作人"]
+    let confirmTitleArray = [LanguageManager.localizedString("Ship.Product"),LanguageManager.localizedString("Ship.TracingBatch"),LanguageManager.localizedString("Ship.LabelSpecification"),LanguageManager.localizedString("Ship.OrderNumber"),LanguageManager.localizedString("Ship.StartCode"),LanguageManager.localizedString("Ship.EndCode"),LanguageManager.localizedString("Ship.Receive"),LanguageManager.localizedString("Ship.Receive"),LanguageManager.localizedString("Ship.Operator")]
     var confirmArray = Array<String>()
     
     var alertView : JXAlertView?
@@ -113,7 +114,7 @@ class DeliveryViewController: ZPTableViewController {
                 self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess, code) in
                     if isSuccess == false {
                         if code == JXNetworkError.kResponseDeliverTagNotEnough {
-                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: LanguageManager.localizedString("Confirm"))
                             alert.tag = 11
                             alert.show()
                         }else{
@@ -121,7 +122,7 @@ class DeliveryViewController: ZPTableViewController {
                         }
                     }
                     guard isSuccess == true,self.vm.batchs.isEmpty == false else{
-                        self.batchLabel.text = "暂无溯源批次"
+                        self.batchLabel.text = LanguageManager.localizedString("Trace.NoTracingBatches")
                         self.batchId = -1
                         return
                     }
@@ -129,7 +130,7 @@ class DeliveryViewController: ZPTableViewController {
                     for model in self.vm.batchs{
                         self.batchArray.append(model.name!)
                     }
-                    self.batchArray.append("暂无溯源批次")
+                    self.batchArray.append(LanguageManager.localizedString("Trace.NoTracingBatches"))
                 })
             }
         }
@@ -155,7 +156,7 @@ class DeliveryViewController: ZPTableViewController {
         self.view.endEditing(true)
         
         if productId == -1 {
-            ViewManager.showNotice(notice: "请选择产品")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProducts"))
             return
         }
         //防止重复获取
@@ -171,7 +172,7 @@ class DeliveryViewController: ZPTableViewController {
         guard
             let orderStr = orderNumTextField.text,
             orderStr.isEmpty == false else {
-                ViewManager.showNotice(notice: "请填写订单数量")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterOrderNumber"))
                 return
         }
         if String.validateNumber(string: orderStr) == false{
@@ -195,13 +196,13 @@ class DeliveryViewController: ZPTableViewController {
         self.view.endEditing(true)
         
         if productId == -1 {
-            ViewManager.showNotice(notice: "请选择产品")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProducts"))
             return
         }
         guard
             let orderStr = orderNumTextField.text,
             orderStr.isEmpty == false else {
-                ViewManager.showNotice(notice: "请填写订单数量")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterOrderNumber"))
                 return
         }
         if String.validateNumber(string: orderStr) == false{
@@ -209,7 +210,7 @@ class DeliveryViewController: ZPTableViewController {
             return
         }
         if sizeLabel.text?.isEmpty == true {
-            ViewManager.showNotice(notice: "请先选择标签规格")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectLabelSpec"))
             return
         }
         guard
@@ -221,13 +222,13 @@ class DeliveryViewController: ZPTableViewController {
             let _ = pcaArray[1]["id"] as? Int,
             let _ = pcaArray[2]["id"] as? Int
             else {
-                ViewManager.showNotice(notice: "请填写收货地址")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterStreetAddress"))
                 return
         }
         guard
             let detailString = self.detailAddressTextField.text,
             detailString.isEmpty == false else {
-                ViewManager.showNotice(notice: "请填写街道地址")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterFullAddress"))
                 return
         }
         guard
@@ -238,14 +239,14 @@ class DeliveryViewController: ZPTableViewController {
         }
         self.confirmArray.removeAll()
         self.confirmArray.append(String.init(format: "%@", self.productName ?? ""))
-        self.confirmArray.append(String.init(format: "%@", self.batchName ?? "暂无溯源批次"))
-        self.confirmArray.append(String.init(format: "%@", self.sizeLabel.text ?? "暂无可用标签"))
+        self.confirmArray.append(String.init(format: "%@", self.batchName ?? LanguageManager.localizedString("Trace.NoTracingBatches")))
+        self.confirmArray.append(String.init(format: "%@", self.sizeLabel.text ?? LanguageManager.localizedString("Ship.NoLabels")))
         self.confirmArray.append(String.init(format: "%d", orderStr))
         self.confirmArray.append(String.init(format: "%@", startCode))
         self.confirmArray.append(String.init(format: "%@", endCode))
         self.confirmArray.append(String.init(format: "%@%@%@%@", provinceName,cityName,areaName,detailString))
         
-        self.confirmArray.append(String.init(format: "%@", self.remarkTextField.text ?? "暂无"))
+        self.confirmArray.append(String.init(format: "%@", self.remarkTextField.text ?? LanguageManager.localizedString("Ship.None")))
         self.confirmArray.append(String.init(format: "%@", self.vm.deliverDirectModel.Operator.name ?? ""))
         
         setConfirmSelectView()
@@ -299,7 +300,7 @@ class DeliveryViewController: ZPTableViewController {
             label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
             label.backgroundColor = UIColor.white
             //label.center = view.center
-            label.text = "确认发货信息"
+            label.text = LanguageManager.localizedString("Ship.ConfirmShippingInformation")
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
             label.textColor = JX333333Color
@@ -372,7 +373,7 @@ class DeliveryViewController: ZPTableViewController {
         
         let button = UIButton()
         button.frame = CGRect(x: 0, y: H + 10, width: contentView.frame.width, height: 44)
-        button.setTitle("确定", for: .normal)
+        button.setTitle(LanguageManager.localizedString("Confirm"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.setTitleColor(JXMainColor, for: .normal)
         button.contentVerticalAlignment = .center
@@ -393,13 +394,13 @@ class DeliveryViewController: ZPTableViewController {
     }
     func confirmDeliver() {
         if productId == -1 {
-            ViewManager.showNotice(notice: "请选择产品")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProducts"))
             return
         }
         guard
             let orderStr = orderNumTextField.text,
             orderStr.isEmpty == false else {
-                ViewManager.showNotice(notice: "请填写订单数量")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterOrderNumber"))
                 return
         }
         if String.validateNumber(string: orderStr) == false{
@@ -415,13 +416,13 @@ class DeliveryViewController: ZPTableViewController {
             let cityID = pcaArray[1]["id"] as? Int,
             let areaID = pcaArray[2]["id"] as? Int
             else {
-                ViewManager.showNotice(notice: "请填写收货地址")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterStreetAddress"))
                 return
         }
         guard
             let detailString = self.detailAddressTextField.text,
             detailString.isEmpty == false else {
-                ViewManager.showNotice(notice: "请填写街道地址")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterFullAddress"))
                 return
         }
         guard
@@ -457,7 +458,7 @@ class DeliveryViewController: ZPTableViewController {
             
             let titleLabel = UILabel()
             titleLabel.frame = CGRect.init(x: 15, y: 0, width: view.frame.width - 30, height: 44)
-            titleLabel.text = "以下内容可根据需要选填"
+            titleLabel.text = LanguageManager.localizedString("Ship.OptionalContent")
             titleLabel.font = UIFont.systemFont(ofSize: 14)
             titleLabel.textAlignment = .left
             titleLabel.textColor = JX666666Color
@@ -494,7 +495,7 @@ class DeliveryViewController: ZPTableViewController {
             }else if indexPath.row == 1{
                 isProcessAlert = 0
                 if self.productId == -1 {
-                    ViewManager.showNotice(notice: "请选择产品")
+                    ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProducts"))
                     return
                 }
                 if self.batchId != -1 {
@@ -505,7 +506,7 @@ class DeliveryViewController: ZPTableViewController {
                 self.vm.fetchBatchs(goodsId: self.productId, completion: { (data, msg, isSuccess, code) in
                     if isSuccess == false {
                         if code == JXNetworkError.kResponseDeliverTagNotEnough {
-                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "确定")
+                            let alert = UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: LanguageManager.localizedString("Confirm"))
                             alert.tag = 11
                             alert.show()
                         }else{
@@ -513,16 +514,16 @@ class DeliveryViewController: ZPTableViewController {
                         }
                     }
                     guard isSuccess == true,self.vm.batchs.isEmpty == false else{
-                        self.batchLabel.text = "暂无溯源批次"
+                        self.batchLabel.text = LanguageManager.localizedString("Trace.NoTracingBatches")
                         self.batchId = -1
-                        self.batchName = "暂无溯源批次"
+                        self.batchName = LanguageManager.localizedString("Trace.NoTracingBatches")
                         return
                     }
                     self.batchArray.removeAll()
                     for model in self.vm.batchs{
                         self.batchArray.append(model.name!)
                     }
-                    self.batchArray.append("暂无溯源批次")
+                    self.batchArray.append(LanguageManager.localizedString("Trace.NoTracingBatches"))
                     self.actionView?.actions = self.batchArray
                     self.actionView?.show()
                 })
@@ -541,7 +542,7 @@ class DeliveryViewController: ZPTableViewController {
                     actionView.tag = 11
                     actionView.show()
                 } else {
-                    ViewManager.showNotice(notice: "暂无可用标签，请先申请标签")
+                    ViewManager.showNotice(notice: LanguageManager.localizedString("Ship.NotEnoughLabel"))
                     return
                 }
             }
@@ -599,7 +600,7 @@ extension DeliveryViewController:JXActionViewDelegate,UIAlertViewDelegate{
                     self.batchName = model.name
                     
                 }else{
-                    let alert = UIAlertView.init(title: "暂无溯源批次，仍然发货？", message: "", delegate: self, cancelButtonTitle: "添加溯源", otherButtonTitles: "确定")
+                    let alert = UIAlertView.init(title: LanguageManager.localizedString("Notice.NoTracingBatchesNotice"), message: "", delegate: self, cancelButtonTitle: LanguageManager.localizedString("Ship.AddTracingInformation"), otherButtonTitles: LanguageManager.localizedString("Confirm"))
                     alert.tag = 10
                     alert.show()
                     
@@ -613,7 +614,7 @@ extension DeliveryViewController:JXActionViewDelegate,UIAlertViewDelegate{
                     self.productId = self.vm.deliverDirectModel.goodsList[index].id
                     self.productName = self.vm.deliverDirectModel.goodsList[index].name
                     
-                    self.batchLabel.text = "请选择"
+                    self.batchLabel.text = LanguageManager.localizedString("Notice.Select")
                     self.batchId = -1
                     self.batchName = nil
                     self.batchArray.removeAll()
@@ -624,10 +625,10 @@ extension DeliveryViewController:JXActionViewDelegate,UIAlertViewDelegate{
                 
                 self.orderString = nil
                 self.vm.deliverDirectCodeModel = DeliverDirectCodeModel()
-                self.startLabel.text = "自动获取"
+                self.startLabel.text = LanguageManager.localizedString("Ship.AutomaticallyObtain")
                 self.endTextField.text = ""
                 
-                ViewManager.showNotice(notice: "请重新获取标签")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.ObtainLabels"))
             }
             self.sizeName = self.vm.deliverDirectModel.codeSpecList[index].desc
             self.sizeId = self.vm.deliverDirectModel.codeSpecList[index].id
@@ -638,16 +639,11 @@ extension DeliveryViewController:JXActionViewDelegate,UIAlertViewDelegate{
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if alertView.tag == 10 {
             if buttonIndex == 0 {
-                //
-                print("添加溯源")
-                
                 self.performSegue(withIdentifier: "traceSourceAdd", sender: nil)
             }else{
-                
-                print("发货")
-                self.batchLabel.text = "暂无溯源批次"
+                self.batchLabel.text = LanguageManager.localizedString("Trace.NoTracingBatches")
                 self.batchId = -1
-                self.batchName = "暂无溯源批次"
+                self.batchName = LanguageManager.localizedString("Trace.NoTracingBatches")
             }
         }else{
             self.navigationController?.popViewController(animated: true)
@@ -808,7 +804,7 @@ extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
             
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
-            button.setTitle("确认发货", for: UIControlState.normal)
+            button.setTitle(LanguageManager.localizedString("Confirm"), for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5
@@ -851,7 +847,7 @@ extension DeliveryViewController:UITextFieldDelegate{
                     endStr.count == 12,
                     number < endNumber
                 {
-                    ViewManager.showNotice(notice: "不能小于默认结束编码")
+                    ViewManager.showNotice(notice: "End code can not be less than the default code")
                 }
             }else if textField == orderNumTextField{
                 if
@@ -862,10 +858,10 @@ extension DeliveryViewController:UITextFieldDelegate{
                     
                     self.orderString = nil
                     self.vm.deliverDirectCodeModel = DeliverDirectCodeModel()
-                    self.startLabel.text = "自动获取"
+                    self.startLabel.text = LanguageManager.localizedString("Ship.AutomaticallyObtain")
                     self.endTextField.text = ""
                     
-                    ViewManager.showNotice(notice: "请重新获取标签")
+                    ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.ObtainLabels"))
                 }
             }else if textField == detailAddressTextField{
                 

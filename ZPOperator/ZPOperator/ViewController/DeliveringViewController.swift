@@ -75,7 +75,7 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             label.frame = CGRect(x: 0, y: 0, width: kScreenWidth, height: 59.5)
             label.backgroundColor = UIColor.white
             //label.center = view.center
-            label.text = "确认发货批次"
+            label.text = LanguageManager.localizedString("Ship.ConfirmShippingBatch")
             label.textAlignment = .center
             label.font = UIFont.systemFont(ofSize: 18)
             label.textColor = JX333333Color
@@ -214,7 +214,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         if let batch = deliveringModel?.Batch,
             row == 0
         {
-            return "发货批次号：" + batch
+            return "\(LanguageManager.localizedString("Ship.BatchNumber"))：" + batch
         }
         return "测试\(row)"
     }
@@ -234,12 +234,14 @@ extension DeliveringViewController: JXSelectViewDataSource{
     }
     func jxSelectView(jxSelectView: JXSelectView, viewForRow row: Int) -> UIView? {
         var view : UIView?
-        let titleArray = ["发货","收货","备注"]
+        let titleArray = [LanguageManager.localizedString("Ship.Ship"),
+                          LanguageManager.localizedString("Ship.Receive"),
+                          LanguageManager.localizedString("Ship.Note")]
         
         if row == 1 || row == 2 || row == 3{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
-            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 40, height: 44))
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 50, height: 44))
             leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
@@ -250,7 +252,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             
             let button = UIButton()
             button.frame = CGRect.init(x: 40, y: 22, width: kScreenWidth - 80, height: 44)
-            button.setTitle("确认发货批次", for: UIControlState.normal)
+            button.setTitle(LanguageManager.localizedString("Ship.ConfirmShippingBatch"), for: UIControlState.normal)
             button.setTitleColor(UIColor.white, for: UIControlState.normal)
             button.backgroundColor = JXOrangeColor
             button.layer.cornerRadius = 5
@@ -262,7 +264,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             leftLabel.textColor = JX333333Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
-            var string = "发货批次号   "
+            var string = "\(LanguageManager.localizedString("Ship.BatchNumber"))   "
             let length = string.count
             
             if let batchCode = deliveringModel?.batchCode{
@@ -337,7 +339,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
                 remarks.isEmpty == false{
                 addressLabel.text = remarks
             }else{
-                addressLabel.text = "暂无"
+                addressLabel.text = LanguageManager.localizedString("Ship.None")
             }
             
             view?.addSubview(addressLabel)

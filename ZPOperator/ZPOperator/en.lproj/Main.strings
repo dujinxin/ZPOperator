@@ -1,0 +1,420 @@
+
+/* Class = "UILabel"; text = "收货"; ObjectID = "009-gZ-lYn"; */
+"009-gZ-lYn.text" = "Receive";
+
+/* Class = "UIButton"; normalTitle = "获取标签"; ObjectID = "0EE-E9-lit"; */
+"0EE-E9-lit.normalTitle" = "Obtain labels";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "0aJ-kY-kEZ"; */
+"0aJ-kY-kEZ.text" = "Please select";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "1Ri-xm-Ijy"; */
+"1Ri-xm-Ijy.text" = "Please select";
+
+/* Class = "UITextField"; placeholder = "请输入新密码，不少于8位，不能为纯数字或纯字母"; ObjectID = "1mK-8g-gQ5"; */
+"1mK-8g-gQ5.placeholder" = "Please enter a new password. The new password must be more than 8 characters and contain both letters & numbers.";
+
+/* Class = "UILabel"; text = "结束编码"; ObjectID = "2Qd-ew-5K8"; */
+"2Qd-ew-5K8.text" = "End code";
+
+/* Class = "UILabel"; text = "        正品溯源操作员APP，在操作员进行实名认证并确认信用良好后，可以使用本APP进行发货管理、溯源批次管理、溯源信息管理、标签查询等日常工作，最终做到移动溯源、操作员对自己的工作行为负责，责任可追溯。"; ObjectID = "2bg-hK-kFK"; */
+"2bg-hK-kFK.text" = "        Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable.";
+
+/* Class = "UILabel"; text = "当前版本"; ObjectID = "2em-19-tLE"; */
+"2em-19-tLE.text" = "Current version";
+
+/* Class = "UILabel"; text = "标签规格"; ObjectID = "2u3-ti-MIR"; */
+"2u3-ti-MIR.text" = "Label spec";
+
+/* Class = "UILabel"; text = "订单数量"; ObjectID = "3Or-wk-fFZ"; */
+"3Or-wk-fFZ.text" = "Order #";
+
+/* Class = "UILabel"; text = "暂无"; ObjectID = "4On-CX-dza"; */
+"4On-CX-dza.text" = "None";
+
+/* Class = "UILabel"; text = "溯源批次"; ObjectID = "4YN-X4-EfR"; */
+"4YN-X4-EfR.text" = "Tracing batch";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5Pa-Nq-v1Q"; */
+"5Pa-Nq-v1Q.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "已发货管理"; ObjectID = "6Io-Q4-Ewt"; */
+"6Io-Q4-Ewt.title" = "Shipped management";
+
+/* Class = "UINavigationItem"; title = "已发货管理"; ObjectID = "6ZT-ZE-UCc"; */
+"6ZT-ZE-UCc.title" = "Shipped management";
+
+/* Class = "UILabel"; text = "操作地点"; ObjectID = "7af-fk-Wfd"; */
+"7af-fk-Wfd.text" = "Location";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "81h-v4-HJ5"; */
+"81h-v4-HJ5.text" = "Operator";
+
+/* Class = "UITextField"; placeholder = "请输入可贴码的最小包装单位数量"; ObjectID = "8Q7-jY-wJB"; */
+"8Q7-jY-wJB.placeholder" = "Please enter the # of minimum package units";
+
+/* Class = "UINavigationItem"; title = "发货管理"; ObjectID = "9U7-L2-0Gl"; */
+"9U7-L2-0Gl.title" = "Ship management";
+
+/* Class = "UINavigationItem"; title = "全部溯源批次"; ObjectID = "9sk-oy-P6u"; */
+"9sk-oy-P6u.title" = "All tracing batches";
+
+/* Class = "UITableViewSection"; headerTitle = "结尾编码可修改为更大数值"; ObjectID = "A1F-G4-gYU"; */
+"A1F-G4-gYU.headerTitle" = "结尾编码可修改为更大数值";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "A6P-8m-p0F"; */
+"A6P-8m-p0F.normalTitle" = "x";
+
+/* Class = "UILabel"; text = "发货产品"; ObjectID = "AOy-xo-QAK"; */
+"AOy-xo-QAK.text" = "Product";
+
+/* Class = "UILabel"; text = "溯源批次"; ObjectID = "Aep-hv-m3w"; */
+"Aep-hv-m3w.text" = "Tracing batch";
+
+/* Class = "UILabel"; text = "开始编码"; ObjectID = "AfS-cX-nWC"; */
+"AfS-cX-nWC.text" = "Start code";
+
+/* Class = "UILabel"; text = "溯源过程"; ObjectID = "Awp-JD-clr"; */
+"Awp-JD-clr.text" = "Process";
+
+/* Class = "UILabel"; text = "发货产品"; ObjectID = "B5O-QN-dMY"; */
+"B5O-QN-dMY.text" = "Product";
+
+/* Class = "UINavigationItem"; title = "添加发货批次"; ObjectID = "B7O-Ue-HcC"; */
+"B7O-Ue-HcC.title" = "Add shipping batch";
+
+/* Class = "UINavigationItem"; title = "标签查询"; ObjectID = "CDe-2d-1wA"; */
+"CDe-2d-1wA.title" = "Label query";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "DBO-y9-u0I"; */
+"DBO-y9-u0I.text" = "Label";
+
+/* Class = "UILabel"; text = "标签规格"; ObjectID = "DiO-oK-mar"; */
+"DiO-oK-mar.text" = "Label spec";
+
+/* Class = "UITextField"; placeholder = "请输入备注"; ObjectID = "E6f-mc-liD"; */
+"E6f-mc-liD.placeholder" = "Please enter a note";
+
+/* Class = "UILabel"; text = "修改密码"; ObjectID = "ETF-b0-gOZ"; */
+"ETF-b0-gOZ.text" = "Edit Password";
+
+/* Class = "UINavigationItem"; title = "添加溯源信息"; ObjectID = "Egm-32-zF3"; */
+"Egm-32-zF3.title" = "Add tracing information";
+
+/* Class = "UIButton"; normalTitle = "请选择"; ObjectID = "EpU-Fd-qHc"; */
+"EpU-Fd-qHc.normalTitle" = "Please select";
+
+/* Class = "UILabel"; text = "溯源批次"; ObjectID = "ErC-A6-u1w"; */
+"ErC-A6-u1w.text" = "Tracing batch";
+
+/* Class = "UILabel"; text = "发货"; ObjectID = "F4K-Yu-Sfu"; */
+"F4K-Yu-Sfu.text" = "Ship from";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "FGj-qo-4l4"; */
+"FGj-qo-4l4.text" = "Please select";
+
+/* Class = "UIButton"; normalTitle = "请选择"; ObjectID = "FnX-ek-yTS"; */
+"FnX-ek-yTS.normalTitle" = "Please select";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "G4G-X2-XyL"; */
+"G4G-X2-XyL.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "溯源批次"; ObjectID = "G51-ZO-RrY"; */
+"G51-ZO-RrY.text" = "Tracing batch";
+
+/* Class = "UILabel"; text = "姓名"; ObjectID = "GAb-bp-RBZ"; */
+"GAb-bp-RBZ.text" = "Name";
+
+/* Class = "UILabel"; text = "网点"; ObjectID = "GMZ-Aq-1gI"; */
+"GMZ-Aq-1gI.text" = "Outlet";
+
+/* Class = "UILabel"; text = "结束编码"; ObjectID = "GZe-U9-bhb"; */
+"GZe-U9-bhb.text" = "End code";
+
+/* Class = "UITextField"; placeholder = "请输入详细地址"; ObjectID = "GdN-v2-l0z"; */
+"GdN-v2-l0z.placeholder" = "Please enter your full address";
+
+/* Class = "UILabel"; text = "产品"; ObjectID = "GyG-Ul-xah"; */
+"GyG-Ul-xah.text" = "Product";
+
+/* Class = "UIButton"; normalTitle = "请选择"; ObjectID = "HF7-P6-bsL"; */
+"HF7-P6-bsL.normalTitle" = "Please select";
+
+/* Class = "UILabel"; text = "发货"; ObjectID = "Hgy-XY-bQg"; */
+"Hgy-XY-bQg.text" = "Ship from";
+
+/* Class = "UILabel"; text = "街道地址"; ObjectID = "I4o-l7-7Sn"; */
+"I4o-l7-7Sn.text" = "Address";
+
+/* Class = "UIButton"; normalTitle = "查看全程溯源"; ObjectID = "IYg-g3-JZ5"; */
+"IYg-g3-JZ5.normalTitle" = "View whole tracing process";
+
+/* Class = "UITextField"; placeholder = "请输入备注"; ObjectID = "IrF-fJ-ZCA"; */
+"IrF-fJ-ZCA.placeholder" = "Please enter a note";
+
+/* Class = "UILabel"; text = "关于我们"; ObjectID = "J4o-v2-FOR"; */
+"J4o-v2-FOR.text" = "About us";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "Jdh-CK-k1K"; */
+"Jdh-CK-k1K.text" = "Note";
+
+/* Class = "UINavigationItem"; title = "全程溯源"; ObjectID = "KrO-WW-ZzK"; */
+"KrO-WW-ZzK.title" = "Whole tracing process";
+
+/* Class = "UILabel"; text = "收货地址"; ObjectID = "Ljg-om-grS"; */
+"Ljg-om-grS.text" = "Area";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "M5w-xo-gwy"; */
+"M5w-xo-gwy.normalTitle" = "x";
+
+/* Class = "UILabel"; text = "开始编码"; ObjectID = "MlP-iO-CXb"; */
+"MlP-iO-CXb.text" = "Start code";
+
+/* Class = "UILabel"; text = "结束编码"; ObjectID = "Ntf-TH-pNp"; */
+"Ntf-TH-pNp.text" = "Start code";
+
+/* Class = "UIButton"; normalTitle = "请选择"; ObjectID = "NyP-CJ-wZd"; */
+"NyP-CJ-wZd.normalTitle" = "Please select";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "OcL-eU-zlr"; */
+"OcL-eU-zlr.text" = "Please select";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "PDx-AR-Lvs"; */
+"PDx-AR-Lvs.text" = "Please select";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "Ptr-GI-1xf"; */
+"Ptr-GI-1xf.text" = "Operator";
+
+/* Class = "UILabel"; text = "产品"; ObjectID = "PvE-Xp-ySH"; */
+"PvE-Xp-ySH.text" = "Product";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "Qi7-pc-gIm"; */
+"Qi7-pc-gIm.text" = "Operator";
+
+/* Class = "UITableViewSection"; footerTitle = " "; ObjectID = "Qug-dc-OLF"; */
+"Qug-dc-OLF.footerTitle" = " ";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "R8h-EX-kJB"; */
+"R8h-EX-kJB.text" = "Operator";
+
+/* Class = "UITextField"; placeholder = "请输入12位纯数字编码"; ObjectID = "RHo-4Z-pRA"; */
+"RHo-4Z-pRA.placeholder" = "请输入12位纯数字编码";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "SoT-J5-ndk"; */
+"SoT-J5-ndk.text" = "Please select";
+
+/* Class = "UILabel"; text = "自动获取"; ObjectID = "SvS-N8-lno"; */
+"SvS-N8-lno.text" = "Automatically obtain";
+
+/* Class = "UILabel"; text = "10000斤"; ObjectID = "T2c-68-eDC"; */
+"T2c-68-eDC.text" = "10000斤";
+
+/* Class = "UINavigationItem"; title = "添加溯源批次"; ObjectID = "Tau-fP-nbK"; */
+"Tau-fP-nbK.title" = "Add tracing batches";
+
+/* Class = "UITextField"; placeholder = "请输入可贴码的最小包装单位数量"; ObjectID = "UXu-1C-FVq"; */
+"UXu-1C-FVq.placeholder" = "Please enter the # of minimum package units";
+
+/* Class = "UINavigationItem"; title = "首页"; ObjectID = "UpU-Xf-CV9"; */
+"UpU-Xf-CV9.title" = "Home";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "V5c-KF-Ebs"; */
+"V5c-KF-Ebs.text" = "Cell phone";
+
+/* Class = "UILabel"; text = "收货"; ObjectID = "Wf0-No-a2J"; */
+"Wf0-No-a2J.text" = "Ship to";
+
+/* Class = "UITableViewSection"; footerTitle = " "; ObjectID = "Wt6-jW-vke"; */
+"Wt6-jW-vke.footerTitle" = " ";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "X1D-SX-7hE"; */
+"X1D-SX-7hE.normalTitle" = "x";
+
+/* Class = "UILabel"; text = "网点"; ObjectID = "XXx-Xb-7Vq"; */
+"XXx-Xb-7Vq.text" = "Outlet";
+
+/* Class = "UILabel"; text = "暂无"; ObjectID = "Y6D-S9-YqH"; */
+"Y6D-S9-YqH.text" = "None";
+
+/* Class = "UIButton"; normalTitle = "退出"; ObjectID = "YSc-Un-Q5U"; */
+"YSc-Un-Q5U.normalTitle" = "Sign out";
+
+/* Class = "UILabel"; text = "备注"; ObjectID = "Z1X-m4-rhR"; */
+"Z1X-m4-rhR.text" = "Note";
+
+/* Class = "UILabel"; text = "请选择"; ObjectID = "aNZ-rV-YI0"; */
+"aNZ-rV-YI0.text" = "Please select";
+
+/* Class = "UILabel"; text = "溯源批次"; ObjectID = "b53-ao-hFn"; */
+"b53-ao-hFn.text" = "Tracing batch";
+
+/* Class = "UIButton"; normalTitle = "保存新密码"; ObjectID = "cEs-Gk-hab"; */
+"cEs-Gk-hab.normalTitle" = "Save new password";
+
+/* Class = "UILabel"; text = "操作地点"; ObjectID = "cM4-WR-BPl"; */
+"cM4-WR-BPl.text" = "Location";
+
+/* Class = "UITableViewSection"; footerTitle = " "; ObjectID = "cpk-OU-1eT"; */
+"cpk-OU-1eT.footerTitle" = " ";
+
+/* Class = "UINavigationItem"; title = "关于我们"; ObjectID = "csw-oi-RDL"; */
+"csw-oi-RDL.title" = "About us";
+
+/* Class = "UILabel"; text = "标签数量"; ObjectID = "cu1-5V-oI7"; */
+"cu1-5V-oI7.text" = "Quantity";
+
+/* Class = "UITextField"; placeholder = "再次输入新密码"; ObjectID = "dXs-vl-ImV"; */
+"dXs-vl-ImV.placeholder" = "Re-enter new password";
+
+/* Class = "UINavigationItem"; title = "溯源批次详情"; ObjectID = "deX-qf-kiO"; */
+"deX-qf-kiO.title" = "Tracing batch details";
+
+/* Class = "UINavigationItem"; title = "未发货管理"; ObjectID = "dwO-cN-off"; */
+"dwO-cN-off.title" = "Shipping management";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "eql-8I-qUf"; */
+"eql-8I-qUf.normalTitle" = "Submit";
+
+/* Class = "UINavigationItem"; title = "添加溯源信息"; ObjectID = "esH-wt-09W"; */
+"esH-wt-09W.title" = "Add tracing information";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "evH-ol-aCe"; */
+"evH-ol-aCe.text" = "Label";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "fFs-d8-5p7"; */
+"fFs-d8-5p7.text" = "Operator";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "fJb-6H-b69"; */
+"fJb-6H-b69.normalTitle" = "Submit";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "fRN-Og-xqU"; */
+"fRN-Og-xqU.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fvc-w7-wui"; */
+"fvc-w7-wui.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "请输入12位纯数字编码"; ObjectID = "g2O-yH-mNY"; */
+"g2O-yH-mNY.placeholder" = "请输入12位纯数字编码";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "g9D-WN-6Oj"; */
+"g9D-WN-6Oj.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "收货地址"; ObjectID = "gez-nP-9AD"; */
+"gez-nP-9AD.text" = "Area";
+
+/* Class = "UINavigationItem"; title = "发货管理"; ObjectID = "ggY-m9-IZG"; */
+"ggY-m9-IZG.title" = "Shipping management";
+
+/* Class = "UILabel"; text = "10000斤"; ObjectID = "gwM-dU-BRL"; */
+"gwM-dU-BRL.text" = "10000斤";
+
+/* Class = "UIButton"; normalTitle = "查询"; ObjectID = "h4N-bb-y0c"; */
+"h4N-bb-y0c.normalTitle" = "Query";
+
+/* Class = "UILabel"; text = "备注信息"; ObjectID = "hI9-BN-atK"; */
+"hI9-BN-atK.text" = "Note";
+
+/* Class = "UIButton"; normalTitle = "查看全程溯源"; ObjectID = "iF9-NQ-k35"; */
+"iF9-NQ-k35.normalTitle" = "View whole tracing process";
+
+/* Class = "UILabel"; text = "备注信息"; ObjectID = "jeN-3J-feC"; */
+"jeN-3J-feC.text" = "Note";
+
+/* Class = "UINavigationItem"; title = "首页"; ObjectID = "kf9-OZ-g6C"; */
+"kf9-OZ-g6C.title" = "Home";
+
+/* Class = "UINavigationItem"; title = "发货"; ObjectID = "l6V-qd-TUi"; */
+"l6V-qd-TUi.title" = "Ship from";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "lAr-s9-RVm"; */
+"lAr-s9-RVm.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "mYn-ov-oZf"; */
+"mYn-ov-oZf.normalTitle" = "Submit";
+
+/* Class = "UINavigationItem"; title = "标签管理"; ObjectID = "mlb-8i-t5e"; */
+"mlb-8i-t5e.title" = "Label query";
+
+/* Class = "UITextField"; placeholder = "请输入12位纯数字编码"; ObjectID = "mrY-6Q-CyL"; */
+"mrY-6Q-CyL.placeholder" = "请输入12位纯数字编码";
+
+/* Class = "UILabel"; text = "开始编码"; ObjectID = "nYP-Mg-lR8"; */
+"nYP-Mg-lR8.text" = "Start code";
+
+/* Class = "UILabel"; text = "标签编码"; ObjectID = "oT9-ml-Mng"; */
+"oT9-ml-Mng.text" = "Label code";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ofg-U7-AF7"; */
+"ofg-U7-AF7.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "请输入旧密码，如已忘，请向管理员索要"; ObjectID = "oqP-Js-lu8"; */
+"oqP-Js-lu8.placeholder" = "Please enter the old password. Forgot? Contact admin.";
+
+/* Class = "UILabel"; text = "溯源过程"; ObjectID = "pBN-yp-w2G"; */
+"pBN-yp-w2G.text" = "Process";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "pP7-g2-O1m"; */
+"pP7-g2-O1m.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "街道地址"; ObjectID = "pV0-Kv-B6h"; */
+"pV0-Kv-B6h.text" = "Address";
+
+/* Class = "UINavigationItem"; title = "修改密码"; ObjectID = "qXN-YJ-rxc"; */
+"qXN-YJ-rxc.title" = "Edit password";
+
+/* Class = "UILabel"; text = "标签规格"; ObjectID = "qac-7C-2s4"; */
+"qac-7C-2s4.text" = "Label spec";
+
+/* Class = "UILabel"; text = "订单数量"; ObjectID = "qbq-31-lqG"; */
+"qbq-31-lqG.text" = "Order #";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "rKu-Z1-vkn"; */
+"rKu-Z1-vkn.normalTitle" = "x";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "rQl-IA-u2K"; */
+"rQl-IA-u2K.normalTitle" = "x";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "rhF-pI-Ic8"; */
+"rhF-pI-Ic8.title" = "Setting";
+
+/* Class = "UITextField"; placeholder = "请输入详细地址"; ObjectID = "rnA-En-ZBf"; */
+"rnA-En-ZBf.placeholder" = "Please enter your full address";
+
+/* Class = "UITextField"; placeholder = "自动获取"; ObjectID = "tJK-n7-dHs"; */
+"tJK-n7-dHs.placeholder" = "Automatically obtain";
+
+/* Class = "UINavigationItem"; title = "未发货管理"; ObjectID = "tgg-qt-Zp8"; */
+"tgg-qt-Zp8.title" = "Shipping management";
+
+/* Class = "UILabel"; text = "所属网点"; ObjectID = "uTO-I2-BZf"; */
+"uTO-I2-BZf.text" = "Owned outlet";
+
+/* Class = "UILabel"; text = "发货网点"; ObjectID = "uyv-PB-Imu"; */
+"uyv-PB-Imu.text" = "Outlet";
+
+/* Class = "UILabel"; text = "操作人"; ObjectID = "vzb-Hi-l4p"; */
+"vzb-Hi-l4p.text" = "Operator";
+
+/* Class = "UILabel"; text = "标签编码"; ObjectID = "w7k-b0-Vfs"; */
+"w7k-b0-Vfs.text" = "Label code";
+
+/* Class = "UILabel"; text = "标签数量"; ObjectID = "yDa-7V-0Z2"; */
+"yDa-7V-0Z2.text" = "Quantity";
+
+/* Class = "UIButton"; normalTitle = "x"; ObjectID = "yPl-Hv-Mgl"; */
+"yPl-Hv-Mgl.normalTitle" = "x";
+
+/* Class = "UILabel"; text = "标签规格"; ObjectID = "yYL-cg-V9c"; */
+"yYL-cg-V9c.text" = "Label spec";
+
+/* Class = "UIButton"; normalTitle = "请选择"; ObjectID = "zA9-1V-Hzi"; */
+"zA9-1V-Hzi.normalTitle" = "Please select";
+
+/* Class = "UILabel"; text = "发货批次号"; ObjectID = "zNV-jN-35i"; */
+"zNV-jN-35i.text" = "Batch #";
+
+/* Class = "UILabel"; text = "发货批次号"; ObjectID = "zZf-4J-W80"; */
+"zZf-4J-W80.text" = "Batch #";
+
+/* Class = "UILabel"; text = "产品"; ObjectID = "zgF-Nf-zCV"; */
+"zgF-Nf-zCV.text" = "Product";

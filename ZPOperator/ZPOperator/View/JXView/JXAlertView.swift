@@ -146,7 +146,7 @@ class JXAlertView: UIView {
     lazy var cancelButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor.white
-        btn.setTitle("取消", for: UIControlState.normal)
+        btn.setTitle(LanguageManager.localizedString("Cancel"), for: UIControlState.normal)
         btn.setTitleColor(JX333333Color, for: UIControlState.normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn.addTarget(self, action: #selector(tapClick), for: UIControlEvents.touchUpInside)

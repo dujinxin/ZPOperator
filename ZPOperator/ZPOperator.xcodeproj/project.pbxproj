@@ -8,14 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		20F6AEA2B68A0E72BB89883D /* Pods_ZPOperator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5F3F87B6442402C72BFF95 /* Pods_ZPOperator.framework */; };
-		350B11E72010843F002B8A6D /* DeliverManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11E62010843F002B8A6D /* DeliverManagerController.swift */; };
-		350B11EB201084D5002B8A6D /* DeliveredController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11EA201084D5002B8A6D /* DeliveredController.swift */; };
-		350B11EF20108A8B002B8A6D /* DeliveredMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11EE20108A8B002B8A6D /* DeliveredMController.swift */; };
-		350B11F120109D1A002B8A6D /* DeliverChickenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */; };
 		3514D65E1F18AF11001744DD /* DeliverListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D65C1F18AF11001744DD /* DeliverListCell.swift */; };
 		3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3514D65D1F18AF11001744DD /* DeliverListCell.xib */; };
 		3514D71E1F1DFEA2001744DD /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */; };
-		3517CFD41FC7CA9A009D127A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3517CFD31FC7CA9A009D127A /* Login.storyboard */; };
 		351A06D41FBED85A00A88FBD /* IdentityAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351A06D31FBED85A00A88FBD /* IdentityAuthController.swift */; };
 		351A06DB1FC27C7F00A88FBD /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351A06DA1FC27C7F00A88FBD /* Encryption.swift */; };
 		351DD2F41F14E18800E90170 /* JXLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351DD2F21F14E18800E90170 /* JXLocationManager.swift */; };
@@ -43,9 +38,6 @@
 		35249C411FC8274D005E52E3 /* CWCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 35249C3F1FC8274D005E52E3 /* CWCommon.m */; };
 		352F49521FECAE42007C4F65 /* JXActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352F49511FECAE42007C4F65 /* JXActionView.swift */; };
 		353F3CAB20120842008EDB82 /* CommenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAA20120842008EDB82 /* CommenModel.swift */; };
-		353F3CAE20120E12008EDB82 /* DeliveringMController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAC20120E11008EDB82 /* DeliveringMController.swift */; };
-		353F3CAF20120E12008EDB82 /* DeliveringController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CAD20120E12008EDB82 /* DeliveringController.swift */; };
-		353F3CB120121772008EDB82 /* DeliverVM_Chicken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */; };
 		353F3CBF20171131008EDB82 /* NewMainCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */; };
 		353F3CC220171247008EDB82 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F3CC020171247008EDB82 /* LabelCell.swift */; };
 		353F3CC320171247008EDB82 /* LabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 353F3CC120171247008EDB82 /* LabelCell.xib */; };
@@ -63,7 +55,6 @@
 		3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */; };
 		354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */; };
 		3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */; };
-		3545031B1EFBBFDB00D9EDA7 /* TraceSourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */; };
 		3545031D1EFBCB8600D9EDA7 /* TraceDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */; };
 		354503201EFBD29300D9EDA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */; };
 		354503351EFBDF8800D9EDA7 /* JXDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503261EFBDF8800D9EDA7 /* JXDefaultView.swift */; };
@@ -79,6 +70,11 @@
 		354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */; };
 		354503441EFCBDAF00D9EDA7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354503431EFCBDAF00D9EDA7 /* UserModel.swift */; };
 		3559482E1F381712008145BB /* JXPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3559482D1F381712008145BB /* JXPlaceHolderTextView.swift */; };
+		357241812021A4B500545A28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 357241832021A4B500545A28 /* Localizable.strings */; };
+		357241852021A4BD00545A28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 357241872021A4BD00545A28 /* InfoPlist.strings */; };
+		3572418A2021A5F200545A28 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357241892021A5F100545A28 /* LanguageManager.swift */; };
+		3572418B2021A82C00545A28 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3572418D2021A82C00545A28 /* Login.storyboard */; };
+		3572419D2023227400545A28 /* TraceSourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3572419F2023227400545A28 /* TraceSourceCell.xib */; };
 		359750801EF8BE9100419474 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597507F1EF8BE9100419474 /* AppDelegate.swift */; };
 		359750851EF8BE9100419474 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 359750831EF8BE9100419474 /* Main.storyboard */; };
 		359750871EF8BE9100419474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 359750861EF8BE9100419474 /* Assets.xcassets */; };
@@ -129,14 +125,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		350B11E62010843F002B8A6D /* DeliverManagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverManagerController.swift; sourceTree = "<group>"; };
-		350B11EA201084D5002B8A6D /* DeliveredController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveredController.swift; sourceTree = "<group>"; };
-		350B11EE20108A8B002B8A6D /* DeliveredMController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveredMController.swift; sourceTree = "<group>"; };
-		350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverChickenModel.swift; sourceTree = "<group>"; };
 		3514D65C1F18AF11001744DD /* DeliverListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverListCell.swift; sourceTree = "<group>"; };
 		3514D65D1F18AF11001744DD /* DeliverListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeliverListCell.xib; sourceTree = "<group>"; };
 		3514D71D1F1DFEA2001744DD /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		3517CFD31FC7CA9A009D127A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		351A06D31FBED85A00A88FBD /* IdentityAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityAuthController.swift; sourceTree = "<group>"; };
 		351A06D51FBEE0BA00A88FBD /* ZPOperator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZPOperator-Bridging-Header.h"; sourceTree = "<group>"; };
 		351A06DA1FC27C7F00A88FBD /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
@@ -186,9 +177,6 @@
 		35249C401FC8274D005E52E3 /* CWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWCommon.h; sourceTree = "<group>"; };
 		352F49511FECAE42007C4F65 /* JXActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXActionView.swift; sourceTree = "<group>"; };
 		353F3CAA20120842008EDB82 /* CommenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenModel.swift; sourceTree = "<group>"; };
-		353F3CAC20120E11008EDB82 /* DeliveringMController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringMController.swift; sourceTree = "<group>"; };
-		353F3CAD20120E12008EDB82 /* DeliveringController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveringController.swift; sourceTree = "<group>"; };
-		353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverVM_Chicken.swift; sourceTree = "<group>"; };
 		353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainCollectionController.swift; sourceTree = "<group>"; };
 		353F3CC020171247008EDB82 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		353F3CC120171247008EDB82 /* LabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCell.xib; sourceTree = "<group>"; };
@@ -206,7 +194,6 @@
 		3545030D1EFA658F00D9EDA7 /* DeliveredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveredViewController.swift; sourceTree = "<group>"; };
 		354503161EFB9CF600D9EDA7 /* JXTopBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXTopBarView.swift; sourceTree = "<group>"; };
 		354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceSourceCell.swift; sourceTree = "<group>"; };
-		354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TraceSourceCell.xib; sourceTree = "<group>"; };
 		3545031C1EFBCB8600D9EDA7 /* TraceDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraceDetailController.swift; sourceTree = "<group>"; };
 		3545031E1EFBD29300D9EDA7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		354503261EFBDF8800D9EDA7 /* JXDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXDefaultView.swift; sourceTree = "<group>"; };
@@ -222,6 +209,19 @@
 		354503411EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JXNetworkManager+Extention.swift"; sourceTree = "<group>"; };
 		354503431EFCBDAF00D9EDA7 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3559482D1F381712008145BB /* JXPlaceHolderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPlaceHolderTextView.swift; sourceTree = "<group>"; };
+		357241822021A4B500545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		357241842021A4B700545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		357241862021A4BD00545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		357241882021A4BE00545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		357241892021A5F100545A28 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		357241902021A86700545A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		357241962021AA3E00545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
+		357241982021AA4200545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
+		3572419B202308AB00545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		3572419C202308AF00545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		3572419E2023227400545A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TraceSourceCell.xib; sourceTree = "<group>"; };
+		357241A12023227800545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TraceSourceCell.strings; sourceTree = "<group>"; };
+		357241A32023227E00545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TraceSourceCell.strings"; sourceTree = "<group>"; };
 		3597507C1EF8BE9100419474 /* ZPOperator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZPOperator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3597507F1EF8BE9100419474 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359750841EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -293,18 +293,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		350B11E5201083A5002B8A6D /* Chicken */ = {
-			isa = PBXGroup;
-			children = (
-				350B11E62010843F002B8A6D /* DeliverManagerController.swift */,
-				353F3CAD20120E12008EDB82 /* DeliveringController.swift */,
-				353F3CAC20120E11008EDB82 /* DeliveringMController.swift */,
-				350B11EA201084D5002B8A6D /* DeliveredController.swift */,
-				350B11EE20108A8B002B8A6D /* DeliveredMController.swift */,
-			);
-			path = Chicken;
-			sourceTree = "<group>";
-		};
 		351A06D91FC27B9C00A88FBD /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,7 +471,7 @@
 		35249C381FC826B6005E52E3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				3517CFD31FC7CA9A009D127A /* Login.storyboard */,
+				3572418D2021A82C00545A28 /* Login.storyboard */,
 				35249C401FC8274D005E52E3 /* CWCommon.h */,
 				35249C3F1FC8274D005E52E3 /* CWCommon.m */,
 				35249C3C1FC826F9005E52E3 /* CWOCRViewController.h */,
@@ -524,7 +512,6 @@
 				35AE7FF51EFCEE0A00528D6A /* MainModel.swift */,
 				35E7DD5E1EFE87C100E1F7E9 /* TraceSourceModel.swift */,
 				35E7DD6A1F00B5CB00E1F7E9 /* DeliverModel.swift */,
-				350B11F020109D1A002B8A6D /* DeliverChickenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -538,7 +525,7 @@
 				3514D65C1F18AF11001744DD /* DeliverListCell.swift */,
 				3514D65D1F18AF11001744DD /* DeliverListCell.xib */,
 				354503181EFBBFDB00D9EDA7 /* TraceSourceCell.swift */,
-				354503191EFBBFDB00D9EDA7 /* TraceSourceCell.xib */,
+				3572419F2023227400545A28 /* TraceSourceCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -546,7 +533,6 @@
 		354502F61EFA1A5300D9EDA7 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				350B11E5201083A5002B8A6D /* Chicken */,
 				354502F71EFA1A5300D9EDA7 /* MainViewController.swift */,
 				353F3CBE20171131008EDB82 /* NewMainCollectionController.swift */,
 				354503061EFA50FA00D9EDA7 /* DeliverManageController.swift */,
@@ -577,7 +563,6 @@
 				354503041EFA439C00D9EDA7 /* MainVM.swift */,
 				3545033F1EFCB21D00D9EDA7 /* LoginVM.swift */,
 				35E7DD681F00B4DD00E1F7E9 /* DeliverVM.swift */,
-				353F3CB020121772008EDB82 /* DeliverVM_Chicken.swift */,
 				35E7DD6E1F01329100E1F7E9 /* DeliverManagerVM.swift */,
 				35BF03881F41528D004A77E9 /* DeliverNewBatchVM.swift */,
 				35BF03DC1F4AD066004A77E9 /* DeliverDirectVM.swift */,
@@ -728,6 +713,8 @@
 				3597507F1EF8BE9100419474 /* AppDelegate.swift */,
 				359750861EF8BE9100419474 /* Assets.xcassets */,
 				3597508B1EF8BE9100419474 /* Info.plist */,
+				357241832021A4B500545A28 /* Localizable.strings */,
+				357241872021A4BD00545A28 /* InfoPlist.strings */,
 			);
 			path = ZPOperator;
 			sourceTree = "<group>";
@@ -735,6 +722,7 @@
 		35CB1FD01FD642CB001EBA33 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				357241892021A5F100545A28 /* LanguageManager.swift */,
 				35CB1FD11FD6430F001EBA33 /* UserManager.swift */,
 			);
 			path = Manager;
@@ -805,6 +793,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 359750731EF8BE9100419474;
 			productRefGroup = 3597507D1EF8BE9100419474 /* Products */;
@@ -821,8 +810,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3545031B1EFBBFDB00D9EDA7 /* TraceSourceCell.xib in Resources */,
+				3572419D2023227400545A28 /* TraceSourceCell.xib in Resources */,
+				357241852021A4BD00545A28 /* InfoPlist.strings in Resources */,
 				359750871EF8BE9100419474 /* Assets.xcassets in Resources */,
+				357241812021A4B500545A28 /* Localizable.strings in Resources */,
 				354502FD1EFA1A5300D9EDA7 /* MainCell.xib in Resources */,
 				359750851EF8BE9100419474 /* Main.storyboard in Resources */,
 				3514D65F1F18AF11001744DD /* DeliverListCell.xib in Resources */,
@@ -830,7 +821,7 @@
 				354502FF1EFA1A5300D9EDA7 /* MainReusableView.xib in Resources */,
 				35E020971F0CD93E00852BBD /* MainReusableViewHeader.xib in Resources */,
 				353F3CC320171247008EDB82 /* LabelCell.xib in Resources */,
-				3517CFD41FC7CA9A009D127A /* Login.storyboard in Resources */,
+				3572418B2021A82C00545A28 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,7 +881,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				35DE9E8D1F14A1A5006F271E /* JXBaseRequest.swift in Sources */,
-				350B11EB201084D5002B8A6D /* DeliveredController.swift in Sources */,
 				35CB1FDE1FD7FA59001EBA33 /* FileManager+Extension.swift in Sources */,
 				35249C2B1FC7F5F8005E52E3 /* CWHackerCheckView.m in Sources */,
 				353F3CAB20120842008EDB82 /* CommenModel.swift in Sources */,
@@ -923,7 +913,6 @@
 				35249C251FC7F5F8005E52E3 /* CWAudioPlayer.m in Sources */,
 				354503171EFB9CF600D9EDA7 /* JXTopBarView.swift in Sources */,
 				35E7DD771F020A5700E1F7E9 /* TraceSRecordVM.swift in Sources */,
-				350B11EF20108A8B002B8A6D /* DeliveredMController.swift in Sources */,
 				354503361EFBDF8800D9EDA7 /* BaseViewController.swift in Sources */,
 				35CB1FD21FD6430F001EBA33 /* UserManager.swift in Sources */,
 				35AE7FFC1EFD1D2100528D6A /* TraceSAddVM.swift in Sources */,
@@ -931,7 +920,6 @@
 				35E020A11F0F716100852BBD /* JXPhotoBrowserController.swift in Sources */,
 				354503371EFBDF8800D9EDA7 /* JXTableViewController.swift in Sources */,
 				35E7DD5F1EFE87C100E1F7E9 /* TraceSourceModel.swift in Sources */,
-				350B11E72010843F002B8A6D /* DeliverManagerController.swift in Sources */,
 				35E7DD7F1F02815A00E1F7E9 /* NotificationEnum.swift in Sources */,
 				35E020931F09F66600852BBD /* UIScreen+Extension.swift in Sources */,
 				351A06DB1FC27C7F00A88FBD /* Encryption.swift in Sources */,
@@ -944,7 +932,6 @@
 				3545030C1EFA657D00D9EDA7 /* DeliveringViewController.swift in Sources */,
 				35249C2A1FC7F5F8005E52E3 /* CWFinishedView.m in Sources */,
 				35249C2D1FC7F5F8005E52E3 /* CWBankCardCaptureController.mm in Sources */,
-				353F3CAF20120E12008EDB82 /* DeliveringController.swift in Sources */,
 				35E7DD631EFEA16700E1F7E9 /* SettingViewController.swift in Sources */,
 				35249C291FC7F5F8005E52E3 /* CWAnimationView.m in Sources */,
 				3545033B1EFBDF8800D9EDA7 /* UIView+Extension.swift in Sources */,
@@ -964,11 +951,10 @@
 				35249C2F1FC7F5F8005E52E3 /* CWCaptureManager.m in Sources */,
 				3545030E1EFA658F00D9EDA7 /* DeliveredViewController.swift in Sources */,
 				359750801EF8BE9100419474 /* AppDelegate.swift in Sources */,
-				353F3CAE20120E12008EDB82 /* DeliveringMController.swift in Sources */,
 				35E0209D1F0F1B9800852BBD /* ProjectHeader.swift in Sources */,
 				354503421EFCB77100D9EDA7 /* JXNetworkManager+Extention.swift in Sources */,
 				35E7DD611EFE8A4D00E1F7E9 /* TraceSourceDetailVM.swift in Sources */,
-				353F3CB120121772008EDB82 /* DeliverVM_Chicken.swift in Sources */,
+				3572418A2021A5F200545A28 /* LanguageManager.swift in Sources */,
 				35BF03DB1F4AC68C004A77E9 /* DeliveryViewController.swift in Sources */,
 				35E020891F06746400852BBD /* DeliveredWholeRecordController.swift in Sources */,
 				3545031A1EFBBFDB00D9EDA7 /* TraceSourceCell.swift in Sources */,
@@ -982,7 +968,6 @@
 				35249C271FC7F5F8005E52E3 /* CWMBProgressHud.m in Sources */,
 				351DD2F51F14E18800E90170 /* QiNiuUploadManager.swift in Sources */,
 				35AE7FFE1EFD429800528D6A /* JXNetworkError.swift in Sources */,
-				350B11F120109D1A002B8A6D /* DeliverChickenModel.swift in Sources */,
 				354503001EFA1A5300D9EDA7 /* MainViewController.swift in Sources */,
 				351DD2F41F14E18800E90170 /* JXLocationManager.swift in Sources */,
 				354503071EFA50FA00D9EDA7 /* DeliverManageController.swift in Sources */,
@@ -998,10 +983,50 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		357241832021A4B500545A28 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				357241822021A4B500545A28 /* en */,
+				357241842021A4B700545A28 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		357241872021A4BD00545A28 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				357241862021A4BD00545A28 /* en */,
+				357241882021A4BE00545A28 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3572418D2021A82C00545A28 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				357241902021A86700545A28 /* Base */,
+				357241962021AA3E00545A28 /* en */,
+				357241982021AA4200545A28 /* zh-Hans */,
+			);
+			name = Login.storyboard;
+			sourceTree = "<group>";
+		};
+		3572419F2023227400545A28 /* TraceSourceCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3572419E2023227400545A28 /* Base */,
+				357241A12023227800545A28 /* en */,
+				357241A32023227E00545A28 /* zh-Hans */,
+			);
+			name = TraceSourceCell.xib;
+			sourceTree = "<group>";
+		};
 		359750831EF8BE9100419474 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				359750841EF8BE9100419474 /* Base */,
+				3572419B202308AB00545A28 /* en */,
+				3572419C202308AF00545A28 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1013,6 +1038,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1063,6 +1089,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

@@ -1,0 +1,45 @@
+
+/* Class = "UILabel"; text = "密码"; ObjectID = "1KA-tY-PJ8"; */
+"1KA-tY-PJ8.text" = "密码";
+
+/* Class = "UILabel"; text = "身份证正面照"; ObjectID = "6GK-gn-2vm"; */
+"6GK-gn-2vm.text" = "身份证正面照";
+
+/* Class = "UITextField"; placeholder = "如果忘记密码，请联系管理员"; ObjectID = "DGc-FA-Wpo"; */
+"DGc-FA-Wpo.placeholder" = "如果忘记密码，请联系管理员";
+
+/* Class = "UILabel"; text = "身份证号"; ObjectID = "Enz-YS-xow"; */
+"Enz-YS-xow.text" = "身份证号";
+
+/* Class = "UITextField"; placeholder = "请向企业管理员提供手机号"; ObjectID = "ItL-Xw-75S"; */
+"ItL-Xw-75S.placeholder" = "请向企业管理员提供手机号";
+
+/* Class = "UILabel"; text = "真实姓名"; ObjectID = "N67-B8-gSY"; */
+"N67-B8-gSY.text" = "真实姓名";
+
+/* Class = "UITextField"; placeholder = "请填写您的真实姓名"; ObjectID = "SGE-qH-xsO"; */
+"SGE-qH-xsO.placeholder" = "请填写您的真实姓名";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "Tvb-El-1Yy"; */
+"Tvb-El-1Yy.normalTitle" = "登录";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "VrF-Kr-v0S"; */
+"VrF-Kr-v0S.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "身份证背面照"; ObjectID = "ZQV-eW-2Ch"; */
+"ZQV-eW-2Ch.text" = "身份证背面照";
+
+/* Class = "UILabel"; text = "同意"; ObjectID = "dAG-tM-8Tg"; */
+"dAG-tM-8Tg.text" = "同意";
+
+/* Class = "UITextField"; placeholder = "请填写您的身份证号"; ObjectID = "gLe-ZN-sHi"; */
+"gLe-ZN-sHi.placeholder" = "请填写您的身份证号";
+
+/* Class = "UILabel"; text = "《征信数据采集及信息查询授权书》"; ObjectID = "oqB-bI-RiW"; */
+"oqB-bI-RiW.text" = "《征信数据采集及信息查询授权书》";
+
+/* Class = "UIButton"; normalTitle = "立即提交"; ObjectID = "qRM-GG-GgQ"; */
+"qRM-GG-GgQ.normalTitle" = "立即提交";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "rvA-6E-9ES"; */
+"rvA-6E-9ES.text" = "手机号";

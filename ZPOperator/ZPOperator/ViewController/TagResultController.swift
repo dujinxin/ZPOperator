@@ -34,18 +34,7 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
         self.tableView.register(UINib.init(nibName: "DeliverListCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib1)
         self.tableView.register(UINib.init(nibName: "TraceSourceCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierNib2)
 
-        
-//        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-//            self.currentPage = 1
-//            self.loadData(page: 1)
-//        })
-//        self.tableView.mj_footer = MJRefreshBackFooter.init(refreshingBlock: {
-//            self.currentPage += 1
-//            self.loadData(page: self.currentPage)
-//        })
-        
         self.tableView.reloadData()
-        //self.tableView.mj_header.beginRefreshing()
         
     }
     
@@ -97,11 +86,8 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
             
             
             // Configure the cell...
-            lab?.text = "   标签码："
-            if let code = detailVM.traceSourceTag.code {
-                lab?.text = String.init(format: "   标签码：%@", code)
-            }
-            
+            lab?.text = String.init(format: "   %@：%@", LanguageManager.localizedString("Label.Code"),detailVM.traceSourceTag.code ?? "")
+    
             return cell!
         }else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib1, for: indexPath) as? DeliverListCell
@@ -109,11 +95,8 @@ class TagResultController: BaseViewController,UITableViewDelegate,UITableViewDat
             cell?.accessoryType = .none
             
             cell?.TitleLabel.text = detailVM.traceSourceTag.goodsName
-            if let code = detailVM.traceSourceTag.batchCode {
-                cell?.DetailTitleLabel.text = String.init(format: "发货批次号 %@", code)
-            }else{
-                cell?.DetailTitleLabel.text = "发货批次号"
-            }
+            cell?.DetailTitleLabel.text = String.init(format: "%@ %@",LanguageManager.localizedString("Ship.BatchNumber") ,detailVM.traceSourceTag.batchCode ?? "")
+            
             return cell!
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell

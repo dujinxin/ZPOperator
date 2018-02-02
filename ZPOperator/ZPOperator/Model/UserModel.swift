@@ -21,7 +21,7 @@ class UserModel: BaseModel {
     
     //设置接口获取
     var mobile : String?
-    var stationName : String?
+    var stationName : String = ""
     var userName : String?
     
     

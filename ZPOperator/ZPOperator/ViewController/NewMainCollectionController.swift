@@ -125,29 +125,23 @@ class NewMainViewController: ZPCollectionViewController{
 //通用（无网点）
         case "/common/batch/list"://发货管理
             performSegue(withIdentifier: "deliverManagement", sender: DeliverStationStyle.none)
-//电商（有网点）
+//电商（有网点&无）
         case "/station/batch/list"://发货管理
-            performSegue(withIdentifier: "deliverManagement", sender: DeliverStationStyle.station)
-//鸡脚环
-        case "/device/batch/list"://发货管理
-            performSegue(withIdentifier: "chickenDeliverManagement", sender: nil)
-        case "/device/info/search"://脚环信息查询
-            performSegue(withIdentifier: "tagManagement", sender: TagSearchStyle.vervel)
+            let style : DeliverStationStyle = UserManager.manager.userAccound.stationName.isEmpty == true ? .none : .station
+            
+            performSegue(withIdentifier: "deliverManagement", sender: style)
 //公共模块
         case "/traceBatch/list":   //溯源管理
             performSegue(withIdentifier: "TraceSources", sender: nil)
         case "/code/search":       //标签查询
-            performSegue(withIdentifier: "tagManagement", sender: TagSearchStyle.label)
+            performSegue(withIdentifier: "tagManagement", sender: nil)
         default:
-            ViewManager.showNotice(notice: "未分配权限")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Unassigned permissions"))
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier{
             switch identifier {
-            case "tagManagement":
-                let dvc = segue.destination as! TagViewController
-                dvc.style = sender as! TagSearchStyle
             case "deliverManagement":
                 let dvc = segue.destination as! DeliverManageController
                 dvc.style = sender as! DeliverStationStyle

@@ -36,11 +36,11 @@ class LoginViewController: BaseViewController {
             font = UIFont.systemFont(ofSize: 12)
         }
         
-        let attributeString1 = NSMutableAttributedString.init(string: "请向企业管理员提供手机号")
+        let attributeString1 = NSMutableAttributedString.init(string: LanguageManager.localizedString("Login.CellPhoneNotice"))
         attributeString1.addAttributes([NSFontAttributeName:font,NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString1.length))
         userTextField.attributedPlaceholder = attributeString1
         
-        let attributeString2 = NSMutableAttributedString.init(string: "如果忘记密码，请联系管理员")
+        let attributeString2 = NSMutableAttributedString.init(string: LanguageManager.localizedString("Login.PasswordNotice"))
         attributeString2.addAttributes([NSFontAttributeName:font,NSForegroundColorAttributeName:UIColor.rgbColor(rgbValue: 0xd0cece)], range: NSRange.init(location: 0, length: attributeString2.length))
         passwordTextField.attributedPlaceholder = attributeString2
         
@@ -112,15 +112,15 @@ class LoginViewController: BaseViewController {
         
         guard let phone = userTextField.text,
             let password = passwordTextField.text else {
-                ViewManager.showNotice(notice: "用户名密码不能为空")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.TwoPasswordsNotMatch"))
                 return
         }
         if !String.validateTelephone(tel: phone) {
-            ViewManager.showNotice(notice: "手机号格式错误")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.IncorrectCellPhone"))
             return
         }
         if password.isEmpty == true {
-            ViewManager.showNotice(notice: "密码不能为空")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.PasswordBlank"))
             return
         }
 

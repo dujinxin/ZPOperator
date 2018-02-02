@@ -77,7 +77,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
         // Dispose of any resources that can be recreated.
     }
     @IBAction func addTraceSourceRecord(_ sender: UIButton) {
-        let alert = UIAlertView.init(title: "注意", message: "此处新增的溯源信息，不影响发货批次之前的溯源信息", delegate: self, cancelButtonTitle: "确定")
+        let alert = UIAlertView.init(title: LanguageManager.localizedString("Ship.Notice"), message: LanguageManager.localizedString("Notice.EewlyAddedTracingInformationNotice"), delegate: self, cancelButtonTitle: LanguageManager.localizedString("Confirm"))
         alert.tag = 100
         alert.show()
         
@@ -92,7 +92,6 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
                 vc.isAddTraceSource = sender as! Bool
                 vc.batchId = self.detailVM.traceSourceWhole.batch.id
                 vc.block = {()->()in
-                    print("回调")
                     self.tableView.mj_header.beginRefreshing()
                 }
                 if let record = currentRecord {
@@ -129,11 +128,7 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             cell?.accessoryType = .none
             
             cell?.TitleLabel.text = detailVM.traceSourceWhole.batch.goodsName
-            if let code = detailVM.traceSourceWhole.batch.code {
-                cell?.DetailTitleLabel.text = String.init(format: "发货批次号 %@", code)
-            }else{
-                cell?.DetailTitleLabel.text = "发货批次号"
-            }
+            cell?.DetailTitleLabel.text = String.init(format: "\(LanguageManager.localizedString("Ship.BatchNumber")) %@", detailVM.traceSourceWhole.batch.code ?? "")
             return cell!
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNib2, for: indexPath) as! TraceSourceCell
@@ -156,19 +151,18 @@ class DeliveredWholeController: BaseViewController,UITableViewDelegate,UITableVi
             if comefrom != 0 {
                 return
             }
+            currentRecord = self.detailVM.dataArray[indexPath.row - 1]
             if currentRecord?.isMine == false {
                 return
             }
             if currentRecord?.canEdit == false {
                 return
             }
-            
-            currentRecord = self.detailVM.dataArray[indexPath.row - 1]
-
             let actionView = JXActionView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 300), style: .list)
             actionView.isUseBottomView = true
             actionView.delegate = self
-            actionView.actions = ["修改","删除"]
+            actionView.actions = [LanguageManager.localizedString("Edit"),
+                                  LanguageManager.localizedString("Delete")]
             actionView.tag = indexPath.row - 1
             actionView.show()
         }
@@ -214,7 +208,7 @@ extension DeliveredWholeController : JXActionViewDelegate,UIAlertViewDelegate{
             performSegue(withIdentifier: "addTraceSourceWholeRecord", sender: false)
         }else{
             //删除
-            let alert = UIAlertView.init(title: "确认删除本条溯源信息？", message: "", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确认删除")
+            let alert = UIAlertView.init(title: LanguageManager.localizedString("Notice.ConfirmDeleteTracingInformation"), message: "", delegate: self, cancelButtonTitle: LanguageManager.localizedString("Cancel"), otherButtonTitles: LanguageManager.localizedString("Confirm"))
             alert.tag = actionView.tag
             alert.show()
         }

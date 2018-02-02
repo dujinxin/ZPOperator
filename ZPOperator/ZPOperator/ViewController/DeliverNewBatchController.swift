@@ -51,13 +51,13 @@ class DeliverNewBatchController: ZPTableViewController {
 
     @IBAction func submitClick(_ sender: UIButton) {
         if productId == -1 {
-            ViewManager.showNotice(notice: "请选择产品")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProducts"))
             return
         }
         guard
              let orderString = orderNumTextField.text,
              orderString.isEmpty == false else {
-            ViewManager.showNotice(notice: "请填写订单数量")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterOrderNumber"))
             return
         }
         if String.validateNumber(string: orderString) == false{
@@ -70,13 +70,13 @@ class DeliverNewBatchController: ZPTableViewController {
             let areaString = areaString,
             provinceId != -1
             else {
-            ViewManager.showNotice(notice: "请填写收货地址")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterStreetAddress"))
             return
         }
         guard
             let detailString = self.detailAddressTextField.text,
             detailString.isEmpty == false else {
-            ViewManager.showNotice(notice: "请填写街道地址")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.EnterFullAddress"))
             return
         }
         self.showMBProgressHUD()
@@ -132,7 +132,7 @@ class DeliverNewBatchController: ZPTableViewController {
             
             let titleLabel = UILabel()
             titleLabel.frame = CGRect.init(x: 15, y: 0, width: view.frame.width - 30, height: 44)
-            titleLabel.text = "以下内容可根据需要选填"
+            titleLabel.text = LanguageManager.localizedString("Ship.OptionalContent")
             titleLabel.font = UIFont.systemFont(ofSize: 14)
             titleLabel.textAlignment = .left
             titleLabel.textColor = JX666666Color

@@ -44,15 +44,15 @@ class ModifyPasswordViewController: ZPTableViewController {
               let newPassword = newTextField.text,
               let againPassword = againTextField.text else {
                 
-                ViewManager.showNotice(notice: "密码不能为空")
+                ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.PasswordBlank"))
             return
         }
         if !String.validatePassword(passWord: newPassword) {
-            ViewManager.showNotice(notice: "密码格式错误")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.IncorrectPassword"))
             return
         }
         if newPassword != againPassword {
-            ViewManager.showNotice(notice: "两次密码输入不一致")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.TwoPasswordsNotMatch"))
             return
         }
         

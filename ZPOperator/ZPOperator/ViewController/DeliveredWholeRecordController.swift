@@ -71,7 +71,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
 //        productLabel.text = self.traceBatch
 //        operatorLabel.text = "操作人 " + LoginVM.loginVMManager.userModel.userName!
         
-        textView.placeHolderText = "请输入溯源信息内容"
+        textView.placeHolderText = LanguageManager.localizedString("Trace.EnterTracingInformation")//"请输入溯源信息内容"
         
         submitButton.layer.cornerRadius = 5
         submitButton.backgroundColor = JXGrayColor
@@ -109,7 +109,7 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 if isSuccess{
                     //格式化数组
                     self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
-                    self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
+                    self.operatorLabel.text = "\(LanguageManager.localizedString("Ship.BatchNumber")) " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
                     for model in self.vm.traceSourceWholeModify.traceProcesses{
                         self.processArray.append(model.name!)
                     }
@@ -124,12 +124,12 @@ class DeliveredWholeRecordController: ZPTableViewController {
                 if isSuccess{
                     //格式化数组
                     self.productLabel.text = self.vm.traceSourceWholeModify.traceSourceWholeProduct.goodsName
-                    self.operatorLabel.text = "发货批次号 " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
+                    self.operatorLabel.text = "\(LanguageManager.localizedString("Ship.BatchNumber")) " + (self.vm.traceSourceWholeModify.traceSourceWholeProduct.code ?? "")
                     for model in self.vm.traceSourceWholeModify.traceProcesses{
                         self.processArray.append(model.name!)
                     }
                     
-                    self.processLabel.text = "请选择"
+                    self.processLabel.text = LanguageManager.localizedString("Notice.Select")
                 }
             })
         }
@@ -162,11 +162,11 @@ class DeliveredWholeRecordController: ZPTableViewController {
     
     @IBAction func submit(_ sender: UIButton) {
         guard let _ = self.addressLabel.text else {
-            ViewManager.showNotice(notice: "请选择操作地点")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectLocation"))
             return
         }
         if self.processId == -1 {
-            ViewManager.showNotice(notice: "请选择操作过程")
+            ViewManager.showNotice(notice: LanguageManager.localizedString("Notice.SelectProcess"))
             return
         }
         
@@ -360,7 +360,8 @@ extension DeliveredWholeRecordController :TZImagePickerControllerDelegate{
     func photo11() {
         self.textView.resignFirstResponder()
         isProcessAlert = 2
-        self.actionView?.actions = ["从相册中选择（最多三张）","拍照"]
+        self.actionView?.actions = [LanguageManager.localizedString("Notice.SelectFromAlbum"),
+            LanguageManager.localizedString("Notice.TakePhoto")]
         self.actionView?.show()
     }
     
@@ -461,7 +462,7 @@ extension DeliveredWholeRecordController: UITextViewDelegate{
             if let string = textView.text {
                 textView.text = string.substring(to: string.index(string.startIndex, offsetBy: 100))
                 
-                ViewManager.showNotice(notice: "字符个数不能大于100")
+                ViewManager.showNotice(notice: "The number of characters can not be greater than 100")
             }
         }
         
