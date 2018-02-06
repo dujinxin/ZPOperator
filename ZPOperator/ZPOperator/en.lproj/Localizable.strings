@@ -124,13 +124,13 @@
 "Current version"="Current version";
 "About us"="About us";
 "Change password"="Change password";
-"Please enter the original password. If you've forgotten your password, please contact administrator for help."="Please enter the original password. If you've forgotten your password, please contact administrator for help.";
-"Please enter a new password. The new password must be more than 8 characters and contain both letters & numbers."="Please enter a new password. The new password must be more than 8 characters and contain both letters & numbers.";
+"Please enter the old password. Forgot? Contact admin."="Please enter the old password. Forgot? Contact admin.";
+"Please enter a new password: more than 8 characters; contains letters & numbers."="Please enter a new password: more than 8 characters; contains letters & numbers.";
 "Re-enter new password"="Re-enter new password";
 "Save new password"="Save new password";
 "Edit successfully"="Edit successfully";
 "Sign out"="Sign out";
-"Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable."="Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable.";
+"Info"="Genuine Tracing Operator App. After passing the real-name certification and credit check, operators can use this app to do daily tasks such as shipping management, tracing batch management, tracing information management, label query, and eventually achieve mobile tracing. Operators should be responsible for their own work behaviors to make responsibility traceable.";
 //log in
 "Login.CellPhone"="Cell phone number";
 "Login.CellPhoneNotice"="Please contact admin for help";

@@ -17,14 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        //window?.isHidden = false
-        
-        print("device size",UIScreen.main.screenSize)
-        print("device mode",UIScreen.main.modelName)
-        print("device mode",UIScreen.main.modelSize)
-//        print("device mode",iPhone6p)
-//        print("device mode",iPhoneX)
-        
         return true
     }
 

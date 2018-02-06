@@ -7,6 +7,7 @@
 */
 "Home"="首页";
 
+//common
 "Confirm"="确定";
 "Cancel"="取消";
 "Complete"="完成";
@@ -15,21 +16,123 @@
 "Notice"="注意";
 "Edit"="编辑";
 "Delete"="删除";
+//notice
+"Notice.Select"="请选择";
+"Notice.SelectProducts"="请选择产品";
+"Notice.SelectLocation"="请选择溯源地点";
+"Notice.SelectProcess"="请选择溯源过程";
+"Notice.SelectSpec"="请先选择标签规格";
+"Notice.EnterOrderNumber"="请填写订单数量";
+"Notice.SelectLabelSpec"="请选择标签规格";
+"Notice.EnterFullAddress"="请填写收货地址";
+"Notice.ObtainLabels"="请先获取标签";
+"Notice.EnterStreetAddress"="请填写街道地址";
+"Notice.EewlyAddedTracingInformationNotice"="此处新增的溯源信息不影响发货批次之前的溯源信息";
+"Notice.Confirm delete"="确认删除";
+"Notice.ConfirmDeleteTracingInformation"="确认删除本条溯源信息";
+"Notice.DeleteSuccessfully"="删除成功";
+"Notice.SelectFromAlbum"="从相册中选择（最多三张）";
+"Notice.TakePhoto"="拍照";
+"Notice.New password should not be same as old password"="新密码不应与旧密码一致";
+"Notice.TwoPasswordsNotMatch"="您输入的两次密码不一致";
+"Notice.Username&PasswordBlank"="用户名密码不能为空";
+"Notice.PasswordBlank"="密码不能为空";
+"Notice.IncorrectCellPhone"="手机号格式错误";
+"Notice.IncorrectPassword"="密码格式错误";
+"Notice.NoTracingBatchesNotice"="暂无溯源批次，仍然发货？";
+"Notice.Confirm the deactivation of tracing batch"="确认停用溯源批次";
+//home
+"Pull down to refresh"="下拉可以刷新";
+"Refreshing data…"="正在刷新数据中…";
+"Release and refresh now"="松开立即刷新";
+"Last update: today"="最后更新：今天";
+//shipping management
+"Ship.management"="发货管理";
+"Ship.Shipping"="未发货";
+"Ship.Shipped"="已发货";
+"Shipping.management"="未发货管理";
+"Shipped.management"="已发货管理";
+"Ship.ConfirmShippingBatch"="确认发货批次";
+"Ship.EnterCodesNotice"="输入已按顺序贴码标签的编码";
+"Ship.Auto-calculate"="根据输入的编码自动计算";
+"Ship.AddTracingInformation"="添加溯源";
+"Ship.ConfirmShippingCode"="确认发货编码";
+"Ship.AddShippingBatch"="添加发货批次";
+"Ship.BatchNumber"="发货批次号";
+"Ship.Ship"="发货";
+"Ship.Receive"="收货";
+"Ship.Note"="备注";
+"Ship.None"="暂无";
+"Ship.TracingBatch"="溯源批次";
+"Ship.StartCode"="开始编码";
+"Ship.EndCode"="结尾编码";
+"Ship.LabelNumber"="标签数量";
+"Ship.Operator"="操作人";
+"Ship.Outlet"="网点";
+"Ship.AllTracingBatches"="全程溯源";
 
-"Coupons"="我的优惠券";
-"Records"="晒单、评论记录";
-"Favorites"="收藏店铺";
-"Level"="等级与成长值";
-"Follower"="粉丝";
-"Share"="分享好友";
-"Settings"="设置";
-"Help"="帮助与反馈";
-"Service"="联系客服";
-"OpenShop"="我要开店";
-"Invitation"="邀请人";
+"Ship.Notice"="注意";
+"Ship.Product"="产品";
+"Ship.LabelSpecification"="标签规格";
+"Ship.OrderNumber"="订单数量";
+"Ship.EnterMinimumNumberLabels"="请输入可贴码的最小包装单位数量";
+"Ship.ObtainLabels"="获取标签";
+"Ship.AutomaticallyObtain"="自动获取";
+"Ship.ShippingAddress"="街道地址";
+"Ship.StreetAddress"="收货地址";
+"Ship.EnterFullAddress"="请输入详细地址";
+"Ship.OptionalContent"="以下内容可根据需要选填";
+"Ship.EnterNotes"="请输入备注";
 
+"Ship.NoLabels"="暂无可用标签";
+"Ship.NotEnoughLabel"="没有可供选择的标签，请先申请";
+"Ship.ConfirmShippingInformation"="确认发货信息";
 
-"Shipped"="已发货";
+"Trace.OperationLocation"="操作地点";
+"Trace.EnterTracingInformation"="请输入溯源信息内容";
+"Trace.ViewWholeTracingProcess"="View whole tracing process";
+"Trace.WholeTracingProcess"="Whole tracing process";
+"Trace.TracingProcess"="溯源过程";
+"Trace.TracingLocation"="溯源地点";
+"Trace.TracingInformation"="溯源内容";
+"Trace.NoTracingBatches"="暂无溯源批次";
+"Trace.Normal"="正常";
+"Trace.Deactivated"="已停用";
+"Trace.TracingBatchDetails"="溯源批次详情";
+"Trace.Creator"="溯源创建人";
+"Trace.AddTracingBatches"="添加溯源批次";
+//label
+"Label.Query"="标签查询";
+"Label.Code"="标签编码";
+"Label.Notice1"="请输入8位纯数字编码";
+"Label.Notice2"="请输入12位纯数字编码";
+"Label.Notice3"="Please enter a '%@' digit code";
+"Label.Notice4"="Please enter a '%@' digit code";
+"Label.Notice5"="Please enter a '%@' digit code";
+"Query"="查询";
+//setting
+"Name"="姓名";
+"Cell phone number"="手机号";
+"Owned outlet"="所属网点";
+"Identity certification"="身份认证";
+"Certified"="已认证";
+"Uncertified"="未认证";
+"Current version"="当前版本";
+"About us"="关于我们";
+"Change password"="修改密码";
+"Please enter the old password. Forgot? Contact admin."="请输入旧密码，如已忘，请向管理员索要";
+"Please enter a new password: more than 8 characters; contains letters & numbers."="请输入新密码，不少于8位，不能为纯数字或纯字母";
+"Re-enter new password"="再次输入新密码";
+"Save new password"="保存新密码";
+"Edit successfully"="编辑成功";
+"Sign out"="退出";
+"Info"="正品溯源操作员APP，在操作员进行实名认证并确认信用良好后，可以使用本APP进行发货管理、溯源批次管理、溯源信息管理、标签查询等日常工作，最终做到移动溯源、操作员对自己的工作行为负责，责任可追溯。";
+//log in
+"Login.CellPhone"="手机号";
+"Login.CellPhoneNotice"="请向企业管理员提供手机号";
+"Login.Password"="密码";
+"Login.PasswordNotice"="如果忘记密码，请联系管理员";
+"Login.SignIn"="登录";
 
 "loginInfomationUnavailble" = "你的登录信息已过期，请重新登录";
 "loginAtOtherDevice1" = "你的账号已在其他地方登录,请重新登录";

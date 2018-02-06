@@ -82,7 +82,7 @@ class DeliveredManagerController: ZPTableViewController {
             remarks.isEmpty == false{
             self.remarkLabel.text = self.traceDeliverSubModel?.remarks
         }
-        self.traceBatchLabel.text = self.traceDeliverSubModel?.traceBatch
+        self.traceBatchLabel.text = self.traceDeliverSubModel?.traceBatch ?? LanguageManager.localizedString("Ship.None")
         self.sizeLabel.text = self.traceDeliverSubModel?.spec
         self.startNumLabel.text = self.traceDeliverSubModel?.startCode
         self.endNumLabel.text = self.traceDeliverSubModel?.endCode

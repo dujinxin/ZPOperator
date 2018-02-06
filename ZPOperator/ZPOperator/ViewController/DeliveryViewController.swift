@@ -784,14 +784,14 @@ extension DeliveryViewController : JXSelectViewDelegate,JXSelectViewDataSource{
         if row < confirmTitleArray.count{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
-            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 60, height: 44))
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 100, height: 44))
             leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
             leftLabel.text = confirmTitleArray[row]
             view?.addSubview(leftLabel)
             
-            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 80 - 20, height: 44))
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 120, y: 0, width: kScreenWidth - 120 - 20, height: 44))
             rightLabel.textColor = JX333333Color
             rightLabel.textAlignment = .left
             rightLabel.font = UIFont.systemFont(ofSize: 13)

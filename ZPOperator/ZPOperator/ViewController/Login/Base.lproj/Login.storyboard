@@ -34,17 +34,17 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="hhA-LU-i8N">
                                                 <rect key="frame" x="7" y="8.6666666666666572" width="17" height="27"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvA-6E-9ES">
-                                                <rect key="frame" x="34" y="0.0" width="55" height="44"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvA-6E-9ES">
+                                                <rect key="frame" x="34" y="0.0" width="50" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="55" id="yRq-A9-kVy"/>
+                                                    <constraint firstAttribute="width" constant="50" id="yRq-A9-kVy"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请向企业管理员提供手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ItL-Xw-75S">
-                                                <rect key="frame" x="94" y="0.0" width="241" height="44"/>
+                                                <rect key="frame" x="89" y="0.0" width="246" height="44"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -73,16 +73,16 @@
                                                 <rect key="frame" x="7" y="8.6666666666666856" width="20" height="27"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KA-tY-PJ8">
-                                                <rect key="frame" x="37" y="0.0" width="55" height="44"/>
+                                                <rect key="frame" x="37" y="0.0" width="50" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="55" id="LgL-1a-6Zz"/>
+                                                    <constraint firstAttribute="width" constant="50" id="LgL-1a-6Zz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="如果忘记密码，请联系管理员" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGc-FA-Wpo">
-                                                <rect key="frame" x="97" y="0.0" width="208" height="44"/>
+                                                <rect key="frame" x="92" y="0.0" width="213" height="44"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>

@@ -216,12 +216,12 @@
 		357241892021A5F100545A28 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		357241902021A86700545A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		357241962021AA3E00545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Login.strings; sourceTree = "<group>"; };
-		357241982021AA4200545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
 		3572419B202308AB00545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		3572419C202308AF00545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		3572419E2023227400545A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/TraceSourceCell.xib; sourceTree = "<group>"; };
 		357241A12023227800545A28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TraceSourceCell.strings; sourceTree = "<group>"; };
-		357241A32023227E00545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TraceSourceCell.strings"; sourceTree = "<group>"; };
+		357241A5202831E900545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/TraceSourceCell.strings"; sourceTree = "<group>"; };
+		357241A62028320300545A28 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
 		3597507C1EF8BE9100419474 /* ZPOperator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZPOperator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3597507F1EF8BE9100419474 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		359750841EF8BE9100419474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1006,7 +1006,7 @@
 			children = (
 				357241902021A86700545A28 /* Base */,
 				357241962021AA3E00545A28 /* en */,
-				357241982021AA4200545A28 /* zh-Hans */,
+				357241A62028320300545A28 /* zh-Hans */,
 			);
 			name = Login.storyboard;
 			sourceTree = "<group>";
@@ -1016,7 +1016,7 @@
 			children = (
 				3572419E2023227400545A28 /* Base */,
 				357241A12023227800545A28 /* en */,
-				357241A32023227E00545A28 /* zh-Hans */,
+				357241A5202831E900545A28 /* zh-Hans */,
 			);
 			name = TraceSourceCell.xib;
 			sourceTree = "<group>";
@@ -1174,7 +1174,7 @@
 					"-framework",
 					"\"TZImagePickerController\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.operator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.tracePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZPOperator/Tool/Extension/ZPOperator-Bridging-Header.h";
@@ -1201,7 +1201,7 @@
 					"$(PROJECT_DIR)/ZPOperator/ThirdPart/CWFaceSDK/lib",
 					"$(PROJECT_DIR)/ZPOperator/ThirdPart/CWFaceSDK/lib/opencv310",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.operator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhengpinsuyuan.tracePal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ZPOperator/Tool/Extension/ZPOperator-Bridging-Header.h";

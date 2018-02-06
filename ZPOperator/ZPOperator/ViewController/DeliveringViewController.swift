@@ -126,14 +126,6 @@ class DeliveringViewController: BaseViewController,UITableViewDelegate,UITableVi
             cell?.contentView.backgroundColor = UIColor.white
         }
         let model = self.vm.deliverListModel.batches[indexPath.row]
-        // Configure the cell...
-        //cell?.accessoryType = .disclosureIndicator
-        //cell?.textLabel?.text = model.goodsName
-        //cell?.textLabel?.textColor = JX333333Color
-        //cell?.textLabel?.font = UIFont.systemFont(ofSize: 14)
-        //cell?.detailTextLabel?.text = model.remarks
-        //cell?.detailTextLabel?.textColor = JX999999Color
-        //cell?.detailTextLabel?.font = UIFont.systemFont(ofSize: 10)
         
         cell?.TitleLabel.text = model.goodsName
         cell?.DetailTitleLabel.text = model.remarks
@@ -241,7 +233,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         if row == 1 || row == 2 || row == 3{
             view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreenWidth, height: 44))
             
-            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 50, height: 44))
+            let leftLabel = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 70, height: 44))
             leftLabel.textColor = JX999999Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
@@ -264,7 +256,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             leftLabel.textColor = JX333333Color
             leftLabel.textAlignment = .left
             leftLabel.font = UIFont.systemFont(ofSize: 14)
-            var string = "\(LanguageManager.localizedString("Ship.BatchNumber"))   "
+            var string = "\(LanguageManager.localizedString("Ship.BatchNumber"))        "
             let length = string.count
             
             if let batchCode = deliveringModel?.batchCode{
@@ -290,7 +282,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             }
             view?.addSubview(weightLabel)
             
-            let rightLabel = UILabel.init(frame: CGRect.init(x: 80, y: 15, width: kScreenWidth - 90 - 50, height: 14))
+            let rightLabel = UILabel.init(frame: CGRect.init(x: 100, y: 15, width: kScreenWidth - 110 - 50, height: 14))
             rightLabel.textColor = JX333333Color
             rightLabel.textAlignment = .left
             rightLabel.font = UIFont.systemFont(ofSize: 13)
@@ -300,7 +292,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
             }
             view?.addSubview(rightLabel)
             
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 30, width: kScreenWidth - 90, height: address1Height - 30))
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 100, y: 30, width: kScreenWidth - 110, height: address1Height - 30))
             addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 13)
@@ -311,7 +303,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         
         if row == 2 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: address2Height)
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: address2Height))
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 100, y: 0, width: kScreenWidth - 110, height: address2Height))
             addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 13)
@@ -330,7 +322,7 @@ extension DeliveringViewController: JXSelectViewDataSource{
         
         if row == 3 {
             view?.frame =  CGRect.init(x: 0, y: 0, width: kScreenWidth, height: remarkHeight)
-            let addressLabel = UILabel.init(frame: CGRect.init(x: 80, y: 0, width: kScreenWidth - 90, height: remarkHeight))
+            let addressLabel = UILabel.init(frame: CGRect.init(x: 100, y: 0, width: kScreenWidth - 110, height: remarkHeight))
             addressLabel.textColor = JX333333Color
             addressLabel.textAlignment = .left
             addressLabel.font = UIFont.systemFont(ofSize: 13)
