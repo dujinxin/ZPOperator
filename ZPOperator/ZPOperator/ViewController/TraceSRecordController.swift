@@ -270,14 +270,15 @@ class TraceSRecordController: ZPTableViewController {
                     self.addressArray.append(JXLocationManager.manager.address)
                 }
                 if isAdd == false {
-                    self.addressArray.append(self.vm.traceSourceModify.stationLocation!)
+                    if let station = self.vm.traceSourceModify.stationLocation, station.isEmpty == false {
+                        self.addressArray.append(station)
+                    }
                 }else {
-                    if let station = self.vm.traceSourceWholeModify.Operator.station {//全程
+                    if let station = self.vm.traceSourceWholeModify.Operator.station,station.isEmpty == false {//全程
                         self.addressArray.append(station)
                     }else{//详情
                         self.addressArray.append(self.vm.traceSourceProgress.stationLocation!)
                     }
-                    
                 }
                 self.actionView?.actions = addressArray
                 self.actionView?.show()

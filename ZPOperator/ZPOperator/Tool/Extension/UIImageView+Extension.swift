@@ -20,7 +20,7 @@ extension UIImageView {
         }
         self.sd_setImage(with: url, placeholderImage: placeholderImage, options: [], progress: nil) { (image, error, _, url) in
             if
-                let image = image,
+                let _ = image,
                 isRound == true{
                 
                 //self.image.

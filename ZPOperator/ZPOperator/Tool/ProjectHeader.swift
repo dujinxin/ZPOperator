@@ -8,11 +8,11 @@
 
 import Foundation
 
-let kVersion = "v1.0.3.2"
+let kVersion = "v1.0.0.1"
 
-let kBaseUrl = "http://192.168.10.12:8086"
+//let kBaseUrl = "http://192.168.10.12:8086"
 
-//let kBaseUrl = "https://operator.izheng.org"
+let kBaseUrl = "https://operator.izheng.org"
 
 
 let isShowLog : Bool = true
